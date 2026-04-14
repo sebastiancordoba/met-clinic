@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MET Clinic — Explorador de Marca</title>
+
+  <style>
+    /* ── Fuentes de la marca ── */
+    @font-face {
+      font-family: 'Moonclaw';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/MOONCLAWSTARPLUMEFREETRIAL-EADW4.OTF') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-THIN.OTF') format('opentype');
+      font-weight: 100; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-EXTRALIGHT.OTF') format('opentype');
+      font-weight: 200; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-LIGHT.OTF') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-REGULAR.OTF') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-MEDIUM.OTF') format('opentype');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-SEMIBOLD.OTF') format('opentype');
+      font-weight: 600; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-BOLD.OTF') format('opentype');
+      font-weight: 700; font-display: swap;
+    }
+    @font-face {
+      font-family: 'BellaDia';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/BELLAGIADISPLAYTHIN-X32MJ.TTF') format('truetype');
+      font-weight: 300; font-display: swap;
+    }
+
+    /* ── Fuentes Dra. Melina ── */
+    @font-face {
+      font-family: 'Larken';
+      src: url('BRANDING/DRA. MT/02 Tipografía/01 Primaria/Larken - Display Serif/Larken-Light.otf') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Light.otf') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Regular.otf') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Medium.otf') format('opentype');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons DemiBold.otf') format('opentype');
+      font-weight: 600; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Light Italic.otf') format('opentype');
+      font-weight: 300; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Italic.otf') format('opentype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+
+    /* ── Variables ── */
+    :root {
+      --sinergia:     #82867F;
+      --formalidad:   #262626;
+      --tranquilidad: #F2F2ED;
+      --confort:      #F7EDDC;
+      --white:        #ffffff;
+      --font-sans:   'Metropolis', 'Helvetica Neue', sans-serif;
+      --font-larken: 'Larken', 'Georgia', serif;
+      --font-tt:     'TTCommons', 'Helvetica Neue', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--formalidad);
+      background: var(--tranquilidad);
+    }
+
+    /* ── Estructura ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 48px 32px 96px; }
+
+    .page-title {
+      font-family: 'Moonclaw', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      margin-bottom: 8px;
+    }
+    .page-heading {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .page-sub {
+      font-size: 13px;
+      color: var(--sinergia);
+      font-weight: 300;
+      margin-bottom: 64px;
+    }
+
+    /* ── Secciones ── */
+    .section { margin-bottom: 80px; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      border-top: 1px solid var(--sinergia);
+      padding-top: 12px;
+      margin-bottom: 32px;
+    }
+    .section-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #555;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Grid ── */
+    .grid { display: grid; gap: 16px; }
+    .grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .grid--3 { grid-template-columns: repeat(3, 1fr); }
+    .grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* ── Logo cards ── */
+    .logo-card {
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .logo-card__bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      min-height: 160px;
+    }
+    .logo-card__bg img { max-width: 100%; max-height: 120px; object-fit: contain; }
+    .logo-card__bg--light   { background: var(--tranquilidad); }
+    .logo-card__bg--white   { background: var(--white); }
+    .logo-card__bg--confort { background: var(--confort); }
+    .logo-card__bg--sage    { background: var(--sinergia); }
+    .logo-card__bg--dark    { background: var(--formalidad); }
+    .logo-card__bg--black   { background: #000000; }
+
+    .logo-card__info {
+      padding: 12px 16px;
+      background: white;
+      border-top: 1px solid rgba(130,134,127,0.15);
+    }
+    .logo-card__name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .logo-card__desc { font-size: 11px; color: #888; font-weight: 300; line-height: 1.5; }
+    .logo-card__tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--tranquilidad);
+      color: var(--sinergia);
+      border: 1px solid var(--sinergia);
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-top: 6px;
+      margin-right: 4px;
+    }
+
+    /* ── Contexto de uso ── */
+    .context-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .context-row__bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+    .context-row__bg img { max-height: 50px; width: auto; mix-blend-mode: multiply; }
+    .context-row__bg--dark img,
+    .context-row__bg--sage img { mix-blend-mode: normal; }
+    .context-row__info {
+      padding: 20px 24px;
+      background: white;
+      border-left: 1px solid rgba(130,134,127,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .context-row__where { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .context-row__why   { font-size: 12px; font-weight: 300; color: #666; line-height: 1.6; }
+
+    /* ── Colores ── */
+    .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .color-card { border-radius: 4px; overflow: hidden; border: 1px solid rgba(130,134,127,0.2); }
+    .color-card__swatch { height: 120px; }
+    .color-card__body { padding: 16px; background: white; }
+    .color-card__name { font-size: 12px; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .color-card__hex  { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 8px; }
+    .color-card__pct  { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--sinergia); margin-bottom: 8px; }
+    .color-card__use  { font-size: 11px; color: #666; font-weight: 300; line-height: 1.5; }
+
+    /* Combinaciones de fondo */
+    .combo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .combo-card {
+      border-radius: 4px;
+      padding: 28px 24px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .combo-card__label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+    .combo-card__sample-h { font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 300; margin-bottom: 6px; }
+    .combo-card__sample-p { font-size: 11px; font-weight: 300; line-height: 1.6; opacity: 0.75; }
+
+    /* ── Tipografías ── */
+    .typo-section { margin-bottom: 48px; }
+    .typo-name {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sinergia); margin-bottom: 6px;
+    }
+    .typo-desc { font-size: 12px; font-weight: 300; color: #666; margin-bottom: 24px; line-height: 1.6; }
+    .typo-specimen {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 32px;
+    }
+    .typo-row { margin-bottom: 20px; display: flex; align-items: baseline; gap: 24px; }
+    .typo-row__meta { font-size: 10px; color: #aaa; width: 120px; flex-shrink: 0; font-family: monospace; }
+    .typo-row__text { flex: 1; }
+
+    .moonclaw-hero   { font-family: 'Moonclaw', serif; font-size: 64px; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1; }
+    .moonclaw-lg     { font-family: 'Moonclaw', serif; font-size: 40px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; }
+    .moonclaw-md     { font-family: 'Moonclaw', serif; font-size: 28px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .moonclaw-sm     { font-family: 'Moonclaw', serif; font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .metro-display   { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 48px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+    .metro-h1        { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 36px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .metro-h2        { font-family: 'Metropolis', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .metro-h3        { font-family: 'Metropolis', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .metro-body      { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.7; }
+    .metro-body-md   { font-family: 'Metropolis', sans-serif; font-weight: 400; font-size: 14px; line-height: 1.7; }
+    .metro-caption   { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .bellagia-display { font-family: 'BellaDia', serif; font-weight: 300; font-size: 56px; line-height: 1; }
+    .bellagia-lg      { font-family: 'BellaDia', serif; font-weight: 300; font-size: 36px; }
+    .bellagia-md      { font-family: 'BellaDia', serif; font-weight: 300; font-size: 24px; }
+
+    /* Combinación tipográfica */
+    .typo-combo {
+      background: var(--tranquilidad);
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 40px;
+      margin-top: 8px;
+    }
+    .typo-combo h3 {
+      font-family: 'Moonclaw', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      margin-bottom: 12px;
+    }
+    .typo-combo h1 {
+      font-family: 'Metropolis', sans-serif;
+      font-weight: 300;
+      font-size: 44px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .typo-combo p {
+      font-family: 'Metropolis', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #555;
+      max-width: 480px;
+    }
+    .typo-combo--dark {
+      background: var(--formalidad);
+    }
+    .typo-combo--dark h3 { color: rgba(242,242,237,0.5); }
+    .typo-combo--dark h1 { color: var(--tranquilidad); }
+    .typo-combo--dark p  { color: rgba(242,242,237,0.65); }
+    .typo-combo--sage {
+      background: var(--sinergia);
+    }
+    .typo-combo--sage h3 { color: rgba(242,242,237,0.6); }
+    .typo-combo--sage h1 { color: var(--tranquilidad); }
+    .typo-combo--sage p  { color: rgba(242,242,237,0.75); }
+
+    /* ── Paleta de imágenes / fotografía ── */
+    .photo-note {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .photo-note__col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; color: var(--sinergia); }
+    .photo-note__col ul { list-style: none; }
+    .photo-note__col ul li { font-size: 12px; font-weight: 300; line-height: 1.8; color: #555; padding-left: 14px; position: relative; }
+    .photo-note__col ul li::before { content: '—'; position: absolute; left: 0; color: var(--sinergia); }
+
+    /* ── Nav ── */
+    nav.toc {
+      position: sticky;
+      top: 0;
+      background: var(--formalidad);
+      z-index: 100;
+      padding: 0 32px;
+    }
+    nav.toc ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav.toc ul li a {
+      display: block;
+      padding: 14px 20px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(242,242,237,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav.toc ul li a:hover { color: var(--tranquilidad); }
+
+    /* ── Tintes de color ── */
+    .tints-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .tints-col__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sinergia); margin-bottom: 10px;
+    }
+    .tint-chip {
+      height: 44px; border-radius: 2px; margin-bottom: 4px;
+      display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+    }
+    .tint-chip span { font-size: 9px; font-family: monospace; opacity: 0.7; }
+
+    /* ── UI elements demo ── */
+    .ui-demo {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 28px 28px 20px;
+      margin-bottom: 16px;
+    }
+    .ui-demo__label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      opacity: 0.45; margin-bottom: 20px;
+    }
+    .ui-demo__row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+    .ui-demo__row-label {
+      font-size: 9px; color: #bbb; width: 72px; flex-shrink: 0;
+      font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .ui-btn {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 11px 22px; border-radius: 2px; cursor: default; border: none;
+    }
+    .ui-btn--outline {
+      background: transparent !important;
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 10px 20px; border-radius: 2px; cursor: default;
+    }
+    .ui-tag {
+      font-family: var(--font-sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .ui-pill {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 400;
+      letter-spacing: 0.08em; padding: 7px 16px; border-radius: 100px;
+    }
+    .ui-divider-v { width: 1px; height: 28px; }
+
+    /* ── Escala de pesos ── */
+    .weight-scale {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+    .weight-row {
+      display: grid; grid-template-columns: 100px 1fr 60px;
+      align-items: baseline; gap: 20px;
+      padding: 10px 0; border-bottom: 1px solid rgba(130,134,127,0.08);
+    }
+    .weight-row:last-child { border-bottom: none; }
+    .weight-label { font-size: 9px; color: #bbb; font-family: monospace; }
+    .weight-num   { font-size: 9px; color: #ddd; font-family: monospace; text-align: right; }
+    .weight-sample-met { font-family: 'Metropolis', sans-serif; font-size: 20px; letter-spacing: 0.03em; }
+    .weight-sample-dm  { font-family: var(--font-tt); font-size: 20px; letter-spacing: 0.02em; }
+
+    /* ── Comparativa de sistemas ── */
+    .system-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .system-card {
+      border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(130,134,127,0.2);
+    }
+    .system-card__header {
+      padding: 14px 20px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .system-card__body { padding: 28px 24px; background: white; }
+    .system-card__eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .system-card__h1 { font-size: 36px; line-height: 1.15; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .system-card__body-text { font-size: 13px; line-height: 1.75; font-weight: 300; color: #555; max-width: 360px; }
+    .system-card__meta {
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(130,134,127,0.15);
+      font-size: 10px; line-height: 1.7; color: #999;
+    }
+    .system-card__meta strong { color: var(--formalidad); }
+
+    /* ── Larken approximation note ── */
+    .approx-note {
+      display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; background: #fff7ed; color: #c07a30;
+      border: 1px solid #f0c080; padding: 2px 8px; border-radius: 2px; margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── Mockups de propuesta ── */
+    .proposal { margin-bottom: 48px; }
+    .proposal__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #999; margin-bottom: 10px;
+    }
+    .proposal__label strong { color: var(--formalidad); }
+    .proposal__label em { color: var(--sinergia); font-style: normal; }
+
+    .mockup {
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(130,134,127,0.25);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    /* Fake nav */
+    .m-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 80px;
+      border-bottom: 1px solid;
+    }
+    .m-nav__links {
+      display: flex; gap: 28px;
+      font-size: 9px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .m-nav__cta {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 9px 20px; border-radius: 2px;
+    }
+
+    /* Hero */
+    .m-hero {
+      padding: 56px 40px 52px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .m-hero__eyebrow {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .m-hero__eyebrow::before {
+      content: ''; display: block; width: 24px; height: 1px; background: currentColor; opacity: 0.5;
+    }
+    .m-hero__h1 { line-height: 1.08; margin-bottom: 18px; }
+    .m-hero__sub { font-size: 13px; line-height: 1.75; font-weight: 300; max-width: 380px; margin-bottom: 26px; opacity: 0.72; }
+    .m-hero__actions { display: flex; gap: 10px; align-items: center; margin-bottom: 28px; }
+    .m-hero__btn {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: 2px; cursor: default; border: none;
+    }
+    .m-hero__btn--ghost {
+      background: transparent !important;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 11px 22px; border-radius: 2px; cursor: default;
+    }
+    /* Awards / press row */
+    .m-hero__trust {
+      display: flex; gap: 0; align-items: stretch;
+      border: 1px solid; border-radius: 3px; overflow: hidden;
+    }
+    .m-trust__item {
+      padding: 10px 16px; border-right: 1px solid;
+      display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    }
+    .m-trust__item:last-child { border-right: none; }
+    .m-trust__label {
+      font-size: 8px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.45;
+    }
+    .m-trust__value {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    }
+
+    /* Image placeholder */
+    .m-hero__img {
+      aspect-ratio: 3/4; border-radius: 3px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; gap: 3px;
+    }
+    .m-hero__img-name {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .m-hero__img-title {
+      font-size: 9px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6;
+    }
+
+    /* Stats strip */
+    .m-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid;
+    }
+    .m-stat {
+      padding: 22px 28px; border-right: 1px solid;
+    }
+    .m-stat:last-child { border-right: none; }
+    .m-stat__num {
+      font-size: 28px; font-weight: 300; letter-spacing: 0.02em; line-height: 1; margin-bottom: 5px;
+    }
+    .m-stat__label { font-size: 9px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; }
+
+    @media (max-width: 768px) {
+      .grid--4, .color-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid--3, .combo-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid--2 { grid-template-columns: 1fr; }
+      .context-row { grid-template-columns: 1fr; }
+      .photo-note { grid-template-columns: 1fr; }
+      .typo-row { flex-direction: column; gap: 4px; }
+      .system-compare { grid-template-columns: 1fr; }
+      .tints-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="toc">
+    <ul>
+      <li><a href="#logos">Logos</a></li>
+      <li><a href="#colores">Colores</a></li>
+      <li><a href="#tipografias">Tipografías</a></li>
+      <li><a href="#combinaciones">Tipo + Color</a></li>
+      <li><a href="#propuestas">Propuestas</a></li>
+      <li><a href="#fotografia">Fotografía</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- ENCABEZADO -->
+    <p class="page-title">Brand Explorer</p>
+    <h1 class="page-heading">MET Clinic</h1>
+    <p class="page-sub">Elementos visuales de la marca — úsalo para decidir cómo implementar cada elemento en la página web</p>
+
+
+    <!-- ══════════════════════════════════════
+         LOGOS
+    ══════════════════════════════════════ -->
+    <section class="section" id="logos">
+      <p class="section-label">01 — Logos</p>
+      <p class="section-desc">
+        Hay 3 familias de color: <strong>Carbon</strong> (negro, para fondos claros), <strong>Crema</strong> (crema muy suave, para fondos oscuros/sage), <strong>Negativo</strong> (blanco sobre transparente, dark mode).
+        Y 7 variantes de forma numeradas del 01 al 07.
+      </p>
+
+      <!-- Variantes de forma -->
+      <p class="section-label" style="margin-top:0; border-top:none; padding-top:0; margin-bottom:20px;">Variantes de forma</p>
+      <div class="grid grid--4" style="margin-bottom:40px;">
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_04.png" alt="Logo 04">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_04 — Horizontal + tagline</div>
+            <div class="logo-card__desc">MET monograma a la izquierda, CLINIC a la derecha con subtítulo "Ginecología Estética & Antiaging" debajo.</div>
+            <span class="logo-card__tag">nav</span>
+            <span class="logo-card__tag">hero</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="Logo 05">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_05 — Horizontal limpio</div>
+            <div class="logo-card__desc">Versión más compacta sin tagline. Ideal para nav, footer, espacios pequeños.</div>
+            <span class="logo-card__tag">nav</span>
+            <span class="logo-card__tag">footer</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_01.png" alt="Logo 01">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_01 — Vertical + tagline</div>
+            <div class="logo-card__desc">Formato cuadrado. MET grande arriba, CLINIC + tagline abajo. Impacto visual fuerte.</div>
+            <span class="logo-card__tag">hero</span>
+            <span class="logo-card__tag">tarjetas</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_06.png" alt="Logo 06">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_06 — Vertical + tagline v2</div>
+            <div class="logo-card__desc">Variante del _01 con proporciones ligeramente distintas en el monograma.</div>
+            <span class="logo-card__tag">hero</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_02.png" alt="Logo 02">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_02 — Vertical sin tagline</div>
+            <div class="logo-card__desc">MET + CLINIC, sin subtítulo. Limpio y compacto en formato cuadrado.</div>
+            <span class="logo-card__tag">redes</span>
+            <span class="logo-card__tag">tarjetas</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_07.png" alt="Logo 07">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_07 — Vertical sin tagline v2</div>
+            <div class="logo-card__desc">Como el _02 pero con el monograma de la variante v2.</div>
+            <span class="logo-card__tag">redes</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_03.png" alt="Logo 03 isotipo">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">_03 — Isotipo (solo MET)</div>
+            <div class="logo-card__desc">Solo el monograma. Para favicon, íconos pequeños, bolsas, merchandising.</div>
+            <span class="logo-card__tag">favicon</span>
+            <span class="logo-card__tag">ícono</span>
+          </div>
+        </div>
+
+        <div class="logo-card">
+          <div class="logo-card__bg logo-card__bg--white" style="padding: 20px;">
+            <img src="BRANDING/METCLINIC/LOGOS/wellness & antiaging/MET_LOGO_W&A VERSION3-01.png" alt="Wellness">
+          </div>
+          <div class="logo-card__info">
+            <div class="logo-card__name">Wellness & Antiaging</div>
+            <div class="logo-card__desc">Variante especial con "Wellness" como tagline en lugar de "Ginecología Estética".</div>
+            <span class="logo-card__tag">sección wellness</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Logos en contexto de uso -->
+      <p class="section-label" style="border-top:none; padding-top:0; margin-bottom:20px;">Logos en contexto — ¿cómo se ven en cada fondo?</p>
+
+      <div class="context-row">
+        <div class="context-row__bg logo-card__bg--light">
+          <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="">
+        </div>
+        <div class="context-row__info">
+          <div class="context-row__where">Nav — Fondo Tranquilidad (#F2F2ED)</div>
+          <div class="context-row__why">Logo Carbon (_05 horizontal) sobre el color de fondo principal de la marca. Contraste bueno, sensación limpia y profesional.</div>
+        </div>
+      </div>
+
+      <div class="context-row">
+        <div class="context-row__bg logo-card__bg--sage" style="background:var(--sinergia);">
+          <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="" style="mix-blend-mode:normal;">
+        </div>
+        <div class="context-row__info">
+          <div class="context-row__where">Sección sage — Fondo Sinergia (#82867F)</div>
+          <div class="context-row__why">Logo Crema (_05) sobre el color dominante de la marca. El tono crema-marfil del logo contrasta suavemente — sensación de lujo sobrio.</div>
+        </div>
+      </div>
+
+      <div class="context-row">
+        <div class="context-row__bg logo-card__bg--dark" style="background:var(--formalidad);">
+          <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="" style="mix-blend-mode:normal;">
+        </div>
+        <div class="context-row__info">
+          <div class="context-row__where">Footer / Hero oscuro — Fondo Formalidad (#262626)</div>
+          <div class="context-row__why">Logo Negativo (_05, blanco sobre transparente). Máximo contraste, impacto fuerte. Ideal para footer y secciones de llamada a la acción.</div>
+        </div>
+      </div>
+
+      <div class="context-row">
+        <div class="context-row__bg" style="background:var(--confort);">
+          <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="" style="mix-blend-mode:multiply;">
+        </div>
+        <div class="context-row__info">
+          <div class="context-row__where">Sección cálida — Fondo Confort (#F7EDDC)</div>
+          <div class="context-row__why">Logo Carbon sobre el tono crema más cálido. Sensación más acogedora, buena para secciones de bienestar o citas.</div>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         COLORES
+    ══════════════════════════════════════ -->
+    <section class="section" id="colores">
+      <p class="section-label">02 — Paleta de colores</p>
+      <p class="section-desc">Paleta oficial del brandbook 2024. Cuatro colores base — mismos hex para MET Clinic y Dra. Melina.</p>
+
+      <!-- Swatches principales -->
+      <div class="color-grid" style="margin-bottom:32px;">
+
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#82867F; height:160px;"></div>
+          <div class="color-card__body">
+            <div class="color-card__name">Sinergia</div>
+            <div class="color-card__hex">#82867F · RGB 130, 134, 127</div>
+            <div class="color-card__pct">Color dominante</div>
+            <div class="color-card__use">Sage green-gray. El color más característico de la marca. Para fondos de sección, elementos de UI, acentos. Transmite calma y sofisticación.</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#262626; height:160px;"></div>
+          <div class="color-card__body">
+            <div class="color-card__name">Formalidad</div>
+            <div class="color-card__hex">#262626 · RGB 38, 38, 38</div>
+            <div class="color-card__pct">Texto y contraste</div>
+            <div class="color-card__use">Casi negro, con ligerísima calidez. Texto principal, footer, headings, botones primarios. Autoridad sin ser frío.</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#F2F2ED; height:160px; border-bottom: 1px solid #e5e5e0;"></div>
+          <div class="color-card__body">
+            <div class="color-card__name">Tranquilidad</div>
+            <div class="color-card__hex">#F2F2ED · RGB 242, 242, 237</div>
+            <div class="color-card__pct">Fondo de página</div>
+            <div class="color-card__use">Off-white con ligero tono verde-gris. Fondo principal de la página y superficies limpias. Más elegante que el blanco puro.</div>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-card__swatch" style="background:#F7EDDC; height:160px; border-bottom: 1px solid #ede3cc;"></div>
+          <div class="color-card__body">
+            <div class="color-card__name">Confort</div>
+            <div class="color-card__hex">#F7EDDC · RGB 247, 237, 220</div>
+            <div class="color-card__pct">Acento cálido</div>
+            <div class="color-card__use">Crema cálida. Secciones acogedoras, tarjetas de cita/testimonio, fondos alternativos. El único color cálido de la paleta.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tintes / Opacidades -->
+      <p class="section-label" style="border-top:none; padding-top:0; margin-bottom:20px;">Tintes — cómo se degrada cada color</p>
+      <div class="tints-grid" style="margin-bottom:40px;">
+
+        <div>
+          <div class="tints-col__label">Sinergia</div>
+          <div class="tint-chip" style="background:#82867F;"><span style="color:rgba(242,242,237,0.75);">100%</span></div>
+          <div class="tint-chip" style="background:rgba(130,134,127,0.65);"><span style="color:var(--formalidad);">65%</span></div>
+          <div class="tint-chip" style="background:rgba(130,134,127,0.3);"><span style="color:var(--formalidad);">30%</span></div>
+          <div class="tint-chip" style="background:rgba(130,134,127,0.12); border:1px solid rgba(130,134,127,0.25);"><span style="color:var(--sinergia);">12%</span></div>
+        </div>
+
+        <div>
+          <div class="tints-col__label">Formalidad</div>
+          <div class="tint-chip" style="background:#262626;"><span style="color:rgba(242,242,237,0.75);">100%</span></div>
+          <div class="tint-chip" style="background:rgba(38,38,38,0.65);"><span style="color:var(--formalidad);">65%</span></div>
+          <div class="tint-chip" style="background:rgba(38,38,38,0.3);"><span style="color:var(--formalidad);">30%</span></div>
+          <div class="tint-chip" style="background:rgba(38,38,38,0.1); border:1px solid rgba(38,38,38,0.2);"><span style="color:var(--formalidad);">10%</span></div>
+        </div>
+
+        <div>
+          <div class="tints-col__label">Tranquilidad</div>
+          <div class="tint-chip" style="background:#F2F2ED; border:1px solid #e5e5e0;"><span style="color:var(--sinergia);">100%</span></div>
+          <div class="tint-chip" style="background:rgba(242,242,237,0.7); border:1px solid rgba(130,134,127,0.15);"><span style="color:var(--sinergia);">70%</span></div>
+          <div class="tint-chip" style="background:rgba(242,242,237,0.4); border:1px solid rgba(130,134,127,0.1);"><span style="color:var(--sinergia);">40%</span></div>
+          <div class="tint-chip" style="background:rgba(242,242,237,0.15); border:1px solid rgba(130,134,127,0.1);"><span style="color:var(--sinergia);">15%</span></div>
+        </div>
+
+        <div>
+          <div class="tints-col__label">Confort</div>
+          <div class="tint-chip" style="background:#F7EDDC; border:1px solid #ede3cc;"><span style="color:#b07a40;">100%</span></div>
+          <div class="tint-chip" style="background:rgba(247,237,220,0.7); border:1px solid rgba(176,122,64,0.15);"><span style="color:#b07a40;">70%</span></div>
+          <div class="tint-chip" style="background:rgba(247,237,220,0.4); border:1px solid rgba(176,122,64,0.1);"><span style="color:#b07a40;">40%</span></div>
+          <div class="tint-chip" style="background:rgba(247,237,220,0.15); border:1px solid rgba(176,122,64,0.1);"><span style="color:#b07a40;">15%</span></div>
+        </div>
+
+      </div>
+
+      <!-- Elementos UI en cada fondo -->
+      <p class="section-label" style="border-top:none; padding-top:0; margin-bottom:20px;">Elementos UI — botones, tags y divisores en cada contexto</p>
+
+      <div class="ui-demo">
+        <div class="ui-demo__label">Fondo Tranquilidad (#F2F2ED) — fondo por defecto de la página</div>
+        <div style="background:#F2F2ED; padding:24px; border-radius:2px; margin-bottom:16px;">
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label">Botones</div>
+            <button class="ui-btn" style="background:#262626; color:#F2F2ED;">Agendar cita</button>
+            <button class="ui-btn" style="background:#82867F; color:#F2F2ED;">Ver servicios</button>
+            <button class="ui-btn--outline" style="border:1px solid #262626; color:#262626;">Conoce más</button>
+            <button class="ui-btn--outline" style="border:1px solid #82867F; color:#82867F;">Ver más</button>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label">Tags</div>
+            <span class="ui-tag" style="background:#262626; color:#F2F2ED;">Ginecología</span>
+            <span class="ui-tag" style="background:#82867F; color:#F2F2ED;">Antiaging</span>
+            <span class="ui-tag" style="background:transparent; border:1px solid #82867F; color:#82867F;">Wellness</span>
+            <span class="ui-tag" style="background:rgba(130,134,127,0.12); color:#82867F;">Funcional</span>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label">Divisores</div>
+            <div class="ui-divider-v" style="background:#262626;"></div>
+            <div class="ui-divider-v" style="background:#82867F;"></div>
+            <div class="ui-divider-v" style="background:rgba(130,134,127,0.3);"></div>
+            <span style="font-family:var(--font-sans); font-size:11px; font-weight:300; color:var(--sinergia); letter-spacing:0.1em;">— Etiqueta de sección</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-demo">
+        <div class="ui-demo__label">Fondo Formalidad (#262626) — footer, hero oscuro, secciones de impacto</div>
+        <div style="background:#262626; padding:24px; border-radius:2px; margin-bottom:16px;">
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label" style="color:#555;">Botones</div>
+            <button class="ui-btn" style="background:#F2F2ED; color:#262626;">Agendar cita</button>
+            <button class="ui-btn" style="background:#F7EDDC; color:#262626;">Ver servicios</button>
+            <button class="ui-btn" style="background:#82867F; color:#F2F2ED;">Contáctanos</button>
+            <button class="ui-btn--outline" style="border:1px solid rgba(242,242,237,0.4); color:#F2F2ED;">Ver más</button>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label" style="color:#555;">Tags</div>
+            <span class="ui-tag" style="background:#F2F2ED; color:#262626;">Ginecología</span>
+            <span class="ui-tag" style="background:#82867F; color:#F2F2ED;">Antiaging</span>
+            <span class="ui-tag" style="background:transparent; border:1px solid rgba(242,242,237,0.3); color:rgba(242,242,237,0.7);">Wellness</span>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label" style="color:#555;">Divisores</div>
+            <div class="ui-divider-v" style="background:#F2F2ED; opacity:0.7;"></div>
+            <div class="ui-divider-v" style="background:#82867F;"></div>
+            <div class="ui-divider-v" style="background:rgba(242,242,237,0.2);"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-demo">
+        <div class="ui-demo__label">Fondo Sinergia (#82867F) — el fondo más característico de la marca</div>
+        <div style="background:#82867F; padding:24px; border-radius:2px; margin-bottom:16px;">
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label" style="color:rgba(242,242,237,0.5);">Botones</div>
+            <button class="ui-btn" style="background:#F2F2ED; color:#262626;">Agendar cita</button>
+            <button class="ui-btn" style="background:#262626; color:#F2F2ED;">Ver servicios</button>
+            <button class="ui-btn--outline" style="border:1px solid rgba(242,242,237,0.5); color:#F2F2ED;">Conoce más</button>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label" style="color:rgba(242,242,237,0.5);">Tags</div>
+            <span class="ui-tag" style="background:#F2F2ED; color:#82867F;">Ginecología</span>
+            <span class="ui-tag" style="background:#262626; color:#F2F2ED;">Antiaging</span>
+            <span class="ui-tag" style="background:transparent; border:1px solid rgba(242,242,237,0.4); color:#F2F2ED;">Wellness</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-demo">
+        <div class="ui-demo__label">Fondo Confort (#F7EDDC) — citas, testimonios, secciones cálidas</div>
+        <div style="background:#F7EDDC; padding:24px; border-radius:2px; margin-bottom:0;">
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label">Botones</div>
+            <button class="ui-btn" style="background:#262626; color:#F2F2ED;">Agendar cita</button>
+            <button class="ui-btn" style="background:#82867F; color:#F2F2ED;">Ver servicios</button>
+            <button class="ui-btn--outline" style="border:1px solid #82867F; color:#82867F;">Conoce más</button>
+          </div>
+          <div class="ui-demo__row">
+            <div class="ui-demo__row-label">Tags</div>
+            <span class="ui-tag" style="background:#262626; color:#F2F2ED;">Bienestar</span>
+            <span class="ui-tag" style="background:rgba(130,134,127,0.15); color:#82867F;">Confort</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Combinaciones de color -->
+      <p class="section-label" style="margin-top:40px; padding-top:0; border-top:none; margin-bottom:20px;">Combinaciones de fondo + texto</p>
+      <div class="combo-grid">
+
+        <div class="combo-card" style="background:#F2F2ED; color:#262626;">
+          <div class="combo-card__label">Tranquilidad + Formalidad</div>
+          <div>
+            <div class="combo-card__sample-h">Bienestar</div>
+            <div class="combo-card__sample-p">La combinación principal. Fondo neutro, texto oscuro. Clínico, limpio, confiable.</div>
+          </div>
+        </div>
+
+        <div class="combo-card" style="background:#262626; color:#F2F2ED;">
+          <div class="combo-card__label">Formalidad + Tranquilidad</div>
+          <div>
+            <div class="combo-card__sample-h">Antiaging</div>
+            <div class="combo-card__sample-p">Máximo contraste. Hero, footer, secciones de impacto. Elegante y fuerte.</div>
+          </div>
+        </div>
+
+        <div class="combo-card" style="background:#82867F; color:#F2F2ED;">
+          <div class="combo-card__label">Sinergia + Tranquilidad</div>
+          <div>
+            <div class="combo-card__sample-h">Regenerativa</div>
+            <div class="combo-card__sample-p">El combo más distintivo. Sage con texto crema. Avant-garde y sofisticado.</div>
+          </div>
+        </div>
+
+        <div class="combo-card" style="background:#F7EDDC; color:#262626;">
+          <div class="combo-card__label">Confort + Formalidad</div>
+          <div>
+            <div class="combo-card__sample-h">Longevidad</div>
+            <div class="combo-card__sample-p">Crema cálida con texto oscuro. Para citas, testimonios.</div>
+          </div>
+        </div>
+
+        <div class="combo-card" style="background:#F2F2ED; color:#82867F;">
+          <div class="combo-card__label">Tranquilidad + Sinergia</div>
+          <div>
+            <div class="combo-card__sample-h">Funcional</div>
+            <div class="combo-card__sample-p">Texto secundario, etiquetas, metadatos sobre fondo claro.</div>
+          </div>
+        </div>
+
+        <div class="combo-card" style="background:#262626; color:#F7EDDC;">
+          <div class="combo-card__label">Formalidad + Confort</div>
+          <div>
+            <div class="combo-card__sample-h">Wellness</div>
+            <div class="combo-card__sample-p">Negro con texto crema. Lujoso, íntimo. Para citas destacadas en fondo oscuro.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         TIPOGRAFÍAS
+    ══════════════════════════════════════ -->
+    <section class="section" id="tipografias">
+      <p class="section-label">03 — Tipografías</p>
+      <p class="section-desc">Hay dos sistemas tipográficos distintos según la marca. <strong>MET Clinic</strong> usa Moonclaw + Metropolis (archivos disponibles localmente). <strong>Dra. Melina</strong> usa Larken + TT Commons (comerciales, necesitan licencia).</p>
+
+
+      <!-- ── Sistema A: MET Clinic ── -->
+      <div style="margin-bottom:56px;">
+
+        <p style="font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--formalidad); background:var(--tranquilidad); padding:10px 16px; border-left:3px solid var(--formalidad); margin-bottom:24px;">
+          Sistema A — MET Clinic &nbsp;·&nbsp; <span style="font-weight:300; color:var(--sinergia);">Moonclaw + Metropolis &nbsp;·&nbsp; Disponible localmente ✓</span>
+        </p>
+
+        <!-- Moonclaw -->
+        <div class="typo-section">
+          <div class="typo-name">Moonclaw — Display / Títulos principales</div>
+          <div class="typo-desc">
+            Serif con carácter propio. Solo mayúsculas — úsala con tracking amplio (0.05–0.2em). El brandbook la define para títulos y encabezados. Carácter editorial y avant-garde, da personalidad fuerte a la marca.
+          </div>
+          <div class="typo-specimen">
+            <div class="typo-row">
+              <div class="typo-row__meta">64px / 5% tracking</div>
+              <div class="typo-row__text moonclaw-hero">WELLNESS</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">40px / 6% tracking</div>
+              <div class="typo-row__text moonclaw-lg">ANTIAGING</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">28px / 8% tracking</div>
+              <div class="typo-row__text moonclaw-md">GINECOLOGÍA ESTÉTICA</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">18px / 12% tracking</div>
+              <div class="typo-row__text moonclaw-sm">MEDICINA REGENERATIVA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metropolis — escala de pesos -->
+        <div class="typo-section">
+          <div class="typo-name">Metropolis — Sans-serif principal (todo uso)</div>
+          <div class="typo-desc">
+            Geométrica moderna, disponible en 9 pesos. Para todo lo que no sea display: subtítulos, body, UI, captions. En mayúsculas para headings (con tracking), en mixed case para cuerpo de texto.
+          </div>
+
+          <p style="font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--sinergia); margin-bottom:12px;">Escala de pesos — misma frase, distinto peso</p>
+          <div class="weight-scale" style="margin-bottom:24px;">
+            <div class="weight-row">
+              <div class="weight-label">100 · Thin</div>
+              <div class="weight-sample-met" style="font-weight:100;">Bienestar íntimo</div>
+              <div class="weight-num">100</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">200 · ExtraLight</div>
+              <div class="weight-sample-met" style="font-weight:200;">Bienestar íntimo</div>
+              <div class="weight-num">200</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">300 · Light</div>
+              <div class="weight-sample-met" style="font-weight:300;">Bienestar íntimo</div>
+              <div class="weight-num">300</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">400 · Regular</div>
+              <div class="weight-sample-met" style="font-weight:400;">Bienestar íntimo</div>
+              <div class="weight-num">400</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">500 · Medium</div>
+              <div class="weight-sample-met" style="font-weight:500;">Bienestar íntimo</div>
+              <div class="weight-num">500</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">600 · SemiBold</div>
+              <div class="weight-sample-met" style="font-weight:600;">Bienestar íntimo</div>
+              <div class="weight-num">600</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">700 · Bold</div>
+              <div class="weight-sample-met" style="font-weight:700;">Bienestar íntimo</div>
+              <div class="weight-num">700</div>
+            </div>
+          </div>
+
+          <p style="font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--sinergia); margin-bottom:12px;">Usos recomendados</p>
+          <div class="typo-specimen">
+            <div class="typo-row">
+              <div class="typo-row__meta">48px / 300 / uppercase</div>
+              <div class="typo-row__text metro-display">MET CLINIC</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">36px / 300 / uppercase</div>
+              <div class="typo-row__text metro-h1">Ginecología Estética</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">24px / 400 / uppercase</div>
+              <div class="typo-row__text metro-h2">Medicina Regenerativa</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">16px / 500 / uppercase</div>
+              <div class="typo-row__text metro-h3">Servicios · Tratamientos</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">15px / 300 / body</div>
+              <div class="typo-row__text metro-body">Soy la Dra. Melina Trujillo, especialista en ginecología estética, regenerativa y funcional. Cada tratamiento está diseñado para empoderarte y revitalizar tu bienestar desde adentro.</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">11px / 300 / caption</div>
+              <div class="typo-row__text metro-caption">GINECOLOGÍA ESTÉTICA & ANTIAGING · CDMX</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bellagia -->
+        <div class="typo-section">
+          <div class="typo-name">Bellagia Display Thin — Serif alternativa (en assets, no en brandbook)</div>
+          <div class="typo-desc">
+            Está en los archivos de branding pero no aparece en el brandbook oficial. Serif display ultra-thin, feminidad y elegancia. Posible uso para citas destacadas o titulares poéticos. No mezclar con Moonclaw.
+          </div>
+          <div class="typo-specimen">
+            <div class="typo-row">
+              <div class="typo-row__meta">56px / display</div>
+              <div class="typo-row__text bellagia-display">Bienestar íntimo</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">36px / grande</div>
+              <div class="typo-row__text bellagia-lg">Regenera tu cuerpo</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">24px / mediano</div>
+              <div class="typo-row__text bellagia-md">Reactiva tu vida</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ── Sistema B: Dra. Melina ── -->
+      <div>
+
+        <p style="font-size:11px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--formalidad); background:var(--confort); padding:10px 16px; border-left:3px solid #b07a30; margin-bottom:24px;">
+          Sistema B — Dra. Melina Trujillo &nbsp;·&nbsp; <span style="font-weight:300; color:var(--sinergia);">Larken + TT Commons &nbsp;·&nbsp; Disponible localmente ✓</span>
+        </p>
+
+        <!-- Larken approximation -->
+        <div class="typo-section">
+          <div class="typo-name">
+            Larken           </div>
+          <div class="typo-desc">
+            Serif elegante con formas orgánicas. El brandbook Dra. Melina la usa en <strong>Light, uppercase, muy espaciada</strong> para títulos. Más suave y femenina que Moonclaw — menos avant-garde, más atemporal y médica.
+          </div>
+          <div class="typo-specimen">
+            <div class="typo-row">
+              <div class="typo-row__meta">64px / 300 / uppercase</div>
+              <div class="typo-row__text" style="font-family:var(--font-larken); font-weight:300; font-size:64px; letter-spacing:0.12em; text-transform:uppercase; line-height:1;">WELLNESS</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">44px / 300 / uppercase</div>
+              <div class="typo-row__text" style="font-family:var(--font-larken); font-weight:300; font-size:44px; letter-spacing:0.1em; text-transform:uppercase; line-height:1;">ANTIAGING</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">30px / 300 / uppercase</div>
+              <div class="typo-row__text" style="font-family:var(--font-larken); font-weight:300; font-size:30px; letter-spacing:0.1em; text-transform:uppercase;">GINECOLOGÍA ESTÉTICA</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">20px / 400 / italic</div>
+              <div class="typo-row__text" style="font-family:var(--font-larken); font-weight:400; font-style:italic; font-size:20px; letter-spacing:0.04em;">"Tu bienestar es mi especialidad"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TT Commons approximation -->
+        <div class="typo-section">
+          <div class="typo-name">
+            TT Commons           </div>
+          <div class="typo-desc">
+            Sans-serif humanista, disponible en Light / Regular / Demibold según el brandbook. Más orgánica y amigable que Metropolis, con menos carácter geométrico. Para cuerpo de texto, subtítulos, UI.
+          </div>
+
+          <p style="font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--sinergia); margin-bottom:12px;">Escala de pesos</p>
+          <div class="weight-scale" style="margin-bottom:24px;">
+            <div class="weight-row">
+              <div class="weight-label">300 · Light</div>
+              <div class="weight-sample-dm" style="font-weight:300;">Bienestar íntimo</div>
+              <div class="weight-num">300</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">400 · Regular</div>
+              <div class="weight-sample-dm" style="font-weight:400;">Bienestar íntimo</div>
+              <div class="weight-num">400</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">500 · Medium</div>
+              <div class="weight-sample-dm" style="font-weight:500;">Bienestar íntimo</div>
+              <div class="weight-num">500</div>
+            </div>
+            <div class="weight-row">
+              <div class="weight-label">600 · DemiBold</div>
+              <div class="weight-sample-dm" style="font-weight:600;">Bienestar íntimo</div>
+              <div class="weight-num">600</div>
+            </div>
+          </div>
+
+          <p style="font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--sinergia); margin-bottom:12px;">Usos recomendados</p>
+          <div class="typo-specimen">
+            <div class="typo-row">
+              <div class="typo-row__meta">36px / 300 / uppercase</div>
+              <div class="typo-row__text" style="font-family:var(--font-tt); font-weight:300; font-size:36px; letter-spacing:0.06em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">20px / 400 / uppercase</div>
+              <div class="typo-row__text" style="font-family:var(--font-tt); font-weight:400; font-size:20px; letter-spacing:0.1em; text-transform:uppercase;">Ginecóloga Estética</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">15px / 300 / body</div>
+              <div class="typo-row__text" style="font-family:var(--font-tt); font-weight:300; font-size:15px; line-height:1.75;">Especialista en ginecología estética, regenerativa y funcional. Con más de 9 años de experiencia y +5,000 pacientes atendidas en la Ciudad de México.</div>
+            </div>
+            <div class="typo-row">
+              <div class="typo-row__meta">11px / 400 / caption</div>
+              <div class="typo-row__text" style="font-family:var(--font-tt); font-weight:400; font-size:11px; letter-spacing:0.15em; text-transform:uppercase;">Ginecología Estética & Antiaging · CDMX</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Comparativa lado a lado ── -->
+      <p class="section-label" style="margin-bottom:20px;">Comparativa — mismo contenido, dos sistemas</p>
+      <div class="system-compare">
+
+        <div class="system-card">
+          <div class="system-card__header" style="background:var(--formalidad); color:var(--tranquilidad);">
+            Sistema A — MET Clinic
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__eyebrow" style="font-family:'Moonclaw',serif; color:var(--sinergia);">Sobre la Doctora</div>
+            <div class="system-card__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; text-transform:uppercase; letter-spacing:0.06em;">Bienestar desde una<br>perspectiva integral</div>
+            <div class="system-card__body-text" style="font-family:'Metropolis',sans-serif;">Especialista en ginecología estética, regenerativa y funcional. Cada tratamiento está diseñado para empoderarte y revitalizar tu confianza.</div>
+            <div class="system-card__meta">
+              <strong>Display:</strong> Moonclaw (eyebrow)<br>
+              <strong>Títulos:</strong> Metropolis Light, uppercase<br>
+              <strong>Cuerpo:</strong> Metropolis Light 300<br>
+              <span style="color:#c0c0c0;">Disponible localmente ✓</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="system-card">
+          <div class="system-card__header" style="background:#F7EDDC; color:#262626; border-bottom:1px solid #ede3cc;">
+            Sistema B — Dra. Melina
+          </div>
+          <div class="system-card__body">
+            <div class="system-card__eyebrow" style="font-family:var(--font-larken); font-weight:300; letter-spacing:0.2em; text-transform:uppercase; font-size:11px; color:var(--sinergia);">Sobre la Doctora</div>
+            <div class="system-card__h1" style="font-family:var(--font-larken); font-weight:300; text-transform:uppercase; letter-spacing:0.1em;">Bienestar desde una<br>perspectiva integral</div>
+            <div class="system-card__body-text" style="font-family:var(--font-tt); font-weight:300;">Especialista en ginecología estética, regenerativa y funcional. Cada tratamiento está diseñado para empoderarte y revitalizar tu confianza.</div>
+            <div class="system-card__meta">
+              <strong>Display:</strong> Larken Light, uppercase<br>
+              <strong>Títulos:</strong> Larken Light, uppercase<br>
+              <strong>Cuerpo:</strong> TT Commons Light 300<br>
+              <span style="color:#888;">Disponible localmente ✓</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         COMBINACIONES TIPOGRÁFICAS
+    ══════════════════════════════════════ -->
+    <section class="section" id="combinaciones">
+      <p class="section-label">04 — Combinaciones tipografía + color</p>
+      <p class="section-desc">Cómo se ven las fuentes juntas en secciones reales de la página.</p>
+
+      <div style="display:grid; gap:16px;">
+
+        <div>
+          <p style="font-size:11px; color:#999; margin-bottom:8px; font-weight:300; letter-spacing:0.1em; text-transform:uppercase;">Opción A — Moonclaw eyebrow + Metropolis headline (fondo Tranquilidad)</p>
+          <div class="typo-combo">
+            <h3>Sobre la Doctora</h3>
+            <h1>Bienestar desde una<br>perspectiva integral</h1>
+            <p>Soy la Dra. Melina Trujillo, especialista en ginecología estética, regenerativa y funcional. Con más de 9 años de experiencia dedicados exclusivamente al cuidado de la salud femenina.</p>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:11px; color:#999; margin-bottom:8px; font-weight:300; letter-spacing:0.1em; text-transform:uppercase;">Opción B — Mismo sistema sobre fondo oscuro (Formalidad)</p>
+          <div class="typo-combo typo-combo--dark">
+            <h3>Nuestros Servicios</h3>
+            <h1>Ginecología Estética<br>& Antiaging</h1>
+            <p>Tratamientos diseñados para empoderar, revitalizar y transformar. Innovación médica al servicio de tu bienestar íntimo.</p>
+          </div>
+        </div>
+
+        <div>
+          <p style="font-size:11px; color:#999; margin-bottom:8px; font-weight:300; letter-spacing:0.1em; text-transform:uppercase;">Opción C — Mismo sistema sobre fondo Sinergia (sage)</p>
+          <div class="typo-combo typo-combo--sage">
+            <h3>Medicina Regenerativa</h3>
+            <h1>Reactiva tu vida,<br>regenera tu cuerpo</h1>
+            <p>Protocolos de medicina funcional y regenerativa para mejorar tu calidad de vida desde adentro hacia afuera.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         PROPUESTAS
+    ══════════════════════════════════════ -->
+    <section class="section" id="propuestas">
+      <p class="section-label">05 — Propuestas para el sitio web</p>
+      <p class="section-desc">Cinco direcciones visuales para el homepage. Cada mockup muestra nav + hero + strip de estadísticas con combinaciones reales de colores y fuentes.</p>
+
+
+      <!-- ── Propuesta 1 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 1 — Clínica limpia</strong> &nbsp;·&nbsp; <em>Fondo Tranquilidad · Metropolis todo · Botones Formalidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#F2F2ED; color:#262626; border-color:rgba(38,38,38,0.1);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="height:60px; width:auto; mix-blend-mode:multiply;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:40px; letter-spacing:0.04em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:#deded9;">
+              <div class="m-hero__img-name" style="font-family:'Metropolis',sans-serif; color:#262626;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; color:#262626;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+
+          <div class="m-stats" style="background:#F2F2ED; border-color:rgba(38,38,38,0.1);">
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones verificadas</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">9 años</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">De experiencia</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">5★</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Calificación Doctoralia</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 2 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 2 — Editorial serif</strong> &nbsp;·&nbsp; <em>Fondo Tranquilidad · Larken headlines · TT Commons body</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#F2F2ED; color:#262626; border-color:rgba(38,38,38,0.08);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_04.png" alt="MET Clinic" style="height:46px; width:auto; mix-blend-mode:multiply;">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:44px; letter-spacing:0.06em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; font-weight:400; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:#deded9;">
+              <div class="m-hero__img-name" style="font-family:'Larken',serif; font-weight:300; color:#262626; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#262626;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+
+          <div class="m-stats" style="background:#F2F2ED; border-color:rgba(38,38,38,0.1);">
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">1,320+</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones verificadas</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">9 años</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">De experiencia</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">5★</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Calificación Doctoralia</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 3 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 3 — Sage dominante</strong> &nbsp;·&nbsp; <em>Fondo Sinergia · Metropolis · Texto Tranquilidad · El más característico de la marca</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#82867F; color:#F2F2ED; border-color:rgba(242,242,237,0.15);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic" style="height:60px; width:auto;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#82867F; color:#F2F2ED;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:40px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.75);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.45); color:#F2F2ED;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.2);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div>
+                </div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:rgba(38,38,38,0.15);">
+              <div class="m-hero__img-name" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#F2F2ED; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+
+          <div class="m-stats" style="background:#6e7268; border-color:rgba(242,242,237,0.15);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Opiniones verificadas</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">9 años</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">De experiencia</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);">
+              <div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">5★</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Calificación Doctoralia</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 4 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 4 — Dark luxury</strong> &nbsp;·&nbsp; <em>Fondo Formalidad · Larken headlines · TT Commons body · Texto Tranquilidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#262626; color:#F2F2ED; border-color:rgba(242,242,237,0.1);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_04.png" alt="MET Clinic" style="height:69px; width:auto;">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.5);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#262626;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#262626; color:#F2F2ED;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:44px; letter-spacing:0.08em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#262626;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; font-weight:400; border:1px solid rgba(242,242,237,0.3); color:rgba(242,242,237,0.8);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">Cosmopolitan MX</div>
+                </div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:#1a1a1a;">
+              <div class="m-hero__img-name" style="font-family:'Larken',serif; font-weight:300; color:#F2F2ED; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'TTCommons',sans-serif; font-weight:300; color:rgba(242,242,237,0.45);">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+
+          <div class="m-stats" style="background:#1e1e1e; border-color:rgba(242,242,237,0.08);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">1,320+</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">Opiniones verificadas</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">9 años</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">De experiencia</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">5★</div>
+              <div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">Calificación Doctoralia</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 5 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 5 — Híbrido cálido</strong> &nbsp;·&nbsp; <em>Fondo Confort · Larken headlines · Metropolis body · Nav en Formalidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#262626; color:#F2F2ED; border-color:rgba(242,242,237,0.1);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="height:60px; width:auto;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F7EDDC; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; font-weight:500; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:44px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F7EDDC;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.15);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:rgba(130,134,127,0.18);">
+              <div class="m-hero__img-name" style="font-family:'Larken',serif; font-weight:300; color:#262626; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#82867F;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+
+          <div class="m-stats" style="background:#eee3cc; border-color:rgba(38,38,38,0.1);">
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">1,320+</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones verificadas</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">9 años</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">De experiencia</div>
+            </div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.1);">
+              <div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#262626;">5★</div>
+              <div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Calificación Doctoralia</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 6 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 6 — Sage nav / Claro hero / Oscuro stats</strong> &nbsp;·&nbsp; <em>Nav Sinergia · Hero Tranquilidad · Strip Formalidad</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic" style="height:60px; width:auto;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:40px; letter-spacing:0.04em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #262626; color:#262626;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:#deded9;">
+              <div class="m-hero__img-name" style="font-family:'Metropolis',sans-serif; color:#262626; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+          <div class="m-stats" style="background:#262626; border-color:rgba(242,242,237,0.08);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Opiniones verificadas</div></div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">9 años</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">De experiencia</div></div>
+            <div class="m-stat"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">5★</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Calificación Doctoralia</div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 7 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 7 — Oscuro nav / Cálido hero / Sage stats</strong> &nbsp;·&nbsp; <em>Nav Formalidad · Hero Confort · Strip Sinergia</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#262626; border-color:rgba(242,242,237,0.1);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_04.png" alt="MET Clinic" style="height:69px; width:auto;">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.5);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F7EDDC; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:44px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F7EDDC;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.15);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:rgba(130,134,127,0.18);">
+              <div class="m-hero__img-name" style="font-family:'Larken',serif; font-weight:300; color:#262626; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#82867F;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+          <div class="m-stats" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F2F2ED;">1,320+</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.6);">Opiniones verificadas</div></div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F2F2ED;">9 años</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.6);">De experiencia</div></div>
+            <div class="m-stat"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F2F2ED;">5★</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.6);">Calificación Doctoralia</div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 8 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 8 — Claro nav / Oscuro hero / Sage stats</strong> &nbsp;·&nbsp; <em>Nav Tranquilidad · Hero Formalidad · Strip Sinergia</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="height:60px; width:auto; mix-blend-mode:multiply;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#262626; color:#F2F2ED;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:40px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.35); color:rgba(242,242,237,0.85);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:#1a1a1a;">
+              <div class="m-hero__img-name" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#F2F2ED; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.45);">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+          <div class="m-stats" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Opiniones verificadas</div></div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.15);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">9 años</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">De experiencia</div></div>
+            <div class="m-stat"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">5★</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Calificación Doctoralia</div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 9 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 9 — Cálido nav / Sage hero / Oscuro stats</strong> &nbsp;·&nbsp; <em>Nav Confort · Hero Sinergia · Strip Formalidad</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F7EDDC; border-color:rgba(38,38,38,0.08);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_04.png" alt="MET Clinic" style="height:69px; width:auto; mix-blend-mode:multiply;">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F7EDDC;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#82867F; color:#F2F2ED;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.6);">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:44px; letter-spacing:0.06em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:rgba(242,242,237,0.75);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F7EDDC; color:#262626;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; border:1px solid rgba(242,242,237,0.4); color:#F2F2ED;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.2);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.5);">Opiniones</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.5);">Doctoralia</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.5);">Prensa</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:rgba(38,38,38,0.18);">
+              <div class="m-hero__img-name" style="font-family:'Larken',serif; font-weight:300; color:#F2F2ED; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'TTCommons',sans-serif; font-weight:300; color:rgba(242,242,237,0.55);">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+          <div class="m-stats" style="background:#262626; border-color:rgba(242,242,237,0.08);">
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">1,320+</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">Opiniones verificadas</div></div>
+            <div class="m-stat" style="border-color:rgba(242,242,237,0.08);"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">9 años</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">De experiencia</div></div>
+            <div class="m-stat"><div class="m-stat__num" style="font-family:'Larken',serif; font-weight:300; color:#F7EDDC;">5★</div><div class="m-stat__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.45);">Calificación Doctoralia</div></div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ── Propuesta 10 ── -->
+      <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 10 — Sage nav / Cálido hero / Claro stats</strong> &nbsp;·&nbsp; <em>Nav Sinergia · Hero Confort · Strip Tranquilidad</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic" style="height:60px; width:auto;">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F7EDDC; color:#262626;">
+            <div>
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:40px; letter-spacing:0.04em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #262626; color:#262626;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+              </div>
+            </div>
+            <div class="m-hero__img" style="background:rgba(130,134,127,0.15);">
+              <div class="m-hero__img-name" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#262626; letter-spacing:0.1em; text-transform:uppercase;">Dra. Melina Trujillo</div>
+              <div class="m-hero__img-title" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecóloga Estética · CDMX</div>
+            </div>
+          </div>
+          <div class="m-stats" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.08);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones verificadas</div></div>
+            <div class="m-stat" style="border-color:rgba(38,38,38,0.08);"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">9 años</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">De experiencia</div></div>
+            <div class="m-stat"><div class="m-stat__num" style="font-family:'Metropolis',sans-serif; color:#262626;">5★</div><div class="m-stat__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Calificación Doctoralia</div></div>
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════
+         FOTOGRAFÍA
+    ══════════════════════════════════════ -->
+    <section class="section" id="fotografia">
+      <p class="section-label">06 — Estilo fotográfico</p>
+      <p class="section-desc">El brandbook define el estilo visual de las imágenes. Usa esto como referencia para decidir qué tipo de fotos usar en la página (de stock o propias).</p>
+
+      <div class="photo-note">
+        <div class="photo-note__col">
+          <h4>Lo que SÍ encaja con la marca</h4>
+          <ul>
+            <li>Fotografía clínica limpia — batas blancas, guantes, instrumentos médicos elegantes</li>
+            <li>B&N contrastado y artístico (como las fotos del brandbook)</li>
+            <li>Cuerpo femenino abstracto — siluetas, fragmentos, sin ser explícito</li>
+            <li>Espacios interiores lujosos — mármol, materiales nobles, iluminación suave</li>
+            <li>Paleta neutral: cremas, beige, gris, blanco, negro</li>
+            <li>Composición minimalista con mucho espacio en blanco</li>
+            <li>Flores y naturaleza abstracta — rosas oscuras, pétalos, plantas</li>
+            <li>Texturas — seda, tela, papel, piel</li>
+          </ul>
+        </div>
+        <div class="photo-note__col">
+          <h4>Lo que NO encaja</h4>
+          <ul>
+            <li>Fotos coloridas o saturadas</li>
+            <li>Estilo "clínica genérica" — sillas de plástico, tubos de neón</li>
+            <li>Personas sonriendo de forma forzada / stock predecible</li>
+            <li>Infografías médicas con colores primarios</li>
+            <li>Filtros Instagram o tonos muy cálidos/rosados</li>
+            <li>Imágenes médicas explícitas o procedimientos invasivos visibles</li>
+            <li>Fondos degradados o efectos visuales digitales</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>

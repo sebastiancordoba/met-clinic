@@ -1,0 +1,8 @@
+# Branding assets
+BRANDING/
+
+# PDFs
+*.pdf
+
+# macOS
+.DS_Store
