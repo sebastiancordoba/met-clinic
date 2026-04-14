@@ -23,17 +23,81 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="#inicio" class="nav__logo" aria-label="MET Clinic inicio">
-        <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MET Clinic logo" class="logo-svg">
-          <!-- M -->
-          <path d="M4 28V8l9 12 9-12v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <!-- E -->
-          <path d="M30 8h14M30 18h11M30 28h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M30 8v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <!-- T -->
-          <path d="M50 8h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M57 8v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <!--
+          MET CLINIC logo — rebuilt for fidelity
+          ViewBox: 0 0 300 72
+          Cap height: y=6 to y=58 (52px tall)
+          M: x=0–40 | E: x=43–67 | T: x=70–116
+          Sparkle: just right of T crossbar
+          CLINIC text: x=130 | Tagline below
+        -->
+        <svg viewBox="0 0 300 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="MET Clinic logo" class="logo-svg">
+
+          <!-- ═══ M ═══
+               Left stem: x=0–6, y=6–58
+               Right stem: x=34–40, y=6–58
+               Diagonals: full V meeting at (20, 36)
+               Serifs: top & bottom of each stem
+          -->
+          <!-- Left stem -->
+          <rect x="0" y="6" width="6" height="52" fill="currentColor"/>
+          <!-- Left stem serifs: top and bottom -->
+          <rect x="-3" y="6" width="12" height="3" fill="currentColor"/>
+          <rect x="-3" y="55" width="12" height="3" fill="currentColor"/>
+          <!-- Right stem -->
+          <rect x="34" y="6" width="6" height="52" fill="currentColor"/>
+          <!-- Right stem serifs: top and bottom -->
+          <rect x="31" y="6" width="12" height="3" fill="currentColor"/>
+          <rect x="31" y="55" width="12" height="3" fill="currentColor"/>
+          <!-- Left diagonal (top-left → center V) -->
+          <polygon points="6,6 13,6 23,36 17,36" fill="currentColor"/>
+          <!-- Right diagonal (top-right → center V) -->
+          <polygon points="27,6 34,6 23,36 17,36" fill="currentColor"/>
+
+          <!-- ═══ E ═══
+               Left stem: x=44–50, y=6–58
+               Top bar: x=44–67, y=6–9
+               Mid bar: x=44–62, y=29–32
+               Bottom bar: x=44–67, y=55–58
+          -->
+          <rect x="44" y="6" width="5.5" height="52" fill="currentColor"/>
+          <rect x="44" y="6" width="23" height="3" fill="currentColor"/>
+          <rect x="44" y="29" width="17" height="3" fill="currentColor"/>
+          <rect x="44" y="55" width="23" height="3" fill="currentColor"/>
+
+          <!-- ═══ T ═══
+               Crossbar: x=68–115, y=6–10 (with serif overhangs)
+               Stem: x=87–93, y=6–58
+               Bottom serifs on stem
+          -->
+          <!-- Crossbar body -->
+          <rect x="70" y="6" width="43" height="4" fill="currentColor"/>
+          <!-- Crossbar serif overhangs -->
+          <rect x="66" y="6" width="7" height="4" fill="currentColor"/>
+          <rect x="110" y="6" width="7" height="4" fill="currentColor"/>
+          <!-- Stem -->
+          <rect x="86.5" y="6" width="5.5" height="52" fill="currentColor"/>
+          <!-- Bottom stem serifs -->
+          <rect x="83" y="55" width="12" height="3" fill="currentColor"/>
+
+          <!-- ✦ 4-pointed sparkle star, right tip of T crossbar -->
+          <path d="M117 0 L118.2 4 L122 5.2 L118.2 6.4 L117 10.4 L115.8 6.4 L112 5.2 L115.8 4 Z" fill="currentColor"/>
+
+          <!-- Thin vertical separator -->
+          <rect x="126" y="10" width="0.8" height="42" fill="currentColor" opacity="0.2"/>
+
           <!-- CLINIC wordmark -->
-          <text x="72" y="22" font-family="'Switzer', sans-serif" font-size="9" font-weight="400" letter-spacing="3" fill="currentColor">CLINIC</text>
+          <text x="132" y="34"
+            font-family="'Switzer','Helvetica Neue',Arial,sans-serif"
+            font-size="13" font-weight="400" letter-spacing="5"
+            fill="currentColor">CLINIC</text>
+
+          <!-- Tagline -->
+          <text x="132" y="48"
+            font-family="'Switzer','Helvetica Neue',Arial,sans-serif"
+            font-size="5.2" font-weight="300" letter-spacing="1.8"
+            fill="currentColor" opacity="0.55">GINECOLOG&#237;A EST&#201;TICA &amp; ANTIAGING</text>
+
         </svg>
       </a>
 
@@ -164,10 +228,6 @@
         </div>
       </div>
 
-      <div class="hero__scroll-hint" aria-hidden="true">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
-      </div>
     </section>
 
     <!-- INTRO MARQUEE -->
@@ -432,56 +492,80 @@
 
         <div class="opinions-grid">
           <blockquote class="opinion-card opinion-card--highlight">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"La atención es totalmente personalizada, las explicaciones del tratamiento y cómo llevarlo es muy claro. Lo más importante: te explica cómo te ayudará a mejorar tu salud."</p>
+            <p>La atención es totalmente personalizada, las explicaciones del tratamiento y cómo llevarlo es muy claro. Lo más importante: te explica cómo te ayudará a mejorar tu salud.</p>
             <footer>
-              <div class="opinion-card__author">Erika</div>
-              <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              <div class="opinion-card__avatar">ER</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">Erika</div>
+                <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              </div>
             </footer>
           </blockquote>
 
           <blockquote class="opinion-card">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"Excelente atención y profesionalismo. La doctora Melina es muy amable y explica de manera clara y detallada. Me hace sentir cómoda y segura durante mi visita."</p>
+            <p>Excelente atención y profesionalismo. La doctora Melina es muy amable y explica de manera clara y detallada. Me hace sentir cómoda y segura durante mi visita.</p>
             <footer>
-              <div class="opinion-card__author">Estrella Romero</div>
-              <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              <div class="opinion-card__avatar">ES</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">Estrella Romero</div>
+                <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              </div>
             </footer>
           </blockquote>
 
           <blockquote class="opinion-card">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"Es una especialista sumamente ética, dedicada y con mucha experiencia científica. Me dio tranquilidad tener mi diagnóstico con pruebas en mano."</p>
+            <p>Es una especialista sumamente ética, dedicada y con mucha experiencia científica. Me dio tranquilidad tener mi diagnóstico con pruebas en mano.</p>
             <footer>
-              <div class="opinion-card__author">Ana Flores Jiménez</div>
-              <div class="opinion-card__service">Check Up Ginecológico · MET Clinic</div>
+              <div class="opinion-card__avatar">AF</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">Ana Flores Jiménez</div>
+                <div class="opinion-card__service">Check Up Ginecológico · MET Clinic</div>
+              </div>
             </footer>
           </blockquote>
 
           <blockquote class="opinion-card">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"Súper profesional toda la clínica. La Dra. Melina y su equipo son increíbles. Siempre es una consulta integral, es muy profesional y amable."</p>
+            <p>Súper profesional toda la clínica. La Dra. Melina y su equipo son increíbles. Siempre es una consulta integral, es muy profesional y amable.</p>
             <footer>
-              <div class="opinion-card__author">Cristina Peña</div>
-              <div class="opinion-card__service">MET Clinic · Abril 2026</div>
+              <div class="opinion-card__avatar">CP</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">Cristina Peña</div>
+                <div class="opinion-card__service">MET Clinic · Abril 2026</div>
+              </div>
             </footer>
           </blockquote>
 
           <blockquote class="opinion-card">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"Me encanta ir con la doctora Melina porque siempre es una consulta integral. Es muy profesional, amable y siempre está ofreciendo lo mejor para mi salud."</p>
+            <p>Me encanta ir con la doctora Melina porque siempre es una consulta integral. Es muy profesional, amable y siempre está ofreciendo lo mejor para mi salud.</p>
             <footer>
-              <div class="opinion-card__author">NVTM</div>
-              <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              <div class="opinion-card__avatar">NV</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">NVTM</div>
+                <div class="opinion-card__service">Consulta Subsecuente · MET Clinic</div>
+              </div>
             </footer>
           </blockquote>
 
           <blockquote class="opinion-card">
+            <span class="opinion-card__quote-mark" aria-hidden="true">“</span>
             <div class="opinion-card__stars">★★★★★</div>
-            <p>"Muy profesional, me explicó el procedimiento cuando lo iba llevando a cabo. Es muy cuidadosa. La Dra. es muy cálida y eso me hizo sentir mejor."</p>
+            <p>Muy profesional, me explicó el procedimiento cuando lo iba llevando a cabo. Es muy cuidadosa. La Dra. es muy cálida y eso me hizo sentir mejor.</p>
             <footer>
-              <div class="opinion-card__author">GG</div>
-              <div class="opinion-card__service">Láser CO₂ · MET Clinic</div>
+              <div class="opinion-card__avatar">GG</div>
+              <div class="opinion-card__author-info">
+                <div class="opinion-card__author">GG</div>
+                <div class="opinion-card__service">Láser CO₂ · MET Clinic</div>
+              </div>
             </footer>
           </blockquote>
         </div>
@@ -494,7 +578,7 @@
       </div>
     </section>
 
-    <!-- PRECIOS -->
+    <!-- PRECIOS (comentado temporalmente)
     <section class="pricing" id="precios">
       <div class="container">
         <div class="section-header">
@@ -545,6 +629,7 @@
         <p class="pricing-note">Se aceptan principales aseguradoras: GNP, AXA, MetLife, Seguros Monterrey, Banorte y más.</p>
       </div>
     </section>
+    -->
 
     <!-- CONTACTO & UBICACIÓN -->
     <section class="contact" id="contacto">
@@ -619,13 +704,28 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg footer-logo" aria-label="MET Clinic">
-          <path d="M4 28V8l9 12 9-12v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <path d="M30 8h14M30 18h11M30 28h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M30 8v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M50 8h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <path d="M57 8v20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <text x="72" y="22" font-family="'Switzer', sans-serif" font-size="9" font-weight="400" letter-spacing="3" fill="currentColor">CLINIC</text>
+        <svg viewBox="0 0 300 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-svg footer-logo" aria-label="MET Clinic">
+          <rect x="0" y="6" width="6" height="52" fill="currentColor"/>
+          <rect x="-3" y="6" width="12" height="3" fill="currentColor"/>
+          <rect x="-3" y="55" width="12" height="3" fill="currentColor"/>
+          <rect x="34" y="6" width="6" height="52" fill="currentColor"/>
+          <rect x="31" y="6" width="12" height="3" fill="currentColor"/>
+          <rect x="31" y="55" width="12" height="3" fill="currentColor"/>
+          <polygon points="6,6 13,6 23,36 17,36" fill="currentColor"/>
+          <polygon points="27,6 34,6 23,36 17,36" fill="currentColor"/>
+          <rect x="44" y="6" width="5.5" height="52" fill="currentColor"/>
+          <rect x="44" y="6" width="23" height="3" fill="currentColor"/>
+          <rect x="44" y="29" width="17" height="3" fill="currentColor"/>
+          <rect x="44" y="55" width="23" height="3" fill="currentColor"/>
+          <rect x="70" y="6" width="43" height="4" fill="currentColor"/>
+          <rect x="66" y="6" width="7" height="4" fill="currentColor"/>
+          <rect x="110" y="6" width="7" height="4" fill="currentColor"/>
+          <rect x="86.5" y="6" width="5.5" height="52" fill="currentColor"/>
+          <rect x="83" y="55" width="12" height="3" fill="currentColor"/>
+          <path d="M117 0 L118.2 4 L122 5.2 L118.2 6.4 L117 10.4 L115.8 6.4 L112 5.2 L115.8 4 Z" fill="currentColor"/>
+          <rect x="126" y="10" width="0.8" height="42" fill="currentColor" opacity="0.2"/>
+          <text x="132" y="34" font-family="'Switzer','Helvetica Neue',Arial,sans-serif" font-size="13" font-weight="400" letter-spacing="5" fill="currentColor">CLINIC</text>
+          <text x="132" y="48" font-family="'Switzer','Helvetica Neue',Arial,sans-serif" font-size="5.2" font-weight="300" letter-spacing="1.8" fill="currentColor" opacity="0.55">GINECOLOG&#237;A EST&#201;TICA &amp; ANTIAGING</text>
         </svg>
         <p class="footer__tagline">La primera clínica en México enfocada en ginecología estética, regenerativa, funcional, wellness y antiaging.</p>
         <div class="footer__social">
@@ -655,7 +755,6 @@
           <div class="footer__col-title">La Clínica</div>
           <a href="#doctora">La Doctora</a>
           <a href="#opiniones">Opiniones</a>
-          <a href="#precios">Precios</a>
           <a href="#contacto">Ubicación</a>
         </div>
         <div class="footer__col">
