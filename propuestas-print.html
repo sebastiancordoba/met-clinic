@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1400" />
+  <title>MET Clinic — Propuestas PDF</title>
+  <style>
+
+    /* ── Fuentes de la marca ── */
+    @font-face {
+      font-family: 'Moonclaw';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/MOONCLAWSTARPLUMEFREETRIAL-EADW4.OTF') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-THIN.OTF') format('opentype');
+      font-weight: 100; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-EXTRALIGHT.OTF') format('opentype');
+      font-weight: 200; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-LIGHT.OTF') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-REGULAR.OTF') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-MEDIUM.OTF') format('opentype');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-SEMIBOLD.OTF') format('opentype');
+      font-weight: 600; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Metropolis';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-BOLD.OTF') format('opentype');
+      font-weight: 700; font-display: swap;
+    }
+    @font-face {
+      font-family: 'BellaDia';
+      src: url('BRANDING/METCLINIC/TIPOGRAFIAS/BELLAGIADISPLAYTHIN-X32MJ.TTF') format('truetype');
+      font-weight: 300; font-display: swap;
+    }
+
+    /* ── Fuentes Dra. Melina ── */
+    @font-face {
+      font-family: 'Larken';
+      src: url('BRANDING/DRA. MT/02 Tipografía/01 Primaria/Larken - Display Serif/Larken-Light.otf') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Light.otf') format('opentype');
+      font-weight: 300; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Regular.otf') format('opentype');
+      font-weight: 400; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Medium.otf') format('opentype');
+      font-weight: 500; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons DemiBold.otf') format('opentype');
+      font-weight: 600; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Light Italic.otf') format('opentype');
+      font-weight: 300; font-style: italic; font-display: swap;
+    }
+    @font-face {
+      font-family: 'TTCommons';
+      src: url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Italic.otf') format('opentype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+
+    /* ── Variables ── */
+    :root {
+      --sinergia:     #82867F;
+      --formalidad:   #262626;
+      --tranquilidad: #F2F2ED;
+      --confort:      #F7EDDC;
+      --white:        #ffffff;
+      --font-sans:   'Metropolis', 'Helvetica Neue', sans-serif;
+      --font-larken: 'Larken', 'Georgia', serif;
+      --font-tt:     'TTCommons', 'Helvetica Neue', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--formalidad);
+      background: var(--tranquilidad);
+    }
+
+    /* ── Estructura ── */
+    .page { max-width: 1100px; margin: 0 auto; padding: 48px 32px 96px; }
+
+    .page-title {
+      font-family: 'Moonclaw', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      margin-bottom: 8px;
+    }
+    .page-heading {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 32px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .page-sub {
+      font-size: 13px;
+      color: var(--sinergia);
+      font-weight: 300;
+      margin-bottom: 64px;
+    }
+
+    /* ── Secciones ── */
+    .section { margin-bottom: 80px; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      border-top: 1px solid var(--sinergia);
+      padding-top: 12px;
+      margin-bottom: 32px;
+    }
+    .section-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: #555;
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Grid ── */
+    .grid { display: grid; gap: 16px; }
+    .grid--2 { grid-template-columns: repeat(2, 1fr); }
+    .grid--3 { grid-template-columns: repeat(3, 1fr); }
+    .grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* ── Logo cards ── */
+    .logo-card {
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .logo-card__bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      min-height: 160px;
+    }
+    .logo-card__bg img { max-width: 100%; max-height: 120px; object-fit: contain; }
+    .logo-card__bg--light   { background: var(--tranquilidad); }
+    .logo-card__bg--white   { background: var(--white); }
+    .logo-card__bg--confort { background: var(--confort); }
+    .logo-card__bg--sage    { background: var(--sinergia); }
+    .logo-card__bg--dark    { background: var(--formalidad); }
+    .logo-card__bg--black   { background: #000000; }
+
+    .logo-card__info {
+      padding: 12px 16px;
+      background: white;
+      border-top: 1px solid rgba(130,134,127,0.15);
+    }
+    .logo-card__name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .logo-card__desc { font-size: 11px; color: #888; font-weight: 300; line-height: 1.5; }
+    .logo-card__tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--tranquilidad);
+      color: var(--sinergia);
+      border: 1px solid var(--sinergia);
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-top: 6px;
+      margin-right: 4px;
+    }
+
+    /* ── Contexto de uso ── */
+    .context-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .context-row__bg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+    .context-row__bg img { max-height: 50px; width: auto; mix-blend-mode: multiply; }
+    .context-row__bg--dark img,
+    .context-row__bg--sage img { mix-blend-mode: normal; }
+    .context-row__info {
+      padding: 20px 24px;
+      background: white;
+      border-left: 1px solid rgba(130,134,127,0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .context-row__where { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .context-row__why   { font-size: 12px; font-weight: 300; color: #666; line-height: 1.6; }
+
+    /* ── Colores ── */
+    .color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .color-card { border-radius: 4px; overflow: hidden; border: 1px solid rgba(130,134,127,0.2); }
+    .color-card__swatch { height: 120px; }
+    .color-card__body { padding: 16px; background: white; }
+    .color-card__name { font-size: 12px; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .color-card__hex  { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 8px; }
+    .color-card__pct  { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--sinergia); margin-bottom: 8px; }
+    .color-card__use  { font-size: 11px; color: #666; font-weight: 300; line-height: 1.5; }
+
+    /* Combinaciones de fondo */
+    .combo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .combo-card {
+      border-radius: 4px;
+      padding: 28px 24px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .combo-card__label { font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+    .combo-card__sample-h { font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 300; margin-bottom: 6px; }
+    .combo-card__sample-p { font-size: 11px; font-weight: 300; line-height: 1.6; opacity: 0.75; }
+
+    /* ── Tipografías ── */
+    .typo-section { margin-bottom: 48px; }
+    .typo-name {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--sinergia); margin-bottom: 6px;
+    }
+    .typo-desc { font-size: 12px; font-weight: 300; color: #666; margin-bottom: 24px; line-height: 1.6; }
+    .typo-specimen {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 32px;
+    }
+    .typo-row { margin-bottom: 20px; display: flex; align-items: baseline; gap: 24px; }
+    .typo-row__meta { font-size: 10px; color: #aaa; width: 120px; flex-shrink: 0; font-family: monospace; }
+    .typo-row__text { flex: 1; }
+
+    .moonclaw-hero   { font-family: 'Moonclaw', serif; font-size: 64px; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1; }
+    .moonclaw-lg     { font-family: 'Moonclaw', serif; font-size: 40px; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1; }
+    .moonclaw-md     { font-family: 'Moonclaw', serif; font-size: 28px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .moonclaw-sm     { font-family: 'Moonclaw', serif; font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .metro-display   { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 48px; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+    .metro-h1        { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 36px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .metro-h2        { font-family: 'Metropolis', sans-serif; font-weight: 400; font-size: 24px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .metro-h3        { font-family: 'Metropolis', sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; }
+    .metro-body      { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 15px; line-height: 1.7; }
+    .metro-body-md   { font-family: 'Metropolis', sans-serif; font-weight: 400; font-size: 14px; line-height: 1.7; }
+    .metro-caption   { font-family: 'Metropolis', sans-serif; font-weight: 300; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .bellagia-display { font-family: 'BellaDia', serif; font-weight: 300; font-size: 56px; line-height: 1; }
+    .bellagia-lg      { font-family: 'BellaDia', serif; font-weight: 300; font-size: 36px; }
+    .bellagia-md      { font-family: 'BellaDia', serif; font-weight: 300; font-size: 24px; }
+
+    /* Combinación tipográfica */
+    .typo-combo {
+      background: var(--tranquilidad);
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 40px;
+      margin-top: 8px;
+    }
+    .typo-combo h3 {
+      font-family: 'Moonclaw', serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sinergia);
+      margin-bottom: 12px;
+    }
+    .typo-combo h1 {
+      font-family: 'Metropolis', sans-serif;
+      font-weight: 300;
+      font-size: 44px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .typo-combo p {
+      font-family: 'Metropolis', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.8;
+      color: #555;
+      max-width: 480px;
+    }
+    .typo-combo--dark {
+      background: var(--formalidad);
+    }
+    .typo-combo--dark h3 { color: rgba(242,242,237,0.5); }
+    .typo-combo--dark h1 { color: var(--tranquilidad); }
+    .typo-combo--dark p  { color: rgba(242,242,237,0.65); }
+    .typo-combo--sage {
+      background: var(--sinergia);
+    }
+    .typo-combo--sage h3 { color: rgba(242,242,237,0.6); }
+    .typo-combo--sage h1 { color: var(--tranquilidad); }
+    .typo-combo--sage p  { color: rgba(242,242,237,0.75); }
+
+    /* ── Paleta de imágenes / fotografía ── */
+    .photo-note {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .photo-note__col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; color: var(--sinergia); }
+    .photo-note__col ul { list-style: none; }
+    .photo-note__col ul li { font-size: 12px; font-weight: 300; line-height: 1.8; color: #555; padding-left: 14px; position: relative; }
+    .photo-note__col ul li::before { content: '—'; position: absolute; left: 0; color: var(--sinergia); }
+
+    /* ── Nav ── */
+    nav.toc {
+      position: sticky;
+      top: 0;
+      background: var(--formalidad);
+      z-index: 100;
+      padding: 0 32px;
+    }
+    nav.toc ul {
+      list-style: none;
+      display: flex;
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav.toc ul li a {
+      display: block;
+      padding: 14px 20px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(242,242,237,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav.toc ul li a:hover { color: var(--tranquilidad); }
+
+    /* ── Tintes de color ── */
+    .tints-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .tints-col__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--sinergia); margin-bottom: 10px;
+    }
+    .tint-chip {
+      height: 44px; border-radius: 2px; margin-bottom: 4px;
+      display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+    }
+    .tint-chip span { font-size: 9px; font-family: monospace; opacity: 0.7; }
+
+    /* ── UI elements demo ── */
+    .ui-demo {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 28px 28px 20px;
+      margin-bottom: 16px;
+    }
+    .ui-demo__label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      opacity: 0.45; margin-bottom: 20px;
+    }
+    .ui-demo__row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+    .ui-demo__row-label {
+      font-size: 9px; color: #bbb; width: 72px; flex-shrink: 0;
+      font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .ui-btn {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 11px 22px; border-radius: 2px; cursor: default; border: none;
+    }
+    .ui-btn--outline {
+      background: transparent !important;
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 10px 20px; border-radius: 2px; cursor: default;
+    }
+    .ui-tag {
+      font-family: var(--font-sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .ui-pill {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 400;
+      letter-spacing: 0.08em; padding: 7px 16px; border-radius: 100px;
+    }
+    .ui-divider-v { width: 1px; height: 28px; }
+
+    /* ── Escala de pesos ── */
+    .weight-scale {
+      background: white;
+      border: 1px solid rgba(130,134,127,0.2);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+    .weight-row {
+      display: grid; grid-template-columns: 100px 1fr 60px;
+      align-items: baseline; gap: 20px;
+      padding: 10px 0; border-bottom: 1px solid rgba(130,134,127,0.08);
+    }
+    .weight-row:last-child { border-bottom: none; }
+    .weight-label { font-size: 9px; color: #bbb; font-family: monospace; }
+    .weight-num   { font-size: 9px; color: #ddd; font-family: monospace; text-align: right; }
+    .weight-sample-met { font-family: 'Metropolis', sans-serif; font-size: 20px; letter-spacing: 0.03em; }
+    .weight-sample-dm  { font-family: var(--font-tt); font-size: 20px; letter-spacing: 0.02em; }
+
+    /* ── Comparativa de sistemas ── */
+    .system-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .system-card {
+      border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(130,134,127,0.2);
+    }
+    .system-card__header {
+      padding: 14px 20px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .system-card__body { padding: 28px 24px; background: white; }
+    .system-card__eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .system-card__h1 { font-size: 36px; line-height: 1.15; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .system-card__body-text { font-size: 13px; line-height: 1.75; font-weight: 300; color: #555; max-width: 360px; }
+    .system-card__meta {
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(130,134,127,0.15);
+      font-size: 10px; line-height: 1.7; color: #999;
+    }
+    .system-card__meta strong { color: var(--formalidad); }
+
+    /* ── Larken approximation note ── */
+    .approx-note {
+      display: inline-block; font-size: 9px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; background: #fff7ed; color: #c07a30;
+      border: 1px solid #f0c080; padding: 2px 8px; border-radius: 2px; margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── Mockups de propuesta ── */
+    .proposal { margin-bottom: 48px; }
+    .proposal__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #999; margin-bottom: 10px;
+    }
+    .proposal__label strong { color: var(--formalidad); }
+    .proposal__label em { color: var(--sinergia); font-style: normal; }
+
+    .mockup {
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(130,134,127,0.25);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    /* Fake nav */
+    .m-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 56px;
+      border-bottom: 1px solid;
+    }
+    .m-nav__links {
+      display: flex; gap: 28px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .m-nav__cta {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 10px 22px; border-radius: 2px;
+    }
+
+    /* Hero */
+    .m-hero {
+      padding: 64px 44px 60px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .m-hero__eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+    }
+    .m-hero__eyebrow::before {
+      content: ''; display: block; width: 24px; height: 1px; background: currentColor; opacity: 0.5;
+    }
+    .m-hero__h1 { line-height: 1.08; margin-bottom: 18px; }
+    .m-hero__sub { font-size: 13px; line-height: 1.75; font-weight: 300; max-width: 380px; margin-bottom: 26px; opacity: 0.72; }
+    .m-hero__actions { display: flex; gap: 10px; align-items: center; margin-bottom: 28px; }
+    .m-hero__btn {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 13px 26px; border-radius: 2px; cursor: default; border: none;
+    }
+    .m-hero__btn--ghost {
+      background: transparent !important;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: 2px; cursor: default;
+    }
+    /* Awards / press row */
+    .m-hero__trust {
+      display: flex; gap: 0; align-items: stretch;
+      border: 1px solid; border-radius: 3px; overflow: hidden;
+    }
+    .m-trust__item {
+      padding: 10px 16px; border-right: 1px solid;
+      display: flex; flex-direction: column; justify-content: center; gap: 2px;
+    }
+    .m-trust__item:last-child { border-right: none; }
+    .m-trust__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.5;
+    }
+    .m-trust__value {
+      font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+    }
+
+    /* Image placeholder */
+    .m-hero__img {
+      aspect-ratio: 3/4; border-radius: 3px;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; gap: 3px;
+    }
+    .m-hero__img-name {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .m-hero__img-title {
+      font-size: 9px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6;
+    }
+
+    /* Stats strip */
+    .m-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid;
+    }
+    .m-stat {
+      padding: 22px 28px; border-right: 1px solid;
+    }
+    .m-stat:last-child { border-right: none; }
+    .m-stat__num {
+      font-size: 32px; font-weight: 300; letter-spacing: 0.02em; line-height: 1; margin-bottom: 5px;
+    }
+    .m-stat__label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.6; }
+
+    @media (max-width: 768px) {
+      .grid--4, .color-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid--3, .combo-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid--2 { grid-template-columns: 1fr; }
+      .context-row { grid-template-columns: 1fr; }
+      .photo-note { grid-template-columns: 1fr; }
+      .typo-row { flex-direction: column; gap: 4px; }
+      .system-compare { grid-template-columns: 1fr; }
+      .tints-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  
+
+    /* ── Print page setup ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    @page {
+      size: 1400px 840px;
+      margin: 0;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e8e8e8;
+    }
+
+    .print-page {
+      width: 1400px;
+      height: 840px;
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 60px;
+      position: relative;
+    }
+
+    .print-page:last-child {
+      page-break-after: avoid;
+    }
+
+    .print-page .proposal__label {
+      position: absolute;
+      top: 18px;
+      left: 60px;
+      font-size: 11px;
+      color: #999;
+      margin: 0;
+    }
+
+    .print-page .mockup {
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.14);
+      /* scale mockup to fit within the page */
+      transform-origin: top center;
+    }
+
+    /* Ensure mockup fills width properly */
+    .print-page .mockup > * {
+      max-width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 1 — Clínica limpia</strong> &nbsp;·&nbsp; <em>Fondo Tranquilidad · Metropolis todo · Botones Formalidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#F2F2ED; color:#262626; border-color:rgba(38,38,38,0.1);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 2 — Editorial serif</strong> &nbsp;·&nbsp; <em>Fondo Tranquilidad · Larken headlines · TT Commons body</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#F2F2ED; color:#262626; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; font-weight:400; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 3 — Sage dominante</strong> &nbsp;·&nbsp; <em>Fondo Sinergia · Metropolis · Texto Tranquilidad · El más característico de la marca</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#82867F; color:#F2F2ED; border-color:rgba(242,242,237,0.15);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#82867F; color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.6);">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.75);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.45); color:#F2F2ED;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.2);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.2);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 4 — Dark luxury</strong> &nbsp;·&nbsp; <em>Fondo Formalidad · Larken headlines · TT Commons body · Texto Tranquilidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#262626; color:#F2F2ED; border-color:rgba(242,242,237,0.1);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.5);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#262626;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#262626; color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.08em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#262626;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; font-weight:400; border:1px solid rgba(242,242,237,0.3); color:rgba(242,242,237,0.8);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(242,242,237,0.4);">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#F7EDDC;">Cosmopolitan MX</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 5 — Híbrido cálido</strong> &nbsp;·&nbsp; <em>Fondo Confort · Larken headlines · Metropolis body · Nav en Formalidad</em></p>
+        <div class="mockup">
+
+          <div class="m-nav" style="background:#262626; color:#F2F2ED; border-color:rgba(242,242,237,0.1);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);">
+              <span>Servicios</span><span>La Doctora</span><span>Contacto</span>
+            </div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+
+          <div class="m-hero" style="background:#F7EDDC; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; font-weight:500; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F7EDDC;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.15);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div>
+                </div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div>
+                </div>
+                <div class="m-trust__item">
+                  <div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div>
+                  <div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 6 — Sage nav / Claro hero / Oscuro stats</strong> &nbsp;·&nbsp; <em>Nav Sinergia · Hero Tranquilidad · Strip Formalidad</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid #262626; color:#262626;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 7 — Oscuro nav / Cálido hero / Sage stats</strong> &nbsp;·&nbsp; <em>Nav Formalidad · Hero Confort · Strip Sinergia</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#262626; border-color:rgba(242,242,237,0.1);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.5);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F7EDDC; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F7EDDC;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; border:1px solid #82867F; color:#82867F;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.15);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.15);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 8 — Claro nav / Oscuro hero / Sage stats</strong> &nbsp;·&nbsp; <em>Nav Tranquilidad · Hero Formalidad · Strip Sinergia</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#262626; color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.35); color:rgba(242,242,237,0.85);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 9 — Split · Formalidad / Sinergia</strong> &nbsp;·&nbsp; <em>Izquierda Formalidad · Derecha Sinergia · Metropolis</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#262626; border-color:rgba(242,242,237,0.1);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.5);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#262626;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:#262626; padding:68px 52px; display:flex; flex-direction:column; justify-content:center; gap:0;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:40px;">
+              <div style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED; line-height:1.1; margin-bottom:28px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="display:flex; gap:10px;">
+                <button style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:13px 24px; background:#F2F2ED; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:12px 22px; background:transparent; color:rgba(242,242,237,0.7); border:1px solid rgba(242,242,237,0.25); border-radius:2px; cursor:default;">Conocer servicios</button>
+              </div>
+            </div>
+            <div style="background:#82867F; padding:68px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:'Metropolis',sans-serif; font-size:16px; font-weight:300; line-height:1.9; color:rgba(242,242,237,0.82);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada y el bienestar integral.</div>
+              <div>
+                <div style="width:40px; height:1px; background:rgba(242,242,237,0.25); margin-bottom:32px;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:1px solid rgba(242,242,237,0.2); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.15); padding-right:20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">1,320+</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Opiniones</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.15); padding:0 20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">9 años</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Experiencia</div>
+                  </div>
+                  <div style="padding-left:20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">5★</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Doctoralia</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 10 — Split · Tranquilidad / Sinergia</strong> &nbsp;·&nbsp; <em>Izquierda Tranquilidad · Derecha Sinergia · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:#F2F2ED; padding:68px 52px; display:flex; flex-direction:column; justify-content:center;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:40px; mix-blend-mode:multiply;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Larken',serif; font-weight:300; font-size:48px; letter-spacing:0.06em; text-transform:uppercase; color:#262626; line-height:1.1; margin-bottom:32px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="display:flex; gap:10px;">
+                <button style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:13px 24px; background:#262626; color:#F2F2ED; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:400; letter-spacing:0.15em; text-transform:uppercase; padding:12px 22px; background:transparent; color:#82867F; border:1px solid rgba(130,134,127,0.4); border-radius:2px; cursor:default;">Conocer servicios</button>
+              </div>
+            </div>
+            <div style="background:#82867F; padding:68px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:16px; font-weight:300; line-height:1.9; color:rgba(242,242,237,0.85);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada y el bienestar integral.</div>
+              <div>
+                <div style="width:40px; height:1px; background:rgba(242,242,237,0.25); margin-bottom:32px;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:1px solid rgba(242,242,237,0.2); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.15); padding-right:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">1,320+</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Opiniones</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.15); padding:0 20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">9 años</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Experiencia</div>
+                  </div>
+                  <div style="padding-left:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">5★</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.55);">Doctoralia</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 11 — Split · Sinergia / Formalidad</strong> &nbsp;·&nbsp; <em>Izquierda Sinergia · Derecha Formalidad · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.6);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:#82867F; padding:68px 52px; display:flex; flex-direction:column; justify-content:center;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:40px;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:rgba(242,242,237,0.55); margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Larken',serif; font-weight:300; font-size:48px; letter-spacing:0.06em; text-transform:uppercase; color:#F2F2ED; line-height:1.1; margin-bottom:32px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="display:flex; gap:10px;">
+                <button style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:500; letter-spacing:0.15em; text-transform:uppercase; padding:13px 24px; background:#F2F2ED; color:#82867F; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'TTCommons',sans-serif; font-size:9px; font-weight:400; letter-spacing:0.15em; text-transform:uppercase; padding:12px 22px; background:transparent; color:rgba(242,242,237,0.75); border:1px solid rgba(242,242,237,0.3); border-radius:2px; cursor:default;">Conocer servicios</button>
+              </div>
+            </div>
+            <div style="background:#262626; padding:68px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:16px; font-weight:300; line-height:1.9; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada y el bienestar integral.</div>
+              <div>
+                <div style="width:40px; height:1px; background:rgba(242,242,237,0.15); margin-bottom:32px;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:1px solid rgba(242,242,237,0.1); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">1,320+</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.45);">Opiniones</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding:0 20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">9 años</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.45);">Experiencia</div>
+                  </div>
+                  <div style="padding-left:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#F2F2ED; line-height:1; margin-bottom:8px;">5★</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.45);">Doctoralia</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 12 — Split · Tranquilidad / Formalidad</strong> &nbsp;·&nbsp; <em>Izquierda Tranquilidad · Derecha Formalidad · Metropolis</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:#F2F2ED; padding:68px 52px; display:flex; flex-direction:column; justify-content:center;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:40px; mix-blend-mode:multiply;">
+              <div style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.25em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#262626; line-height:1.1; margin-bottom:28px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="display:flex; gap:10px;">
+                <button style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:13px 24px; background:#262626; color:#F2F2ED; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'Metropolis',sans-serif; font-size:9px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; padding:12px 22px; background:transparent; color:#82867F; border:1px solid rgba(130,134,127,0.4); border-radius:2px; cursor:default;">Conocer servicios</button>
+              </div>
+            </div>
+            <div style="background:#262626; padding:68px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:'Metropolis',sans-serif; font-size:16px; font-weight:300; line-height:1.9; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada y el bienestar integral.</div>
+              <div>
+                <div style="width:40px; height:1px; background:rgba(242,242,237,0.15); margin-bottom:32px;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:1px solid rgba(242,242,237,0.1); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">1,320+</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.5);">Opiniones</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding:0 20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">9 años</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.5);">Experiencia</div>
+                  </div>
+                  <div style="padding-left:20px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:28px; font-weight:300; color:#F2F2ED; line-height:1; margin-bottom:6px;">5★</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,242,237,0.5);">Doctoralia</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 13 — Formalidad → Sinergia</strong> &nbsp;·&nbsp; <em>Diagonal · De charcoal a sage · La más característica de la marca</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:linear-gradient(90deg,#262626 60%,#4e5450 100%); border-color:rgba(242,242,237,0.1);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.55);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#262626;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:linear-gradient(135deg,#262626 0%,#4a5250 45%,#82867F 100%); color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.55);">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; font-size:15px; line-height:1.85; font-weight:300; max-width:400px; margin-bottom:30px; color:rgba(242,242,237,0.72);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#262626;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.35); color:rgba(242,242,237,0.85);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.15);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.15);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.42);">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.15);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.42);">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.42);">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 14 — Sinergia → Tranquilidad</strong> &nbsp;·&nbsp; <em>Vertical · Sage que se abre a claro · Sensación clínica y fresca · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.6);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:linear-gradient(170deg,#82867F 0%,#b8bab4 50%,#F2F2ED 100%); color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:500; color:rgba(38,38,38,0.55);">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-size:15px; line-height:1.85; font-weight:300; max-width:400px; margin-bottom:30px; color:rgba(38,38,38,0.68);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; border:1px solid rgba(38,38,38,0.3); color:#262626;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(38,38,38,0.4);">Opiniones</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(38,38,38,0.4);">Doctoralia</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:rgba(38,38,38,0.4);">Prensa</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 15 — Oscuro con tinte sage</strong> &nbsp;·&nbsp; <em>Ultra sutil · De negro puro a charcoal con tinte verde · Lujo máximo</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:linear-gradient(90deg,#141414 0%,#1e2220 100%); border-color:rgba(242,242,237,0.07);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:linear-gradient(150deg,#0f0f0f 0%,#1c201e 40%,#2a302d 100%); color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; font-size:15px; line-height:1.85; font-weight:300; max-width:400px; margin-bottom:30px; color:rgba(242,242,237,0.6);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(130,134,127,0.4); color:rgba(242,242,237,0.8);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(130,134,127,0.25);">
+                <div class="m-trust__item" style="border-color:rgba(130,134,127,0.25);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(130,134,127,0.7);">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(130,134,127,0.25);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(130,134,127,0.7);">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(130,134,127,0.7);">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 16 — Split con gradiente</strong> &nbsp;·&nbsp; <em>Izquierda Formalidad → Sinergia · Derecha Tranquilidad sólido · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:linear-gradient(160deg,#262626 0%,#4a5250 55%,#82867F 100%); padding:68px 52px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:280px; height:auto; display:block; margin-bottom:40px;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:rgba(242,242,237,0.5); margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Larken',serif; font-weight:300; font-size:48px; letter-spacing:0.06em; text-transform:uppercase; color:#F2F2ED; line-height:1.1; margin-bottom:32px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="display:flex; gap:10px;">
+                <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:13px 24px; background:#F2F2ED; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:12px 22px; background:transparent; color:rgba(242,242,237,0.75); border:1px solid rgba(242,242,237,0.3); border-radius:2px; cursor:default;">Servicios</button>
+              </div>
+            </div>
+            <div style="background:#F2F2ED; padding:68px 52px; display:flex; flex-direction:column; justify-content:space-between;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:16px; font-weight:300; line-height:1.9; color:rgba(38,38,38,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada y el bienestar integral.</div>
+              <div>
+                <div style="width:40px; height:1px; background:rgba(130,134,127,0.3); margin-bottom:32px;"></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0; border-top:1px solid rgba(130,134,127,0.2); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(130,134,127,0.15); padding-right:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#262626; line-height:1; margin-bottom:8px;">1,320+</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Opiniones</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(130,134,127,0.15); padding:0 20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#262626; line-height:1; margin-bottom:8px;">9 años</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Experiencia</div>
+                  </div>
+                  <div style="padding-left:20px;">
+                    <div style="font-family:'Larken',serif; font-weight:300; font-size:32px; color:#262626; line-height:1; margin-bottom:8px;">5★</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Doctoralia</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 17 — Imagen a pantalla completa</strong> &nbsp;·&nbsp; <em>clinic.png · Overlay degradado lateral · Metropolis · Logo Negativo</em></p>
+        <div class="mockup">
+          <div style="position:relative; overflow:hidden;">
+            <div class="m-nav" style="position:relative; z-index:2; background:rgba(30,30,30,0.72); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-color:rgba(242,242,237,0.1);">
+              <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+              <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#F2F2ED; color:#262626;">Agendar cita</div>
+            </div>
+            <div style="position:relative; min-height:520px; background-image:url('clinic.png'); background-size:cover; background-position:center; display:flex; align-items:center;">
+              <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(30,30,30,0.92) 0%, rgba(30,30,30,0.72) 50%, rgba(30,30,30,0.18) 100%);"></div>
+              <div style="position:relative; z-index:1; padding:64px 52px; max-width:560px;">
+                <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+                <div style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+                <div style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED; line-height:1.08; margin-bottom:20px;">Tu bienestar,<br>nuestra especialidad</div>
+                <div style="font-family:'Metropolis',sans-serif; font-size:15px; font-weight:300; line-height:1.85; color:rgba(242,242,237,0.6); max-width:400px; margin-bottom:32px;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+                <div style="display:flex; gap:12px; margin-bottom:40px;">
+                  <button style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:14px 28px; background:#F2F2ED; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                  <button style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:13px 24px; background:transparent; color:rgba(242,242,237,0.8); border:1px solid rgba(242,242,237,0.28); border-radius:2px; cursor:default;">Conocer servicios</button>
+                </div>
+                <div style="display:flex; gap:0; border-top:1px solid rgba(242,242,237,0.14); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Opiniones</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">1,320+ verificadas</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Doctoralia</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">★★★★★ Excelencia</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Prensa</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">Cosmopolitan MX</div>
+                  </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 18 — Split contenido + imagen</strong> &nbsp;·&nbsp; <em>Izquierda Formalidad · Derecha clinic.png · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#262626; border-color:rgba(242,242,237,0.07);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.45);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F7EDDC; color:#262626;">Agendar cita</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; min-height:580px;">
+            <div style="background:#262626; padding:68px 52px; display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:280px; height:auto; display:block; margin-bottom:40px;">
+              <div style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+              <div style="font-family:'Larken',serif; font-weight:300; font-size:48px; letter-spacing:0.06em; text-transform:uppercase; color:#F2F2ED; line-height:1.1; margin-bottom:28px;">Tu bienestar,<br>nuestra<br>especialidad</div>
+              <div style="font-family:'TTCommons',sans-serif; font-size:15px; font-weight:300; line-height:1.85; color:rgba(242,242,237,0.55); margin-bottom:32px; max-width:360px;">Especialista en ginecología estética, regenerativa y funcional.</div>
+              <div style="display:flex; gap:10px; margin-bottom:40px;">
+                <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:13px 24px; background:#F7EDDC; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:12px 22px; background:transparent; color:rgba(242,242,237,0.7); border:1px solid rgba(242,242,237,0.18); border-radius:2px; cursor:default;">Servicios</button>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid rgba(242,242,237,0.08); padding-top:24px;">
+                <div style="border-right:1px solid rgba(242,242,237,0.07); padding-right:16px;">
+                  <div style="font-family:'Larken',serif; font-weight:300; font-size:28px; color:#F2F2ED; line-height:1; margin-bottom:6px;">1,320+</div>
+                  <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Opiniones</div>
+                </div>
+                <div style="border-right:1px solid rgba(242,242,237,0.07); padding:0 16px;">
+                  <div style="font-family:'Larken',serif; font-weight:300; font-size:28px; color:#F2F2ED; line-height:1; margin-bottom:6px;">9 años</div>
+                  <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Experiencia</div>
+                </div>
+                <div style="padding-left:16px;">
+                  <div style="font-family:'Larken',serif; font-weight:300; font-size:28px; color:#F2F2ED; line-height:1; margin-bottom:6px;">5★</div>
+                  <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F;">Doctoralia</div>
+                </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 19 — Claro nav / Oscuro hero / Imagen clínica</strong> &nbsp;·&nbsp; <em>Nav Tranquilidad · Hero Formalidad · clinic.png · Metropolis</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#F2F2ED; border-color:rgba(38,38,38,0.08);">
+            <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#262626; color:#F2F2ED;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+              <div class="m-hero__eyebrow" style="font-family:'Metropolis',sans-serif; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.65);">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'Metropolis',sans-serif; background:#82867F; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'Metropolis',sans-serif; border:1px solid rgba(242,242,237,0.35); color:rgba(242,242,237,0.85);">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(242,242,237,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Opiniones</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(242,242,237,0.12);"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Doctoralia</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'Metropolis',sans-serif; color:rgba(242,242,237,0.4);">Prensa</div><div class="m-trust__value" style="font-family:'Metropolis',sans-serif; color:#F2F2ED;">Cosmopolitan MX</div></div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 20 — Sage nav / Claro hero / Imagen clínica</strong> &nbsp;·&nbsp; <em>Nav Sinergia · Hero Tranquilidad · clinic.png · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div class="m-nav" style="background:#82867F; border-color:rgba(242,242,237,0.15);">
+            <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:rgba(242,242,237,0.7);"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+            <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#F2F2ED; color:#82867F;">Agendar cita</div>
+          </div>
+          <div class="m-hero" style="background:#F2F2ED; color:#262626;">
+            <div>
+              <img src="BRANDING/METCLINIC/LOGOS/MET_CARBON_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px; mix-blend-mode:multiply;">
+              <div class="m-hero__eyebrow" style="font-family:'TTCommons',sans-serif; font-weight:600; color:#82867F;">Ginecología Estética & Antiaging</div>
+              <div class="m-hero__h1" style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase; color:#262626;">Tu bienestar,<br>nuestra especialidad</div>
+              <div class="m-hero__sub" style="font-family:'TTCommons',sans-serif; font-weight:300; color:#555;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+              <div class="m-hero__actions">
+                <button class="m-hero__btn" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#262626; color:#F2F2ED;">Agendar cita</button>
+                <button class="m-hero__btn--ghost" style="font-family:'TTCommons',sans-serif; border:1px solid rgba(38,38,38,0.25); color:#262626;">Conocer servicios</button>
+              </div>
+              <div class="m-hero__trust" style="border-color:rgba(38,38,38,0.12);">
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Opiniones</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">1,320+ verificadas</div></div>
+                <div class="m-trust__item" style="border-color:rgba(38,38,38,0.12);"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Doctoralia</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">★★★★★ Excelencia</div></div>
+                <div class="m-trust__item"><div class="m-trust__label" style="font-family:'TTCommons',sans-serif; color:#82867F;">Prensa</div><div class="m-trust__value" style="font-family:'TTCommons',sans-serif; color:#262626;">Cosmopolitan MX</div></div>
+  </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 21 — Imagen completa con Nav Claro</strong> &nbsp;·&nbsp; <em>clinic.png · Nav Tranquilidad con contorno Sinergia · Metropolis</em></p>
+        <div class="mockup">
+          <div style="position:relative; overflow:hidden;">
+            <div class="m-nav" style="position:relative; z-index:2; background:rgba(242,242,237,0.9); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid #82867F;">
+              <div class="m-nav__links" style="font-family:'Metropolis',sans-serif; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+              <div class="m-nav__cta" style="font-family:'Metropolis',sans-serif; background:#262626; color:#F2F2ED;">Agendar cita</div>
+            </div>
+            <div style="position:relative; min-height:520px; background-image:url('clinic.png'); background-size:cover; background-position:center; display:flex; align-items:center;">
+              <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(30,30,30,0.92) 0%, rgba(30,30,30,0.72) 50%, rgba(30,30,30,0.18) 100%);"></div>
+              <div style="position:relative; z-index:1; padding:64px 52px; max-width:560px;">
+                <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+                <div style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+                <div style="font-family:'Metropolis',sans-serif; font-weight:300; font-size:46px; letter-spacing:0.04em; text-transform:uppercase; color:#F2F2ED; line-height:1.08; margin-bottom:20px;">Tu bienestar,<br>nuestra especialidad</div>
+                <div style="font-family:'Metropolis',sans-serif; font-size:15px; font-weight:300; line-height:1.85; color:rgba(242,242,237,0.6); max-width:400px; margin-bottom:32px;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+                <div style="display:flex; gap:12px; margin-bottom:40px;">
+                  <button style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:14px 28px; background:#F2F2ED; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                  <button style="font-family:'Metropolis',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:13px 24px; background:transparent; color:rgba(242,242,237,0.8); border:1px solid rgba(242,242,237,0.28); border-radius:2px; cursor:default;">Conocer servicios</button>
+                </div>
+                <div style="display:flex; gap:0; border-top:1px solid rgba(242,242,237,0.14); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Opiniones</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">1,320+ verificadas</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Doctoralia</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">★★★★★ Excelencia</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:10px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Prensa</div>
+                    <div style="font-family:'Metropolis',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">Cosmopolitan MX</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="print-page">
+    <div class="proposal">
+        <p class="proposal__label"><strong>Propuesta 22 — Imagen completa con Nav Blanco (Serif)</strong> &nbsp;·&nbsp; <em>clinic.png · Nav Blanco con contorno Sinergia · Larken + TT Commons</em></p>
+        <div class="mockup">
+          <div style="position:relative; overflow:hidden;">
+            <div class="m-nav" style="position:relative; z-index:2; background:rgba(255,255,255,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:2px solid #82867F;">
+              <div class="m-nav__links" style="font-family:'TTCommons',sans-serif; font-weight:400; color:#82867F;"><span>Servicios</span><span>La Doctora</span><span>Contacto</span></div>
+              <div class="m-nav__cta" style="font-family:'TTCommons',sans-serif; font-weight:500; background:#82867F; color:#ffffff;">Agendar cita</div>
+            </div>
+            <div style="position:relative; min-height:520px; background-image:url('clinic.png'); background-size:cover; background-position:center; display:flex; align-items:center;">
+              <div style="position:absolute; inset:0; background:linear-gradient(100deg, rgba(30,30,30,0.95) 0%, rgba(30,30,30,0.75) 50%, rgba(30,30,30,0.2) 100%);"></div>
+              <div style="position:relative; z-index:1; padding:64px 52px; max-width:560px;">
+                <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_05.png" alt="MET Clinic" style="max-height:160px; width:auto; max-width:100%; height:auto; display:block; margin-bottom:36px;">
+                <div style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#82867F; margin-bottom:16px;">Ginecología Estética & Antiaging</div>
+                <div style="font-family:'Larken',serif; font-weight:300; font-size:50px; letter-spacing:0.06em; text-transform:uppercase; color:#F2F2ED; line-height:1.08; margin-bottom:20px;">Tu bienestar,<br>nuestra especialidad</div>
+                <div style="font-family:'TTCommons',sans-serif; font-size:16px; font-weight:300; line-height:1.85; color:rgba(242,242,237,0.7); max-width:400px; margin-bottom:32px;">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</div>
+                <div style="display:flex; gap:12px; margin-bottom:40px;">
+                  <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; padding:14px 28px; background:#F2F2ED; color:#262626; border:none; border-radius:2px; cursor:default;">Agendar cita</button>
+                  <button style="font-family:'TTCommons',sans-serif; font-size:11px; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; padding:13px 24px; background:transparent; color:rgba(242,242,237,0.9); border:1px solid rgba(242,242,237,0.35); border-radius:2px; cursor:default;">Conocer servicios</button>
+                </div>
+                <div style="display:flex; gap:0; border-top:1px solid rgba(242,242,237,0.14); padding-top:28px;">
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Opiniones</div>
+                    <div style="font-family:'Larken',serif; font-size:20px; font-weight:300; color:#F2F2ED;">1,320+</div>
+                  </div>
+                  <div style="border-right:1px solid rgba(242,242,237,0.1); padding-right:28px; margin-right:28px;">
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Doctoralia</div>
+                    <div style="font-family:'Larken',serif; font-size:20px; font-weight:300; color:#F2F2ED;">5.0★</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:#82867F; margin-bottom:6px;">Prensa</div>
+                    <div style="font-family:'TTCommons',sans-serif; font-size:14px; font-weight:400; color:#F2F2ED;">Cosmopolitan MX</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>
