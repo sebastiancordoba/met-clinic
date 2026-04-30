@@ -300,14 +300,16 @@
       overflow:hidden; position:relative;
       width:100%;
     }
-    /* Edge fades */
-    .servicios-carousel::before,
-    .servicios-carousel::after {
-      content:''; position:absolute;
-      top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
+    /* Edge fades — desktop only */
+    @media (min-width: 641px) {
+      .servicios-carousel::before,
+      .servicios-carousel::after {
+        content:''; position:absolute;
+        top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
+      }
+      .servicios-carousel::before { left:0;  background:linear-gradient(to right, var(--tranquil) 20%, transparent); }
+      .servicios-carousel::after  { right:0; background:linear-gradient(to left,  var(--tranquil) 20%, transparent); }
     }
-    .servicios-carousel::before { left:0;  background:linear-gradient(to right, var(--tranquil) 20%, transparent); }
-    .servicios-carousel::after  { right:0; background:linear-gradient(to left,  var(--tranquil) 20%, transparent); }
 
     .servicios-track {
       display:flex;
