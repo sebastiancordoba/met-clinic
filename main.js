@@ -143,5 +143,3 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   });
 });
 
-// ── Form submit placeholder ───────────────────────
-document.querySelector('form').addEventListener('submit', e => e.preventDefault());
