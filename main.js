@@ -82,8 +82,8 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
   let cur  = 2;
   let busy = false;
 
-  function visible() { return window.innerWidth <= 640 ? 3 : 5; }
-  function sides()   { return (visible() - 1) / 2; }        // 1 or 2
+  function visible() { return window.innerWidth <= 640 ? 1 : 5; }
+  function sides()   { return (visible() - 1) / 2; }        // 0 or 2
   function cw()      { return el.offsetWidth / visible(); }
 
   function render(animate) {
@@ -97,10 +97,10 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
     all.forEach((c, i) => {
       c.classList.remove('s-active', 's-bright', 's-side', 's-hidden');
       const d = Math.abs(i - cur);
-      if      (d === 0)  c.classList.add('s-active');
-      else if (d === 1)  c.classList.add(s === 2 ? 's-bright' : 's-side');
-      else if (d === 2)  c.classList.add('s-side');
-      else               c.classList.add('s-hidden');
+      if      (d === 0)          c.classList.add('s-active');
+      else if (d === 1 && s >= 1) c.classList.add(s === 2 ? 's-bright' : 's-side');
+      else if (d === 2 && s >= 2) c.classList.add('s-side');
+      else                       c.classList.add('s-hidden');
     });
   }
 
