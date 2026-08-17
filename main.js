@@ -54,15 +54,15 @@ const cObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 
 // ── Services carousel ────────────────────────────
-// Desktop: 5 visible (3 bright center + 2 faded sides)
-// Mobile:  3 visible (1 bright center + 2 faded sides)
+// Desktop: center card = 10/12, peek 1/12 each side
+// Mobile:  1 card full width
 (function () {
   const el    = document.getElementById('svcCarousel');
+  if (!el) return; // #servicios ahora usa grid de pilares (sin carrusel)
   const track = el.querySelector('.servicios-track');
   const orig  = [...track.children]; // 6 real cards
   const N     = orig.length;
 
-  // Prepend 2 clones (last 2), append 3 clones (first 3) — enough for both modes
   const pre1 = orig[N - 2].cloneNode(true);
   const pre2 = orig[N - 1].cloneNode(true);
   const app1 = orig[0].cloneNode(true);
@@ -78,29 +78,32 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
   // all (11): [pre1, pre2, c0..c5, app1, app2, app3]
   const all = [...track.children];
 
-  // cur = index of the center card in `all`. Real cards start at index 2.
   let cur  = 2;
   let busy = false;
 
-  function visible() { return window.innerWidth <= 640 ? 1 : 5; }
-  function sides()   { return (visible() - 1) / 2; }        // 0 or 2
-  function cw()      { return el.offsetWidth / visible(); }
+  function isDesktop() { return window.innerWidth > 640; }
+  // Desktop: card width = 10/12 of container, centered (1/12 peek each side)
+  // Mobile:  card width = full container
+  function cw() {
+    return isDesktop() ? el.offsetWidth * (10 / 12) : el.offsetWidth;
+  }
 
   function render(animate) {
     const w = cw();
-    const s = sides();
+    const C = el.offsetWidth;
+    // Center the active card: offset = space left on each side
+    const offset = isDesktop() ? (C - w) / 2 : 0;
     all.forEach(c => { c.style.width = w + 'px'; });
     track.style.transition = animate
       ? 'transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)'
       : 'none';
-    track.style.transform = `translateX(${-(cur - s) * w}px)`;
+    track.style.transform = `translateX(${-cur * w + offset}px)`;
     all.forEach((c, i) => {
       c.classList.remove('s-active', 's-bright', 's-side', 's-hidden');
       const d = Math.abs(i - cur);
-      if      (d === 0)          c.classList.add('s-active');
-      else if (d === 1 && s >= 1) c.classList.add(s === 2 ? 's-bright' : 's-side');
-      else if (d === 2 && s >= 2) c.classList.add('s-side');
-      else                       c.classList.add('s-hidden');
+      if      (d === 0)                    c.classList.add('s-active');
+      else if (d === 1 && isDesktop())     c.classList.add('s-side');
+      else                                 c.classList.add('s-hidden');
     });
   }
 
@@ -125,7 +128,11 @@ document.querySelectorAll('[data-count]').forEach(el => cObs.observe(el));
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    if (t) {
+      e.preventDefault();
+      const top = t.getBoundingClientRect().top + window.scrollY - 68;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   });
 });
 
@@ -142,4 +149,68 @@ document.querySelectorAll('.drawer-link').forEach(a => {
     drawer.classList.remove('open');
   });
 });
+
+// ── Especialistas carousel (vertical cards, 4/3/2 por vista) ──
+(function () {
+  const track = document.getElementById('espTrack');
+  if (!track) return;
+  const cards = [...track.children];           // lista maestra (referencias persistentes)
+  const prev = document.getElementById('espPrev');
+  const next = document.getElementById('espNext');
+  const dotsWrap = document.getElementById('espDots');
+  const controls = track.closest('.esp-carousel').querySelector('.esp-controls');
+  let idx = 0, pages = [], perView = 0;
+
+  function calcPer() {
+    const w = window.innerWidth;
+    if (w <= 640) return 2;
+    if (w <= 1000) return 3;
+    return 4;
+  }
+
+  function build() {
+    const per = calcPer();
+    const firstCard = idx * (perView || per);  // recuerda la card visible al reagrupar
+    perView = per;
+    track.innerHTML = '';
+    dotsWrap.innerHTML = '';
+    pages = [];
+    for (let i = 0; i < cards.length; i += per) {
+      const page = document.createElement('div');
+      page.className = 'esp-page';
+      page.style.gridTemplateColumns = `repeat(${per}, 1fr)`;
+      cards.slice(i, i + per).forEach(c => page.appendChild(c));
+      track.appendChild(page);
+      pages.push(page);
+    }
+    pages.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'esp-dot';
+      d.setAttribute('aria-label', 'Página ' + (i + 1));
+      d.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(d);
+    });
+    controls.classList.toggle('is-hidden', pages.length <= 1);
+    idx = Math.max(0, Math.min(Math.floor(firstCard / per), pages.length - 1));
+    go(idx, true);
+  }
+
+  function go(i, instant) {
+    idx = Math.max(0, Math.min(pages.length - 1, i));
+    if (instant) track.style.transition = 'none';
+    track.style.transform = `translateX(${-idx * 100}%)`;
+    if (instant) { void track.offsetWidth; track.style.transition = ''; }
+    [...dotsWrap.children].forEach((d, j) => d.classList.toggle('is-active', j === idx));
+    prev.disabled = idx === 0;
+    next.disabled = idx === pages.length - 1;
+  }
+
+  prev.addEventListener('click', () => go(idx - 1));
+  next.addEventListener('click', () => go(idx + 1));
+
+  let rt;
+  window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(build, 150); });
+
+  build();
+})();
 

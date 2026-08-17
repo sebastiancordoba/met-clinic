@@ -35,6 +35,7 @@
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
     body { font-family:var(--font); color:var(--dark); overflow-x:hidden; max-width:100vw; }
+    a { color:inherit; text-decoration:none; }
 
     ::-webkit-scrollbar { width:4px; }
     ::-webkit-scrollbar-track { background:var(--confort); }
@@ -116,56 +117,97 @@
       height:calc(100vh - 68px);
       height:calc(100dvh - 68px);
       min-height:512px;
+      display:flex; flex-direction:column;
+      overflow:hidden;
+      background:var(--confort);
+    }
+    /* Media layer — image now, <video> later (see FASE 2 marker in HTML) */
+    .hero__media {
+      position:absolute; inset:0; z-index:0;
       background-image:url('clinic.png');
       background-size:cover; background-position:center;
       background-attachment:fixed;
-      display:flex; flex-direction:column;
-      overflow:hidden;
+      transform:scale(1.06);
+      animation:heroZoom 7s var(--ease) forwards;
+    }
+    .hero__media video {
+      width:100%; height:100%; object-fit:cover; display:block;
+    }
+    @keyframes heroZoom {
+      from { transform:scale(1.10); }
+      to   { transform:scale(1.00); }
     }
     .hero__overlay {
-      position:absolute; inset:0;
+      position:absolute; inset:0; z-index:0;
       background:linear-gradient(108deg,
-        rgba(247,237,220,0.97) 0%,
-        rgba(247,237,220,0.84) 44%,
-        rgba(247,237,220,0.06) 100%);
+        rgba(247,237,220,0.96) 0%,
+        rgba(247,237,220,0.82) 42%,
+        rgba(247,237,220,0.12) 100%);
     }
     .hero__content {
       position:relative; z-index:1;
       flex:1; min-height:0;
-      display:flex; flex-direction:column; justify-content:flex-start;
+      display:flex; flex-direction:column; justify-content:center;
       align-items:flex-start;
-      padding:clamp(32px, 5vh, 72px) 80px 24px;
-      max-width:680px;
+      padding:clamp(24px, 4vh, 56px) 72px clamp(20px, 3vh, 32px);
+      max-width:820px;
     }
 
     /* Hero entrance — elements animate in on load */
-    .hero__logo, .hero__title, .hero__desc, .hero__actions {
-      opacity:0; transform:translateY(18px);
-      transition:opacity 0.75s var(--ease), transform 0.75s var(--ease);
+    .hero__logo, .hero__eyebrow, .hero__title, .hero__desc, .hero__actions {
+      opacity:0; transform:translateY(16px);
+      transition:opacity 0.45s var(--ease), transform 0.45s var(--ease);
     }
     .hero--loaded .hero__logo    { opacity:1; transform:none; transition-delay:0s; }
-    .hero--loaded .hero__title   { opacity:1; transform:none; transition-delay:0.15s; }
-    .hero--loaded .hero__desc    { opacity:1; transform:none; transition-delay:0.28s; }
-    .hero--loaded .hero__actions { opacity:1; transform:none; transition-delay:0.4s; }
+    .hero--loaded .hero__eyebrow { opacity:1; transform:none; transition-delay:0.07s; }
+    .hero--loaded .hero__title   { opacity:1; transform:none; transition-delay:0.14s; }
+    .hero--loaded .hero__desc    { opacity:1; transform:none; transition-delay:0.21s; }
+    .hero--loaded .hero__actions { opacity:1; transform:none; transition-delay:0.28s; }
 
     .hero__logo {
-      max-height:clamp(110px, 20vh, 200px); width:auto; max-width:100%;
-      display:block; margin-bottom:clamp(18px, 2.5vh, 32px);
+      max-height:clamp(72px, 11vh, 116px); width:auto; max-width:100%;
+      display:block; margin-bottom:clamp(16px, 2.4vh, 30px);
       mix-blend-mode:multiply;
+    }
+    .hero__eyebrow {
+      font-size:11px; font-weight:500;
+      letter-spacing:0.26em; text-transform:uppercase;
+      color:var(--sage); margin-bottom:clamp(14px, 2vh, 22px);
+      display:flex; align-items:center; gap:14px;
+    }
+    .hero__eyebrow::before {
+      content:''; display:block;
+      width:28px; height:1px; background:var(--sage); opacity:0.6;
     }
 
     .hero__title {
-      font-size: clamp(26px,3.4vw,46px);
-      font-weight:300; letter-spacing:0.04em;
-      text-transform:uppercase; color:var(--dark);
-      line-height:1.06; margin-bottom:clamp(10px, 1.8vh, 20px);
+      font-family:var(--font);
+      font-size: clamp(38px, 5.4vw, 74px);
+      font-weight:200; letter-spacing:-0.02em;
+      color:var(--dark);
+      line-height:1.02;
+      margin-bottom:clamp(14px, 2vh, 24px);
+      max-width:20ch;
+    }
+    .hero__title em {
+      font-style:normal; font-weight:400;
+      color:var(--sage);
     }
     .hero__desc {
-      font-size:16px; font-weight:300;
-      line-height:1.8; color:rgba(38,38,38,0.72);
-      max-width:420px; margin-bottom:clamp(18px, 2.5vh, 32px);
+      font-size:clamp(14px, 1vw, 16px); font-weight:300;
+      line-height:1.7; color:rgba(38,38,38,0.72);
+      max-width:460px; margin-bottom:clamp(18px, 2.4vh, 30px);
     }
-    .hero__actions { display:flex; gap:14px; }
+    .hero__actions { display:flex; gap:22px; align-items:center; flex-wrap:wrap; }
+    .hero__link {
+      font-family:var(--font);
+      font-size:12px; font-weight:500;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--dark); text-decoration:none;
+      padding:6px 0; border-bottom:1px solid var(--sage);
+      transition:color 0.3s, border-color 0.3s, transform 0.25s;
+    }
+    .hero__link:hover { color:var(--sage); transform:translateX(4px); }
 
     .btn-primary {
       font-family:var(--font);
@@ -208,19 +250,28 @@
     .hero__stat__label { font-size:10px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--sage); }
     .hero__stat__sub { font-size:10px; font-weight:400; letter-spacing:0.06em; color:rgba(38,38,38,0.5); }
 
+    /* Pantallas de poca altura — comprime el hero para que nada se encime */
+    @media (min-width: 641px) and (max-height: 780px) {
+      .hero__logo { max-height:clamp(56px, 9vh, 88px); margin-bottom:14px; }
+      .hero__eyebrow { margin-bottom:12px; }
+      .hero__title { font-size:clamp(34px, 4.4vw, 58px); margin-bottom:14px; }
+      .hero__desc { font-size:14px; line-height:1.6; margin-bottom:18px; }
+      .hero__stat { padding:10px 28px; }
+    }
+
     /* ═══════════════════════════════════════════
        REVEAL
     ═══════════════════════════════════════════ */
     .reveal {
-      opacity:0; transform:translateY(28px);
-      transition:opacity 0.75s var(--ease), transform 0.75s var(--ease);
+      opacity:0; transform:translateY(18px);
+      transition:opacity 0.42s var(--ease), transform 0.42s var(--ease);
     }
     .reveal.visible { opacity:1; transform:none; }
-    .d1 { transition-delay:0.1s; }
-    .d2 { transition-delay:0.2s; }
-    .d3 { transition-delay:0.3s; }
-    .d4 { transition-delay:0.4s; }
-    .d5 { transition-delay:0.5s; }
+    .d1 { transition-delay:0.06s; }
+    .d2 { transition-delay:0.12s; }
+    .d3 { transition-delay:0.18s; }
+    .d4 { transition-delay:0.24s; }
+    .d5 { transition-delay:0.3s; }
 
     /* ═══════════════════════════════════════════
        SECTION BASE
@@ -238,124 +289,365 @@
     .eyebrow.centered::before { display:none; }
 
     h2 {
-      font-size:clamp(28px,3.2vw,44px);
-      font-weight:300; letter-spacing:0.04em;
-      text-transform:uppercase; line-height:1.08;
-      margin-bottom:18px;
+      font-size:clamp(34px,4.8vw,68px);
+      font-weight:200; letter-spacing:-0.025em;
+      text-transform:none; line-height:0.98;
+      margin-bottom:20px;
     }
     .divider { width:36px; height:1px; background:var(--sage); opacity:0.5; margin-bottom:28px; }
-    .body-text { font-size:16px; font-weight:300; line-height:1.9; color:rgba(38,38,38,0.75); max-width:520px; }
+    .body-text { font-size:clamp(16px,1.2vw,18px); font-weight:300; line-height:1.75; color:rgba(38,38,38,0.72); max-width:540px; }
 
     /* ═══════════════════════════════════════════
-       SOBRE  — Tranquilidad
+       SOBRE  — Split full-height
     ═══════════════════════════════════════════ */
+    #sobre-block {
+      display:flex; flex-direction:column;
+      height:calc(100vh - 68px);
+      height:calc(100dvh - 68px);
+    }
     #sobre {
+      flex:1; min-height:0;
+      display:flex; flex-direction:column;
       background:var(--tranquil);
       border-top:1px solid rgba(130,134,127,0.18);
     }
-    .sobre-grid {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:80px; align-items:center;
+    .sobre-split {
+      flex:1; min-height:0;
+      display:grid; grid-template-columns:1fr 2fr;
     }
-    .sobre-img {
-      aspect-ratio:3/4;
-      background-image:url('clinic.png');
-      background-size:cover; background-position:center 20%;
-      position:relative; overflow:visible;
+    .sobre-foto {
+      position:relative; overflow:hidden;
     }
-    .sobre-img::after {
-      content:''; position:absolute;
-      inset:0; border:2px solid var(--sage);
-      transform:translate(14px,14px);
-      pointer-events:none;
-      transition:transform 0.5s var(--ease);
+    .sobre-foto img {
+      width:100%; height:100%; object-fit:cover;
+      object-position:center top; display:block;
     }
-    .sobre-img:hover::after { transform:translate(8px,8px); }
-    .credentials { display:flex; flex-direction:column; gap:14px; margin-top:36px; }
+    .sobre-texto {
+      padding:clamp(28px,3.5vw,52px) clamp(32px,3.5vw,60px);
+      display:flex; flex-direction:column; justify-content:center;
+      background:var(--tranquil);
+      overflow-y:auto;
+    }
+    .sobre-texto .eyebrow { margin-bottom:10px; }
+    .sobre-texto h2 { font-size:clamp(20px,2vw,28px); margin-bottom:10px; line-height:1.15; }
+    .sobre-texto .divider { margin-bottom:14px; }
+    .sobre-texto .body-text { font-size:13px; line-height:1.65; margin-bottom:0; }
+    .credentials { display:flex; flex-direction:column; gap:6px; margin-top:18px; }
     .credential {
-      display:flex; align-items:flex-start; gap:16px;
-      padding:16px 20px;
+      display:flex; align-items:flex-start; gap:12px;
+      padding:9px 14px;
       background:rgba(247,237,220,0.45);
       border-left:2px solid var(--sage);
       transition:background 0.35s, transform 0.3s;
     }
-    .credential:hover { background:rgba(247,237,220,0.9); transform:translateX(5px); }
-    .credential__n { font-size:22px; font-weight:200; color:var(--sage); min-width:32px; line-height:1.1; }
-    .credential__t { font-size:15px; font-weight:400; line-height:1.65; color:rgba(38,38,38,0.78); }
+    .credential:hover { background:rgba(247,237,220,0.9); transform:translateX(4px); }
+    .credential__n { font-size:15px; font-weight:200; color:var(--sage); min-width:24px; line-height:1.1; }
+    .credential__t { font-size:12px; font-weight:400; line-height:1.5; color:rgba(38,38,38,0.78); }
 
     /* ═══════════════════════════════════════════
-       SERVICIOS  — Blanco
+       SERVICIOS  — Firma + Pilares
     ═══════════════════════════════════════════ */
     #servicios {
       background:var(--tranquil);
       border-top:1px solid rgba(130,134,127,0.14);
+      padding:clamp(64px,8vw,120px) 0;
     }
-    .servicios-header {
-      display:grid; grid-template-columns:1fr 1fr;
-      gap:64px; align-items:end; margin-bottom:52px;
+    #servicios .section-inner { padding-top:0; padding-bottom:0; }
+    .serv-head { max-width:900px; margin-bottom:clamp(40px,5vw,64px); }
+    .serv-head h2 {
+      font-family:var(--font); font-weight:200; text-transform:none;
+      font-size:clamp(36px,5.6vw,80px); line-height:0.96; letter-spacing:-0.03em;
+      margin-bottom:0;
     }
+    .serv-head h2 em { font-style:normal; font-weight:400; color:var(--sage); }
+    .serv-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.7); max-width:580px; }
 
-    /* Carousel */
-    .servicios-carousel {
-      overflow:hidden; position:relative;
-      width:100%;
+    /* Firma — feature banner */
+    .serv-firma {
+      position:relative; overflow:hidden;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      min-height:clamp(340px,42vw,480px);
+      padding:clamp(28px,3.5vw,56px);
+      margin-bottom:24px; color:var(--confort);
     }
-    /* Edge fades — desktop only */
-    @media (min-width: 641px) {
-      .servicios-carousel::before,
-      .servicios-carousel::after {
-        content:''; position:absolute;
-        top:0; bottom:0; width:100px; z-index:2; pointer-events:none;
+    .serv-firma::before {
+      content:''; position:absolute; inset:0; z-index:0;
+      background:url('images/servicios/02-oshot-prp-bioestimulacion.jpg') center/cover;
+      transition:transform 0.5s var(--ease);
+    }
+    .serv-firma:hover::before { transform:scale(1.04); }
+    .serv-firma::after {
+      content:''; position:absolute; inset:0; z-index:0;
+      background:linear-gradient(105deg, rgba(38,38,38,0.82) 0%, rgba(38,38,38,0.45) 52%, rgba(38,38,38,0.12) 100%);
+    }
+    .serv-firma > * { position:relative; z-index:1; }
+    .serv-firma__tag { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; opacity:0.85; margin-bottom:16px; }
+    .serv-firma__title { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,56px); line-height:1.0; letter-spacing:-0.02em; margin-bottom:16px; max-width:18ch; }
+    .serv-firma__desc { font-size:clamp(15px,1.1vw,18px); font-weight:300; line-height:1.6; max-width:480px; color:rgba(247,237,220,0.85); margin-bottom:26px; }
+    .serv-firma__link { display:inline-flex; align-items:center; gap:10px; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--confort); border-bottom:1px solid var(--confort); padding-bottom:6px; transition:gap 0.3s; }
+    .serv-firma__link:hover { gap:16px; }
+
+    /* Pilares — filas (lista) */
+    .serv-grid { display:flex; flex-direction:column; border-top:1px solid var(--sage-mid); }
+    /* Desktop: los 6 llenan una pantalla, repartidos por igual */
+    @media (min-width:761px){
+      .serv-grid { height:calc(100vh - 68px); height:calc(100dvh - 68px); }
+      .pilar { flex:1; padding-top:0; padding-bottom:0; }
+    }
+    .pilar {
+      display:grid;
+      grid-template-columns: auto minmax(0,1.5fr) minmax(0,1fr) auto;
+      align-items:center; gap:clamp(20px,3.5vw,60px);
+      padding:clamp(26px,3vw,42px) clamp(6px,1vw,18px);
+      border-bottom:1px solid var(--sage-mid);
+      position:relative; overflow:hidden;
+      transition:background 0.3s var(--ease), padding-left 0.35s var(--ease);
+    }
+    .pilar::before { content:''; position:absolute; top:0; left:0; bottom:0; width:0; background:var(--sage); transition:width 0.35s var(--ease); }
+    .pilar:hover { background:var(--white); padding-left:clamp(16px,1.8vw,30px); }
+    .pilar:hover::before { width:3px; }
+    .pilar__n { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--sage); margin:0; white-space:nowrap; }
+    .pilar__title { font-family:var(--font); font-weight:300; font-size:clamp(22px,2.4vw,36px); line-height:1.05; letter-spacing:-0.02em; color:var(--dark); margin:0; }
+    .pilar__desc { font-size:15px; font-weight:300; line-height:1.5; color:rgba(38,38,38,0.6); margin:0; }
+    .pilar__link { display:inline-flex; align-items:center; gap:8px; margin:0; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); white-space:nowrap; transition:gap 0.3s, color 0.3s; }
+    .pilar:hover .pilar__link { gap:13px; color:var(--sage); }
+    @media (max-width:760px){
+      .pilar {
+        grid-template-columns:auto 1fr;
+        grid-template-areas:"n title" "desc desc" "link link";
+        gap:6px 16px; padding:26px 4px;
       }
-      .servicios-carousel::before { left:0;  background:linear-gradient(to right, var(--tranquil) 20%, transparent); }
-      .servicios-carousel::after  { right:0; background:linear-gradient(to left,  var(--tranquil) 20%, transparent); }
+      .pilar__n { grid-area:n; align-self:center; }
+      .pilar__title { grid-area:title; font-size:clamp(21px,5.4vw,28px); }
+      .pilar__desc { grid-area:desc; margin-top:8px; }
+      .pilar__link { grid-area:link; margin-top:16px; }
+      .pilar:hover { padding-left:4px; }
     }
 
-    .servicios-track {
-      display:flex;
-      will-change:transform;
-    }
-
-    /* Card */
-    .card {
-      flex-shrink:0;
+    /* ═══════════════════════════════════════════
+       TECNOLOGÍA  — strip de equipos
+    ═══════════════════════════════════════════ */
+    #tecnologia {
       background:var(--white);
-      cursor:default; position:relative; overflow:hidden;
-      display:flex; flex-direction:column;
-      transition:opacity 0.65s var(--ease), box-shadow 0.4s var(--ease);
-      opacity:0;
+      border-top:1px solid rgba(130,134,127,0.16);
+      border-bottom:1px solid rgba(130,134,127,0.16);
+      padding:clamp(40px,5vw,68px) 0;
     }
-    .card.s-active { opacity:1; }
-    .card.s-bright { opacity:1; }
-    .card.s-side   { opacity:0.25; }
-    .card.s-hidden { opacity:0; transition:none; }
-    .card.s-active:hover, .card.s-bright:hover { box-shadow:0 14px 44px rgba(130,134,127,0.18); }
+    .tech-label { text-align:center; font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage); margin-bottom:clamp(24px,3vw,40px); }
+    /* Marquee — barra de tecnologías que se desplaza en continuo */
+    .tech-marquee {
+      overflow:hidden; width:100%;
+      -webkit-mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+      mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+    }
+    .tech-track { display:flex; width:max-content; align-items:center; animation:techScroll 40s linear infinite; }
+    .tech-marquee:hover .tech-track { animation-play-state:paused; }
+    .tech-item {
+      display:flex; align-items:center; flex-shrink:0;
+      padding:0 clamp(26px,3.5vw,54px);
+      font-size:clamp(18px,1.9vw,28px); font-weight:300; letter-spacing:0.01em;
+      color:rgba(38,38,38,0.4); white-space:nowrap; transition:color 0.3s;
+    }
+    .tech-item:hover { color:var(--dark); }
+    /* Soporte para logos monocromos (recoloreados al color de la letra, sin fondo) */
+    .tech-logo {
+      display:block; height:clamp(20px,2.2vw,30px); width:auto;
+      filter:brightness(0); opacity:0.4; transition:opacity 0.3s;
+    }
+    .tech-item:hover .tech-logo { opacity:0.85; }
+    @keyframes techScroll { from { transform:translateX(-50%); } to { transform:translateX(0); } }
+    @media (prefers-reduced-motion: reduce){ .tech-track { animation:none; } }
 
-    /* Image area */
-    .card__img {
-      width:100%; aspect-ratio:3/2; overflow:hidden;
-      background:rgba(130,134,127,0.1);
+    /* ═══════════════════════════════════════════
+       ESPECIALISTAS  — equipo
+    ═══════════════════════════════════════════ */
+    #especialistas { background:var(--tranquil); border-top:1px solid rgba(130,134,127,0.16); padding:clamp(64px,8vw,110px) 0; }
+    #especialistas .section-inner { padding-top:0; padding-bottom:0; }
+    .esp-head { max-width:900px; margin-bottom:clamp(40px,5vw,60px); }
+    .esp-head h2 { font-family:var(--font); font-weight:200; text-transform:none; font-size:clamp(36px,5.4vw,74px); line-height:0.96; letter-spacing:-0.03em; margin-bottom:0; }
+    .esp-head h2 em { font-style:normal; font-weight:400; color:var(--sage); }
+    .esp-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.7); max-width:560px; }
+    /* Carrusel de especialistas — responsivo (4 / 3 / 2 por vista) */
+    .esp-carousel { position:relative; }
+    .esp-viewport { overflow:hidden; }
+    .esp-track { display:flex; transition:transform 0.5s var(--ease); }
+    .esp-page { flex:0 0 100%; display:grid; gap:24px; align-items:start; }
+    .esp-controls { display:flex; align-items:center; justify-content:center; gap:22px; margin-top:clamp(28px,3vw,40px); }
+    .esp-controls.is-hidden { display:none; }
+    .esp-arrow { width:48px; height:48px; border:1px solid var(--sage-mid); background:var(--white); cursor:pointer; font-size:18px; color:var(--dark); display:flex; align-items:center; justify-content:center; transition:background 0.3s, color 0.3s, border-color 0.3s, opacity 0.3s; }
+    .esp-arrow:hover:not(:disabled){ background:var(--sage); color:var(--confort); border-color:var(--sage); }
+    .esp-arrow:disabled { opacity:0.3; cursor:default; }
+    .esp-dots { display:flex; gap:9px; }
+    .esp-dot { width:8px; height:8px; border-radius:50%; border:none; background:var(--sage-mid); cursor:pointer; padding:0; transition:background 0.3s, transform 0.3s; }
+    .esp-dot.is-active { background:var(--sage); transform:scale(1.35); }
+
+    /* Card vertical — foto arriba, texto abajo */
+    .esp-card { display:flex; flex-direction:column; background:var(--white); border:1px solid rgba(130,134,127,0.16); overflow:hidden; transition:transform 0.25s var(--ease), box-shadow 0.25s var(--ease); }
+    .esp-card:hover { transform:translateY(-5px); box-shadow:0 18px 50px rgba(38,38,38,0.08); }
+    .esp-photo { aspect-ratio:4/5; overflow:hidden; background:linear-gradient(150deg,var(--tranquil),var(--confort)); position:relative; }
+    .esp-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.5s var(--ease); }
+    .esp-card:hover .esp-photo img { transform:scale(1.04); }
+    .esp-photo__ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:rgba(130,134,127,0.55); }
+    .esp-body { padding:clamp(18px,1.5vw,26px); }
+    .esp-name { font-family:var(--font); font-weight:300; font-size:clamp(19px,1.5vw,25px); line-height:1.1; letter-spacing:-0.01em; margin-bottom:8px; }
+    .esp-role { font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--sage); line-height:1.4; margin-bottom:14px; }
+    .esp-bio { font-size:13.5px; font-weight:300; line-height:1.55; color:rgba(38,38,38,0.65); margin-bottom:18px; }
+    .esp-social { display:flex; gap:14px; }
+    .esp-social a { color:rgba(38,38,38,0.4); transition:color 0.3s; display:flex; }
+    .esp-social a:hover { color:var(--sage); }
+    @media (max-width:640px){
+      .esp-bio { display:none; }
+      .esp-body { padding:14px 14px 18px; }
+      .esp-name { font-size:16px; }
+      .esp-role { font-size:9px; letter-spacing:0.08em; margin-bottom:10px; }
+      .esp-page { gap:14px; }
+      .esp-controls { gap:16px; margin-top:24px; }
+      .esp-arrow { width:42px; height:42px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       PROCESO  — Tu experiencia (4 pasos)
+    ═══════════════════════════════════════════ */
+    #proceso {
+      background:var(--white);
+      border-top:1px solid rgba(130,134,127,0.2);
       position:relative;
     }
-    .card__img img {
-      width:100%; height:100%; object-fit:cover;
-      display:block;
-      transition:transform 0.6s var(--ease);
+    #proceso .section-inner { padding:clamp(72px,9vw,120px) 56px; }
+    .proceso-header {
+      display:grid; grid-template-columns:1fr 1.4fr;
+      gap:64px; align-items:end;
+      margin-bottom:clamp(48px, 6vw, 80px);
     }
-    .card.s-active:hover .card__img img, .card.s-bright:hover .card__img img { transform:scale(1.05); }
+    .proceso-header h2 {
+      font-family:var(--font);
+      font-size:clamp(36px, 5.2vw, 72px);
+      font-weight:200; letter-spacing:-0.03em;
+      text-transform:none; line-height:0.96;
+      margin-bottom:0;
+    }
+    .proceso-header h2 em { font-style:normal; color:var(--sage); font-weight:400; }
+    .proceso-header .body-text { font-size:15px; max-width:none; }
+    .proceso-steps {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:0;
+      border-top:1px solid rgba(130,134,127,0.28);
+    }
+    .proceso-step {
+      padding:36px 32px 40px;
+      border-right:1px solid rgba(130,134,127,0.18);
+      position:relative;
+      transition:background 0.4s var(--ease);
+    }
+    .proceso-step:last-child { border-right:none; }
+    .proceso-step:hover { background:rgba(247,237,220,0.55); }
+    .proceso-step::before {
+      content:''; position:absolute;
+      top:-1px; left:0; width:0; height:2px;
+      background:var(--sage);
+      transition:width 0.7s var(--ease);
+    }
+    .proceso-step:hover::before { width:100%; }
+    .proceso-step__num {
+      font-family:'Larken', 'Times New Roman', serif;
+      font-size:46px; font-weight:300;
+      color:var(--sage); opacity:0.85;
+      line-height:1; margin-bottom:24px;
+      letter-spacing:-0.02em;
+    }
+    .proceso-step__title {
+      font-size:12px; font-weight:600;
+      letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--dark); margin-bottom:14px;
+      line-height:1.3;
+    }
+    .proceso-step__desc {
+      font-size:14px; font-weight:300; line-height:1.7;
+      color:rgba(38,38,38,0.7);
+    }
+    @media (max-width: 900px) {
+      .proceso-header { grid-template-columns:1fr; gap:24px; }
+      .proceso-steps { grid-template-columns:1fr 1fr; }
+      .proceso-step { border-right:1px solid rgba(130,134,127,0.18); }
+      .proceso-step:nth-child(2n) { border-right:none; }
+      .proceso-step:nth-child(-n+2) { border-bottom:1px solid rgba(130,134,127,0.18); }
+    }
+    @media (max-width: 640px) {
+      #proceso .section-inner { padding:64px 20px; }
+      .proceso-steps { grid-template-columns:1fr; }
+      .proceso-step { border-right:none !important; border-bottom:1px solid rgba(130,134,127,0.18); padding:28px 8px 32px; }
+      .proceso-step:last-child { border-bottom:none; }
+      .proceso-step__num { font-size:38px; margin-bottom:16px; }
+    }
 
-    /* Text area */
-    .card__body { padding:24px 24px 28px; flex:1; display:flex; flex-direction:column; }
-    .card__num { font-size:10px; font-weight:600; letter-spacing:0.22em; color:var(--sage); margin-bottom:10px; }
-    .card__title { font-size:15px; font-weight:500; letter-spacing:0.05em; text-transform:uppercase; color:var(--dark); line-height:1.3; margin-bottom:10px; }
-    .card__desc { font-size:13px; font-weight:300; line-height:1.85; color:rgba(38,38,38,0.68); flex:1; }
-    .card__link {
-      display:inline-flex; align-items:center; gap:8px;
-      margin-top:20px; font-size:11px; font-weight:600;
-      letter-spacing:0.16em; text-transform:uppercase;
-      color:var(--sage); transition:gap 0.3s, color 0.3s;
+    /* ═══════════════════════════════════════════
+       ASOCIACIONES  — Confort (thin strip)
+    ═══════════════════════════════════════════ */
+    #asociaciones {
+      background: var(--confort);
+      border-top: 1px solid rgba(130,134,127,0.2);
+      border-bottom: 1px solid rgba(130,134,127,0.2);
     }
-    .card.s-active:hover .card__link, .card.s-bright:hover .card__link { gap:12px; color:var(--dark); }
+    .asociaciones-inner {
+      max-width: 1100px; margin: 0 auto;
+      padding: 26px 56px;
+      display: flex; align-items: center; gap: 40px;
+    }
+    .asoc-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--sage); white-space: nowrap; flex-shrink: 0;
+    }
+    .asoc-list {
+      display: flex; align-items: center; gap: 0; flex-wrap: wrap; flex: 1;
+    }
+    .asoc-item {
+      display: flex; align-items: center;
+      padding: 4px 32px;
+      border-right: 1px solid rgba(130,134,127,0.2);
+    }
+    .asoc-item:first-child { padding-left: 0; }
+    .asoc-item:last-child { border-right: none; }
+    .asoc-logo {
+      display: block; height: clamp(26px,2.8vw,38px); width: auto;
+      filter: brightness(0); opacity: 0.4; transition: opacity 0.3s;
+    }
+    .asoc-item:hover .asoc-logo { opacity: 0.65; }
+    @media (max-width: 640px) {
+      .asociaciones-inner { padding: 20px; gap: 16px 0; flex-wrap: wrap; }
+      .asoc-label { width: 100%; }
+      .asoc-item { padding: 4px 22px; }
+    }
+
+    /* ═══════════════════════════════════════════
+       CITA EDITORIAL  — Confort
+    ═══════════════════════════════════════════ */
+    #cita {
+      background: var(--confort);
+      border-top: 1px solid rgba(130,134,127,0.2);
+      text-align: center;
+      padding: clamp(72px,10vw,120px) 56px;
+    }
+    .cita__text {
+      font-family: 'Larken', serif;
+      font-size: clamp(48px, 8vw, 108px);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      line-height: 1.02;
+      margin-bottom: 36px;
+    }
+    .cita__byline {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--sage);
+      display: inline-flex; align-items: center; gap: 18px;
+    }
+    .cita__byline::before, .cita__byline::after {
+      content: ''; display: block; width: 36px; height: 1px;
+      background: var(--sage); opacity: 0.55;
+    }
+    @media (max-width: 640px) {
+      #cita { padding: 64px 24px; }
+    }
 
     /* ═══════════════════════════════════════════
        FILOSOFÍA  — Formalidad (dark)
@@ -542,8 +834,11 @@
        RESPONSIVE — TABLET (≤ 900px)
     ═══════════════════════════════════════════ */
     @media (max-width: 900px) {
-      .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
-      .sobre-img { aspect-ratio: 16/9; }
+      #sobre-block { height: auto; }
+      #sobre { flex: none; }
+      .sobre-split { grid-template-columns: 1fr; height: auto; }
+      .sobre-foto { height: 55vw; max-height: 500px; }
+      .sobre-texto { padding: 56px 40px; overflow: visible; }
       .servicios-header { grid-template-columns: 1fr; gap: 20px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonios-grid { grid-template-columns: repeat(2, 1fr); }
@@ -563,13 +858,17 @@
       .nav__logo { position: absolute; left: 50%; transform: translateX(-50%); }
 
       /* Hero */
-      .hero { background-attachment: scroll; height:calc(100vh - 68px); height:calc(100dvh - 68px); min-height:480px; }
+      .hero { height:calc(100vh - 68px); height:calc(100dvh - 68px); min-height:480px; }
+      .hero__media { background-attachment: scroll; }
       .hero__content { padding:clamp(16px,4vh,40px) 24px clamp(12px,2vh,24px); max-width:100%; min-height:0; justify-content:center; }
-      .hero__logo { max-height:clamp(80px,16vh,130px); margin-bottom:clamp(12px,2.5vh,24px); }
-      .hero__title { font-size:clamp(24px,6.5vw,38px); margin-top:0; margin-bottom:clamp(10px,2vh,18px); }
-      .hero__desc { font-size:14px; margin-bottom:clamp(20px,4vh,36px); line-height:1.75; display:block; color:rgba(38,38,38,0.82); }
-      .hero__actions { flex-direction:row; gap:10px; margin-bottom:0; }
-      .btn-primary, .btn-ghost { flex:1; text-align:center; padding:13px 14px; }
+      .hero__logo { max-height:clamp(60px,11vh,100px); margin-bottom:clamp(14px,2.5vh,22px); }
+      .hero__eyebrow { font-size:10px; letter-spacing:0.22em; margin-bottom:clamp(10px,1.6vh,16px); }
+      .hero__eyebrow::before { width:18px; }
+      .hero__title { font-size:clamp(34px,9.5vw,52px); letter-spacing:-0.01em; margin-bottom:clamp(12px,2vh,20px); }
+      .hero__desc { font-size:14px; margin-bottom:clamp(20px,3.5vh,32px); line-height:1.7; display:block; color:rgba(38,38,38,0.78); }
+      .hero__actions { flex-direction:column; align-items:stretch; gap:14px; margin-bottom:0; }
+      .btn-primary, .btn-ghost { text-align:center; padding:14px 22px; }
+      .hero__link { align-self:flex-start; }
       .hero__stats { display: grid; grid-template-columns: repeat(3,1fr); }
       .hero__stat { padding: 12px 8px; }
       .hero__stat__num { font-size: 16px; }
@@ -580,8 +879,11 @@
       .section-inner { padding: 64px 20px; }
 
       /* Sobre */
-      .sobre-img { aspect-ratio: 4/3; }
-      .sobre-img::after { display: none; }
+      #sobre-block { height: auto; }
+      .sobre-split { height: auto; }
+      .sobre-foto { height: 70vw; max-height: 400px; }
+      .sobre-texto { padding: 40px 20px; overflow: visible; }
+      .sobre-texto h2 { font-size: clamp(26px, 7vw, 36px) !important; }
 
       /* Servicios — sin cambios adicionales, carousel ya es full-width */
 
@@ -610,9 +912,9 @@
   <nav class="nav" id="site-nav">
     <img src="BRANDING/METCLINIC/LOGOS/MET_POSITIVO_03.png" alt="MET Clinic" class="nav__logo">
     <ul class="nav__links">
-      <li><a href="#sobre">La Doctora</a></li>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#testimonios">Opiniones</a></li>
+      <li><a href="#especialistas">Equipo</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="nav__cta">Agendar cita</a>
@@ -623,23 +925,31 @@
 
   <!-- Mobile drawer -->
   <div class="nav__drawer" id="nav-drawer">
-    <a href="#sobre" class="drawer-link">La Doctora</a>
     <a href="#servicios" class="drawer-link">Servicios</a>
-    <a href="#testimonios" class="drawer-link">Opiniones</a>
+    <a href="#especialistas" class="drawer-link">Equipo</a>
+    <a href="tienda.html" class="drawer-link">Tienda</a>
     <a href="#contacto" class="drawer-link">Contacto</a>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar cita</a>
   </div>
 
   <!-- ══ HERO ══ -->
   <section class="hero" id="hero">
+    <!-- FASE 2 — Reemplazar el div .hero__media por:
+         <video autoplay muted loop playsinline poster="clinic.png" class="hero__media">
+           <source src="video/hero.mp4" type="video/mp4">
+         </video>
+         (un loop corto de 8-12s, sin audio, ~3-5MB) -->
+    <div class="hero__media" aria-hidden="true"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <img src="BRANDING/METCLINIC/LOGOS/MET_POSITIVO_04.png" alt="MET Clinic" class="hero__logo">
-      <h1 class="hero__title">Tu bienestar,<br>nuestra especialidad</h1>
-      <p class="hero__desc">Especialista en ginecología estética, regenerativa y funcional. Enfocada en empoderar a cada mujer a través de la medicina personalizada.</p>
+      <p class="hero__eyebrow">Ginecología estética &amp; antiaging</p>
+      <h1 class="hero__title">Bienestar íntimo,<br><em>en cada etapa.</em></h1>
+      <p class="hero__desc">Ginecología estética, antiaging y longevidad para la mujer.</p>
       <div class="hero__actions">
-        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar cita</a>
-        <a href="#servicios" class="btn-ghost">Conocer servicios</a>
+        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Solicitar consulta</a>
+        <a href="tienda.html" class="btn-ghost">Visitar la boutique</a>
+        <a href="#proceso" class="hero__link">Cómo trabajamos →</a>
       </div>
     </div>
     <div class="hero__stats">
@@ -661,78 +971,225 @@
     </div>
   </section>
 
-  <!-- ══ SOBRE ══ -->
-  <section id="sobre">
+  <!-- ══ ASOCIACIONES ══ -->
+  <section id="asociaciones">
+    <div class="asociaciones-inner reveal">
+      <span class="asoc-label">Miembro de</span>
+      <div class="asoc-list">
+        <span class="asoc-item"><img class="asoc-logo" src="images/asoc/a4m.png" alt="American Academy of Anti-Aging Medicine (A4M)"></span>
+        <span class="asoc-item"><img class="asoc-logo" src="images/asoc/solapav.png" alt="Sociedad Latinoamericana de Patología Vulvar (SoLaPaV)"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SERVICIOS — Firma + Pilares ══ -->
+  <section id="servicios">
     <div class="section-inner">
-      <div class="sobre-grid">
-        <div class="sobre-img reveal"></div>
-        <div>
-          <p class="eyebrow reveal">La Doctora</p>
-          <h2 class="reveal d1">Dra. Melina<br>Trujillo Quiroz</h2>
-          <div class="divider reveal d1"></div>
-          <p class="body-text reveal d2">
-            Especialista en Ginecología y Obstetricia por la UNAM, con Maestría en Reproducción Humana por la Universidad Rey Juan Carlos – IVI, Madrid. Su enfoque integra medicina de precisión, bienestar funcional y ginecología estética de vanguardia.
-          </p>
-          <div class="credentials">
-            <div class="credential reveal d2">
-              <div class="credential__n">01</div>
-              <div class="credential__t">Especialidad Médica en Ginecología y Obstetricia — UNAM</div>
-            </div>
-            <div class="credential reveal d3">
-              <div class="credential__n">02</div>
-              <div class="credential__t">Maestría en Reproducción Humana — Universidad Rey Juan Carlos · IVI, Madrid</div>
-            </div>
-            <div class="credential reveal d4">
-              <div class="credential__n">03</div>
-              <div class="credential__t">Maestría en Medicina Antiaging y Longevidad · Formación en DEXEUS MUJER, Barcelona</div>
-            </div>
+      <div class="serv-head reveal">
+        <p class="eyebrow">Tratamientos</p>
+        <h2>Tu cuerpo,<br><em>en un solo lugar.</em></h2>
+      </div>
+
+      <!-- Firma -->
+      <a href="pilar-ginecologia.html" class="serv-firma reveal">
+        <span class="serv-firma__tag">Nuestra especialidad</span>
+        <span class="serv-firma__title">Ginecología Estética &amp; Regenerativa</span>
+        <span class="serv-firma__desc">Láser íntimo CO₂, O-Shot, suelo pélvico EMSELLA y despigmentación íntima. La firma que distingue a MET Clinic.</span>
+        <span class="serv-firma__link">Explorar tratamientos →</span>
+      </a>
+
+      <!-- Pilares -->
+      <div class="serv-grid">
+        <a href="pilar-facial.html" class="pilar reveal">
+          <span class="pilar__n">01</span>
+          <span class="pilar__title">Rejuvenecimiento Facial &amp; Antiaging</span>
+          <span class="pilar__desc">Piel firme y luminosa.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-corporal.html" class="pilar reveal d1">
+          <span class="pilar__n">02</span>
+          <span class="pilar__title">Contorno Corporal &amp; Reafirmación</span>
+          <span class="pilar__desc">Modela y reafirma, sin cirugía.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-depilacion.html" class="pilar reveal d2">
+          <span class="pilar__n">03</span>
+          <span class="pilar__title">Depilación Láser</span>
+          <span class="pilar__desc">Piel libre de vello, definitiva.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-piel.html" class="pilar reveal">
+          <span class="pilar__n">04</span>
+          <span class="pilar__title">Manchas, Cicatrices &amp; Estrías</span>
+          <span class="pilar__desc">Tono y textura, emparejados.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-capilar.html" class="pilar reveal d1">
+          <span class="pilar__n">05</span>
+          <span class="pilar__title">Salud Capilar</span>
+          <span class="pilar__desc">Frena la caída, densifica.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-longevidad.html" class="pilar reveal d2">
+          <span class="pilar__n">06</span>
+          <span class="pilar__title">Bienestar, Longevidad &amp; IV Therapy</span>
+          <span class="pilar__desc">Energía, prevención, longevidad.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TECNOLOGÍA ══ -->
+  <section id="tecnologia">
+    <div class="section-inner" style="padding-top:0; padding-bottom:0;">
+      <p class="tech-label reveal">Tecnología de vanguardia</p>
+    </div>
+    <div class="tech-marquee">
+      <div class="tech-track">
+        <span class="tech-item"><img class="tech-logo" src="images/tech/hydrafacial.png" alt="HydraFacial"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/endymed.png" alt="EndyMed"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/sofwave.svg" alt="Sofwave"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/emsella.png" alt="EMSELLA"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/healite.png" alt="Healite II"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/xwave.png" alt="X-Wave"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/asirox.svg" alt="Asirox"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt="mesoestetic"></span>
+        <span class="tech-item"><img class="tech-logo" src="images/tech/exomind.png" alt="Exomind"></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/hydrafacial.png" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/endymed.png" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/sofwave.svg" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/emsella.png" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/healite.png" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/xwave.png" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/asirox.svg" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt=""></span>
+        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/exomind.png" alt=""></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ESPECIALISTAS ══ -->
+  <section id="especialistas">
+    <div class="section-inner">
+      <div class="esp-head reveal">
+        <p class="eyebrow">El equipo</p>
+        <h2>Manos expertas<br><em>en cada resultado.</em></h2>
+      </div>
+      <div class="esp-carousel reveal d1">
+        <div class="esp-viewport">
+          <div class="esp-track" id="espTrack">
+
+            <article class="esp-card">
+              <div class="esp-photo"><img src="foto_jardin.png" alt="Dra. Melina Trujillo Quiroz"></div>
+              <div class="esp-body">
+                <div class="esp-name">Dra. Melina Trujillo</div>
+                <div class="esp-role">Directora · Ginecología &amp; Antiaging</div>
+                <p class="esp-bio">Ginecóloga por la UNAM, formada en DEXEUS Barcelona e IVI Madrid. Referente en ginecología estética en México.</p>
+                <div class="esp-social">
+                  <a href="https://www.instagram.com/metclinic.mx" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+                  </a>
+                  <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" aria-label="Doctoralia">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10a7.5 7.5 0 1 0 15 0 7.5 7.5 0 0 0-15 0z"/><path d="M12 6.5v7M8.5 10h7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- TODO: reemplazar con especialistas reales (foto + nombre + rol + bio) -->
+            <article class="esp-card">
+              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
+              <div class="esp-body">
+                <div class="esp-name">Especialista en Estética</div>
+                <div class="esp-role">Medicina Estética Facial &amp; Corporal</div>
+                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
+                <div class="esp-social">
+                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <article class="esp-card">
+              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
+              <div class="esp-body">
+                <div class="esp-name">Especialista en Bienestar</div>
+                <div class="esp-role">Longevidad &amp; IV Therapy</div>
+                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
+                <div class="esp-social">
+                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <article class="esp-card">
+              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
+              <div class="esp-body">
+                <div class="esp-name">Especialista en Láser</div>
+                <div class="esp-role">Depilación &amp; Tecnología</div>
+                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
+                <div class="esp-social">
+                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+                </div>
+              </div>
+            </article>
+
           </div>
+        </div>
+        <div class="esp-controls">
+          <button class="esp-arrow" id="espPrev" aria-label="Anterior">←</button>
+          <div class="esp-dots" id="espDots"></div>
+          <button class="esp-arrow" id="espNext" aria-label="Siguiente">→</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ SERVICIOS ══ -->
-  <section id="servicios">
+  <!-- ══ PROCESO — Cómo trabajamos ══ -->
+  <section id="proceso">
     <div class="section-inner">
-      <div class="servicios-header">
+      <div class="proceso-header">
         <div>
-          <p class="eyebrow reveal">Especialidades</p>
-          <h2 class="reveal d1">Nuestros<br>servicios</h2>
-          <div class="divider reveal d1"></div>
+          <p class="eyebrow reveal">Tu experiencia</p>
+          <h2 class="reveal d1">Cómo<br><em>trabajamos.</em></h2>
         </div>
-        <p class="body-text reveal d2">Cada tratamiento es diseñado de forma personalizada con las tecnologías más avanzadas en un ambiente de total discreción y confort.</p>
+        <p class="body-text reveal d2">Cuatro pasos. Cero protocolos genéricos.</p>
       </div>
-    </div>
-    <div class="servicios-carousel" id="svcCarousel">
-      <div class="servicios-track">
-        <div class="card">
-          <div class="card__img"><!-- imagen: ginecología estética --></div>
-          <div class="card__body"><div class="card__num">01</div><div class="card__title">Ginecología Estética</div><div class="card__desc">Rejuvenecimiento íntimo, bioestimulación y estética genital con láser de CO₂ fraccionado y radiofrecuencia de última generación.</div><span class="card__link">Ver más →</span></div>
+      <div class="proceso-steps">
+        <div class="proceso-step reveal">
+          <div class="proceso-step__num">01</div>
+          <div class="proceso-step__title">Diagnóstico</div>
+          <div class="proceso-step__desc">Te escuchamos y evaluamos a fondo.</div>
         </div>
-        <div class="card">
-          <div class="card__img"><!-- imagen: antiaging --></div>
-          <div class="card__body"><div class="card__num">02</div><div class="card__title">Medicina Antiaging &amp; Longevidad</div><div class="card__desc">Protocolos personalizados basados en analítica funcional, terapia hormonal y medicina regenerativa para una vida plena.</div><span class="card__link">Ver más →</span></div>
+        <div class="proceso-step reveal d1">
+          <div class="proceso-step__num">02</div>
+          <div class="proceso-step__title">Plan</div>
+          <div class="proceso-step__desc">Un protocolo diseñado solo para ti.</div>
         </div>
-        <div class="card">
-          <div class="card__img"><!-- imagen: ginecología funcional --></div>
-          <div class="card__body"><div class="card__num">03</div><div class="card__title">Ginecología Funcional</div><div class="card__desc">Abordaje integral de ciclos hormonales, menopausia, fertilidad y microbiota con enfoque en bienestar a largo plazo.</div><span class="card__link">Ver más →</span></div>
+        <div class="proceso-step reveal d2">
+          <div class="proceso-step__num">03</div>
+          <div class="proceso-step__title">Tratamiento</div>
+          <div class="proceso-step__desc">Tecnología de punta, manos expertas.</div>
         </div>
-        <div class="card">
-          <div class="card__img"><!-- imagen: suelo pélvico --></div>
-          <div class="card__body"><div class="card__num">04</div><div class="card__title">Suelo Pélvico &amp; Uroginecología</div><div class="card__desc">Diagnóstico y tratamiento de disfunciones del suelo pélvico, incontinencia y prolapso con técnicas mínimamente invasivas.</div><span class="card__link">Ver más →</span></div>
-        </div>
-        <div class="card">
-          <div class="card__img"><!-- imagen: endoscopía --></div>
-          <div class="card__body"><div class="card__num">05</div><div class="card__title">Endoscopía Ginecológica</div><div class="card__desc">Histeroscopía, laparoscopía y colposcopía con formación avanzada en centros de referencia internacional.</div><span class="card__link">Ver más →</span></div>
-        </div>
-        <div class="card">
-          <div class="card__img"><!-- imagen: mastología --></div>
-          <div class="card__body"><div class="card__num">06</div><div class="card__title">Mastología &amp; Oncología</div><div class="card__desc">Valoración de riesgo oncológico, mastología y seguimiento de patología mamaria en un entorno de máxima discreción.</div><span class="card__link">Ver más →</span></div>
+        <div class="proceso-step reveal d3">
+          <div class="proceso-step__num">04</div>
+          <div class="proceso-step__title">Seguimiento</div>
+          <div class="proceso-step__desc">Acompañamos tu evolución.</div>
         </div>
       </div>
     </div>
-    <div style="height:72px"></div>
+  </section>
+
+  <!-- FASE 2 — Aquí va una sección "Resultados" con before/after slider o métricas reales
+       (ej. +X% colágeno tras 3 sesiones, NPS, satisfacción medida por Doctoralia).
+       Se renderiza después de #proceso y antes de #cita para cerrar el "qué cambia". -->
+
+  <!-- ══ CITA EDITORIAL ══ -->
+  <section id="cita">
+    <div class="reveal">
+      <div class="cita__text">Ámate.<br>Rejuvenécete.</div>
+      <div class="cita__byline">Dra. Melina Trujillo Quiroz</div>
+    </div>
   </section>
 
   <!-- ══ FILOSOFÍA DARK ══ -->
@@ -743,8 +1200,7 @@
           <p class="eyebrow reveal">Filosofía</p>
           <h2 class="reveal d1">La medicina<br>como arte</h2>
           <div class="divider reveal d1"></div>
-          <p class="body-text reveal d2">Creemos que cada mujer merece atención médica que respete su historia, su ritmo y su visión de bienestar. No tratamos síntomas: acompañamos procesos.</p>
-          <p class="body-text reveal d3" style="margin-top:20px;">Formación en UNAM, Madrid y Barcelona. Certificada con Excelencia en Doctoralia 2020, 2022 y 2023. Atención en español e inglés.</p>
+          <p class="body-text reveal d2">No tratamos síntomas.<br>Acompañamos procesos.</p>
         </div>
         <div style="display:flex; justify-content:center; align-items:center;">
           <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic"
@@ -808,7 +1264,7 @@
           <p class="eyebrow reveal">Contacto</p>
           <h2 class="reveal d1">Agenda tu<br>consulta</h2>
           <div class="divider reveal d1"></div>
-          <p class="body-text reveal d2" style="margin-bottom:36px;">Agenda tu consulta directamente en Doctoralia o escríbenos por WhatsApp. Primera consulta desde <strong style="color:var(--dark); font-weight:500;">$2,100 MXN</strong> · Consulta online disponible.</p>
+          <p class="body-text reveal d2" style="margin-bottom:36px;">Primera consulta desde <strong style="color:var(--dark); font-weight:500;">$2,100 MXN</strong> · Online disponible.</p>
           <div class="reveal d3" style="display:flex; flex-direction:column; gap:14px;">
             <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary" style="text-align:center; padding:16px 32px;">Agendar en Doctoralia</a>
             <a href="https://wa.me/525540099923?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta" target="_blank" rel="noopener" class="btn-ghost" style="text-align:center; padding:15px 32px;">Escribir por WhatsApp</a>
@@ -829,7 +1285,7 @@
           </div>
           <div class="info-item">
             <div class="info-item__label">Idiomas</div>
-            <div class="info-item__value">Español · Inglés</div>
+            <div class="info-item__value">Español · Inglés · Francés · Italiano</div>
           </div>
           <div class="info-item">
             <div class="info-item__label">Cédula profesional</div>
@@ -865,8 +1321,8 @@
       <div>
         <div class="footer-col__label">Navegación</div>
         <ul class="footer-col__links">
-          <li><a href="#sobre">La Doctora</a></li>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#especialistas">Equipo</a></li>
           <li><a href="#testimonios">Opiniones</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
