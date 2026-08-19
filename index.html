@@ -7,17 +7,17 @@
 
   <style>
     /* ── Fuentes ── */
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-THIN.OTF') format('opentype'); font-weight:100; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-EXTRALIGHT.OTF') format('opentype'); font-weight:200; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-LIGHT.OTF') format('opentype'); font-weight:300; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-REGULAR.OTF') format('opentype'); font-weight:400; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-MEDIUM.OTF') format('opentype'); font-weight:500; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-SEMIBOLD.OTF') format('opentype'); font-weight:600; font-display:swap; }
-    @font-face { font-family:'Metropolis'; src:url('BRANDING/METCLINIC/TIPOGRAFIAS/METROPOLIS-BOLD.OTF') format('opentype'); font-weight:700; font-display:swap; }
-    @font-face { font-family:'Larken'; src:url('BRANDING/DRA. MT/02 Tipografía/01 Primaria/Larken - Display Serif/Larken-Light.otf') format('opentype'); font-weight:300; font-display:swap; }
-    @font-face { font-family:'TTCommons'; src:url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Light.otf') format('opentype'); font-weight:300; font-display:swap; }
-    @font-face { font-family:'TTCommons'; src:url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Regular.otf') format('opentype'); font-weight:400; font-display:swap; }
-    @font-face { font-family:'TTCommons'; src:url('BRANDING/DRA. MT/02 Tipografía/02 Secundaria/TT Commons/TT Commons Medium.otf') format('opentype'); font-weight:500; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-100.woff2') format('woff2'); font-weight:100; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-200.woff2') format('woff2'); font-weight:200; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-300.woff2') format('woff2'); font-weight:300; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-700.woff2') format('woff2'); font-weight:700; font-display:swap; }
+    @font-face { font-family:'Larken'; src:url('BRANDING/webfonts/larken-300.woff2') format('woff2'); font-weight:300; font-display:swap; }
+    @font-face { font-family:'TTCommons'; src:url('BRANDING/webfonts/ttcommons-300.woff2') format('woff2'); font-weight:300; font-display:swap; }
+    @font-face { font-family:'TTCommons'; src:url('BRANDING/webfonts/ttcommons-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'TTCommons'; src:url('BRANDING/webfonts/ttcommons-500.woff2') format('woff2'); font-weight:500; font-display:swap; }
 
     /* ── Variables ── */
     :root {
@@ -124,7 +124,7 @@
     /* Media layer — image now, <video> later (see FASE 2 marker in HTML) */
     .hero__media {
       position:absolute; inset:0; z-index:0;
-      background-image:url('clinic.png');
+      background-image:url('images/web/clinic.webp');
       background-size:cover; background-position:center;
       background-attachment:fixed;
       transform:scale(1.06);
@@ -910,7 +910,7 @@
 
   <!-- ══ NAV ══ -->
   <nav class="nav" id="site-nav">
-    <img src="BRANDING/METCLINIC/LOGOS/MET_POSITIVO_03.png" alt="MET Clinic" class="nav__logo">
+    <img src="images/web/met-positivo-03.webp" alt="MET Clinic" class="nav__logo">
     <ul class="nav__links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#especialistas">Equipo</a></li>
@@ -935,14 +935,14 @@
   <!-- ══ HERO ══ -->
   <section class="hero" id="hero">
     <!-- FASE 2 — Reemplazar el div .hero__media por:
-         <video autoplay muted loop playsinline poster="clinic.png" class="hero__media">
+         <video autoplay muted loop playsinline poster="images/web/clinic.webp" class="hero__media">
            <source src="video/hero.mp4" type="video/mp4">
          </video>
          (un loop corto de 8-12s, sin audio, ~3-5MB) -->
     <div class="hero__media" aria-hidden="true"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <img src="BRANDING/METCLINIC/LOGOS/MET_POSITIVO_04.png" alt="MET Clinic" class="hero__logo">
+      <img src="images/web/met-positivo-04.webp" alt="MET Clinic" class="hero__logo">
       <p class="hero__eyebrow">Ginecología estética &amp; antiaging</p>
       <h1 class="hero__title">Bienestar íntimo,<br><em>en cada etapa.</em></h1>
       <p class="hero__desc">Ginecología estética, antiaging y longevidad para la mujer.</p>
@@ -1081,7 +1081,7 @@
           <div class="esp-track" id="espTrack">
 
             <article class="esp-card">
-              <div class="esp-photo"><img src="foto_jardin.png" alt="Dra. Melina Trujillo Quiroz"></div>
+              <div class="esp-photo"><img src="images/web/foto-jardin.webp" alt="Dra. Melina Trujillo Quiroz"></div>
               <div class="esp-body">
                 <div class="esp-name">Dra. Melina Trujillo</div>
                 <div class="esp-role">Directora · Ginecología &amp; Antiaging</div>
@@ -1203,7 +1203,7 @@
           <p class="body-text reveal d2">No tratamos síntomas.<br>Acompañamos procesos.</p>
         </div>
         <div style="display:flex; justify-content:center; align-items:center;">
-          <img src="BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png" alt="MET Clinic"
+          <img src="images/web/met-crema-05.webp" alt="MET Clinic"
                class="reveal d2"
                style="max-width:240px; height:auto; opacity:0.65; mix-blend-mode:screen;">
         </div>
@@ -1315,7 +1315,7 @@
   <footer>
     <div class="footer-grid">
       <div>
-        <img src="BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_07.png" alt="MET Clinic" class="footer-logo">
+        <img src="images/web/met-negativo-07.webp" alt="MET Clinic" class="footer-logo">
         <p class="footer-tagline">Ginecología estética,<br>regenerativa y funcional.<br>Guadalupe Inn · CDMX<br>55 4009 9923</p>
       </div>
       <div>
