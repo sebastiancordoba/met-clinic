@@ -31,6 +31,8 @@ TRABAJOS = [
     ("BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png",       "met-crema-05.webp",    800, 88),
     ("BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_07.png",    "met-negativo-07.webp", 400, 88),
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_03.png",    "met-positivo-03.webp", 400, 88),
+    # Lockup apilado del hero. Se pinta a ~330 px, así que 800 cubre retina.
+    ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_07.png",    "met-positivo-07.webp", 800, 88),
     ("images/servicios/02-oshot-prp-bioestimulacion.jpg", "servicio-oshot-prp.webp", 1200, 80),
 ]
 
