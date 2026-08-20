@@ -7,3 +7,5 @@
 .DS_Store
 
 node_modules
+# Worktrees de Claude Code — repos embebidos, no van al repo
+.claude/worktrees/
