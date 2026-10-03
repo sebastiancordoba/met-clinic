@@ -3,24 +3,41 @@ const nav = document.getElementById('site-nav');
 const darkSections = document.querySelectorAll('.is-dark');
 
 function getDarkRanges() {
+  // El rango arranca una altura de nav antes: así el nav ya va oscuro cuando la
+  // sección oscura le llega por debajo — incluye el hero, que empieza en y=68.
   return Array.from(darkSections).map(el => ({
-    top: el.offsetTop, bottom: el.offsetTop + el.offsetHeight
+    top: el.offsetTop - nav.offsetHeight, bottom: el.offsetTop + el.offsetHeight
   }));
 }
 let darkRanges = getDarkRanges();
-window.addEventListener('resize', () => { darkRanges = getDarkRanges(); });
+window.addEventListener('resize', () => { darkRanges = getDarkRanges(); updateNav(); });
 
-window.addEventListener('scroll', () => {
+function updateNav() {
   const y = window.scrollY;
   const mid = y + nav.offsetHeight / 2;
   nav.classList.toggle('scrolled', y > 60);
   nav.classList.toggle('dark-section', darkRanges.some(r => mid >= r.top && mid <= r.bottom));
-}, { passive: true });
+}
+window.addEventListener('scroll', updateNav, { passive: true });
+updateNav();
 
 // ── Hero entrance ─────────────────────────────────
-window.addEventListener('load', () => {
-  requestAnimationFrame(() => document.querySelector('.hero').classList.add('hero--loaded'));
-});
+// Colgaba de 'load', que espera a TODAS las imágenes de la página (fotos de
+// servicios, logos de equipos…): el hero se quedaba en blanco varios segundos.
+// Basta con que haya decodificado el logo, que es lo primero que se anima.
+(() => {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const arranca = () => requestAnimationFrame(() => hero.classList.add('hero--loaded'));
+  const logo = hero.querySelector('.hero__logo');
+  if (logo && !logo.complete) {
+    logo.addEventListener('load', arranca, { once: true });
+    logo.addEventListener('error', arranca, { once: true });
+    setTimeout(arranca, 1200);   // red lenta: no dejamos el hero vacío
+  } else {
+    arranca();
+  }
+})();
 
 // ── Scroll reveal ─────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
