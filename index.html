@@ -76,6 +76,27 @@
       height: 44px; width: auto; display: block;
       transition: filter 0.4s, opacity 0.4s;
     }
+    /* Destello del logo — el mismo de la tienda en Shopify (shopify_tema_met.py).
+       Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
+       `mask` usando el propio logo, así que la luz solo cae sobre las letras.
+       Ciclo de 7 s, barrido en el primer 34% (~2.4 s de luz, 4.6 de pausa). */
+    .nav__marca { position:relative; display:block; line-height:0; }
+    .nav__marca::after {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(102deg, rgba(242,242,237,0) 32%, rgba(255,255,255,0.98) 50%, rgba(242,242,237,0) 68%);
+      background-size:300% 100%; background-repeat:no-repeat;
+      -webkit-mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
+              mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
+      animation:metLogoShine 7s cubic-bezier(0.4,0,0.2,1) 2.6s infinite;
+    }
+    .nav.dark-section .nav__marca::after { display:none; }
+    @keyframes metLogoShine {
+      0%   { background-position:250% 0; }
+      34%  { background-position:-150% 0; }
+      100% { background-position:-150% 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { .nav__marca::after { animation:none; } }
+
     .nav.dark-section .nav__logo { filter: brightness(0) invert(1); opacity: 0.85; }
 
     .nav__links { display:flex; gap:36px; list-style:none; }
@@ -936,7 +957,7 @@
       .nav__links { display: none; }
       .nav__cta { display: none; }
       .nav__hamburger { display: flex; }
-      .nav__logo { position: absolute; left: 50%; transform: translateX(-50%); }
+      .nav__marca { position: absolute; left: 50%; transform: translateX(-50%); }
 
       /* Hero */
       .hero { height:calc(100vh - 68px); height:calc(100dvh - 68px); min-height:480px; }
@@ -1077,7 +1098,7 @@
 
   <!-- ══ NAV ══ -->
   <nav class="nav" id="site-nav">
-    <img src="images/web/met-positivo-03.webp" alt="MET Clinic" class="nav__logo">
+    <a href="#hero" class="nav__marca" aria-label="MET Clinic — inicio"><img src="images/web/met-positivo-03.webp" alt="MET Clinic" class="nav__logo"></a>
     <ul class="nav__links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#especialistas">Equipo</a></li>
@@ -1148,7 +1169,7 @@
       <span class="asoc-label">Miembro de</span>
       <div class="asoc-list">
         <span class="asoc-item"><img class="asoc-logo" src="images/asoc/a4m.png" alt="American Academy of Anti-Aging Medicine (A4M)"></span>
-        <span class="asoc-item"><img class="asoc-logo" src="images/asoc/solapav.png" alt="Sociedad Latinoamericana de Patología Vulvar (SoLaPaV)"></span>
+        <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-solapav.webp" alt="Sociedad Latinoamericana de Patología Vulvar (SoLaPaV)"></span>
       </div>
     </div>
   </section>
@@ -1524,6 +1545,7 @@
         <ul class="footer-col__links">
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#especialistas">Equipo</a></li>
+          <li><a href="#clinica">La clínica</a></li>
           <li><a href="#testimonios">Opiniones</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -1531,15 +1553,18 @@
       <div>
         <div class="footer-col__label">Servicios</div>
         <ul class="footer-col__links">
-          <li><a href="#servicios">Ginecología Estética</a></li>
-          <li><a href="#servicios">Medicina Antiaging</a></li>
-          <li><a href="#servicios">Ginecología Funcional</a></li>
-          <li><a href="#servicios">Láser &amp; Radiofrecuencia</a></li>
+          <li><a href="pilar-ginecologia.html">Ginecología Estética</a></li>
+          <li><a href="pilar-facial.html">Rejuvenecimiento Facial</a></li>
+          <li><a href="pilar-corporal.html">Contorno Corporal</a></li>
+          <li><a href="pilar-piel.html">Manchas, Cicatrices &amp; Estrías</a></li>
+          <li><a href="pilar-capilar.html">Salud Capilar</a></li>
+          <li><a href="pilar-depilacion.html">Depilación Láser</a></li>
+          <li><a href="pilar-longevidad.html">Bienestar &amp; Longevidad</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2025 MET Clinic. Todos los derechos reservados.</span>
+      <span class="footer-copy">© 2026 MET Clinic. Todos los derechos reservados.</span>
       <div class="footer-social">
         <a href="https://www.instagram.com/metclinic.mx" target="_blank" rel="noopener">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

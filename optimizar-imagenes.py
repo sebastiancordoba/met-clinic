@@ -42,6 +42,8 @@ TRABAJOS = [
     ("images/equipo/grupo.jpg",                         "equipo-grupo.webp",  900, 80),
     # Mosaico "La clínica" de la portada (sesión de septiembre). Las verticales
     # se pintan a ~360 px de ancho; 900 cubre retina con margen.
+    # Logo de asociación: el PNG original mide 4784 px y se pinta a ~72 px de alto.
+    ("images/asoc/solapav.png",                         "asoc-solapav.webp",        480, 90),
     ("images/clinica/recepcion.jpg",                    "clinica-recepcion.webp",   900, 80),
     ("images/clinica/detalle-tratamiento.jpg",          "clinica-detalle.webp",     900, 80),
     ("images/clinica/consultorio-ultrasonido.jpg",      "clinica-consultorio.webp", 900, 80),
