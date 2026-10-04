@@ -228,17 +228,22 @@ document.querySelectorAll('.drawer-link').forEach(a => {
 /* ── Video del hero ───────────────────────────────────────────────────────
    Se carga a mano y no con autoplay+src en el HTML por tres razones:
    - quien tiene `prefers-reduced-motion` se queda con el póster fijo;
-   - quien tiene ahorro de datos (`saveData`) no paga 1.2 MB de fondo;
+   - quien tiene ahorro de datos (`saveData`) no paga el video de fondo;
    - la primera pintura no compite con el video por la conexión.
+   Hay cuatro versiones (ver optimizar-video.sh) y se baja solo una:
+   recorte vertical si la pantalla es alta y angosta, 1080p si no; AV1 si el
+   navegador lo decodifica, H.264 si no.
    Si el navegador bloquea el autoplay, play() rechaza y queda el póster. */
 (function () {
   const v = document.querySelector('.hero__media--video video');
-  if (!v || !v.dataset.src) return;
+  if (!v || !v.dataset.base) return;
   const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ahorro = navigator.connection && navigator.connection.saveData;
   if (menosMovimiento || ahorro) return;
+  const vertical = window.matchMedia('(max-aspect-ratio: 2/3)').matches;
+  const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
   const arrancar = () => {
-    v.src = v.dataset.src;
+    v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
     v.play().catch(() => {});
   };
   if (document.readyState === 'complete') arrancar();
