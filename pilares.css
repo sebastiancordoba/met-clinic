@@ -96,7 +96,7 @@ a { color:inherit; text-decoration:none; }
   line-height:0.98; letter-spacing:-0.025em; margin-bottom:24px; max-width:16ch;
 }
 /* Acento de marca en Larken (solo hay Light recta; sin inclinación sintética). */
-.pilar-hero__title em, .pilar-cta h2 em { font-family:'Larken','Times New Roman',serif; font-style:normal; font-weight:300; font-synthesis:none; letter-spacing:-0.01em; color:var(--sage); }
+.pilar-hero__title em, .pilar-cta h2 em, .pilar-faq h2 em { font-family:'Larken','Times New Roman',serif; font-style:normal; font-weight:300; font-synthesis:none; letter-spacing:-0.01em; color:var(--sage); }
 .pilar-hero__intro { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.65; color:rgba(38,38,38,0.7); max-width:600px; }
 .pilar-hero__actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,3.5vw,40px); }
 
@@ -159,11 +159,10 @@ a { color:inherit; text-decoration:none; }
 .chip-static { font-size:13px; font-weight:400; letter-spacing:0.02em; padding:9px 16px; background:var(--tranquil); border:1px solid var(--sage-mid); color:rgba(38,38,38,0.72); }
 
 /* ════════════ CTA BAND (oscuro) ════════════ */
-.pilar-cta { background:var(--dark); border-top:2px solid var(--sage); padding:clamp(64px,8vw,110px) 0; text-align:center; }
-.pilar-cta h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4.4vw,58px); line-height:1.0; letter-spacing:-0.02em; color:var(--confort); margin-bottom:20px; }
-.pilar-cta p { font-size:clamp(15px,1.2vw,18px); font-weight:300; line-height:1.6; color:rgba(247,237,220,0.6); max-width:520px; margin:0 auto 36px; }
-.pilar-cta .btn-ghost { color:var(--confort); border-color:rgba(247,237,220,0.3); }
-.pilar-cta .btn-ghost:hover { border-color:var(--sage); color:var(--sage); }
+/* Cierre en claro: la paleta del sitio es clara y el footer oscuro ya va justo debajo. */
+.pilar-cta { background:var(--confort); border-top:1px solid rgba(130,134,127,0.2); padding:clamp(64px,8vw,110px) 0; text-align:center; }
+.pilar-cta h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4.4vw,58px); line-height:1.0; letter-spacing:-0.02em; color:var(--dark); margin-bottom:20px; }
+.pilar-cta p { font-size:clamp(15px,1.2vw,18px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.65); max-width:520px; margin:0 auto 36px; }
 .pilar-cta__actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
 
 /* ════════════ FOOTER ════════════ */
@@ -217,3 +216,19 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
   .barra-movil__cita { background:var(--dark); color:var(--confort); }
   body { padding-bottom:calc(66px + env(safe-area-inset-bottom)); }
 }
+
+/* ── Preguntas frecuentes ── */
+.pilar-faq { background:var(--tranquil); border-top:1px solid rgba(130,134,127,0.2); padding:clamp(64px,8vw,110px) 0; }
+.pilar-faq__list { max-width:820px; margin-top:clamp(28px,3vw,44px); border-top:1px solid rgba(130,134,127,0.25); }
+.pilar-faq details { border-bottom:1px solid rgba(130,134,127,0.25); }
+.pilar-faq summary {
+  list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:24px;
+  padding:22px 0; font-size:clamp(16px,1.3vw,19px); font-weight:400; color:var(--dark);
+}
+.pilar-faq summary::-webkit-details-marker { display:none; }
+.pilar-faq summary::after { content:'+'; font-family:'Larken','Times New Roman',serif; font-size:26px; font-weight:300; color:var(--sage); transition:transform 0.3s var(--ease); flex-shrink:0; }
+.pilar-faq details[open] summary::after { transform:rotate(45deg); }
+.pilar-faq details p { margin:0; padding:0 48px 24px 0; font-size:15px; font-weight:300; line-height:1.75; color:rgba(38,38,38,0.72); }
+.pilar-faq h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,54px); line-height:1.0; letter-spacing:-0.02em; margin:0; }
+.pilar-faq summary { line-height:1.35; }
+@media (max-width:640px) { .pilar-faq details p { padding-right:8px; } }
