@@ -34,6 +34,10 @@ TRABAJOS = [
     # Lockup apilado del hero. Se pinta a ~330 px, así que 800 cubre retina.
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_07.png",    "met-positivo-07.webp", 800, 88),
     ("images/servicios/02-oshot-prp-bioestimulacion.jpg", "servicio-oshot-prp.webp", 1200, 80),
+    # Fotos de tratamiento de las páginas de servicio (sesión de septiembre).
+    # Quien sale recostada es del equipo haciendo de modelo.
+    ("images/servicios/healite-ii.jpg",                 "servicio-healite.webp", 900, 80),
+    ("images/servicios/exomind.jpg",                    "servicio-exomind.webp", 900, 80),
     # El equipo en la entrada, para la cabecera de la sección. Vertical.
     ("images/equipo/grupo.jpg",                         "equipo-grupo.webp",  900, 80),
 ]
