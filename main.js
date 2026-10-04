@@ -22,21 +22,13 @@ window.addEventListener('scroll', updateNav, { passive: true });
 updateNav();
 
 // ── Hero entrance ─────────────────────────────────
-// Colgaba de 'load', que espera a TODAS las imágenes de la página (fotos de
-// servicios, logos de equipos…): el hero se quedaba en blanco varios segundos.
-// Basta con que haya decodificado el logo, que es lo primero que se anima.
+// Colgaba de 'load', que espera a TODAS las imágenes de la página: el hero se
+// quedaba en blanco varios segundos. Esperaba también a que se decodificara el
+// logo grande; ya no está —con el video, estorbaba—, así que el texto entra
+// en cuanto hay DOM. Su fondo es el póster, que ya trae el CSS.
 (() => {
   const hero = document.querySelector('.hero');
-  if (!hero) return;
-  const arranca = () => requestAnimationFrame(() => hero.classList.add('hero--loaded'));
-  const logo = hero.querySelector('.hero__logo');
-  if (logo && !logo.complete) {
-    logo.addEventListener('load', arranca, { once: true });
-    logo.addEventListener('error', arranca, { once: true });
-    setTimeout(arranca, 1200);   // red lenta: no dejamos el hero vacío
-  } else {
-    arranca();
-  }
+  if (hero) requestAnimationFrame(() => hero.classList.add('hero--loaded'));
 })();
 
 // ── Scroll reveal ─────────────────────────────────
