@@ -133,25 +133,51 @@
     .hero__media video {
       width:100%; height:100%; object-fit:cover; display:block;
     }
+    /* Con video la deriva sobra: el montaje ya trae movimiento, y escalarlo
+       encima marea. El fondo pasa al póster del video para que, si éste no
+       carga, se vea el mismo cuadro y no otra foto. */
+    .hero__media--video {
+      animation:none; transform:none;
+      background-image:url('images/web/hero-poster.webp');
+    }
     @keyframes heroDrift {
       from { transform:scale(1.06) translate3d(0, 0, 0); }
       to   { transform:scale(1.15) translate3d(-1.6%, -1.8%, 0); }
     }
-    /* Velo crema centrado: la foto sólo asoma por los bordes, así el logo y el
-       título quedan sobre color plano de marca y no sobre el detalle de la foto. */
+    /* Velo crema detrás del texto.
+
+       Con la foto fija era casi opaco (95% al centro) para que el logo y el
+       título quedaran sobre color plano. Con el video eso lo dejaba como un
+       fantasma: se pagó un video de la clínica y no se veía. Ahora el velo es
+       una columna suave detrás del texto —lo justo para leer sobre los cuadros
+       más claros, el jardín y los anaqueles iluminados— y los costados quedan
+       casi limpios para que el video se vea. */
     .hero__overlay {
       position:absolute; inset:0; z-index:0;
       background:
-        radial-gradient(88% 78% at 50% 46%,
-          rgba(247,237,220,0.95) 0%,
-          rgba(247,237,220,0.86) 38%,
-          rgba(247,237,220,0.42) 74%,
-          rgba(247,237,220,0.06) 100%),
+        radial-gradient(40% 62% at 50% 52%,
+          rgba(247,237,220,0.92) 0%,
+          rgba(247,237,220,0.86) 52%,
+          rgba(247,237,220,0.32) 82%,
+          rgba(247,237,220,0) 100%),
         linear-gradient(180deg,
-          rgba(247,237,220,0.66) 0%,
-          rgba(247,237,220,0.18) 34%,
-          rgba(247,237,220,0.30) 78%,
-          rgba(247,237,220,0.72) 100%);
+          rgba(247,237,220,0.55) 0%,
+          rgba(247,237,220,0) 22%,
+          rgba(247,237,220,0) 74%,
+          rgba(247,237,220,0.70) 100%);
+    }
+    /* En móvil la columna de texto ocupa casi todo el ancho, así que el velo
+       también: si no, el título queda sobre el video crudo. */
+    @media (max-width:640px) {
+      .hero__overlay {
+        background:
+          radial-gradient(90% 60% at 50% 50%,
+            rgba(247,237,220,0.86) 0%,
+            rgba(247,237,220,0.72) 55%,
+            rgba(247,237,220,0.30) 100%),
+          linear-gradient(180deg, rgba(247,237,220,0.5) 0%, rgba(247,237,220,0) 25%,
+                          rgba(247,237,220,0) 72%, rgba(247,237,220,0.75) 100%);
+      }
     }
     .hero__content {
       position:relative; z-index:1;
@@ -1047,13 +1073,17 @@
 
   <!-- ══ HERO ══ -->
   <section class="hero" id="hero">
-    <!-- FASE 2 — Cuando llegue el video, reemplazar el div .hero__media por:
-         <video autoplay muted loop playsinline poster="images/web/clinic.webp" class="hero__media">
-           <source src="video/hero.mp4" type="video/mp4">
-         </video>
-         (un loop corto de 8-12s, sin audio, ~3-5MB)
-         Nada más del hero cambia: el logo animado y el texto van encima. -->
-    <div class="hero__media" aria-hidden="true"></div>
+    <!-- Video del hero: 11 s de la clínica, 1280×720, sin audio, ~1.2 MB.
+         Sale de optimizar-video.sh; el original no vive en el repo.
+         El <video> NO lleva src: main.js se lo pone sólo si quien visita no
+         pidió menos movimiento ni ahorro de datos. Así la primera pintura no
+         espera al video, y el póster (que es un cuadro del propio video) se
+         ve desde el primer instante. -->
+    <div class="hero__media hero__media--video" aria-hidden="true">
+      <video muted loop playsinline preload="none"
+             poster="images/web/hero-poster.webp"
+             data-src="video/hero.mp4"></video>
+    </div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <span class="hero__logo-wrap">

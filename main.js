@@ -231,3 +231,24 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   build();
 })();
 
+
+
+/* ── Video del hero ───────────────────────────────────────────────────────
+   Se carga a mano y no con autoplay+src en el HTML por tres razones:
+   - quien tiene `prefers-reduced-motion` se queda con el póster fijo;
+   - quien tiene ahorro de datos (`saveData`) no paga 1.2 MB de fondo;
+   - la primera pintura no compite con el video por la conexión.
+   Si el navegador bloquea el autoplay, play() rechaza y queda el póster. */
+(function () {
+  const v = document.querySelector('.hero__media--video video');
+  if (!v || !v.dataset.src) return;
+  const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ahorro = navigator.connection && navigator.connection.saveData;
+  if (menosMovimiento || ahorro) return;
+  const arrancar = () => {
+    v.src = v.dataset.src;
+    v.play().catch(() => {});
+  };
+  if (document.readyState === 'complete') arrancar();
+  else window.addEventListener('load', arrancar, { once: true });
+})();
