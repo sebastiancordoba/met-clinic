@@ -34,7 +34,40 @@ TRABAJOS = [
     # Lockup apilado del hero. Se pinta a ~330 px, así que 800 cubre retina.
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_07.png",    "met-positivo-07.webp", 800, 88),
     ("images/servicios/02-oshot-prp-bioestimulacion.jpg", "servicio-oshot-prp.webp", 1200, 80),
+    # El equipo en la entrada, para la cabecera de la sección. Vertical.
+    ("images/equipo/grupo.jpg",                         "equipo-grupo.webp",  900, 80),
 ]
+
+
+# Retratos del equipo. Los originales vienen a 2:3 de cuerpo casi entero, y la
+# tarjeta es 4:5: pintados tal cual, las caras salían chicas y cada quien a
+# distinta altura. Se recortan a medio cuerpo con EL MISMO tamaño de recorte
+# para todas —misma escala— y la cara a la misma altura, para que se lean
+# como serie y no como fotos sueltas.
+#
+# (origen, destino, centro x de la cara, centro y de la cara) en fracciones
+# de la foto. Medidos a mano sobre una rejilla: son seis y así quedan a la
+# vista y se pueden corregir, en vez de depender de un detector de rostros.
+# Los originales en images/equipo/ van reducidos a 3000 px de alto: el doble
+# de lo que pide la tarjeta, sin meter 10 MB al repo.
+RETRATOS = [
+    ("images/equipo/dra-melina.jpg", "equipo-dra-melina.webp", 0.52, 0.39),
+]
+RETRATO_ALTO = 0.45      # alto del recorte como fracción del alto de la foto
+RETRATO_CARA_Y = 0.30    # dónde cae la cara dentro del recorte
+RETRATO_SALIDA = (720, 900)   # 4:5, la tarjeta pinta ~300 px de ancho x2
+
+
+def generar_retratos() -> None:
+    for origen, destino, cx, cy in RETRATOS:
+        im = Image.open(origen).convert("RGB")
+        W, H = im.size
+        ch = round(H * RETRATO_ALTO); cw = ch * 4 // 5
+        left = min(max(round(cx * W - cw / 2), 0), W - cw)
+        top = min(max(round(cy * H - RETRATO_CARA_Y * ch), 0), H - ch)
+        im = im.crop((left, top, left + cw, top + ch)).resize(RETRATO_SALIDA, Image.LANCZOS)
+        im.save(SALIDA / destino, "WEBP", quality=80, method=6)
+        print(f"  {(SALIDA / destino).stat().st_size // 1024:>5} KB  {destino}")
 
 
 # Favicon y tarjeta para compartir. Se generan aquí y no a mano porque
@@ -114,6 +147,7 @@ def main() -> None:
           f"ahorro {(antes-despues)/1024/1024:.1f} MB\n")
     generar_favicon()
     generar_og()
+    generar_retratos()
 
 
 if __name__ == "__main__":
