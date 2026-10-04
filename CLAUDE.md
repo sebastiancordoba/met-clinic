@@ -46,15 +46,20 @@ Section order (anchors used by nav links and `main.js` smooth-scroll):
 
 ```
 #hero  →  #asociaciones  →  #servicios  →  #tecnologia  →  #especialistas  →  #clinica
-       →  #proceso  →  #cita  →  #filosofia (.is-dark)  →  #testimonios  →  #contacto  →  <footer>
+       →  #proceso  →  #cita  →  #filosofia (salvia)  →  #testimonios  →  #contacto  →  <footer>
 ```
 
 Things worth knowing before editing:
 
 - **Nav offset is 68px.** Fixed nav height is hardcoded; smooth-scroll in `main.js` subtracts 68, and several sections size themselves to `calc(100dvh - 68px)`. If you change nav height, hunt down all three.
-- **`.is-dark` sections** flip the nav to a dark theme on scroll. `main.js` measures their offsets on load + resize and toggles `nav.dark-section` based on whether the nav midpoint is inside one. Adding a new dark section is just `class="is-dark"` — no JS change needed.
+- **`.is-dark` sections** flip the nav to a dark theme on scroll (`main.js` toggles `nav.dark-section`). No section uses it today — the site stays on the light palette — but the mechanism is still there.
 - **One-screen layout pattern.** `#sobre-block` and `#servicios` are constrained to `height: calc(100dvh - 68px)` and use flex column children with `flex:1 / min-height:0` so content fills exactly one viewport. Be careful with padding/margins inside them — small additions overflow and clip.
-- **Brand tokens** live in `:root` (`--sage`, `--tranquil`, `--confort`, `--dark`, `--font`, `--ease`). Use these instead of hex values.
+- **Brand tokens** live in `:root` (`--sage`, `--tranquil`, `--confort`, `--dark`, `--texto-suave`, `--font`, `--ease`). Use these instead of hex values.
+- **Color rules (brandbook p. 17-18, applied Oct 2026):**
+  - Small text never goes in `--sage`: on cream it's 3.2:1 and small text needs 4.5:1. Use `--texto-suave` (#515151, the official "Formalidad 80%" tint, 6.8:1). Sage is for large headings, the Larken accents, lines and icons.
+  - Section backgrounds alternate **only** `--tranquil` and `--confort` — no plain white sections. `#filosofia` is the one block on `--sage`; nothing on sage reaches 4.5:1, so only large text goes there (its stats sit on cream cards).
+  - Translucent dark text stays at alpha ≥ 0.75.
+  - Check with axe-core before shipping color changes.
 
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 

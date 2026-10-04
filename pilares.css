@@ -17,6 +17,10 @@
 /* ── Variables ── */
 :root {
   --sage:        #82867F;
+  /* Texto chico secundario: tinta oficial «Formalidad 80%» del manual (pág. 18).
+     El salvia sobre crema da 3.2:1 y el texto chico necesita 4.5:1; éste da 6.8:1.
+     El salvia queda para títulos grandes, acentos, líneas e íconos. */
+  --texto-suave: #515151;
   --sage-light:  rgba(130,134,127,0.10);
   --sage-mid:    rgba(130,134,127,0.25);
   --dark:        #262626;
@@ -48,7 +52,7 @@ a { color:inherit; text-decoration:none; }
   position:fixed; top:0; left:0; right:0; z-index:100;
   display:flex; align-items:center; justify-content:space-between;
   padding:0 clamp(20px,3vw,48px); height:68px;
-  background:rgba(247,237,220,0.94);
+  background:rgba(242,242,237,0.94);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
   border-top:2px solid var(--sage); border-bottom:1px solid var(--sage-mid);
 }
@@ -77,7 +81,7 @@ a { color:inherit; text-decoration:none; }
 .nav__links { display:flex; gap:32px; list-style:none; }
 .nav__links a {
   font-size:13px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--sage); position:relative; transition:color 0.3s;
+  color:var(--texto-suave); position:relative; transition:color 0.3s;
 }
 .nav__links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--sage); transition:width 0.35s var(--ease); }
 .nav__links a:hover, .nav__links a.is-active { color:var(--dark); }
@@ -93,7 +97,7 @@ a { color:inherit; text-decoration:none; }
 .nav__hamburger.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
 .nav__hamburger.open span:nth-child(2){ opacity:0; }
 .nav__hamburger.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
-.nav__drawer { display:none; position:fixed; top:68px; left:0; right:0; background:var(--confort); border-bottom:2px solid var(--sage); padding:24px; z-index:99; flex-direction:column; }
+.nav__drawer { display:none; position:fixed; top:68px; left:0; right:0; background:var(--tranquil); border-bottom:2px solid var(--sage); padding:24px; z-index:99; flex-direction:column; }
 .nav__drawer.open { display:flex; }
 .nav__drawer a { font-size:15px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--dark); padding:15px 0; border-bottom:1px solid rgba(130,134,127,0.15); }
 .nav__drawer a:last-child { border-bottom:none; }
@@ -107,10 +111,10 @@ a { color:inherit; text-decoration:none; }
 .pilar-hero__back {
   display:inline-flex; align-items:center; gap:9px;
   font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
-  color:var(--sage); margin-bottom:clamp(28px,4vw,48px); transition:gap 0.3s, color 0.3s;
+  color:var(--texto-suave); margin-bottom:clamp(28px,4vw,48px); transition:gap 0.3s, color 0.3s;
 }
 .pilar-hero__back:hover { gap:13px; color:var(--dark); }
-.pilar-hero__eyebrow { font-size:11px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:var(--sage); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
+.pilar-hero__eyebrow { font-size:11px; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
 .pilar-hero__eyebrow::before { content:''; width:26px; height:1px; background:var(--sage); opacity:0.6; }
 .pilar-hero__title {
   font-family:var(--font); font-weight:200; font-size:clamp(40px,6vw,84px);
@@ -118,7 +122,7 @@ a { color:inherit; text-decoration:none; }
 }
 /* Acento de marca en Larken (solo hay Light recta; sin inclinación sintética). */
 .pilar-hero__title em, .pilar-cta h2 em, .pilar-faq h2 em { font-family:'Larken','Times New Roman',serif; font-style:normal; font-weight:300; font-synthesis:none; letter-spacing:-0.01em; color:var(--sage); }
-.pilar-hero__intro { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.65; color:rgba(38,38,38,0.7); max-width:600px; }
+.pilar-hero__intro { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.65; color:rgba(38,38,38,0.78); max-width:600px; }
 .pilar-hero__actions { display:flex; flex-wrap:wrap; gap:14px; margin-top:clamp(28px,3.5vw,40px); }
 
 /* Botones */
@@ -138,13 +142,13 @@ a { color:inherit; text-decoration:none; }
 /* ════════════ INTRO / CONTEXTO ════════════ */
 .pilar-intro { padding:clamp(56px,7vw,96px) 0; background:var(--tranquil); }
 .pilar-intro__grid { display:grid; grid-template-columns:1fr 1.2fr; gap:clamp(32px,5vw,72px); align-items:start; }
-.pilar-intro__kicker { font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage); margin-bottom:18px; }
+.pilar-intro__kicker { font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:18px; }
 .pilar-intro h2 { font-family:var(--font); font-weight:200; font-size:clamp(28px,3.4vw,46px); line-height:1.02; letter-spacing:-0.02em; }
-.pilar-intro p { font-size:clamp(15px,1.15vw,17px); font-weight:300; line-height:1.8; color:rgba(38,38,38,0.72); }
+.pilar-intro p { font-size:clamp(15px,1.15vw,17px); font-weight:300; line-height:1.8; color:rgba(38,38,38,0.78); }
 .pilar-intro p + p { margin-top:18px; }
 
 /* ════════════ GRUPOS DE TRATAMIENTO ════════════ */
-.treatments { padding:clamp(40px,5vw,72px) 0 clamp(64px,8vw,110px); background:var(--white); border-top:1px solid var(--sage-mid); }
+.treatments { padding:clamp(40px,5vw,72px) 0 clamp(64px,8vw,110px); background:var(--confort); border-top:1px solid var(--sage-mid); }
 .treatments__head { max-width:760px; margin-bottom:clamp(36px,4vw,56px); }
 .treatments__head .pilar-intro__kicker { margin-bottom:16px; }
 .treatments__head h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,54px); line-height:1.0; letter-spacing:-0.02em; }
@@ -157,10 +161,10 @@ a { color:inherit; text-decoration:none; }
 .tgroup__foto { margin:28px 0 0; aspect-ratio:3/2; overflow:hidden; background:var(--tranquil); }
 .tgroup__foto img { width:100%; height:100%; object-fit:cover; object-position:50% 52%; display:block; }
 .tgroup:last-child { border-bottom:1px solid var(--sage-mid); }
-.tgroup__label { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--sage); margin-bottom:14px; }
+.tgroup__label { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:14px; }
 .tgroup__name { font-family:var(--font); font-weight:300; font-size:clamp(24px,2.4vw,36px); line-height:1.05; letter-spacing:-0.015em; margin-bottom:16px; }
-.tgroup__desc { font-size:15px; font-weight:300; line-height:1.7; color:rgba(38,38,38,0.66); }
-.tgroup__tag { display:inline-block; margin-top:18px; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--sage); border:1px solid var(--sage-mid); padding:7px 14px; }
+.tgroup__desc { font-size:15px; font-weight:300; line-height:1.7; color:rgba(38,38,38,0.78); }
+.tgroup__tag { display:inline-block; margin-top:18px; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--texto-suave); border:1px solid var(--sage-mid); padding:7px 14px; }
 
 /* Lista de tratamientos del grupo */
 .tlist { display:flex; flex-direction:column; }
@@ -173,17 +177,17 @@ a { color:inherit; text-decoration:none; }
 .titem:hover { padding-left:8px; }
 .titem__dot { width:5px; height:5px; border-radius:50%; background:var(--sage); flex-shrink:0; transform:translateY(7px); }
 .titem__name { font-size:16px; font-weight:400; line-height:1.4; color:var(--dark); flex:1; }
-.titem__meta { font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(38,38,38,0.42); white-space:nowrap; }
+.titem__meta { font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(38,38,38,0.78); white-space:nowrap; }
 
 /* Variante chips (para zonas, ej. depilación) */
 .chips-wrap { display:flex; flex-wrap:wrap; gap:10px; }
-.chip-static { font-size:13px; font-weight:400; letter-spacing:0.02em; padding:9px 16px; background:var(--tranquil); border:1px solid var(--sage-mid); color:rgba(38,38,38,0.72); }
+.chip-static { font-size:13px; font-weight:400; letter-spacing:0.02em; padding:9px 16px; background:var(--tranquil); border:1px solid var(--sage-mid); color:rgba(38,38,38,0.78); }
 
 /* ════════════ CTA BAND (oscuro) ════════════ */
 /* Cierre en claro: la paleta del sitio es clara y el footer oscuro ya va justo debajo. */
 .pilar-cta { background:var(--confort); border-top:1px solid rgba(130,134,127,0.2); padding:clamp(64px,8vw,110px) 0; text-align:center; }
 .pilar-cta h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4.4vw,58px); line-height:1.0; letter-spacing:-0.02em; color:var(--dark); margin-bottom:20px; }
-.pilar-cta p { font-size:clamp(15px,1.2vw,18px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.65); max-width:520px; margin:0 auto 36px; }
+.pilar-cta p { font-size:clamp(15px,1.2vw,18px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.78); max-width:520px; margin:0 auto 36px; }
 .pilar-cta__actions { display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
 
 /* ════════════ FOOTER ════════════ */
@@ -191,12 +195,12 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .footer-grid { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
 .footer-logo { height:96px; width:auto; opacity:0.85; margin-bottom:20px; display:block; }
 .footer-tagline { font-size:14px; font-weight:300; letter-spacing:0.06em; color:rgba(247,237,220,0.55); line-height:1.8; }
-.footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--sage); margin-bottom:18px; }
+.footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,237,220,0.72); margin-bottom:18px; }
 .footer-col__links { list-style:none; display:flex; flex-direction:column; gap:11px; }
 .footer-col__links a { font-size:14px; font-weight:300; color:rgba(247,237,220,0.65); letter-spacing:0.04em; transition:color 0.3s; }
 .footer-col__links a:hover { color:var(--confort); }
 .footer-bottom { max-width:1140px; margin:32px auto 0; padding-top:22px; border-top:1px solid rgba(130,134,127,0.14); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
-.footer-copy { font-size:13px; font-weight:300; color:rgba(247,237,220,0.5); }
+.footer-copy { font-size:13px; font-weight:300; color:rgba(247,237,220,0.68); }
 
 /* ════════════ RESPONSIVE ════════════ */
 @media (max-width:860px) {
@@ -221,7 +225,7 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
     position:fixed; left:0; right:0; bottom:0; z-index:90;
     display:grid; grid-template-columns:1fr 1fr; gap:8px;
     padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-    background:rgba(247,237,220,0.94);
+    background:rgba(242,242,237,0.94);
     -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
     border-top:1px solid rgba(130,134,127,0.2);
     transition:transform 0.35s var(--ease);
@@ -249,7 +253,7 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .pilar-faq summary::-webkit-details-marker { display:none; }
 .pilar-faq summary::after { content:'+'; font-family:'Larken','Times New Roman',serif; font-size:26px; font-weight:300; color:var(--sage); transition:transform 0.3s var(--ease); flex-shrink:0; }
 .pilar-faq details[open] summary::after { transform:rotate(45deg); }
-.pilar-faq details p { margin:0; padding:0 48px 24px 0; font-size:15px; font-weight:300; line-height:1.75; color:rgba(38,38,38,0.72); }
+.pilar-faq details p { margin:0; padding:0 48px 24px 0; font-size:15px; font-weight:300; line-height:1.75; color:rgba(38,38,38,0.78); }
 .pilar-faq h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,54px); line-height:1.0; letter-spacing:-0.02em; margin:0; }
 .pilar-faq summary { line-height:1.35; }
 @media (max-width:640px) { .pilar-faq details p { padding-right:8px; } }
