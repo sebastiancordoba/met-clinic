@@ -34,6 +34,7 @@
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    button { font-family:inherit; }
     body { font-family:var(--font); color:var(--dark); overflow-x:hidden; max-width:100vw; }
     a { color:inherit; text-decoration:none; }
 
@@ -209,8 +210,12 @@
       margin-bottom:clamp(16px, 2.2vh, 28px);
       max-width:18ch; text-wrap:balance;
     }
-    .hero__title em {
-      font-style:normal; font-weight:300;
+    /* Acento de marca: la parte en <em> de cada título va en Larken, la serif del manual.
+       Solo tenemos Larken Light recta; font-synthesis evita que el navegador la incline a la fuerza. */
+    .hero__title em, h2 em {
+      font-family:'Larken', 'Times New Roman', serif;
+      font-style:normal; font-weight:300; font-synthesis:none;
+      letter-spacing:-0.01em;
       color:var(--sage);
     }
     .hero__actions { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
@@ -376,7 +381,6 @@
       font-size:clamp(36px,5.6vw,80px); line-height:0.96; letter-spacing:-0.03em;
       margin-bottom:0;
     }
-    .serv-head h2 em { font-style:normal; font-weight:400; color:var(--sage); }
     .serv-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.7); max-width:580px; }
 
     /* Firma — feature banner */
@@ -494,7 +498,6 @@
       .esp-head { grid-template-columns:1fr; align-items:start; }
     }
     .esp-head h2 { font-family:var(--font); font-weight:200; text-transform:none; font-size:clamp(36px,5.4vw,74px); line-height:0.96; letter-spacing:-0.03em; margin-bottom:0; }
-    .esp-head h2 em { font-style:normal; font-weight:400; color:var(--sage); }
     .esp-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.7); max-width:560px; }
     /* Carrusel de especialistas — responsivo (4 / 3 / 2 por vista) */
     .esp-carousel { position:relative; }
@@ -555,7 +558,6 @@
       text-transform:none; line-height:0.96;
       margin-bottom:0;
     }
-    .proceso-header h2 em { font-style:normal; color:var(--sage); font-weight:400; }
     .proceso-header .body-text { font-size:15px; max-width:none; }
     .proceso-steps {
       display:grid; grid-template-columns:repeat(4,1fr);
@@ -688,6 +690,7 @@
     #filosofia .eyebrow { color:rgba(247,237,220,0.45); }
     #filosofia .eyebrow::before { background:rgba(247,237,220,0.35); }
     #filosofia h2 { color:var(--confort); }
+    #filosofia h2 em { color:#B9BCB4; }
     #filosofia .divider { background:var(--sage); opacity:0.55; }
     #filosofia .body-text { color:rgba(247,237,220,0.52); }
 
@@ -739,8 +742,13 @@
       box-shadow:0 16px 48px rgba(38,38,38,0.08);
     }
     .testimonio__stars { color:var(--sage); font-size:14px; letter-spacing:2px; margin-bottom:16px; }
-    .testimonio__text { font-size:15px; font-weight:300; line-height:1.88; color:rgba(38,38,38,0.78); margin-bottom:24px; font-style:italic; }
+    .testimonio__text { margin:0 0 24px; font-size:15px; font-weight:300; line-height:1.88; color:rgba(38,38,38,0.78); margin-bottom:24px; font-style:italic; }
+    .testimonio { margin:0; }
     .testimonio__author { font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--sage); }
+    .testimonio__meta { display:block; margin-top:6px; font-size:11px; font-weight:400; letter-spacing:0.04em; text-transform:none; color:rgba(38,38,38,0.5); }
+    .testimonios-fuente { text-align:center; margin-top:40px; }
+    .testimonios-fuente a { font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); text-decoration:none; padding-bottom:6px; border-bottom:1px solid var(--sage); }
+    .testimonios-fuente a:hover { color:var(--sage); }
 
     /* ═══════════════════════════════════════════
        CONTACTO  — Tranquilidad
@@ -930,6 +938,33 @@
       .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-social { justify-content: center; }
+    }
+
+    /* ═══════════════════════════════════════════
+       BARRA DE CONTACTO — solo móvil, siempre a un toque
+    ═══════════════════════════════════════════ */
+    .barra-movil { display:none; }
+    @media (max-width:640px) {
+      .barra-movil {
+        position:fixed; left:0; right:0; bottom:0; z-index:90;
+        display:grid; grid-template-columns:1fr 1fr; gap:8px;
+        padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+        background:rgba(247,237,220,0.94);
+        -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        border-top:1px solid rgba(130,134,127,0.2);
+        transform:translateY(0); transition:transform 0.35s var(--ease);
+      }
+      .barra-movil.oculta { transform:translateY(110%); }
+      .barra-movil a {
+        display:flex; align-items:center; justify-content:center; gap:8px;
+        min-height:46px; text-decoration:none;
+        font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+      }
+      .barra-movil__wa { border:1px solid var(--sage); color:var(--dark); }
+      .barra-movil__wa svg { width:16px; height:16px; fill:var(--sage); }
+      .barra-movil__cita { background:var(--dark); color:var(--confort); }
+      body { padding-bottom:calc(66px + env(safe-area-inset-bottom)); }
+      .hero__content { padding-bottom:calc(32px + 66px); }
     }
   </style>
 
@@ -1295,7 +1330,7 @@
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
         <div>
           <p class="eyebrow reveal">Filosofía</p>
-          <h2 class="reveal d1">La medicina<br>como arte</h2>
+          <h2 class="reveal d1">La medicina<br><em>como arte.</em></h2>
           <div class="divider reveal d1"></div>
           <p class="body-text reveal d2">No tratamos síntomas.<br>Acompañamos procesos.</p>
         </div>
@@ -1331,25 +1366,30 @@
     <div class="section-inner">
       <div style="text-align:center; margin-bottom:8px;">
         <p class="eyebrow centered reveal">Opiniones</p>
-        <h2 class="reveal d1" style="text-align:center;">Lo que dicen<br>nuestras pacientes</h2>
+        <h2 class="reveal d1" style="text-align:center;">Lo que dicen<br><em>nuestras pacientes.</em></h2>
       </div>
+      <!-- Opiniones reales y verificadas de Doctoralia, citadas textualmente (los "…" marcan recortes).
+           Fuente: doctoralia.com.mx/melina-trujillo-quiroz — no inventar ni editar el texto. -->
       <div class="testimonios-grid">
-        <div class="testimonio reveal">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"La Dra. Trujillo cambió mi vida. Por primera vez me sentí escuchada y tratada con un enfoque realmente personalizado. Los resultados superaron todas mis expectativas."</p>
-          <div class="testimonio__author">Ana M. — Ciudad de México</div>
-        </div>
-        <div class="testimonio reveal d1">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"Profesionalismo excepcional. El ambiente de la clínica es elegante y tranquilo, y la doctora tiene una sensibilidad única. La recomiendo ampliamente."</p>
-          <div class="testimonio__author">Sofía R. — Guadalajara</div>
-        </div>
-        <div class="testimonio reveal d2">
-          <div class="testimonio__stars">★★★★★</div>
-          <p class="testimonio__text">"Después de años buscando respuestas, encontré en MET Clinic un enfoque integral que realmente funciona. La atención es de primer nivel y los resultados son reales."</p>
-          <div class="testimonio__author">Valentina C. — Monterrey</div>
-        </div>
+        <figure class="testimonio reveal">
+          <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote class="testimonio__text">“Entré en perimenopausia y pasé más de 5 años buscando un ginecólogo o endocrinólogo que me atendiera… solo la Dra. Melina entendió mis necesidades de: no perder calidad de vida, calidad de relaciones y mi autoestima.”</blockquote>
+          <figcaption class="testimonio__author">Yalte<span class="testimonio__meta">Consulta subsecuente · mayo 2026</span></figcaption>
+        </figure>
+        <figure class="testimonio reveal d1">
+          <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote class="testimonio__text">“Lo que más destaco de ella es su empatía y el respeto con el que trata a sus pacientes. Te explica todo a detalle, sin prisas, y hace que te sientas en un espacio seguro y en total confianza desde el primer momento.”</blockquote>
+          <figcaption class="testimonio__author">Escoffie<span class="testimonio__meta">Consulta subsecuente · julio 2026</span></figcaption>
+        </figure>
+        <figure class="testimonio reveal d2">
+          <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
+          <blockquote class="testimonio__text">“Hace poco más de 10 años conocí a la doctora Melina, y la he seguido durante todos estos años… a diferencia de muchas mujeres que conozco, yo ya no sufro el proceso.”</blockquote>
+          <figcaption class="testimonio__author">Valeria<span class="testimonio__meta">Check up ginecológico · enero 2026</span></figcaption>
+        </figure>
       </div>
+      <p class="testimonios-fuente reveal">
+        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico#profile-reviews" target="_blank" rel="noopener">Leer más de 1,300 opiniones verificadas en Doctoralia →</a>
+      </p>
     </div>
   </section>
 
@@ -1359,7 +1399,7 @@
       <div class="contacto-grid">
         <div>
           <p class="eyebrow reveal">Contacto</p>
-          <h2 class="reveal d1">Agenda tu<br>consulta</h2>
+          <h2 class="reveal d1">Agenda tu<br><em>consulta.</em></h2>
           <div class="divider reveal d1"></div>
           <p class="body-text reveal d2" style="margin-bottom:36px;">Primera consulta desde <strong style="color:var(--dark); font-weight:500;">$2,100 MXN</strong> · Online disponible.</p>
           <div class="reveal d3" style="display:flex; flex-direction:column; gap:14px;">
@@ -1463,6 +1503,14 @@
       </div>
     </div>
   </footer>
+
+  <nav class="barra-movil" aria-label="Contacto rápido">
+    <a class="barra-movil__wa" href="https://wa.me/525540099923?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+      WhatsApp
+    </a>
+    <a class="barra-movil__cita" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Agendar cita</a>
+  </nav>
 
   <script src="main.js" defer></script>
 </body>

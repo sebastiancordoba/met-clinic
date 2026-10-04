@@ -244,3 +244,15 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   if (document.readyState === 'complete') arrancar();
   else window.addEventListener('load', arrancar, { once: true });
 })();
+
+
+/* ── Barra de contacto en móvil ──────────────────────────────────────────
+   Se esconde cuando #contacto está en pantalla: ahí ya están los mismos dos
+   botones en grande y repetirlos abajo solo estorba. */
+(function () {
+  const barra = document.querySelector('.barra-movil');
+  const contacto = document.getElementById('contacto');
+  if (!barra || !contacto || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([e]) => barra.classList.toggle('oculta', e.isIntersecting),
+    { threshold: 0.25 }).observe(contacto);
+})();
