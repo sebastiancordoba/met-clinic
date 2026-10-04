@@ -40,6 +40,13 @@ TRABAJOS = [
     ("images/servicios/exomind.jpg",                    "servicio-exomind.webp", 900, 80),
     # El equipo en la entrada, para la cabecera de la sección. Vertical.
     ("images/equipo/grupo.jpg",                         "equipo-grupo.webp",  900, 80),
+    # Mosaico "La clínica" de la portada (sesión de septiembre). Las verticales
+    # se pintan a ~360 px de ancho; 900 cubre retina con margen.
+    ("images/clinica/recepcion.jpg",                    "clinica-recepcion.webp",   900, 80),
+    ("images/clinica/detalle-tratamiento.jpg",          "clinica-detalle.webp",     900, 80),
+    ("images/clinica/consultorio-ultrasonido.jpg",      "clinica-consultorio.webp", 900, 80),
+    ("images/clinica/boutique.jpg",                     "clinica-boutique.webp",    900, 80),
+    ("images/clinica/cabina-exomind.jpg",               "clinica-exomind.webp",     900, 80),
 ]
 
 

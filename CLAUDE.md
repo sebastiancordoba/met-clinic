@@ -45,8 +45,8 @@ node generate-pdf.mjs
 Section order (anchors used by nav links and `main.js` smooth-scroll):
 
 ```
-#hero  →  #sobre-block ( #sobre + #asociaciones )  →  #servicios  →  #cita
-       →  #filosofia (.is-dark)  →  #testimonios  →  #contacto  →  <footer>
+#hero  →  #asociaciones  →  #servicios  →  #tecnologia  →  #especialistas  →  #clinica
+       →  #proceso  →  #cita  →  #filosofia (.is-dark)  →  #testimonios  →  #contacto  →  <footer>
 ```
 
 Things worth knowing before editing:

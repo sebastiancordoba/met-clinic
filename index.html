@@ -540,6 +540,50 @@
     /* ═══════════════════════════════════════════
        PROCESO  — Tu experiencia (4 pasos)
     ═══════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════
+       LA CLÍNICA — mosaico del espacio (patrón de Lanserhof)
+    ═══════════════════════════════════════════ */
+    #clinica { background:var(--confort); padding:clamp(64px,8vw,110px) 0; }
+    #clinica .section-inner { padding-top:0; padding-bottom:0; max-width:1240px; }
+    .clinica-head { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,64px); align-items:end; margin-bottom:clamp(32px,4vw,52px); }
+    .clinica-head h2 { margin-bottom:0; }
+    .clinica-head .body-text { margin:0; }
+    .mosaico {
+      display:grid; gap:8px;
+      grid-template-columns:repeat(4, 1fr);
+      grid-template-rows:repeat(2, clamp(220px, 24vw, 320px));
+      grid-template-areas:
+        "rec  cab  cab  det"
+        "rec  con  bou  exo";
+    }
+    .mosaico figure { position:relative; margin:0; overflow:hidden; background:var(--tranquil); }
+    .mosaico img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s var(--ease); }
+    .mosaico figure:hover img { transform:scale(1.03); }
+    .mosaico figcaption {
+      position:absolute; left:0; bottom:0; padding:28px 16px 12px; width:100%;
+      font-size:10px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase;
+      color:#fff; background:linear-gradient(transparent, rgba(38,38,38,0.42));
+    }
+    .m-rec { grid-area:rec; } .m-cab { grid-area:cab; } .m-det { grid-area:det; }
+    .m-con { grid-area:con; } .m-bou { grid-area:bou; } .m-exo { grid-area:exo; }
+    .m-rec img { object-position:50% 40%; }
+    .m-con img { object-position:50% 30%; }
+    .m-bou img { object-position:50% 55%; }
+    .m-exo img { object-position:40% 60%; }
+    .m-det img { object-position:50% 60%; }
+    @media (max-width:760px) {
+      .clinica-head { grid-template-columns:1fr; gap:16px; }
+      .mosaico {
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:56vw 72vw 56vw 72vw;
+        grid-template-areas:
+          "cab cab"
+          "rec con"
+          "det det"
+          "bou exo";
+      }
+    }
+
     #proceso {
       background:var(--white);
       border-top:1px solid rgba(130,134,127,0.2);
@@ -1278,6 +1322,26 @@
   </section>
 
   <!-- ══ PROCESO — Cómo trabajamos ══ -->
+  <section id="clinica" aria-labelledby="clinica-titulo">
+    <div class="section-inner">
+      <div class="clinica-head">
+        <div>
+          <p class="eyebrow reveal">La clínica</p>
+          <h2 id="clinica-titulo" class="reveal d1">Un espacio<br><em>pensado para ti.</em></h2>
+        </div>
+        <p class="body-text reveal d2">En Guadalupe Inn, Ciudad de México. Consultorios y cabinas privadas, tecnología de última generación y una boutique de dermocosmética, en una casa rodeada de jardín.</p>
+      </div>
+      <div class="mosaico reveal">
+        <figure class="m-rec"><img src="images/web/clinica-recepcion.webp" alt="Recepción de MET Clinic con el logo iluminado" width="900" height="1350" loading="lazy"><figcaption>Recepción</figcaption></figure>
+        <figure class="m-cab"><img src="images/web/clinic.webp" alt="Cabina de tratamiento con camilla y equipos de aparatología" width="1920" height="1095" loading="lazy"><figcaption>Cabina de tratamiento</figcaption></figure>
+        <figure class="m-det"><img src="images/web/clinica-detalle.webp" alt="Detalle de un tratamiento facial con equipo de aparatología" width="900" height="1350" loading="lazy"><figcaption>Tratamiento</figcaption></figure>
+        <figure class="m-con"><img src="images/web/clinica-consultorio.webp" alt="Consultorio con equipo de ultrasonido" width="900" height="1350" loading="lazy"><figcaption>Consultorio</figcaption></figure>
+        <figure class="m-bou"><img src="images/web/clinica-boutique.webp" alt="Boutique de dermocosmética de MET Clinic" width="900" height="1350" loading="lazy"><figcaption>Boutique</figcaption></figure>
+        <figure class="m-exo"><img src="images/web/clinica-exomind.webp" alt="Sesión de Exomind en la cabina de bienestar" width="900" height="1350" loading="lazy"><figcaption>Bienestar &amp; longevidad</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section id="proceso">
     <div class="section-inner">
       <div class="proceso-header">
