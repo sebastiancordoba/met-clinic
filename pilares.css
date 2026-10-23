@@ -260,3 +260,7 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .pilar-faq h2 { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,54px); line-height:1.0; letter-spacing:-0.02em; margin:0; }
 .pilar-faq summary { line-height:1.35; }
 @media (max-width:640px) { .pilar-faq details p { padding-right:8px; } }
+
+/* Aviso médico bajo el CTA de cada servicio. RLGS en materia de publicidad: cédula del profesional (art. 19) y
+   riesgos/contraindicaciones de los procedimientos (art. 65). Texto genérico: no promete resultados. */
+.pilar-cta .pilar-aviso { max-width:560px; margin:40px auto 0; font-size:12px; line-height:1.6; color:var(--texto-suave); }
