@@ -261,3 +261,140 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   new IntersectionObserver(([e]) => barra.classList.toggle('oculta', e.isIntersecting),
     { threshold: 0.25 }).observe(contacto);
 })();
+
+
+/* ── Mapa propio en #contacto ────────────────────────────────────────────
+   MapLibre GL (cdnjs) con teselas vectoriales de OpenStreetMap servidas por
+   OpenFreeMap: sin llave ni cuenta. Se baja solo cuando la sección está a
+   ~600 px de la pantalla (~210 KB comprimido más las teselas). El estilo
+   base es "positron", recoloreado aquí con la paleta de la clínica y sin
+   lo que no ayuda a llegar (escudos, aeropuertos, fronteras).
+   Sin WebGL o sin red queda la tarjeta con dirección y enlaces, que ya
+   funciona sola. */
+(function () {
+  const caja = document.getElementById('mapa');
+  const lienzo = document.getElementById('mapaLienzo');
+  if (!caja || !lienzo) return;
+
+  // Variante B (enmarcada) para comparar en la vista previa: ?mapa=b
+  const tarjeta = /[?&]mapa=b\b/.test(location.search);
+  if (tarjeta) caja.classList.add('mapa--tarjeta');
+
+  const clinica = [parseFloat(caja.dataset.lng), parseFloat(caja.dataset.lat)];
+  const metro = [-99.1892568, 19.3615527];
+  // Ruta a pie Metro → clínica (OSRM perfil peatón, 466 m, ~6 min), con el último tramo hasta la puerta.
+  const ruta = [[-99.189188, 19.361545], [-99.189192, 19.361514], [-99.189305, 19.360622], [-99.189348, 19.360269],
+    [-99.18927, 19.360328], [-99.188611, 19.360149], [-99.188788, 19.358649], [-99.188861, 19.357985], clinica];
+
+  // "Cómo llegar" abre la app de mapas del dispositivo: Apple Maps en iPhone/iPad/Mac, Google Maps en lo demás.
+  const ir = document.getElementById('mapaIr');
+  const apple = /iPhone|iPad|Macintosh/.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
+  if (ir && apple) {
+    ir.href = 'https://maps.apple.com/?daddr=' + clinica[1] + ',' + clinica[0] + '&q=MET%20Clinic';
+  }
+
+  const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const P = tarjeta
+    ? { tierra: '#F2F2ED', edificio: '#E7E7E0', parque: 'rgba(130,134,127,0.22)', agua: '#D3D8D2',
+        calle: '#FFFFFF', borde: '#DCDCD3', texto: '#5E5E5A', halo: '#F2F2ED' }
+    : { tierra: '#F7EDDC', edificio: '#EEE2CB', parque: 'rgba(130,134,127,0.18)', agua: '#DADCD2',
+        calle: '#FFFBF3', borde: '#E5D7BE', texto: '#66625A', halo: '#F7EDDC' };
+  const quitar = /^(airport|aeroway|highway-shield|road_shield|boundary|label_country|label_state|landcover_(ice|glacier))/;
+
+  function recolorear(estilo) {
+    estilo.layers = estilo.layers.filter((l) => !quitar.test(l.id));
+    for (const l of estilo.layers) {
+      const p = (l.paint = l.paint || {});
+      const id = l.id;
+      if (id === 'background') p['background-color'] = P.tierra;
+      else if (id === 'park' || id === 'landcover_wood') { p['fill-color'] = P.parque; p['fill-opacity'] = 1; }
+      else if (id === 'water') p['fill-color'] = P.agua;
+      else if (id === 'waterway') p['line-color'] = P.agua;
+      else if (id === 'landuse_residential') p['fill-opacity'] = 0;
+      else if (id === 'building') { p['fill-color'] = P.edificio; p['fill-outline-color'] = P.borde; }
+      else if (/casing/.test(id)) p['line-color'] = P.borde;
+      else if (/^highway|^road_pier/.test(id) && l.type === 'line') p['line-color'] = P.calle;
+      else if (/^railway/.test(id)) p['line-color'] = /dash/.test(id) ? P.tierra : '#C9CBC4';
+      if (l.type === 'symbol' && l.paint) {
+        p['text-color'] = P.texto; p['text-halo-color'] = P.halo; p['text-halo-width'] = 1.4; p['text-halo-blur'] = 0;
+      }
+    }
+    return estilo;
+  }
+
+  function cargar(url, tipo) {
+    return new Promise((ok, mal) => {
+      const el = document.createElement(tipo === 'css' ? 'link' : 'script');
+      if (tipo === 'css') { el.rel = 'stylesheet'; el.href = url; } else { el.src = url; }
+      el.onload = ok; el.onerror = mal;
+      document.head.appendChild(el);
+    });
+  }
+
+  function marcador(html, clase) {
+    const el = document.createElement('div');
+    el.className = clase;
+    el.innerHTML = html;
+    return el;
+  }
+
+  async function iniciar() {
+    const base = 'https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/4.7.1/';
+    try {
+      const [, , estilo] = await Promise.all([
+        cargar(base + 'maplibre-gl.min.css', 'css'),
+        cargar(base + 'maplibre-gl.min.js', 'js'),
+        fetch('https://tiles.openfreemap.org/styles/positron').then((r) => r.json()),
+      ]);
+      const angosto = window.matchMedia('(max-width:760px)').matches;
+      const map = new maplibregl.Map({
+        container: lienzo,
+        style: recolorear(estilo),
+        center: angosto ? [-99.1888, 19.35935] : [-99.1912, 19.35915],
+        zoom: angosto ? 15.5 : 15.8,
+        minZoom: 12, maxZoom: 19,
+        attributionControl: false,
+        cooperativeGestures: true,
+        pitchWithRotate: false, dragRotate: false, touchPitch: false,
+        fadeDuration: menosMovimiento ? 0 : 300,
+        locale: {
+          'CooperativeGesturesHandler.WindowsHelpText': 'Usa Ctrl + rueda para acercar el mapa',
+          'CooperativeGesturesHandler.MacHelpText': 'Usa ⌘ + rueda para acercar el mapa',
+          'CooperativeGesturesHandler.MobileHelpText': 'Usa dos dedos para mover el mapa',
+          'NavigationControl.ZoomIn': 'Acercar', 'NavigationControl.ZoomOut': 'Alejar',
+          'FullscreenControl.Enter': 'Pantalla completa', 'FullscreenControl.Exit': 'Salir de pantalla completa',
+          'AttributionControl.ToggleAttribution': 'Créditos del mapa',
+        },
+      });
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+      map.addControl(new maplibregl.FullscreenControl({ container: caja }), 'top-right');
+      map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+
+      map.on('load', () => {
+        caja.classList.add('mapa--listo');
+        map.addSource('ruta', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: ruta } } });
+        map.addLayer({
+          id: 'ruta', type: 'line', source: 'ruta',
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: { 'line-color': '#82867F', 'line-width': 3.5, 'line-dasharray': [0.1, 2.2] },
+        });
+      });
+
+      new maplibregl.Marker({ element: marcador('<span class="mapa-metro__m">M</span><span class="mapa-metro__nombre">' + (angosto ? 'Metro · L7' : 'Barranca del Muerto · L7') + '</span>', 'mapa-metro' + (angosto ? ' mapa-metro--izq' : '')), anchor: angosto ? 'right' : 'left', offset: [angosto ? 11 : -11, 0] })
+        .setLngLat(metro).addTo(map);
+      new maplibregl.Marker({ element: marcador('<div class="mapa-pin__disco"><img src="images/web/met-positivo-03.webp" alt=""></div><span class="mapa-pin__nombre">MET Clinic</span>', 'mapa-pin'), anchor: 'center' })
+        .setLngLat(clinica).addTo(map);
+    } catch (e) {
+      // sin WebGL, sin red o con el CDN caído: se queda la cuadrícula y la tarjeta con los enlaces
+      caja.classList.add('mapa--sin-mapa');
+    }
+  }
+
+  if (!('IntersectionObserver' in window)) { iniciar(); return; }
+  const io = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    io.disconnect();
+    iniciar();
+  }, { rootMargin: '600px 0px' });
+  io.observe(caja);
+})();

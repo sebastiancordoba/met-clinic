@@ -854,6 +854,105 @@
     .info-item__label { font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:7px; }
     .info-item__value { font-size:16px; font-weight:300; color:var(--dark); line-height:1.7; }
 
+    /* ── Mapa propio ──
+       Variante A (por defecto): el mapa no tiene caja; se funde con el crema de la sección por los bordes.
+       Variante B (.mapa--tarjeta, ?mapa=b en la vista previa): enmarcado como el resto de las tarjetas. */
+    .mapa {
+      position:relative; margin-top:72px;
+      height:min(560px, 70vh); min-height:440px;
+    }
+    .mapa .mapa__lienzo {
+      position:absolute; inset:0; /* .mapa delante: la hoja de MapLibre pone .maplibregl-map { position:relative } */
+      /* antes de cargar: un cuadriculado tenue, para que no salte nada cuando llega el mapa */
+      background:
+        linear-gradient(rgba(130,134,127,0.07) 1px, transparent 1px) 0 0/48px 48px,
+        linear-gradient(90deg, rgba(130,134,127,0.07) 1px, transparent 1px) 0 0/48px 48px;
+    }
+    .mapa--listo .mapa__lienzo { background:none; }
+    .mapa__lienzo .maplibregl-canvas {
+      -webkit-mask-image:radial-gradient(ellipse 72% 78% at 58% 50%, #000 52%, transparent 100%);
+              mask-image:radial-gradient(ellipse 72% 78% at 58% 50%, #000 52%, transparent 100%);
+    }
+    .mapa--tarjeta .mapa__lienzo {
+      border:1px solid rgba(130,134,127,0.2); border-top:2px solid var(--sage);
+      box-shadow:0 18px 40px -24px rgba(38,38,38,0.25); overflow:hidden;
+    }
+    .mapa--tarjeta .mapa__lienzo .maplibregl-canvas { -webkit-mask-image:none; mask-image:none; }
+
+    .mapa__tarjeta {
+      position:absolute; left:0; top:50%; transform:translateY(-50%); z-index:2;
+      width:320px; padding:30px 30px 26px;
+      background:rgba(247,237,220,0.94);
+      border:1px solid rgba(130,134,127,0.2); border-top:2px solid var(--sage);
+      box-shadow:0 18px 40px -24px rgba(38,38,38,0.3);
+    }
+    .mapa--tarjeta .mapa__tarjeta { left:28px; background:rgba(242,242,237,0.96); }
+    .mapa__logo { height:22px; width:auto; display:block; margin-bottom:18px; opacity:0.9; }
+    .mapa__eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:10px; }
+    .mapa__dir { font-size:17px; font-weight:300; line-height:1.6; color:var(--dark); margin-bottom:18px; }
+    .mapa__refs { list-style:none; margin:0 0 22px; padding:16px 0 0; border-top:1px solid rgba(130,134,127,0.18); display:flex; flex-direction:column; gap:10px; }
+    .mapa__refs li { font-size:13px; font-weight:300; line-height:1.5; color:var(--texto-suave); display:flex; align-items:center; gap:10px; }
+    .mapa__refs a { color:var(--dark); text-decoration:none; border-bottom:1px solid rgba(130,134,127,0.4); margin-left:28px; }
+    .mapa__m {
+      flex:none; width:18px; height:18px; border-radius:50%;
+      background:var(--dark); color:var(--confort);
+      font-size:10px; font-weight:600; display:grid; place-items:center;
+    }
+    .mapa__m--via { background:none; border-radius:0; height:0; border-top:3px solid #fff; box-shadow:0 0 0 1px rgba(130,134,127,0.45); }
+    .mapa__ir { display:block; text-align:center; padding:15px 24px; }
+    .mapa__apps { margin-top:12px; font-size:12px; font-weight:300; color:var(--texto-suave); text-align:center; }
+    .mapa__apps a { color:var(--texto-suave); text-decoration:none; border-bottom:1px solid rgba(130,134,127,0.35); }
+    .mapa__apps a:hover, .mapa__refs a:hover { color:var(--dark); border-color:var(--dark); }
+
+    /* marcador de la clínica: el logo en un círculo, con un pulso lento */
+    .mapa-pin { position:relative; width:64px; height:64px; cursor:default; }
+    .mapa-pin__disco {
+      position:absolute; inset:0; border-radius:50%;
+      background:var(--confort); border:1.5px solid var(--sage);
+      box-shadow:0 10px 24px -8px rgba(38,38,38,0.35);
+      display:grid; place-items:center;
+    }
+    .mapa-pin__disco img { width:40px; height:auto; }
+    .mapa-pin::before {
+      content:''; position:absolute; inset:-14px; border-radius:50%;
+      border:1px solid rgba(130,134,127,0.55);
+      animation:mapaPulso 3.2s var(--ease) infinite;
+    }
+    .mapa-pin__nombre {
+      position:absolute; top:74px; left:50%; transform:translateX(-50%); white-space:nowrap;
+      font-size:10px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--dark);
+      background:rgba(247,237,220,0.92); padding:4px 8px;
+    }
+    @keyframes mapaPulso { 0% { transform:scale(0.7); opacity:1; } 100% { transform:scale(1.35); opacity:0; } }
+    @media (prefers-reduced-motion: reduce) { .mapa-pin::before { animation:none; opacity:0.5; } }
+
+    .mapa-metro { display:flex; align-items:center; gap:7px; font-family:var(--font); }
+    .mapa-metro--izq { flex-direction:row-reverse; } /* en celular el nombre va a la izquierda: a la derecha están los controles */
+    .mapa-metro__m {
+      width:22px; height:22px; border-radius:50%; background:var(--dark); color:var(--confort);
+      font-size:11px; font-weight:600; display:grid; place-items:center;
+      box-shadow:0 0 0 3px rgba(247,237,220,0.9);
+    }
+    .mapa-metro__nombre { font-size:11px; font-weight:500; letter-spacing:0.04em; color:var(--dark); background:rgba(247,237,220,0.9); padding:3px 7px; }
+
+    /* controles de MapLibre con la piel de la página */
+    .mapa .maplibregl-ctrl-group { border-radius:0; box-shadow:none; border:1px solid rgba(130,134,127,0.3); background:rgba(247,237,220,0.95); }
+    .mapa .maplibregl-ctrl-group button { width:34px; height:34px; }
+    .mapa .maplibregl-ctrl-group button + button { border-top:1px solid rgba(130,134,127,0.25); }
+    .mapa .maplibregl-ctrl-attrib { font-family:var(--font); font-size:10px; background:rgba(247,237,220,0.85); }
+    .mapa .maplibregl-ctrl-attrib a { color:var(--texto-suave); }
+    .mapa .maplibregl-cooperative-gesture-screen { font-family:var(--font); font-size:15px; font-weight:300; background:rgba(38,38,38,0.55); }
+
+    @media (max-width:760px) {
+      .mapa { height:auto; min-height:0; margin-top:56px; }
+      .mapa .mapa__lienzo { position:relative; height:400px; inset:auto; }
+      .mapa__lienzo .maplibregl-canvas {
+        -webkit-mask-image:linear-gradient(transparent, #000 8%, #000 86%, transparent);
+                mask-image:linear-gradient(transparent, #000 8%, #000 86%, transparent);
+      }
+      .mapa__tarjeta, .mapa--tarjeta .mapa__tarjeta { position:relative; left:auto; top:auto; transform:none; width:auto; margin-top:0; }
+    }
+
     /* ═══════════════════════════════════════════
        FOOTER  — Formalidad
     ═══════════════════════════════════════════ */
@@ -1517,20 +1616,30 @@
             <div class="info-item__label">Cédula profesional</div>
             <div class="info-item__value">9177465 · 5574513</div>
           </div>
-          <!-- Mapa cuadrado -->
-          <div style="margin-top:24px; position:relative; overflow:hidden; aspect-ratio:1/1; border:1px solid rgba(130,134,127,0.2); border-top:2px solid var(--sage);">
-            <iframe
-              title="MET Clinic — Ubicación"
-              src="https://maps.google.com/maps?q=Guty+C%C3%A1rdenas+65%2C+Guadalupe+Inn%2C+01020+Ciudad+de+M%C3%A9xico&output=embed&z=16"
-              width="100%" height="100%"
-              style="position:absolute; inset:0; display:block; border:none; filter:grayscale(25%) contrast(1.05);"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-          <div style="margin-top:10px; font-size:12px; font-weight:300; color:rgba(38,38,38,0.78); letter-spacing:0.04em;">
-            Guty Cárdenas 65 · Guadalupe Inn · Álvaro Obregón · CDMX 01020
-          </div>
+        </div>
+      </div>
+
+      <!-- Mapa propio (MapLibre + teselas de OpenStreetMap vía OpenFreeMap, sin llave). main.js lo carga cuando
+           la sección se acerca a la pantalla; mientras tanto, y si no hay WebGL, queda la tarjeta con los enlaces.
+           Coordenadas: las mismas que geocodifica Google para la dirección (19.3580013, -99.1890269). -->
+      <div class="mapa reveal" id="mapa" data-lat="19.3580013" data-lng="-99.1890269">
+        <div class="mapa__lienzo" id="mapaLienzo" role="region" aria-label="Mapa de la ubicación de MET Clinic"></div>
+        <div class="mapa__tarjeta">
+          <img class="mapa__logo" src="images/web/met-positivo-03.webp" alt="" width="64" height="26">
+          <p class="mapa__eyebrow">Cómo llegar</p>
+          <p class="mapa__dir">Guty Cárdenas 65<br>Guadalupe Inn, Álvaro Obregón<br>CDMX 01020</p>
+          <ul class="mapa__refs">
+            <li><span class="mapa__m" aria-hidden="true">M</span>6 min a pie del Metro Barranca del Muerto · Línea 7</li>
+            <li><span class="mapa__m mapa__m--via" aria-hidden="true"></span>A una calle de Av. Revolución</li>
+            <li><a href="tel:+525540099923">55 4009 9923</a></li>
+          </ul>
+          <a class="btn-primary mapa__ir" id="mapaIr" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/dir/?api=1&amp;destination=MET+Clinic%2C+Guty+C%C3%A1rdenas+65%2C+Guadalupe+Inn%2C+01020+CDMX">Cómo llegar</a>
+          <p class="mapa__apps">Abrir en
+            <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Guty+C%C3%A1rdenas+65%2C+Guadalupe+Inn%2C+01020+CDMX">Google Maps</a> ·
+            <a target="_blank" rel="noopener" href="https://maps.apple.com/?q=MET+Clinic&amp;ll=19.3580013,-99.1890269&amp;address=Guty+C%C3%A1rdenas+65,+Guadalupe+Inn,+01020+CDMX">Apple Maps</a> ·
+            <a target="_blank" rel="noopener" href="https://waze.com/ul?ll=19.3580013,-99.1890269&amp;navigate=yes">Waze</a>
+          </p>
         </div>
       </div>
 

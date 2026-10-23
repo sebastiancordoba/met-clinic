@@ -61,6 +61,20 @@ Things worth knowing before editing:
   - Translucent dark text stays at alpha ≥ 0.75.
   - Check with axe-core before shipping color changes.
 
+### Mapa de #contacto (`#mapa` + IIFE en `main.js`)
+
+Mapa propio en lugar del iframe de Google: MapLibre GL 4.7.1 desde cdnjs y teselas vectoriales de OpenStreetMap
+servidas por OpenFreeMap (estilo `positron`, sin llave ni cuenta), recoloreado en `recolorear()` con la paleta.
+Se baja solo cuando la sección está a ~600 px (unos 210 KB comprimidos más teselas); sin WebGL o sin red queda la
+tarjeta con dirección y enlaces. La atribución de OpenStreetMap es obligatoria: no la quites.
+
+- Coordenadas de la clínica en `data-lat/data-lng` (las que geocodifica Google para la dirección). La ruta a pie desde
+  el Metro Barranca del Muerto está fija en `main.js` (OSRM peatón, 466 m).
+- "Cómo llegar" abre Apple Maps en iPhone/iPad/Mac y Google Maps en lo demás; abajo están las tres apps.
+- `cooperativeGestures`: la rueda y un dedo siguen moviendo la página; el mapa se mueve con Ctrl/⌘ o dos dedos.
+- Variante A (sin caja, se funde con el crema) por defecto; `?mapa=b` muestra la B (enmarcada) para comparar.
+  Quitar la que no se elija antes de publicar.
+
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 
 The trickiest piece. There are 6 real cards; the IIFE clones 2 in front and 3 behind for seamless looping, then auto-advances every 4s with a snap-back when it reaches the clone of card 0.
