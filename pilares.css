@@ -33,6 +33,9 @@
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+/* WCAG 2.4.11: al tabular o saltar a un ancla, lo enfocado no queda debajo del menú fijo (68 px) ni de la barra de celular */
+html { scroll-padding-top:76px; }
+@media (max-width:640px) { html { scroll-padding-bottom:84px; } }
 body { font-family:var(--font); color:var(--dark); background:var(--tranquil); overflow-x:hidden; max-width:100vw; }
 a { color:inherit; text-decoration:none; }
 ::-webkit-scrollbar { width:4px; }
