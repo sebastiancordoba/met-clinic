@@ -61,6 +61,18 @@ Things worth knowing before editing:
   - Translucent dark text stays at alpha ≥ 0.75.
   - Check with axe-core before shipping color changes.
 
+### Equipo y agenda (oct 2026)
+
+- **Equipo:** las tarjetas sin datos reales viven en `<template id="espPendientes">` y no se ven. `main.js` solo cuenta
+  las `.esp-card` de fuera; si queda una sola (hoy, la doctora) la pinta horizontal (`.esp-solo`). Para sumar a alguien,
+  saca su tarjeta del template con foto, nombre, cargo y bio reales. Nunca publiques «Espacio reservado».
+- **Agenda:** «Ver horarios disponibles aquí» en #contacto inserta el widget oficial de Doctoralia
+  (`platform.docplanner.com/js/widget.js`) **solo al hacer clic**: trae GTM, Amplitude y Sentry de Doctoralia, y no
+  deben cargar a quien no lo usa.
+- **Publicidad médica (COFEPRIS, RLGS en materia de publicidad):** la cédula va junto al nombre de la doctora (art. 19);
+  cada página de servicio cierra con `.pilar-aviso` (valoración previa, riesgos y contraindicaciones; art. 65). No
+  prometas resultados ni pongas antes/después sin consentimiento escrito para publicidad.
+
 ### Mapa de #contacto (`#mapa` + IIFE en `main.js`)
 
 Mapa propio en lugar del iframe de Google: MapLibre GL 4.7.1 desde cdnjs y teselas vectoriales de OpenStreetMap
