@@ -414,3 +414,30 @@ document.querySelectorAll('.drawer-link').forEach(a => {
     btn.textContent = pausado ? 'Reanudar' : 'Pausar';
   });
 })();
+
+
+/* ── Agenda de Doctoralia dentro de #contacto ───────────────────────────
+   El widget oficial (platform.docplanner.com) muestra los horarios libres de
+   la doctora y agenda sin salir de la página. Se inserta al pedirlo, no antes:
+   carga analítica de terceros y pesa. */
+(function () {
+  const btn = document.getElementById('agendaAbrir');
+  const caja = document.getElementById('agendaCaja');
+  if (!btn || !caja) return;
+  btn.addEventListener('click', () => {
+    const abierta = !caja.hidden;
+    caja.hidden = abierta;
+    btn.setAttribute('aria-expanded', String(!abierta));
+    btn.textContent = abierta ? 'Ver horarios disponibles aquí' : 'Ocultar horarios';
+    if (abierta || caja.dataset.cargada) return;
+    caja.dataset.cargada = '1';
+    caja.innerHTML = '<a id="zl-url" class="zl-url" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico"'
+      + ' rel="nofollow" data-zlw-doctor="melina-trujillo-quiroz" data-zlw-type="big_with_calendar" data-zlw-opinion="false"'
+      + ' data-zlw-hide-branding="true" data-zlw-saas-only="false" data-zlw-a11y-title="Agenda de citas de la Dra. Melina Trujillo">'
+      + 'Agenda de la Dra. Melina Trujillo en Doctoralia</a>';
+    const s = document.createElement('script');
+    s.id = 'zl-widget-s';
+    s.src = 'https://platform.docplanner.com/js/widget.js';
+    document.body.appendChild(s);
+  });
+})();
