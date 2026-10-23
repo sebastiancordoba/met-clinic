@@ -487,7 +487,15 @@
       mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
     }
     .tech-track { display:flex; width:max-content; align-items:center; animation:techScroll 40s linear infinite; }
-    .tech-marquee:hover .tech-track { animation-play-state:paused; }
+    .tech-marquee:hover .tech-track, .tech-marquee:focus-within .tech-track, .tech-marquee.pausado .tech-track { animation-play-state:paused; }
+    /* WCAG 2.2.2: lo que se mueve más de 5 s necesita cómo pararlo; el hover no existe en celular ni con teclado */
+    .tech-pausa {
+      display:block; margin:clamp(16px,2vw,24px) auto 0; min-height:24px; padding:4px 10px;
+      background:none; border:none; cursor:pointer;
+      font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--texto-suave);
+    }
+    .tech-pausa:hover { color:var(--dark); }
+    @media (prefers-reduced-motion: reduce){ .tech-pausa { display:none; } }
     .tech-item {
       display:flex; align-items:center; flex-shrink:0;
       padding:0 clamp(26px,3.5vw,54px);
@@ -1375,6 +1383,7 @@
         <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/exomind.png" alt=""></span>
       </div>
     </div>
+    <button type="button" class="tech-pausa" aria-pressed="false">Pausar</button>
   </section>
 
   <!-- ══ ESPECIALISTAS ══ -->

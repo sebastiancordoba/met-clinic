@@ -398,3 +398,16 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   }, { rootMargin: '600px 0px' });
   io.observe(caja);
 })();
+
+
+/* ── Pausa de la barra de tecnologías ───────────────────────────────────── */
+(function () {
+  const btn = document.querySelector('.tech-pausa');
+  const barra = document.querySelector('.tech-marquee');
+  if (!btn || !barra) return;
+  btn.addEventListener('click', () => {
+    const pausado = barra.classList.toggle('pausado');
+    btn.setAttribute('aria-pressed', String(pausado));
+    btn.textContent = pausado ? 'Reanudar' : 'Pausar';
+  });
+})();
