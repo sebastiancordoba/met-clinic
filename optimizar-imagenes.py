@@ -43,7 +43,11 @@ TRABAJOS = [
     # Mosaico "La clínica" de la portada (sesión de septiembre). Las verticales
     # se pintan a ~360 px de ancho; 900 cubre retina con margen.
     # Logo de asociación: el PNG original mide 4784 px y se pinta a ~72 px de alto.
-    ("images/asoc/solapav.png",                         "asoc-solapav.webp",        480, 90),
+    # Se pinta a ~38 px de alto (105 de ancho): 320 cubre 3x.
+    ("images/asoc/solapav.png",                         "asoc-solapav.webp",        320, 90),
+    ("images/asoc/a4m.png",                             "asoc-a4m.webp",            250, 90),
+    # Logo de la barra de tecnologías (~30 px de alto). xwave.png se queda en PNG: en WebP pesaba más.
+    ("images/tech/healite.png",                         "tech-healite.webp",        300, 90),
     ("images/clinica/recepcion.jpg",                    "clinica-recepcion.webp",   900, 80),
     ("images/clinica/detalle-tratamiento.jpg",          "clinica-detalle.webp",     900, 80),
     ("images/clinica/consultorio-ultrasonido.jpg",      "clinica-consultorio.webp", 900, 80),
