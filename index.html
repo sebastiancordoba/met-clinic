@@ -557,8 +557,21 @@
     .esp-name { font-family:var(--font); font-weight:300; font-size:clamp(19px,1.5vw,25px); line-height:1.1; letter-spacing:-0.01em; margin-bottom:8px; }
     .esp-role { font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--texto-suave); line-height:1.4; margin-bottom:14px; }
     .esp-bio { font-size:13.5px; font-weight:300; line-height:1.55; color:rgba(38,38,38,0.78); margin-bottom:18px; }
-    .esp-cedula { font-size:12px; font-weight:400; letter-spacing:0.04em; color:var(--texto-suave); margin-top:10px; } /* RLGS Publicidad art. 19: el número de cédula va junto al nombre del médico */
+    .esp-cedula { font-size:12px; font-weight:400; letter-spacing:0.04em; color:var(--texto-suave); margin:-6px 0 16px; } /* RLGS Publicidad art. 19: el número de cédula va junto al nombre del médico */
     .esp-social { display:flex; gap:14px; }
+    /* una sola tarjeta (las demás siguen pendientes): destacada, foto a un lado y texto al otro */
+    .esp-solo .esp-page { grid-template-columns:1fr !important; }
+    .esp-solo .esp-card { flex-direction:row; max-width:920px; }
+    .esp-solo .esp-card:hover { transform:none; }
+    .esp-solo .esp-photo { flex:0 0 40%; aspect-ratio:4/5; }
+    .esp-solo .esp-body { display:flex; flex-direction:column; justify-content:center; padding:clamp(28px,4.5vw,64px); }
+    .esp-solo .esp-name { font-size:clamp(26px,2.6vw,38px); }
+    .esp-solo .esp-bio { display:block; font-size:16px; max-width:440px; }
+    @media (max-width:640px) {
+      .esp-solo .esp-card { flex-direction:column; }
+      .esp-solo .esp-photo { flex:none; aspect-ratio:1/1; }
+      .esp-solo .esp-body { padding:22px 20px 26px; }
+    }
     .esp-social a { color:rgba(38,38,38,0.78); transition:color 0.3s; display:flex; }
     .esp-social a:hover { color:var(--sage); }
     @media (max-width:640px){
@@ -1420,7 +1433,10 @@
               </div>
             </article>
 
-            <!-- TODO: reemplazar con especialistas reales (foto + nombre + rol + bio) -->
+            <!-- Tarjetas pendientes: ocultas hasta tener nombre, cargo, foto y bio reales (dejar «Espacio reservado»
+                 a la vista se ve a medio hacer). Para mostrarlas, sácalas de este <template>; main.js solo cuenta las
+                 .esp-card que están fuera y, si queda una sola, la pinta como tarjeta destacada (.esp-solo). -->
+            <template id="espPendientes">
             <article class="esp-card">
               <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
               <div class="esp-body">
@@ -1456,6 +1472,7 @@
                 </div>
               </div>
             </article>
+            </template>
 
           </div>
         </div>

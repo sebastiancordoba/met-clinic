@@ -163,7 +163,9 @@ document.querySelectorAll('.drawer-link').forEach(a => {
 (function () {
   const track = document.getElementById('espTrack');
   if (!track) return;
-  const cards = [...track.children];           // lista maestra (referencias persistentes)
+  const cards = [...track.children].filter(c => c.classList.contains('esp-card')); // lista maestra; sin las del <template>
+  const solo = cards.length === 1;
+  track.closest('.esp-carousel').classList.toggle('esp-solo', solo);
   const prev = document.getElementById('espPrev');
   const next = document.getElementById('espNext');
   const dotsWrap = document.getElementById('espDots');
@@ -171,6 +173,7 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   let idx = 0, pages = [], perView = 0;
 
   function calcPer() {
+    if (solo) return 1;
     const w = window.innerWidth;
     if (w <= 640) return 2;
     if (w <= 1000) return 3;
