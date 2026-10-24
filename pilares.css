@@ -198,7 +198,7 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .footer-grid { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
 .footer-logo { height:96px; width:auto; opacity:0.85; margin-bottom:20px; display:block; }
 .footer-tagline { font-size:14px; font-weight:300; letter-spacing:0.06em; color:rgba(247,237,220,0.55); line-height:1.8; }
-.footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,237,220,0.72); margin-bottom:18px; }
+.footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,237,220,0.78); margin-bottom:18px; }
 .footer-col__links { list-style:none; display:flex; flex-direction:column; gap:11px; }
 .footer-col__links a { font-size:14px; font-weight:300; color:rgba(247,237,220,0.65); letter-spacing:0.04em; transition:color 0.3s; }
 .footer-col__links a:hover { color:var(--confort); }
@@ -242,7 +242,8 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
   .barra-movil__wa { border:1px solid var(--sage); color:var(--dark); }
   .barra-movil__wa svg { width:16px; height:16px; fill:var(--sage); }
   .barra-movil__cita { background:var(--dark); color:var(--confort); }
-  body { padding-bottom:calc(66px + env(safe-area-inset-bottom)); }
+  /* El hueco para la barra va en el pie y no en el body: así no queda una franja blanca bajo el pie. */
+  footer { padding-bottom:calc(36px + 66px + env(safe-area-inset-bottom)); }
 }
 
 /* ── Preguntas frecuentes ── */
