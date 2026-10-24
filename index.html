@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MET Clinic · Ginecología Estética y Antiaging en CDMX</title>
 
-  <link rel="preload" as="image" href="images/web/hero-poster.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/web/hero-poster.webp" fetchpriority="high" media="(min-width:641px)">
+  <link rel="preload" as="image" href="images/web/hero-poster-movil.webp" fetchpriority="high" media="(max-width:640px)">
   <style>
     /* ── Fuentes ── */
     @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-100.woff2') format('woff2'); font-weight:100; font-display:swap; }
@@ -27,6 +28,9 @@
          El salvia sobre crema da 3.2:1 y el texto chico necesita 4.5:1; éste da 6.8:1.
          El salvia queda para títulos grandes, acentos, líneas e íconos. */
       --texto-suave: #515151;
+      /* Alto de la barra fija de contacto en el teléfono, sin la zona segura:
+         10 + 46 (botón) + 10 de relleno y 1 de borde. Lo descuenta .portada. */
+      --barra-h:     67px;
       --sage-light:  rgba(130,134,127,0.10);
       --sage-mid:    rgba(130,134,127,0.25);
       --dark:        #262626;
@@ -141,12 +145,22 @@
     /* ═══════════════════════════════════════════
        HERO
     ═══════════════════════════════════════════ */
-    .hero {
-      position:relative;
+    /* Portada = video + barra de datos, y las dos caben en la primera
+       pantalla: la barra se ve entera sin desplazar y el video, más bajo,
+       se amplía menos. svh y no dvh: es el alto CON las barras de Safari
+       visibles, así que en iPhone la barra de datos no queda debajo de ellas
+       al entrar. En el teléfono también se descuenta la barra fija de
+       contacto (--barra-h). */
+    .portada {
       margin-top:68px;
       height:calc(100vh - 68px);
-      height:calc(100dvh - 68px);
-      min-height:512px;
+      height:calc(100svh - 68px);
+      min-height:560px;
+      display:flex; flex-direction:column;
+    }
+    .hero {
+      position:relative;
+      flex:1; min-height:360px;
       display:flex; flex-direction:column;
       overflow:hidden;
       background:var(--confort);
@@ -170,6 +184,11 @@
       animation:none; transform:none;
       background-image:url('images/web/hero-poster.webp');
     }
+    /* En el teléfono, el cuadro vertical (720×1080, el mismo del video para
+       celular): el horizontal de 1600 px se recortaba a ~500 px y se estiraba. */
+    @media (max-width:640px) {
+      .hero__media--video { background-image:url('images/web/hero-poster-movil.webp'); }
+    }
     @keyframes heroDrift {
       from { transform:scale(1.06) translate3d(0, 0, 0); }
       to   { transform:scale(1.15) translate3d(-1.6%, -1.8%, 0); }
@@ -182,22 +201,26 @@
        video enseña. Ahora el texto vive en la franja inferior y el velo sólo
        la cubre a ella: los dos tercios de arriba son video limpio.
        Crema y no oscuro: el sitio se queda en la paleta clara de marca. */
+    /* Medido en px desde abajo y no en % del alto: el texto mide lo mismo
+       aunque el hero sea más bajo (ahora comparte pantalla con la barra de
+       datos), y con % el velo se quedaba debajo del título en pantallas
+       bajas. min() lo limita en las muy bajas. */
     .hero__overlay {
       position:absolute; inset:0; z-index:0;
-      background:linear-gradient(180deg,
-        rgba(247,237,220,0) 0%,
-        rgba(247,237,220,0) 34%,
-        rgba(247,237,220,0.62) 56%,
-        rgba(247,237,220,0.9) 78%,
-        rgba(247,237,220,0.95) 100%);
+      background:linear-gradient(0deg,
+        rgba(247,237,220,0.95) 0,
+        rgba(247,237,220,0.9) min(180px, 30%),
+        rgba(247,237,220,0.62) min(360px, 55%),
+        rgba(247,237,220,0) min(540px, 80%));
     }
-    /* En móvil el texto apilado ocupa más alto, así que el velo empieza antes. */
+    /* En móvil el texto apilado ocupa más alto, así que el velo sube más. */
     @media (max-width:640px) {
       .hero__overlay {
-        background:linear-gradient(180deg,
-          rgba(247,237,220,0) 0%, rgba(247,237,220,0) 30%,
-          rgba(247,237,220,0.6) 50%, rgba(247,237,220,0.92) 70%,
-          rgba(247,237,220,0.95) 100%);
+        background:linear-gradient(0deg,
+          rgba(247,237,220,0.95) 0,
+          rgba(247,237,220,0.92) min(230px, 45%),
+          rgba(247,237,220,0.6) min(350px, 70%),
+          rgba(247,237,220,0) min(500px, 95%));
       }
     }
     .hero__content {
@@ -1165,7 +1188,12 @@
       .nav__marca { position: absolute; left: 50%; transform: translateX(-50%); }
 
       /* Hero */
-      .hero { height:calc(100vh - 68px); height:calc(100dvh - 68px); min-height:480px; }
+      .portada {
+        height:calc(100vh - 68px - var(--barra-h));
+        height:calc(100svh - 68px - var(--barra-h) - env(safe-area-inset-bottom));
+        min-height:480px;
+      }
+      .hero { min-height:340px; }
       .hero__media { background-attachment: scroll; }
       .hero__content { padding:0 24px clamp(24px,4vh,40px); }
       .hero__eyebrow { font-size:10px; letter-spacing:0.22em; margin-bottom:clamp(8px,1.4vh,14px); }
@@ -1243,7 +1271,6 @@
       .barra-movil__cita { background:var(--dark); color:var(--confort); }
       /* El hueco para la barra va en el pie y no en el body: así no queda una franja blanca bajo el pie. */
       footer { padding-bottom:calc(32px + 66px + env(safe-area-inset-bottom)); }
-      .hero__content { padding-bottom:calc(32px + 66px); }
     }
   </style>
 
@@ -1413,6 +1440,7 @@
 
   <main id="contenido">
   <!-- ══ HERO ══ -->
+  <div class="portada">
   <section class="hero" id="hero">
     <!-- Video del hero: 11 s de la clínica, 1280×720, sin audio, ~1.2 MB.
          Sale de optimizar-video.sh; el original no vive en el repo.
@@ -1438,7 +1466,8 @@
       </div>
     </div>
   </section>
-  <!-- Barra de datos: debajo del hero y no dentro, para no tapar el video. -->
+  <!-- Barra de datos: debajo del hero y no dentro, para no tapar el video.
+       Comparte .portada con él para que se vea completa al entrar. -->
     <div class="hero__stats" aria-label="MET Clinic en números">
       <div class="hero__stat">
         <div class="hero__stat__num" data-count="1366" data-suffix="+">0</div>
@@ -1456,6 +1485,7 @@
         <div class="hero__stat__sub">UNAM · IVI · DEXEUS</div>
       </div>
     </div>
+  </div>
 
   <!-- ══ ASOCIACIONES ══ -->
   <section id="asociaciones">

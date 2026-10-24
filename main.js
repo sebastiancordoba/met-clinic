@@ -233,8 +233,10 @@ document.querySelectorAll('.drawer-link').forEach(a => {
    - quien tiene `prefers-reduced-motion` se queda con el póster fijo;
    - quien tiene ahorro de datos (`saveData`) no paga el video de fondo;
    - la primera pintura no compite con el video por la conexión.
-   Hay cuatro versiones (ver optimizar-video.sh) y se baja solo una:
-   recorte vertical si la pantalla es alta y angosta, 1080p si no; AV1 si el
+   Hay cuatro versiones (ver optimizar-video.sh) y se baja solo una. En el
+   teléfono, el recorte vertical (pesa la tercera parte). En lo demás, la que
+   se amplíe menos en el recuadro real del hero: en un iPad vertical el
+   1080p recortado conserva más detalle que el vertical estirado. AV1 si el
    navegador lo decodifica, H.264 si no.
    Si el navegador bloquea el autoplay, play() rechaza y queda el póster. */
 (function () {
@@ -243,7 +245,9 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ahorro = navigator.connection && navigator.connection.saveData;
   if (menosMovimiento || ahorro) return;
-  const vertical = window.matchMedia('(max-aspect-ratio: 2/3)').matches;
+  const caja = v.parentElement.getBoundingClientRect();
+  const zoom = (w, h) => Math.max(caja.width / w, caja.height / h);
+  const vertical = window.matchMedia('(max-width: 640px)').matches || zoom(720, 1080) < zoom(1920, 1080);
   const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
   const arrancar = () => {
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';

@@ -10,6 +10,7 @@
 #   video/hero-movil.av1.mp4      720x1080, AV1,   ~1.5 MB  celular vertical
 #   video/hero-movil.mp4          720x1080, H.264, ~1.9 MB  celular vertical, el resto (casi todo iPhone)
 #   images/web/hero-poster.webp  un cuadro del propio video, ~75 KB
+#   images/web/hero-poster-movil.webp  el mismo cuadro en vertical 720x1080, ~50 KB
 #
 # main.js elige cuál bajar; solo se descarga uno.
 #
@@ -65,8 +66,12 @@ ffmpeg -v error -y -ss 4.0 -i "$SRC" -frames:v 1 -vf "$FILTRO,scale=1600:-2" "$T
 python3 -c "
 from PIL import Image
 Image.open('$TMP').convert('RGB').save('images/web/hero-poster.webp', 'WEBP', quality=78, method=6)"
+ffmpeg -v error -y -ss 4.0 -i "$SRC" -frames:v 1 -vf "$VERTICAL" "$TMP"
+python3 -c "
+from PIL import Image
+Image.open('$TMP').convert('RGB').save('images/web/hero-poster-movil.webp', 'WEBP', quality=80, method=6)"
 rm -f "$TMP"
 
-for f in video/hero-*.mp4 images/web/hero-poster.webp; do
+for f in video/hero-*.mp4 images/web/hero-poster*.webp; do
   printf '%6d KB  %s\n' $(( $(stat -f%z "$f") / 1024 )) "$f"
 done
