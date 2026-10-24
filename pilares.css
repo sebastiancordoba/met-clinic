@@ -291,3 +291,9 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .footer-social a:hover { color:var(--confort); border-color:rgba(247,237,220,0.4); }
 .footer-social a svg { flex-shrink:0; opacity:0.75; }
 @media (max-width:640px) { .footer-social { gap:8px; } .footer-social a { padding:9px 10px; font-size:11px; letter-spacing:0.08em; gap:6px; } }
+
+/* Subtítulos con el mismo acento que la portada: segunda línea en Larken salvia,
+   y la línea corta antes de cada kicker. */
+.pilar-intro h2 em, .treatments__head h2 em, .pilar-faq h2 em { font-family:'Larken','Times New Roman',serif; font-style:normal; font-weight:300; font-synthesis:none; letter-spacing:-0.01em; color:var(--sage); }
+.pilar-intro__kicker { display:flex; align-items:center; gap:12px; }
+.pilar-intro__kicker::before { content:''; width:20px; height:1px; background:var(--sage); opacity:0.6; flex:none; }
