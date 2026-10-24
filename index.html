@@ -853,6 +853,34 @@
     /* ═══════════════════════════════════════════
        CONTACTO  — Tranquilidad
     ═══════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════
+       PREGUNTAS FRECUENTES  — Tranquil (entre Contacto en confort y el footer)
+       Solo datos verificados: precios y pagos salen del perfil de Doctoralia
+       (oct-2026). Si cambia una respuesta, cámbiala también en el JSON-LD FAQPage.
+    ═══════════════════════════════════════════ */
+    #preguntas { background:var(--tranquil); border-top:1px solid rgba(130,134,127,0.2); }
+    .faq-grid { display:grid; grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr); gap:clamp(32px,6vw,96px); align-items:start; }
+    .faq-lado { position:sticky; top:110px; }
+    .faq-lado p { font-size:15px; font-weight:300; line-height:1.7; color:var(--texto-suave); max-width:34ch; }
+    .faq-lado a { color:var(--dark); text-decoration:none; border-bottom:1px solid var(--sage); }
+    .faq-lista { border-top:1px solid rgba(130,134,127,0.25); }
+    .faq-lista details { border-bottom:1px solid rgba(130,134,127,0.25); }
+    .faq-lista summary {
+      list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:24px;
+      padding:22px 0; font-size:clamp(16px,1.3vw,19px); font-weight:400; line-height:1.35; color:var(--dark);
+    }
+    .faq-lista summary::-webkit-details-marker { display:none; }
+    .faq-lista summary::after { content:'+'; font-family:'Larken','Times New Roman',serif; font-size:26px; font-weight:300; color:var(--sage); transition:transform 0.3s var(--ease); flex-shrink:0; }
+    .faq-lista details[open] summary::after { transform:rotate(45deg); }
+    .faq-lista summary:focus-visible { outline:2px solid var(--dark); outline-offset:4px; }
+    .faq-lista details p { margin:0; padding:0 48px 24px 0; font-size:15px; font-weight:300; line-height:1.75; color:rgba(38,38,38,0.78); }
+    .faq-lista details a { color:var(--dark); text-decoration:none; border-bottom:1px solid var(--sage); }
+    @media (max-width:760px){
+      .faq-grid { grid-template-columns:1fr; gap:28px; }
+      .faq-lado { position:static; }
+      .faq-lista details p { padding-right:8px; }
+    }
+
     #contacto {
       background:var(--confort);
       border-top:1px solid rgba(130,134,127,0.18);
@@ -1246,6 +1274,70 @@
   "sameAs": [
     "https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico",
     "https://www.instagram.com/metclinic.mx"
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta la primera consulta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Desde $2,100 MXN en la clínica y desde $1,500 MXN en línea. Son precios para pacientes sin aseguradora y pueden variar según el caso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo consultar en línea?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Agenda la consulta online en Doctoralia: al menos 30 minutos antes te llega por SMS y correo el enlace para entrar desde tu teléfono o tu computadora."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué formas de pago aceptan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Efectivo, transferencia y tarjeta de crédito o débito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Aceptan seguro de gastos médicos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La clínica trabaja con GNP, AXA, MetLife, Seguros Monterrey, Seguros Banorte, Quálitas, BBVA Seguros y PIF. La cobertura depende de tu póliza y del servicio: confírmala al agendar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Necesito una valoración antes de un tratamiento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Todo tratamiento empieza con una valoración médica con la Dra. Melina Trujillo, en la que te explica beneficios, riesgos y contraindicaciones, y diseña contigo un plan para tu etapa."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Dónde está la clínica y cómo llego?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Guty Cárdenas 65, Col. Guadalupe Inn, Álvaro Obregón, CDMX 01020: a 6 minutos a pie del Metro Barranca del Muerto (Línea 7) y a una calle de Av. Revolución."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo agendo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "En Doctoralia, donde ves los horarios libres y confirmas al momento, o por WhatsApp al 55 4009 9923."
+      }
+    }
   ]
 }
   </script>
@@ -1711,6 +1803,50 @@
     </div>
   </section>
 
+  <!-- ══ PREGUNTAS FRECUENTES ══
+       Solo datos verificados (perfil de Doctoralia, oct-2026, y lo que ya dice esta página).
+       No agregar horarios, estacionamiento ni datos médicos sin confirmarlos con la clínica.
+       Si cambia una respuesta, cámbiala también en el JSON-LD FAQPage del <head>. -->
+  <section id="preguntas" aria-labelledby="preguntas-titulo">
+    <div class="section-inner faq-grid">
+      <div class="faq-lado">
+        <p class="eyebrow reveal">Preguntas frecuentes</p>
+        <h2 id="preguntas-titulo" class="reveal d1">Antes de<br><em>tu cita.</em></h2>
+        <p class="reveal d2">¿Tienes otra duda? Escríbenos por <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a> y te responde el equipo de la clínica.</p>
+      </div>
+      <div class="faq-lista reveal d2">
+          <details>
+            <summary>¿Cuánto cuesta la primera consulta?</summary>
+            <p>Desde $2,100 MXN en la clínica y desde $1,500 MXN en línea. Son precios para pacientes sin aseguradora y pueden variar según el caso.</p>
+          </details>
+          <details>
+            <summary>¿Puedo consultar en línea?</summary>
+            <p>Sí. Agenda la consulta online en <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>: al menos 30 minutos antes te llega por SMS y correo el enlace para entrar desde tu teléfono o tu computadora.</p>
+          </details>
+          <details>
+            <summary>¿Qué formas de pago aceptan?</summary>
+            <p>Efectivo, transferencia y tarjeta de crédito o débito.</p>
+          </details>
+          <details>
+            <summary>¿Aceptan seguro de gastos médicos?</summary>
+            <p>La clínica trabaja con GNP, AXA, MetLife, Seguros Monterrey, Seguros Banorte, Quálitas, BBVA Seguros y PIF. La cobertura depende de tu póliza y del servicio: confírmala al agendar.</p>
+          </details>
+          <details>
+            <summary>¿Necesito una valoración antes de un tratamiento?</summary>
+            <p>Sí. Todo tratamiento empieza con una valoración médica con la Dra. Melina Trujillo, en la que te explica beneficios, riesgos y contraindicaciones, y diseña contigo un plan para tu etapa.</p>
+          </details>
+          <details>
+            <summary>¿Dónde está la clínica y cómo llego?</summary>
+            <p>En Guty Cárdenas 65, Col. Guadalupe Inn, Álvaro Obregón, CDMX 01020: a 6 minutos a pie del Metro Barranca del Muerto (Línea 7) y a una calle de Av. Revolución. <a href="#mapa">Ver el mapa</a>.</p>
+          </details>
+          <details>
+            <summary>¿Cómo agendo?</summary>
+            <p>En <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>, donde ves los horarios libres y confirmas al momento, o por <a href="https://wa.me/525540099923?text=Hola%2C%20quiero%20agendar%20una%20consulta" target="_blank" rel="noopener">WhatsApp al 55 4009 9923</a>.</p>
+          </details>
+      </div>
+    </div>
+  </section>
+
   <!-- ══ FOOTER ══ -->
   </main>
 
@@ -1728,6 +1864,7 @@
           <li><a href="#clinica">La clínica</a></li>
           <li><a href="#testimonios">Opiniones</a></li>
           <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
         </ul>
       </div>
       <div>
