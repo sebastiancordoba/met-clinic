@@ -277,3 +277,16 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 }
 /* Con la foto al lado, el título tiene menos ancho: «Rejuvenecimiento» se salía de su columna. */
 .pilar-hero--foto .pilar-hero__title { font-size:clamp(38px,4.2vw,62px); }
+
+/* Pie: dirección completa y los mismos tres enlaces que la portada */
+.footer-tagline a { color:inherit; border-bottom:1px solid rgba(247,237,220,0.25); }
+.footer-social { display:flex; gap:12px; align-items:center; flex-wrap:wrap; justify-content:center; }
+.footer-social a {
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(247,237,220,0.72); padding:9px 14px; border:1px solid rgba(247,237,220,0.16);
+  transition:color 0.3s, border-color 0.3s;
+}
+.footer-social a:hover { color:var(--confort); border-color:rgba(247,237,220,0.4); }
+.footer-social a svg { flex-shrink:0; opacity:0.75; }
+@media (max-width:640px) { .footer-social { gap:8px; } .footer-social a { padding:9px 10px; font-size:11px; letter-spacing:0.08em; gap:6px; } }
