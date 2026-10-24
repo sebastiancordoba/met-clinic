@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MET Clinic · Ginecología Estética y Antiaging en CDMX</title>
 
+  <link rel="preload" as="image" href="images/web/hero-poster.webp" fetchpriority="high">
   <style>
     /* ── Fuentes ── */
     @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-100.woff2') format('woff2'); font-weight:100; font-display:swap; }
@@ -1385,10 +1386,12 @@
          El <video> NO lleva src: main.js se lo pone sólo si quien visita no
          pidió menos movimiento ni ahorro de datos. Así la primera pintura no
          espera al video, y el póster (que es un cuadro del propio video) se
-         ve desde el primer instante. -->
+         ve desde el primer instante.
+         El póster va como fondo del <div> (precargado arriba) y NO como atributo
+         poster del <video>: así el LCP en celular baja de 2.9 a 2.5 s (Lighthouse,
+         3 corridas cada uno, 24-oct-2026). El video sin datos es transparente. -->
     <div class="hero__media hero__media--video" aria-hidden="true">
       <video muted loop playsinline preload="none"
-             poster="images/web/hero-poster.webp"
              data-base="video/hero"></video>
     </div>
     <div class="hero__overlay"></div>
