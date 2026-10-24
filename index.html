@@ -670,6 +670,7 @@
     }
     .proceso-header .body-text { font-size:15px; max-width:none; }
     .proceso-steps {
+      list-style:none; margin:0; padding:0;
       display:grid; grid-template-columns:repeat(4,1fr);
       gap:0;
       border-top:1px solid rgba(130,134,127,0.28);
@@ -719,7 +720,12 @@
       .proceso-step { border-right:none !important; border-bottom:1px solid rgba(130,134,127,0.18); padding:28px 8px 32px; }
       .proceso-step:last-child { border-bottom:none; }
       .proceso-step__num { font-size:38px; margin-bottom:16px; }
+      /* En el teléfono, número a la izquierda y texto a la derecha: la mitad de alto */
+      .proceso-step { display:grid; grid-template-columns:52px 1fr; column-gap:14px; padding:24px 4px 26px; }
+      .proceso-step__num { grid-row:span 2; font-size:34px; margin:0; }
+      .proceso-step__title { margin-bottom:8px; }
     }
+    .proceso-step__desc a { color:var(--dark); text-decoration:none; border-bottom:1px solid var(--sage); }
 
     /* ═══════════════════════════════════════════
        ASOCIACIONES  — Confort (thin strip)
@@ -1652,28 +1658,29 @@
         </div>
         <p class="body-text reveal d2">Cuatro pasos. Cero protocolos genéricos.</p>
       </div>
-      <div class="proceso-steps">
-        <div class="proceso-step reveal">
+      <!-- El recorrido real de una paciente. Precios y modalidades: perfil de Doctoralia (oct-2026). -->
+      <ol class="proceso-steps">
+        <li class="proceso-step reveal">
           <div class="proceso-step__num">01</div>
-          <div class="proceso-step__title">Diagnóstico</div>
-          <div class="proceso-step__desc">Te escuchamos y evaluamos a fondo.</div>
-        </div>
-        <div class="proceso-step reveal d1">
+          <div class="proceso-step__title">Agenda</div>
+          <div class="proceso-step__desc">En <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a> o por <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a>, en la clínica o en línea. Primera consulta desde $2,100 MXN.</div>
+        </li>
+        <li class="proceso-step reveal d1">
           <div class="proceso-step__num">02</div>
-          <div class="proceso-step__title">Plan</div>
-          <div class="proceso-step__desc">Un protocolo diseñado solo para ti.</div>
-        </div>
-        <div class="proceso-step reveal d2">
+          <div class="proceso-step__title">Valoración</div>
+          <div class="proceso-step__desc">Con la Dra. Melina Trujillo: te escucha, te explora y te explica beneficios, riesgos y contraindicaciones de cada opción.</div>
+        </li>
+        <li class="proceso-step reveal d2">
           <div class="proceso-step__num">03</div>
-          <div class="proceso-step__title">Tratamiento</div>
-          <div class="proceso-step__desc">Tecnología de punta, manos expertas.</div>
-        </div>
-        <div class="proceso-step reveal d3">
+          <div class="proceso-step__title">Plan y tratamiento</div>
+          <div class="proceso-step__desc">Un protocolo para tu etapa, con la tecnología que de verdad necesitas, en consultorios y cabinas privadas.</div>
+        </li>
+        <li class="proceso-step reveal d3">
           <div class="proceso-step__num">04</div>
           <div class="proceso-step__title">Seguimiento</div>
-          <div class="proceso-step__desc">Acompañamos tu evolución.</div>
-        </div>
-      </div>
+          <div class="proceso-step__desc">Revisamos tu evolución en consultas de seguimiento y ajustamos el plan contigo.</div>
+        </li>
+      </ol>
     </div>
   </section>
 
