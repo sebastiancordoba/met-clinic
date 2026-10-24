@@ -144,6 +144,14 @@ def generar_og() -> None:
     print(f"  {d.stat().st_size // 1024:>5} KB  og-metclinic.jpg (1200x630)")
 
 
+# Recortes antes de reducir, en fracciones (izq, arriba, der, abajo). Algunas
+# fotos de servicio son láminas de presentación con texto quemado a la derecha:
+# sobre la tarjeta ese texto se encimaba con el título en el teléfono.
+RECORTES = {
+    "servicio-oshot-prp.webp": (0, 0, 0.62, 1),
+}
+
+
 def main() -> None:
     SALIDA.mkdir(parents=True, exist_ok=True)
     antes = despues = 0
@@ -153,6 +161,9 @@ def main() -> None:
             print(f"  ✗ falta {origen}")
             continue
         im = Image.open(o)
+        if destino in RECORTES:
+            l, t, r, b = RECORTES[destino]
+            im = im.crop((round(l * im.width), round(t * im.height), round(r * im.width), round(b * im.height)))
         if im.width > ancho:
             im = im.resize((ancho, round(im.height * ancho / im.width)), Image.LANCZOS)
         d = SALIDA / destino

@@ -424,6 +424,11 @@
       background:url('images/web/servicio-oshot-prp.webp') center/cover;
       transition:transform 0.5s var(--ease);
     }
+    /* La foto (recortada, ~725 px) se pinta entera a la derecha; el resto lo cubre el gris
+       de su propio fondo desenfocado, para no estirarla y que no se vea borrosa. */
+    @media (min-width:761px){ .serv-firma::before {
+      background:linear-gradient(90deg, #bdbdbd 42%, rgba(189,189,189,0) 60%),
+                 url('images/web/servicio-oshot-prp.webp') right center/58% auto no-repeat, #bdbdbd; } }
     .serv-firma:hover::before { transform:scale(1.04); }
     .serv-firma::after {
       content:''; position:absolute; inset:0; z-index:0;
