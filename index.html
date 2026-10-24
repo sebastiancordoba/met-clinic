@@ -759,9 +759,16 @@
       filter: brightness(0); opacity: 0.4; transition: opacity 0.3s;
     }
     .asoc-item:hover .asoc-logo { opacity: 0.65; }
+    .asoc-dra { display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--dark); padding-right:40px; margin-right:auto; border-right:1px solid rgba(130,134,127,0.2); }
+    .asoc-dra__foto { width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 18%; flex:none; border:1px solid rgba(130,134,127,0.25); }
+    .asoc-dra__texto { display:flex; flex-direction:column; gap:3px; font-size:13px; font-weight:300; line-height:1.4; color:var(--texto-suave); }
+    .asoc-dra__texto strong { font-size:15px; font-weight:400; color:var(--dark); }
+    .asoc-dra__ced { font-size:11.5px; letter-spacing:0.02em; }
+    .asoc-dra:hover strong { color:var(--sage); }
     @media (max-width: 640px) {
       .asociaciones-inner { padding: 20px; gap: 16px 0; flex-wrap: wrap; }
       .asoc-label { width: 100%; }
+      .asoc-dra { width:100%; padding:0 0 16px; margin:0; border-right:none; border-bottom:1px solid rgba(130,134,127,0.2); }
       .asoc-item { padding: 4px 22px; }
     }
 
@@ -1441,6 +1448,13 @@
   <!-- ══ ASOCIACIONES ══ -->
   <section id="asociaciones">
     <div class="asociaciones-inner reveal">
+      <!-- La doctora, desde la primera pantalla: la paciente agenda con ella. Ficha completa en #especialistas. -->
+      <a class="asoc-dra" href="#especialistas">
+        <img class="asoc-dra__foto" src="images/web/equipo-dra-melina.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+        <span class="asoc-dra__texto"><strong>Dra. Melina Trujillo Quiroz</strong>
+          <span>Ginecóloga · UNAM · IVI Madrid · Dexeus Barcelona</span>
+          <span class="asoc-dra__ced">Cédulas profesionales 9177465 · 5574513</span></span>
+      </a>
       <span class="asoc-label">Miembro de</span>
       <div class="asoc-list">
         <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-a4m.webp" alt="American Academy of Anti-Aging Medicine (A4M)"></span>
