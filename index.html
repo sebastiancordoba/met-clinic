@@ -1205,6 +1205,7 @@
       /* Opiniones: carrusel que se desliza con el dedo, una tarjeta y un pedazo de la siguiente */
       .testimonios-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-left:-20px; margin-right:-20px; padding:0 20px 8px; scroll-padding:0 20px; scrollbar-width:none; }
       .testimonios-grid::-webkit-scrollbar { display:none; }
+      .testimonios-grid:focus-visible { outline:2px solid var(--dark); outline-offset:4px; }
       .testimonio { flex:0 0 86%; scroll-snap-align:start; padding:28px 24px; }
       .testimonio:hover { transform:none; }
 
@@ -1769,7 +1770,7 @@
       </div>
       <!-- Opiniones reales y verificadas de Doctoralia, citadas textualmente (los "…" marcan recortes).
            Fuente: doctoralia.com.mx/melina-trujillo-quiroz — no inventar ni editar el texto. -->
-      <div class="testimonios-grid">
+      <div class="testimonios-grid" tabindex="0" role="region" aria-label="Opiniones de pacientes (desliza para ver más)">
         <figure class="testimonio reveal">
           <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote class="testimonio__text">“Entré en perimenopausia y pasé más de 5 años buscando un ginecólogo o endocrinólogo que me atendiera… solo la Dra. Melina entendió mis necesidades de: no perder calidad de vida, calidad de relaciones y mi autoestima.”</blockquote>
