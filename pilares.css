@@ -264,3 +264,16 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 /* Aviso médico bajo el CTA de cada servicio. RLGS en materia de publicidad: cédula del profesional (art. 19) y
    riesgos/contraindicaciones de los procedimientos (art. 65). Texto genérico: no promete resultados. */
 .pilar-cta .pilar-aviso { max-width:560px; margin:40px auto 0; font-size:12px; line-height:1.6; color:var(--texto-suave); }
+
+/* ════════════ HERO CON FOTO ════════════
+   Una foto real de la clínica junto al título (a la derecha en compu, debajo en el teléfono).
+   Sin .reveal a propósito: en compu suele ser el LCP y no debe esperar al JavaScript. */
+.pilar-hero--foto .wrap { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr); gap:clamp(32px,5vw,72px); align-items:center; }
+.pilar-hero__foto { margin:0; aspect-ratio:4/5; overflow:hidden; background:var(--tranquil); border:1px solid rgba(130,134,127,0.16); }
+.pilar-hero__foto img { width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:760px) {
+  .pilar-hero--foto .wrap { grid-template-columns:1fr; gap:32px; }
+  .pilar-hero__foto { aspect-ratio:4/3; }
+}
+/* Con la foto al lado, el título tiene menos ancho: «Rejuvenecimiento» se salía de su columna. */
+.pilar-hero--foto .pilar-hero__title { font-size:clamp(38px,4.2vw,62px); }

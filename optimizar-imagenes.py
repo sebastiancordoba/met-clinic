@@ -38,6 +38,8 @@ TRABAJOS = [
     # Quien sale recostada es del equipo haciendo de modelo.
     ("images/servicios/healite-ii.jpg",                 "servicio-healite.webp", 900, 80),
     ("images/servicios/exomind.jpg",                    "servicio-exomind.webp", 900, 80),
+    # Cabecera de la página de Ginecología: el consultorio con colposcopio. El original ya es chico (522 px).
+    ("images/servicios/05-endoscopia-ginecologica.jpg", "servicio-gine-consultorio.webp", 900, 82),
     # El equipo en la entrada, para la cabecera de la sección. Vertical.
     ("images/equipo/grupo.jpg",                         "equipo-grupo.webp",  900, 80),
     # Mosaico "La clínica" de la portada (sesión de septiembre). Las verticales
