@@ -71,7 +71,15 @@ Things worth knowing before editing:
   deben cargar a quien no lo usa.
 - **Publicidad médica (COFEPRIS, RLGS en materia de publicidad):** la cédula va junto al nombre de la doctora (art. 19);
   cada página de servicio cierra con `.pilar-aviso` (valoración previa, riesgos y contraindicaciones; art. 65). No
-  prometas resultados ni pongas antes/después sin consentimiento escrito para publicidad.
+  prometas resultados ni pongas antes/después sin consentimiento escrito para publicidad. Nada de «definitiva»,
+  «frena la caída», «sin tiempo de recuperación» o «se nota desde la primera sesión»; di «progresiva» o «recuperación
+  mínima».
+- **Datos verificados:** precios, formas de pago, aseguradoras, consulta en línea y formación de la doctora salen de su
+  perfil de Doctoralia (revisado el 23-oct-2026). Viven en #preguntas (más su JSON-LD FAQPage), #proceso, #contacto,
+  la franja de #asociaciones y la tarjeta de la doctora: si cambia uno, cámbialo en todos. Pendiente de confirmar con
+  ella: la página dice «9 años» y 4 idiomas; Doctoralia dice 11 años y español/inglés.
+- **Hero:** el póster del video va como fondo precargado del `<div>`, no como atributo `poster` (LCP en celular
+  2.9 → 2.4 s). En el teléfono, el hueco de la barra fija de contacto va en el `footer`, no en el `body`.
 
 ### Mapa de #contacto (`#mapa` + IIFE en `main.js`)
 
