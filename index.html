@@ -867,8 +867,8 @@
       transform:translateY(-5px);
       box-shadow:0 16px 48px rgba(38,38,38,0.08);
     }
-    .testimonio__stars { color:var(--sage); font-size:14px; letter-spacing:2px; margin-bottom:16px; }
-    .testimonio__text { margin:0 0 24px; font-size:15px; font-weight:300; line-height:1.88; color:rgba(38,38,38,0.78); margin-bottom:24px; font-style:italic; }
+    .testimonio__stars { color:var(--dark); font-size:14px; letter-spacing:2px; margin-bottom:16px; }
+    .testimonio__text { margin:0 0 24px; font-size:16px; font-weight:300; line-height:1.75; color:var(--texto-suave); margin-bottom:24px; }
     .testimonio { margin:0; }
     .testimonio__author { font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--texto-suave); }
     .testimonio__meta { display:block; margin-top:6px; font-size:11px; font-weight:400; letter-spacing:0.04em; text-transform:none; color:rgba(38,38,38,0.78); }
@@ -1195,7 +1195,11 @@
       .stat-block__num { font-size: 40px; }
 
       /* Testimonios */
-      .testimonios-grid { grid-template-columns: 1fr; }
+      /* Opiniones: carrusel que se desliza con el dedo, una tarjeta y un pedazo de la siguiente */
+      .testimonios-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-left:-20px; margin-right:-20px; padding:0 20px 8px; scroll-padding:0 20px; scrollbar-width:none; }
+      .testimonios-grid::-webkit-scrollbar { display:none; }
+      .testimonio { flex:0 0 86%; scroll-snap-align:start; padding:28px 24px; }
+      .testimonio:hover { transform:none; }
 
       /* Footer */
       footer { padding: 48px 20px 32px; }
@@ -1762,21 +1766,21 @@
         <figure class="testimonio reveal">
           <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote class="testimonio__text">“Entré en perimenopausia y pasé más de 5 años buscando un ginecólogo o endocrinólogo que me atendiera… solo la Dra. Melina entendió mis necesidades de: no perder calidad de vida, calidad de relaciones y mi autoestima.”</blockquote>
-          <figcaption class="testimonio__author">Yalte<span class="testimonio__meta">Consulta subsecuente · mayo 2026</span></figcaption>
+          <figcaption class="testimonio__author">Yalte<span class="testimonio__meta">Consulta subsecuente · mayo 2026</span><span class="testimonio__meta">✓ Opinión verificada en Doctoralia</span></figcaption>
         </figure>
         <figure class="testimonio reveal d1">
           <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote class="testimonio__text">“Lo que más destaco de ella es su empatía y el respeto con el que trata a sus pacientes. Te explica todo a detalle, sin prisas, y hace que te sientas en un espacio seguro y en total confianza desde el primer momento.”</blockquote>
-          <figcaption class="testimonio__author">Escoffie<span class="testimonio__meta">Consulta subsecuente · julio 2026</span></figcaption>
+          <figcaption class="testimonio__author">Escoffie<span class="testimonio__meta">Consulta subsecuente · julio 2026</span><span class="testimonio__meta">✓ Opinión verificada en Doctoralia</span></figcaption>
         </figure>
         <figure class="testimonio reveal d2">
           <div class="testimonio__stars" aria-label="5 de 5 estrellas">★★★★★</div>
           <blockquote class="testimonio__text">“Hace poco más de 10 años conocí a la doctora Melina, y la he seguido durante todos estos años… a diferencia de muchas mujeres que conozco, yo ya no sufro el proceso.”</blockquote>
-          <figcaption class="testimonio__author">Valeria<span class="testimonio__meta">Check up ginecológico · enero 2026</span></figcaption>
+          <figcaption class="testimonio__author">Valeria<span class="testimonio__meta">Check up ginecológico · enero 2026</span><span class="testimonio__meta">✓ Opinión verificada en Doctoralia</span></figcaption>
         </figure>
       </div>
       <p class="testimonios-fuente reveal">
-        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico#profile-reviews" target="_blank" rel="noopener">Leer más de 1,300 opiniones verificadas en Doctoralia →</a>
+        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico#profile-reviews" target="_blank" rel="noopener">Ver las 1,366 opiniones en Doctoralia →</a>
       </p>
     </div>
   </section>
