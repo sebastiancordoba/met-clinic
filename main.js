@@ -353,8 +353,8 @@ document.querySelectorAll('.drawer-link').forEach(a => {
       const map = new maplibregl.Map({
         container: lienzo,
         style: recolorear(estilo),
-        center: angosto ? [-99.1888, 19.35935] : [-99.1912, 19.35915],
-        zoom: angosto ? 15.5 : 15.8,
+        center: angosto ? [-99.1889, 19.35905] : [-99.1912, 19.35915],
+        zoom: angosto ? 15.35 : 15.8,
         minZoom: 12, maxZoom: 19,
         attributionControl: false,
         cooperativeGestures: true,
