@@ -14,7 +14,7 @@ GitHub Pages serves from the `gh-pages` branch (not `main`). Deploy is a force p
 git push origin main:gh-pages --force
 ```
 
-Live URL: https://sebastiancordoba.github.io/met-clinic/
+Live URL: https://sebastiancordoba.github.io/met-clinic/ (temporary; the final domain, https://metclinic.com.mx, is not connected yet; see «SEO and sharing»)
 
 There is no build, lint, or test pipeline. To preview locally, just open `index.html` in a browser (or `python3 -m http.server` from the repo root if `file://` blocks fonts/images).
 
@@ -126,12 +126,7 @@ The `.webp` files ship without a PNG fallback on purpose: every browser has supp
 
 Every page carries canonical, favicon, Open Graph and Twitter card tags; `index.html` also carries `MedicalClinic` JSON-LD. `sitemap.xml` and `robots.txt` live at the root — robots excludes the internal design artifacts.
 
-**The absolute URLs are hardcoded.** They currently point at the GitHub Pages address; when `metclinic.com.mx` goes live, swap them everywhere in one command:
-
-```bash
-sed -i '' 's|https://sebastiancordoba.github.io/met-clinic|https://metclinic.com.mx|g' \
-  *.html sitemap.xml robots.txt
-```
+**The absolute URLs are hardcoded** and, since 24-oct-2026, point at the final domain `https://metclinic.com.mx` (canonical, `og:url`, `og:image`, JSON-LD, sitemap, robots). `metclinic.mx` also belongs to the clinic and only 301-redirects to `.com.mx`; never use it in the markup. Both domains are bought but **not connected**: Sebas connects DNS, Pages and Search Console only when he approves the site as finished. Until then the canonicals point at a domain that doesn't serve anything yet, so don't push this branch to `gh-pages`. Launch steps: `~/hermes-workspace/reportes/2026-10-24-lanzamiento-dominio.md`. The `CNAME` file for Pages is created on launch day, not before.
 
 Deliberately **not** in the structured data: `aggregateRating` and `openingHours`. Google penalises review markup that doesn't match real data — the reviews live on Doctoralia, not here — and nobody has told us the opening hours. Add hours when someone confirms them.
 

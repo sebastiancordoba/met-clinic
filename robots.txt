@@ -4,4 +4,4 @@ Disallow: /propuestas.html
 Disallow: /propuestas-print.html
 Disallow: /brand-explorer.html
 
-Sitemap: https://sebastiancordoba.github.io/met-clinic/sitemap.xml
+Sitemap: https://metclinic.com.mx/sitemap.xml
