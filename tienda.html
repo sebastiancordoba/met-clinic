@@ -26,6 +26,27 @@
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="MET Clinic — Ginecología Estética &amp; Antiaging" />
   <meta name="twitter:card" content="summary_large_image" />
+  <!-- Variante de estilo para comparar en la vista previa: ?estilo=redondeado | ?estilo=actual.
+       Sin el parámetro no hace nada. Ver estilo-redondeado.css. -->
+  <script>
+  (function () {
+    try {
+      var k = 'met-estilo', q = location.search.match(/[?&]estilo=(redondeado|actual)\b/);
+      if (q) sessionStorage.setItem(k, q[1]);
+      var e = q ? q[1] : sessionStorage.getItem(k);
+      if (!e) return;
+      if (e === 'redondeado') document.documentElement.classList.add('redondeado');
+      document.write('<link rel="stylesheet" href="estilo-redondeado.css">');
+      document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('nav');
+        s.className = 'estilo-switch'; s.setAttribute('aria-label', 'Comparar estilo');
+        s.innerHTML = '<a href="?estilo=actual">Actual</a><a href="?estilo=redondeado">Redondeado</a>';
+        s.querySelector(e === 'redondeado' ? 'a + a' : 'a').setAttribute('aria-current', 'true');
+        document.body.appendChild(s);
+      });
+    } catch (err) {}
+  })();
+  </script>
 </head>
 <body>
 
