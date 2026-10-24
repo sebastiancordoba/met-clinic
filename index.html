@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="redondeado">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1272,6 +1272,98 @@
       /* El hueco para la barra va en el pie y no en el body: así no queda una franja blanca bajo el pie. */
       footer { padding-bottom:calc(32px + 66px + env(safe-area-inset-bottom)); }
     }
+
+    /* ═══════════════════════════════════════════
+       BORDES REDONDEADOS (predeterminado desde el 24-oct-2026; Sebas lo eligió)
+       Una escala de radios: --r-sm 8 · --r-md 14 · --r-lg 20 · --r-pill 999.
+       - Píldora: botones, chips y etiquetas.
+       - 20 px: fotos, tarjetas grandes y el mapa.
+       - 14 px: tarjetas chicas (opiniones, preguntas, datos de Filosofía).
+       Va bajo html.redondeado (la clase ya viene en el <html>): ?estilo=actual
+       la quita para comparar con la versión de esquinas rectas. El mismo bloque
+       vive en index.html y en pilares.css; si cambias uno, cambia el otro.
+    ═══════════════════════════════════════════ */
+    html.redondeado {
+      --r-sm: 8px;
+      --r-md: 14px;
+      --r-lg: 20px;
+      --r-pill: 999px;
+      --sombra-suave: 0 1px 2px rgba(38,38,38,0.04), 0 10px 30px -12px rgba(38,38,38,0.14);
+    }
+
+    /* ── Botones, chips y etiquetas: píldora ── */
+    html.redondeado .btn-primary,
+    html.redondeado .btn-ghost,
+    html.redondeado .nav__cta,
+    html.redondeado .barra-movil a,
+    html.redondeado .footer-social a,
+    html.redondeado .chip-static,
+    html.redondeado .tgroup__tag { border-radius: var(--r-pill); }
+    html.redondeado .esp-arrow { border-radius: 50%; }
+
+    /* ── Campos de formulario (hoy solo en la maqueta de compra; listos aquí) ── */
+    html.redondeado .form-input,
+    html.redondeado .form-select,
+    html.redondeado .form-textarea { border-radius: var(--r-sm); }
+
+    /* ── Fotos y tarjetas grandes ── */
+    html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
+    html.redondeado .esp-card {
+      border-radius: var(--r-lg);
+      border-color: rgba(130,134,127,0.14);
+      box-shadow: var(--sombra-suave);
+    }
+    html.redondeado .sobre-foto,
+    html.redondeado .esp-grupo,
+    html.redondeado .pilar-hero__foto,
+    html.redondeado .tgroup__foto { border-radius: var(--r-lg); }
+    html.redondeado .mosaico figure { border-radius: var(--r-md); }
+    html.redondeado .agenda__caja iframe { border-radius: var(--r-md); }
+
+    /* ── Tarjetas chicas ── */
+    html.redondeado .testimonio {
+      border-radius: var(--r-md);
+      border-color: rgba(130,134,127,0.12);
+      box-shadow: var(--sombra-suave);
+    }
+    html.redondeado .stat-block { border-radius: var(--r-md); }
+    html.redondeado .credential { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+
+    /* Preguntas frecuentes: de renglones con línea a tarjetas sueltas. */
+    html.redondeado .faq-lista,
+    html.redondeado .pilar-faq__list { border-top: none; display: grid; gap: 10px; }
+    html.redondeado .faq-lista details,
+    html.redondeado .pilar-faq details {
+      border: 1px solid rgba(130,134,127,0.18);
+      border-radius: var(--r-md);
+      background: rgba(255,255,255,0.55);
+      padding: 0 22px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    html.redondeado .faq-lista details[open],
+    html.redondeado .pilar-faq details[open] { background: rgba(255,255,255,0.85); box-shadow: var(--sombra-suave); }
+    html.redondeado .faq-lista details p,
+    html.redondeado .pilar-faq details p { padding-right: 28px; }
+
+    /* ── Mapa: con esquinas redondas va enmarcado (sin el desvanecido de la
+       variante A, que no tiene bordes que redondear) ── */
+    html.redondeado .mapa .mapa__lienzo {
+      border-radius: var(--r-lg); overflow: hidden;
+      border: 1px solid rgba(130,134,127,0.18);
+      box-shadow: var(--sombra-suave);
+    }
+    html.redondeado .mapa__lienzo .maplibregl-canvas { -webkit-mask-image: none; mask-image: none; }
+    html.redondeado .mapa__tarjeta,
+    html.redondeado .mapa--tarjeta .mapa__tarjeta {
+      border-radius: var(--r-lg);
+      border: 1px solid rgba(130,134,127,0.18);
+      box-shadow: 0 18px 40px -20px rgba(38,38,38,0.28);
+    }
+    @media (min-width: 761px) {
+      html.redondeado .mapa__tarjeta { left: 28px; }
+    }
+    html.redondeado .mapa .maplibregl-ctrl-group { border-radius: var(--r-sm); overflow: hidden; }
+    html.redondeado .mapa-pin__nombre { border-radius: var(--r-pill); }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
@@ -1411,8 +1503,9 @@
   ]
 }
   </script>
-  <!-- Variante de estilo para comparar en la vista previa: ?estilo=redondeado | ?estilo=actual.
-       Sin el parámetro no hace nada. Ver estilo-redondeado.css. -->
+  <!-- Bordes redondeados por defecto (clase en <html>). ?estilo=actual vuelve a las esquinas
+       rectas para comparar y ?estilo=redondeado regresa; se recuerda en la pestaña y muestra
+       un interruptor. Sin el parámetro no hace nada. -->
   <script>
   (function () {
     try {
@@ -1420,13 +1513,17 @@
       if (q) sessionStorage.setItem(k, q[1]);
       var e = q ? q[1] : sessionStorage.getItem(k);
       if (!e) return;
-      if (e === 'redondeado') document.documentElement.classList.add('redondeado');
-      document.write('<link rel="stylesheet" href="estilo-redondeado.css">');
+      if (e === 'actual') document.documentElement.classList.remove('redondeado');
       document.addEventListener('DOMContentLoaded', function () {
         var s = document.createElement('nav');
-        s.className = 'estilo-switch'; s.setAttribute('aria-label', 'Comparar estilo');
-        s.innerHTML = '<a href="?estilo=actual">Actual</a><a href="?estilo=redondeado">Redondeado</a>';
-        s.querySelector(e === 'redondeado' ? 'a + a' : 'a').setAttribute('aria-current', 'true');
+        s.setAttribute('aria-label', 'Comparar estilo');
+        s.style.cssText = 'position:fixed;left:12px;bottom:' + (innerWidth <= 640 ? 80 : 12) + 'px;z-index:200;display:flex;gap:2px;padding:3px;background:rgba(38,38,38,.88);border-radius:999px;font:600 10px/1 Metropolis,sans-serif;letter-spacing:.12em;text-transform:uppercase';
+        [['actual', 'Rectas'], ['redondeado', 'Redondeado']].forEach(function (o) {
+          var a = document.createElement('a'); a.href = '?estilo=' + o[0]; a.textContent = o[1];
+          a.style.cssText = 'padding:8px 12px;border-radius:999px;text-decoration:none;' +
+            (o[0] === e ? 'background:#F7EDDC;color:#262626' : 'color:rgba(247,237,220,.8)');
+          s.appendChild(a);
+        });
         document.body.appendChild(s);
       });
     } catch (err) {}

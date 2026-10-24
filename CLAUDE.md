@@ -54,6 +54,11 @@ Things worth knowing before editing:
 - **Nav offset is 68px.** Fixed nav height is hardcoded; smooth-scroll in `main.js` subtracts 68, and several sections size themselves to `calc(100dvh - 68px)`. If you change nav height, hunt down all three.
 - **`.is-dark` sections** flip the nav to a dark theme on scroll (`main.js` toggles `nav.dark-section`). No section uses it today — the site stays on the light palette — but the mechanism is still there.
 - **One-screen layout pattern.** `#sobre-block` and `#servicios` are constrained to `height: calc(100dvh - 68px)` and use flex column children with `flex:1 / min-height:0` so content fills exactly one viewport. Be careful with padding/margins inside them — small additions overflow and clip.
+- **Bordes redondeados (default since 24-oct-2026, Sebas chose them).** One radius scale: `--r-sm` 8, `--r-md` 14,
+  `--r-lg` 20, `--r-pill` 999 (buttons, chips). The block lives under `html.redondeado` at the end of `index.html`'s
+  `<style>` **and** of `pilares.css`, so a change goes in both. Every page's `<html>` carries the class;
+  `?estilo=actual` removes it to compare with the old square corners. The mockup (`met-clinic-maqueta/maqueta.css`)
+  uses the same scale.
 - **Brand tokens** live in `:root` (`--sage`, `--tranquil`, `--confort`, `--dark`, `--texto-suave`, `--font`, `--ease`). Use these instead of hex values.
 - **Color rules (brandbook p. 17-18, applied Oct 2026):**
   - Small text never goes in `--sage`: on cream it's 3.2:1 and small text needs 4.5:1. Use `--texto-suave` (#515151, the official "Formalidad 80%" tint, 6.8:1). Sage is for large headings, the Larken accents, lines and icons.

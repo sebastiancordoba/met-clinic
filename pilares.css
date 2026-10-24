@@ -297,3 +297,95 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .pilar-intro h2 em, .treatments__head h2 em, .pilar-faq h2 em { font-family:'Larken','Times New Roman',serif; font-style:normal; font-weight:300; font-synthesis:none; letter-spacing:-0.01em; color:var(--sage); }
 .pilar-intro__kicker { display:flex; align-items:center; gap:12px; }
 .pilar-intro__kicker::before { content:''; width:20px; height:1px; background:var(--sage); opacity:0.6; flex:none; }
+
+/* ═══════════════════════════════════════════
+   BORDES REDONDEADOS (predeterminado desde el 24-oct-2026; Sebas lo eligió)
+   Una escala de radios: --r-sm 8 · --r-md 14 · --r-lg 20 · --r-pill 999.
+   - Píldora: botones, chips y etiquetas.
+   - 20 px: fotos, tarjetas grandes y el mapa.
+   - 14 px: tarjetas chicas (opiniones, preguntas, datos de Filosofía).
+   Va bajo html.redondeado (la clase ya viene en el <html>): ?estilo=actual
+   la quita para comparar con la versión de esquinas rectas. El mismo bloque
+   vive en index.html y en pilares.css; si cambias uno, cambia el otro.
+═══════════════════════════════════════════ */
+html.redondeado {
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+  --sombra-suave: 0 1px 2px rgba(38,38,38,0.04), 0 10px 30px -12px rgba(38,38,38,0.14);
+}
+
+/* ── Botones, chips y etiquetas: píldora ── */
+html.redondeado .btn-primary,
+html.redondeado .btn-ghost,
+html.redondeado .nav__cta,
+html.redondeado .barra-movil a,
+html.redondeado .footer-social a,
+html.redondeado .chip-static,
+html.redondeado .tgroup__tag { border-radius: var(--r-pill); }
+html.redondeado .esp-arrow { border-radius: 50%; }
+
+/* ── Campos de formulario (hoy solo en la maqueta de compra; listos aquí) ── */
+html.redondeado .form-input,
+html.redondeado .form-select,
+html.redondeado .form-textarea { border-radius: var(--r-sm); }
+
+/* ── Fotos y tarjetas grandes ── */
+html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
+html.redondeado .esp-card {
+  border-radius: var(--r-lg);
+  border-color: rgba(130,134,127,0.14);
+  box-shadow: var(--sombra-suave);
+}
+html.redondeado .sobre-foto,
+html.redondeado .esp-grupo,
+html.redondeado .pilar-hero__foto,
+html.redondeado .tgroup__foto { border-radius: var(--r-lg); }
+html.redondeado .mosaico figure { border-radius: var(--r-md); }
+html.redondeado .agenda__caja iframe { border-radius: var(--r-md); }
+
+/* ── Tarjetas chicas ── */
+html.redondeado .testimonio {
+  border-radius: var(--r-md);
+  border-color: rgba(130,134,127,0.12);
+  box-shadow: var(--sombra-suave);
+}
+html.redondeado .stat-block { border-radius: var(--r-md); }
+html.redondeado .credential { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+
+/* Preguntas frecuentes: de renglones con línea a tarjetas sueltas. */
+html.redondeado .faq-lista,
+html.redondeado .pilar-faq__list { border-top: none; display: grid; gap: 10px; }
+html.redondeado .faq-lista details,
+html.redondeado .pilar-faq details {
+  border: 1px solid rgba(130,134,127,0.18);
+  border-radius: var(--r-md);
+  background: rgba(255,255,255,0.55);
+  padding: 0 22px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+html.redondeado .faq-lista details[open],
+html.redondeado .pilar-faq details[open] { background: rgba(255,255,255,0.85); box-shadow: var(--sombra-suave); }
+html.redondeado .faq-lista details p,
+html.redondeado .pilar-faq details p { padding-right: 28px; }
+
+/* ── Mapa: con esquinas redondas va enmarcado (sin el desvanecido de la
+   variante A, que no tiene bordes que redondear) ── */
+html.redondeado .mapa .mapa__lienzo {
+  border-radius: var(--r-lg); overflow: hidden;
+  border: 1px solid rgba(130,134,127,0.18);
+  box-shadow: var(--sombra-suave);
+}
+html.redondeado .mapa__lienzo .maplibregl-canvas { -webkit-mask-image: none; mask-image: none; }
+html.redondeado .mapa__tarjeta,
+html.redondeado .mapa--tarjeta .mapa__tarjeta {
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(130,134,127,0.18);
+  box-shadow: 0 18px 40px -20px rgba(38,38,38,0.28);
+}
+@media (min-width: 761px) {
+  html.redondeado .mapa__tarjeta { left: 28px; }
+}
+html.redondeado .mapa .maplibregl-ctrl-group { border-radius: var(--r-sm); overflow: hidden; }
+html.redondeado .mapa-pin__nombre { border-radius: var(--r-pill); }
