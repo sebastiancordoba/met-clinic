@@ -167,20 +167,20 @@ a { color:inherit; text-decoration:none; }
 .tgroup__label { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:14px; }
 .tgroup__name { font-family:var(--font); font-weight:300; font-size:clamp(24px,2.4vw,36px); line-height:1.05; letter-spacing:-0.015em; margin-bottom:16px; }
 .tgroup__desc { font-size:15px; font-weight:300; line-height:1.7; color:rgba(38,38,38,0.78); }
-.tgroup__tag { display:inline-block; margin-top:18px; font-size:11px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--texto-suave); border:1px solid var(--sage-mid); padding:7px 14px; }
+.tgroup__tag { display:inline-block; margin-top:18px; font-size:11px; font-weight:500; letter-spacing:0.1em; line-height:1.6; text-transform:uppercase; color:var(--texto-suave); border:1px solid var(--sage-mid); padding:7px 14px; }
 
 /* Lista de tratamientos del grupo */
 .tlist { display:flex; flex-direction:column; }
 .titem {
-  display:flex; align-items:baseline; gap:16px;
+  display:flex; align-items:flex-start; gap:16px;
   padding:16px 0; border-bottom:1px solid rgba(130,134,127,0.15);
   transition:padding-left 0.3s var(--ease);
 }
 .titem:first-child { border-top:1px solid rgba(130,134,127,0.15); }
 .titem:hover { padding-left:8px; }
-.titem__dot { width:5px; height:5px; border-radius:50%; background:var(--sage); flex-shrink:0; transform:translateY(7px); }
+.titem__dot { width:5px; height:5px; border-radius:50%; background:var(--sage); flex-shrink:0; margin-top:9px; } /* centrado en la 1.ª línea del nombre (16px × 1.4 = 22.4px) */
 .titem__name { font-size:16px; font-weight:400; line-height:1.4; color:var(--dark); flex:1; }
-.titem__meta { font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(38,38,38,0.78); white-space:nowrap; }
+.titem__meta { font-size:12px; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:rgba(38,38,38,0.78); white-space:nowrap; line-height:22px; }
 
 /* Variante chips (para zonas, ej. depilación) */
 .chips-wrap { display:flex; flex-wrap:wrap; gap:10px; margin-top:clamp(24px,3vw,36px); }
@@ -217,8 +217,8 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 @media (max-width:560px) {
   .footer-grid { grid-template-columns:1fr; }
   .footer-bottom { flex-direction:column; text-align:center; }
-  .titem { flex-wrap:wrap; gap:8px; }
-  .titem__meta { width:100%; padding-left:21px; }
+  .titem { flex-wrap:wrap; gap:4px 16px; }
+  .titem__meta { width:100%; padding-left:21px; line-height:1.4; }
 }
 
 /* ── Barra de contacto: solo móvil, siempre a un toque (igual que en la portada) ── */
