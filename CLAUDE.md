@@ -103,6 +103,19 @@ tarjeta con dirección y enlaces. La atribución de OpenStreetMap es obligatoria
 - Variante A (sin caja, se funde con el crema) por defecto; `?mapa=b` muestra la B (enmarcada) para comparar.
   Quitar la que no se elija antes de publicar.
 
+### Pie de página: «Pregúntale a tu IA» + mapa chico (24-oct-2026)
+
+La franja `.pie-extra` va arriba de `.footer-bottom` en las 9 páginas; el comportamiento vive en `pie.js` (cargado en
+todas). El CSS está en `index.html` **y** en `pilares.css`.
+
+- Los botones abren ChatGPT (`?hints=search&q=`), Claude (`/new?q=`, conserva la pregunta tras iniciar sesión) y
+  Perplexity (`/search?q=`) con la pregunta ya escrita. Gemini **no** acepta `?q=` (probado): el botón copia la
+  pregunta y avisa.
+- La pregunta es neutral (opiniones, servicios, ubicación) por COFEPRIS. Va repetida en los 4 enlaces de cada página.
+- Los íconos son de simple-icons, en monocromo. OpenAI ya no está en las versiones recientes; el suyo sale de la 13.0.0.
+- El mapa es el mismo MapLibre + OpenFreeMap, quieto (`interactive:false`), recoloreado en grafito y diferido a
+  ~400 px. Si la portada ya bajó MapLibre para #contacto, reusa ese `<script>`.
+
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 
 The trickiest piece. There are 6 real cards; the IIFE clones 2 in front and 3 behind for seamless looping, then auto-advances every 4s with a snap-back when it reaches the clone of card 0.
