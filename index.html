@@ -567,6 +567,13 @@
     .esp-bio { font-size:13.5px; font-weight:300; line-height:1.55; color:rgba(38,38,38,0.78); margin-bottom:18px; }
     .esp-cedula { font-size:12px; font-weight:400; letter-spacing:0.04em; color:var(--texto-suave); margin:-6px 0 16px; } /* RLGS Publicidad art. 19: el número de cédula va junto al nombre del médico */
     .esp-social { display:flex; gap:14px; }
+    .esp-formacion { list-style:none; margin:0 0 20px; padding:16px 0 0; border-top:1px solid rgba(130,134,127,0.18); display:flex; flex-direction:column; gap:9px; }
+    .esp-formacion li { font-size:13px; font-weight:300; line-height:1.45; color:var(--texto-suave); padding-left:16px; position:relative; }
+    .esp-formacion li::before { content:''; position:absolute; left:0; top:0.62em; width:6px; height:1px; background:var(--sage); }
+    .esp-formacion strong { font-weight:500; color:var(--dark); }
+    .esp-agendar { align-self:flex-start; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--dark); text-decoration:none; padding-bottom:5px; border-bottom:1px solid var(--sage); margin-bottom:20px; line-height:1.6; }
+    .esp-agendar:hover { color:var(--sage); }
+    .esp-carousel:not(.esp-solo) .esp-formacion { display:none; } /* en la rejilla de varias tarjetas no cabe */
     /* una sola tarjeta (las demás siguen pendientes): destacada, foto a un lado y texto al otro */
     .esp-solo .esp-page { grid-template-columns:1fr !important; }
     .esp-solo .esp-card { flex-direction:row; max-width:920px; }
@@ -1534,6 +1541,14 @@
                 <div class="esp-role">Directora · Ginecología &amp; Antiaging</div>
                 <p class="esp-bio">Ginecóloga por la UNAM, formada en DEXEUS Barcelona e IVI Madrid. Referente en ginecología estética en México.</p>
                 <p class="esp-cedula">Cédulas profesionales 9177465 · 5574513</p>
+                <!-- Formación tal como la publica su perfil de Doctoralia (oct-2026). -->
+                <ul class="esp-formacion">
+                  <li><strong>Ginecología y Obstetricia</strong> · UNAM</li>
+                  <li><strong>Máster en Reproducción Humana</strong> · Universidad Rey Juan Carlos e IVI, Madrid</li>
+                  <li><strong>Dexeus Mujer, Barcelona</strong> · histeroscopía, laparoscopía, colposcopía y ultrasonido</li>
+                  <li><strong>Maestría en Medicina Antienvejecimiento y Longevidad</strong></li>
+                </ul>
+                <a class="esp-agendar" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Ver perfil y 1,366 opiniones en Doctoralia →</a>
                 <div class="esp-social">
                   <a href="https://www.instagram.com/metclinic.mx" target="_blank" rel="noopener" aria-label="Instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
