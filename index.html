@@ -522,7 +522,13 @@
     }
     .tech-item:hover .tech-logo { opacity:0.85; }
     @keyframes techScroll { from { transform:translateX(-50%); } to { transform:translateX(0); } }
-    @media (prefers-reduced-motion: reduce){ .tech-track { animation:none; } }
+    /* Sin movimiento: los logos se acomodan en renglones centrados (antes quedaban cortados en la orilla)
+       y se ocultan las copias que sólo existen para el bucle del carrusel. */
+    @media (prefers-reduced-motion: reduce){
+      .tech-track { animation:none; width:auto; flex-wrap:wrap; justify-content:center; row-gap:24px; padding:0 20px; }
+      .tech-marquee { -webkit-mask-image:none; mask-image:none; }
+      .tech-item[aria-hidden="true"] { display:none; }
+    }
 
     /* ═══════════════════════════════════════════
        ESPECIALISTAS  — equipo
