@@ -186,10 +186,10 @@
       position:absolute; inset:0; z-index:0;
       background:linear-gradient(180deg,
         rgba(247,237,220,0) 0%,
-        rgba(247,237,220,0) 42%,
-        rgba(247,237,220,0.55) 64%,
-        rgba(247,237,220,0.88) 84%,
-        rgba(247,237,220,0.94) 100%);
+        rgba(247,237,220,0) 34%,
+        rgba(247,237,220,0.62) 56%,
+        rgba(247,237,220,0.9) 78%,
+        rgba(247,237,220,0.95) 100%);
     }
     /* En móvil el texto apilado ocupa más alto, así que el velo empieza antes. */
     @media (max-width:640px) {
@@ -210,16 +210,19 @@
     }
 
     /* Hero entrance — elements animate in on load */
-    .hero__eyebrow, .hero__title, .hero__actions {
+    .hero__eyebrow, .hero__title, .hero__firma, .hero__actions {
       opacity:0; transform:translateY(16px);
       transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
     }
     .hero--loaded .hero__eyebrow   { opacity:1; transform:none; transition-delay:0.25s; }
     .hero--loaded .hero__title     { opacity:1; transform:none; transition-delay:0.40s; }
+    .hero--loaded .hero__firma     { opacity:1; transform:none; transition-delay:0.50s; }
     .hero--loaded .hero__actions   { opacity:1; transform:none; transition-delay:0.60s; }
+    /* Quién y dónde, en una línea: el título solo no dice que es una ginecóloga ni en qué ciudad. */
+    .hero__firma { font-size:15px; font-weight:400; line-height:1.6; letter-spacing:0.02em; color:var(--texto-suave); margin-bottom:clamp(20px,3vh,32px); }
 
     .hero__eyebrow {
-      font-size:11px; font-weight:500;
+      font-size:11px; font-weight:600;
       letter-spacing:0.3em; text-transform:uppercase;
       color:var(--texto-suave); margin-bottom:clamp(16px, 2.2vh, 26px);
       display:flex; align-items:center; gap:16px;
@@ -1146,13 +1149,14 @@
       .hero__eyebrow { font-size:10px; letter-spacing:0.22em; margin-bottom:clamp(8px,1.4vh,14px); }
       .hero__eyebrow::before { width:14px; }
       .hero__title { font-size:clamp(32px,9vw,46px); letter-spacing:-0.02em; margin-bottom:clamp(10px,1.6vh,18px); }
-      .hero__actions { flex-direction:column; align-items:stretch; gap:14px; margin-bottom:0; }
+      .hero__actions { flex-direction:row; align-items:center; gap:20px; margin-bottom:0; }
+      .hero__firma { font-size:13px; margin-bottom:clamp(14px,2.2vh,22px); }
       .btn-primary, .btn-ghost { text-align:center; padding:14px 22px; }
       .hero__link { align-self:flex-start; }
       .hero__stats { display: grid; grid-template-columns: repeat(3,1fr); }
       .hero__stat { padding: 12px 8px; }
       .hero__stat__num { font-size: 16px; }
-      .hero__stat__label { font-size: 8px; letter-spacing:0.08em; text-align:center; }
+      .hero__stat__label { font-size: 10px; letter-spacing:0.06em; text-align:center; line-height:1.3; }
       .hero__stat__sub { display:none; }
 
       /* Sections */
@@ -1399,9 +1403,9 @@
     <div class="hero__content">
       <p class="hero__eyebrow">Ginecología estética &amp; antiaging</p>
       <h1 class="hero__title">Bienestar íntimo,<br><em>en cada etapa.</em></h1>
+      <p class="hero__firma">Dra. Melina Trujillo Quiroz · Ginecóloga por la UNAM<br>Guadalupe Inn, Ciudad de México</p>
       <div class="hero__actions">
-        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Solicitar consulta</a>
-        <a href="tienda.html" class="btn-ghost">Visitar la boutique</a>
+        <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar consulta</a>
         <a href="#proceso" class="hero__link">Cómo trabajamos →</a>
       </div>
     </div>
