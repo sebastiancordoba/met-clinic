@@ -645,6 +645,13 @@
       .esp-solo .esp-photo { flex:none; aspect-ratio:1/1; }
       .esp-solo .esp-body { padding:22px 20px 26px; }
     }
+    /* El resto del equipo: rejilla de cinco retratos iguales bajo la tarjeta de la doctora. */
+    .equipo-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(14px,1.6vw,24px); margin-top:clamp(28px,3.5vw,48px); }
+    .esp-card--equipo .esp-body { padding:14px 16px 18px; }
+    .esp-card--equipo .esp-name { font-size:clamp(16px,1.25vw,19px); margin-bottom:6px; }
+    .esp-card--equipo .esp-role { margin-bottom:0; }
+    @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:640px) { .equipo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     .esp-social a { color:rgba(38,38,38,0.78); transition:color 0.3s; display:flex; }
     .esp-social a:hover { color:var(--sage); }
     @media (max-width:640px){
@@ -1811,46 +1818,6 @@
               </div>
             </article>
 
-            <!-- Tarjetas pendientes: ocultas hasta tener nombre, cargo, foto y bio reales (dejar «Espacio reservado»
-                 a la vista se ve a medio hacer). Para mostrarlas, sácalas de este <template>; main.js solo cuenta las
-                 .esp-card que están fuera y, si queda una sola, la pinta como tarjeta destacada (.esp-solo). -->
-            <template id="espPendientes">
-            <article class="esp-card">
-              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
-              <div class="esp-body">
-                <div class="esp-name">Especialista en Estética</div>
-                <div class="esp-role">Medicina Estética Facial &amp; Corporal</div>
-                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
-                <div class="esp-social">
-                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="esp-card">
-              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
-              <div class="esp-body">
-                <div class="esp-name">Especialista en Bienestar</div>
-                <div class="esp-role">Longevidad &amp; IV Therapy</div>
-                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
-                <div class="esp-social">
-                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-                </div>
-              </div>
-            </article>
-
-            <article class="esp-card">
-              <div class="esp-photo"><span class="esp-photo__ph">Foto pendiente</span></div>
-              <div class="esp-body">
-                <div class="esp-name">Especialista en Láser</div>
-                <div class="esp-role">Depilación &amp; Tecnología</div>
-                <p class="esp-bio">Espacio reservado para el perfil del especialista. Agrega nombre, formación y foto.</p>
-                <div class="esp-social">
-                  <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-                </div>
-              </div>
-            </article>
-            </template>
 
           </div>
         </div>
@@ -1859,6 +1826,46 @@
           <div class="esp-dots" id="espDots"></div>
           <button class="esp-arrow" id="espNext" aria-label="Siguiente">→</button>
         </div>
+      </div>
+      <!-- El resto del equipo (restaurado el 24-oct; 69b19f3 había escondido los espacios). Fotos de la sesión de
+           septiembre, recortadas como serie en optimizar-imagenes.py. NOMBRE Y PUESTO PENDIENTES: no vienen en el
+           Drive. Antes de publicar, cambia «… por confirmar» y el alt por los datos reales; no los inventes. -->
+      <div class="equipo-grid reveal d2">
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-1.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-2.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-3.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-4.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-5.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
       </div>
     </div>
   </section>

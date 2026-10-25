@@ -68,9 +68,10 @@ Things worth knowing before editing:
 
 ### Equipo y agenda (oct 2026)
 
-- **Equipo:** las tarjetas sin datos reales viven en `<template id="espPendientes">` y no se ven. `main.js` solo cuenta
-  las `.esp-card` de fuera; si queda una sola (hoy, la doctora) la pinta horizontal (`.esp-solo`). Para sumar a alguien,
-  saca su tarjeta del template con foto, nombre, cargo y bio reales. Nunca publiques «Espacio reservado».
+- **Equipo:** la doctora va como tarjeta destacada (`main.js` la pinta horizontal, `.esp-solo`, porque es la única
+  `.esp-card` del carrusel). Debajo, `.equipo-grid` con las otras cinco personas (sesión de septiembre, recortadas como
+  serie en `optimizar-imagenes.py`, `RETRATOS`). **Sus nombres y puestos no vienen en el Drive:** las tarjetas dicen
+  «Nombre/Puesto por confirmar» y llevan `data-pendiente`. Cámbialos por los reales antes de publicar; no los inventes.
 - **Agenda:** «Ver horarios disponibles aquí» en #contacto inserta el widget oficial de Doctoralia
   (`platform.docplanner.com/js/widget.js`) **solo al hacer clic**: trae GTM, Amplitude y Sentry de Doctoralia, y no
   deben cargar a quien no lo usa.

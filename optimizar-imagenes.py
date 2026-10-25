@@ -55,6 +55,8 @@ TRABAJOS = [
     ("images/clinica/consultorio-ultrasonido.jpg",      "clinica-consultorio.webp", 900, 80),
     ("images/clinica/boutique.jpg",                     "clinica-boutique.webp",    900, 80),
     ("images/clinica/cabina-exomind.jpg",               "clinica-exomind.webp",     900, 80),
+    # Cabecera de Longevidad (24-oct, misma sesión, DSC00270): la doctora junto al Exomind.
+    ("images/servicios/longevidad-dra-exomind.jpg",     "servicio-longevidad-dra.webp", 900, 80),
 ]
 
 
@@ -71,6 +73,16 @@ TRABAJOS = [
 # de lo que pide la tarjeta, sin meter 10 MB al repo.
 RETRATOS = [
     ("images/equipo/dra-melina.jpg", "equipo-dra-melina.webp", 0.52, 0.39),
+    # El resto del equipo (sesión de septiembre, Drive «MET Clinic fotos»), todas
+    # frente a la escalera para que se lean como serie. Sin nombres todavía: el
+    # archivo va numerado y la tarjeta dice «Nombre por confirmar». Las caras se
+    # midieron con un detector (OpenCV) y se revisaron a la vista.
+    # Se pintan a ~230 px de ancho en la rejilla de cinco: 480x600 cubre 2x.
+    ("images/equipo/equipo-1.jpg", "equipo-1.webp", 0.516, 0.383, (480, 600)),  # DSC00108
+    ("images/equipo/equipo-2.jpg", "equipo-2.webp", 0.514, 0.373, (480, 600)),  # DSC00121
+    ("images/equipo/equipo-3.jpg", "equipo-3.webp", 0.554, 0.395, (480, 600)),  # DSC00153
+    ("images/equipo/equipo-4.jpg", "equipo-4.webp", 0.525, 0.382, (480, 600)),  # DSC00161
+    ("images/equipo/equipo-5.jpg", "equipo-5.webp", 0.521, 0.396, (480, 600)),  # DSC00229
 ]
 RETRATO_ALTO = 0.45      # alto del recorte como fracción del alto de la foto
 RETRATO_CARA_Y = 0.30    # dónde cae la cara dentro del recorte
@@ -78,13 +90,13 @@ RETRATO_SALIDA = (720, 900)   # 4:5, la tarjeta pinta ~300 px de ancho x2
 
 
 def generar_retratos() -> None:
-    for origen, destino, cx, cy in RETRATOS:
+    for origen, destino, cx, cy, *tam in RETRATOS:
         im = Image.open(origen).convert("RGB")
         W, H = im.size
         ch = round(H * RETRATO_ALTO); cw = ch * 4 // 5
         left = min(max(round(cx * W - cw / 2), 0), W - cw)
         top = min(max(round(cy * H - RETRATO_CARA_Y * ch), 0), H - ch)
-        im = im.crop((left, top, left + cw, top + ch)).resize(RETRATO_SALIDA, Image.LANCZOS)
+        im = im.crop((left, top, left + cw, top + ch)).resize(tam[0] if tam else RETRATO_SALIDA, Image.LANCZOS)
         im.save(SALIDA / destino, "WEBP", quality=80, method=6)
         print(f"  {(SALIDA / destino).stat().st_size // 1024:>5} KB  {destino}")
 
