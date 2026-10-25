@@ -254,8 +254,12 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const zoom = (w, h) => Math.max(caja.width / w, caja.height / h);
   const vertical = window.matchMedia('(max-width: 640px)').matches || zoom(720, 1080) < zoom(1920, 1080);
   const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
+  // ?video=lento: el mismo archivo a 0.8× para comparar (24-oct, Sebas: «va muy rápido»).
+  // Son 11 tomas en 11 s; a 0.8× cada una dura ~1.25 s y el video 13.8 s.
+  const lento = /[?&]video=lento\b/.test(location.search);
   const arrancar = () => {
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
+    if (lento) v.defaultPlaybackRate = v.playbackRate = 0.8;
     v.play().catch(() => {});
   };
   if (document.readyState === 'complete') arrancar();
