@@ -57,7 +57,7 @@ Things worth knowing before editing:
 - **Bordes redondeados (default since 24-oct-2026, Sebas chose them).** One radius scale: `--r-sm` 8, `--r-md` 14,
   `--r-lg` 20, `--r-pill` 999 (buttons, chips). The block lives under `html.redondeado` at the end of `index.html`'s
   `<style>` **and** of `pilares.css`, so a change goes in both. Every page's `<html>` carries the class;
-  `?estilo=actual` removes it to compare with the old square corners. The mockup (`met-clinic-maqueta/maqueta.css`)
+  `?estilo=actual` removes it to compare with the old square corners (URL only: no visible switch and nothing is remembered; Sebas asked to remove the floating switch on 24-oct). The mockup (`met-clinic-maqueta/maqueta.css`)
   uses the same scale.
 - **Brand tokens** live in `:root` (`--sage`, `--tranquil`, `--confort`, `--dark`, `--texto-suave`, `--font`, `--ease`). Use these instead of hex values.
 - **Color rules (brandbook p. 17-18, applied Oct 2026):**

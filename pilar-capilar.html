@@ -99,30 +99,12 @@
   ]
 }
   </script>
-  <!-- Bordes redondeados por defecto (clase en <html>). ?estilo=actual vuelve a las esquinas
-       rectas para comparar y ?estilo=redondeado regresa; se recuerda en la pestaña y muestra
-       un interruptor. Sin el parámetro no hace nada. -->
+  <!-- Bordes redondeados: estilo definitivo (clase en <html>). Solo ?estilo=actual en la URL
+       quita la clase para comparar con las esquinas rectas; no hay control visible ni se recuerda. -->
   <script>
   (function () {
-    try {
-      var k = 'met-estilo', q = location.search.match(/[?&]estilo=(redondeado|actual)\b/);
-      if (q) sessionStorage.setItem(k, q[1]);
-      var e = q ? q[1] : sessionStorage.getItem(k);
-      if (!e) return;
-      if (e === 'actual') document.documentElement.classList.remove('redondeado');
-      document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('nav');
-        s.setAttribute('aria-label', 'Comparar estilo');
-        s.style.cssText = 'position:fixed;left:12px;bottom:' + (innerWidth <= 640 ? 80 : 12) + 'px;z-index:200;display:flex;gap:2px;padding:3px;background:rgba(38,38,38,.88);border-radius:999px;font:600 10px/1 Metropolis,sans-serif;letter-spacing:.12em;text-transform:uppercase';
-        [['actual', 'Rectas'], ['redondeado', 'Redondeado']].forEach(function (o) {
-          var a = document.createElement('a'); a.href = '?estilo=' + o[0]; a.textContent = o[1];
-          a.style.cssText = 'padding:8px 12px;border-radius:999px;text-decoration:none;' +
-            (o[0] === e ? 'background:#F7EDDC;color:#262626' : 'color:rgba(247,237,220,.8)');
-          s.appendChild(a);
-        });
-        document.body.appendChild(s);
-      });
-    } catch (err) {}
+    try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
+    if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
   })();
   </script>
 </head>
