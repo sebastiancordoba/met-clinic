@@ -454,8 +454,10 @@
     /* ═══════════════════════════════════════════
        SERVICIOS  — Firma + Pilares
     ═══════════════════════════════════════════ */
+    /* Fondos de la portada (24-oct, 6 bloques): servicios crema · equipo claro ·
+       opiniones crema · preguntas claro · contacto crema. Solo tranquil y confort. */
     #servicios {
-      background:var(--tranquil);
+      background:var(--confort);
       border-top:1px solid rgba(130,134,127,0.14);
       padding:clamp(64px,8vw,120px) 0;
     }
@@ -538,12 +540,8 @@
     /* ═══════════════════════════════════════════
        TECNOLOGÍA  — strip de equipos
     ═══════════════════════════════════════════ */
-    #tecnologia {
-      background:var(--confort);
-      border-top:1px solid rgba(130,134,127,0.16);
-      border-bottom:1px solid rgba(130,134,127,0.16);
-      padding:clamp(40px,5vw,68px) 0;
-    }
+    /* Desde el 24-oct va DENTRO de #servicios, como su cierre: ya no es una franja aparte. */
+    #tecnologia { margin-top:clamp(40px,5vw,64px); }
     .tech-label { text-align:center; font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:clamp(24px,3vw,40px); }
     /* Marquee — barra de tecnologías que se desplaza en continuo */
     .tech-marquee {
@@ -677,254 +675,44 @@
     }
 
     /* ═══════════════════════════════════════════
-       PROCESO  — Tu experiencia (4 pasos)
+       ASOCIACIONES y «Conoce la clínica» — al pie de #especialistas
+       (24-oct: la franja propia bajo la portada salió; la doctora ya
+       tiene su tarjeta en esta misma sección).
     ═══════════════════════════════════════════ */
-    /* ═══════════════════════════════════════════
-       LA CLÍNICA — mosaico del espacio (patrón de Lanserhof)
-    ═══════════════════════════════════════════ */
-    #clinica { background:var(--confort); padding:clamp(64px,8vw,110px) 0; }
-    #clinica .section-inner { padding-top:0; padding-bottom:0; max-width:1240px; }
-    .clinica-head { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,64px); align-items:end; margin-bottom:clamp(32px,4vw,52px); }
-    .clinica-head h2 { margin-bottom:0; }
-    .clinica-head .body-text { margin:0; }
-    .mosaico {
-      display:grid; gap:8px;
-      grid-template-columns:repeat(4, 1fr);
-      /* Las dos filas caben juntas bajo la barra (24-oct): en una laptop de 680 px la foto
-         alta de la recepción se salía de la pantalla. */
-      grid-template-rows:repeat(2, min(clamp(220px, 24vw, 320px), calc((100svh - 68px - 56px) / 2)));
-      grid-template-areas:
-        "rec  cab  cab  det"
-        "rec  con  bou  exo";
+    .esp-pie {
+      display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      gap:20px 40px; margin-top:clamp(28px,3.5vw,44px);
+      padding-top:clamp(20px,2.5vw,28px); border-top:1px solid rgba(130,134,127,0.2);
     }
-    .mosaico figure { position:relative; margin:0; overflow:hidden; background:var(--tranquil); }
-    .mosaico img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 1.2s var(--ease); }
-    .mosaico figure:hover img { transform:scale(1.03); }
-    .mosaico figcaption {
-      position:absolute; left:0; bottom:0; padding:28px 16px 12px; width:100%;
-      font-size:10px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase;
-      color:#fff; background:linear-gradient(transparent, rgba(38,38,38,0.42));
-    }
-    .m-rec { grid-area:rec; } .m-cab { grid-area:cab; } .m-det { grid-area:det; }
-    .m-con { grid-area:con; } .m-bou { grid-area:bou; } .m-exo { grid-area:exo; }
-    .m-rec img { object-position:50% 40%; }
-    .m-con img { object-position:50% 30%; }
-    .m-bou img { object-position:50% 55%; }
-    .m-exo img { object-position:40% 60%; }
-    .m-det img { object-position:50% 60%; }
-    @media (max-width:760px) {
-      .clinica-head { grid-template-columns:1fr; gap:16px; }
-      .mosaico {
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:56vw 72vw 56vw 72vw;
-        grid-template-areas:
-          "cab cab"
-          "rec con"
-          "det det"
-          "bou exo";
-      }
-    }
-
-    #proceso {
-      background:var(--tranquil);
-      border-top:1px solid rgba(130,134,127,0.2);
-      position:relative;
-    }
-    #proceso .section-inner { padding:clamp(72px,9vw,120px) 56px; }
-    .proceso-header {
-      display:grid; grid-template-columns:1fr 1.4fr;
-      gap:64px; align-items:end;
-      margin-bottom:clamp(48px, 6vw, 80px);
-    }
-    .proceso-header h2 {
-      font-family:var(--font);
-      font-size:clamp(36px, 5.2vw, 72px);
-      font-weight:200; letter-spacing:-0.03em;
-      text-transform:none; line-height:0.96;
-      margin-bottom:0;
-    }
-    .proceso-header .body-text { font-size:15px; max-width:none; }
-    .proceso-steps {
-      list-style:none; margin:0; padding:0;
-      display:grid; grid-template-columns:repeat(4,1fr);
-      gap:0;
-      border-top:1px solid rgba(130,134,127,0.28);
-    }
-    .proceso-step {
-      padding:36px 32px 40px;
-      border-right:1px solid rgba(130,134,127,0.18);
-      position:relative;
-      transition:background 0.4s var(--ease);
-    }
-    .proceso-step:last-child { border-right:none; }
-    .proceso-step:hover { background:rgba(247,237,220,0.55); }
-    .proceso-step::before {
-      content:''; position:absolute;
-      top:-1px; left:0; width:0; height:2px;
-      background:var(--sage);
-      transition:width 0.7s var(--ease);
-    }
-    .proceso-step:hover::before { width:100%; }
-    .proceso-step__num {
-      font-family:'Larken', 'Times New Roman', serif;
-      font-size:46px; font-weight:300;
-      color:var(--sage);
-      line-height:1; margin-bottom:24px;
-      letter-spacing:-0.02em;
-    }
-    .proceso-step__title {
-      font-size:12px; font-weight:600;
-      letter-spacing:0.18em; text-transform:uppercase;
-      color:var(--dark); margin-bottom:14px;
-      line-height:1.3;
-    }
-    .proceso-step__desc {
-      font-size:14px; font-weight:300; line-height:1.7;
-      color:rgba(38,38,38,0.78);
-    }
-    @media (max-width: 900px) {
-      .proceso-header { grid-template-columns:1fr; gap:24px; }
-      .proceso-steps { grid-template-columns:1fr 1fr; }
-      .proceso-step { border-right:1px solid rgba(130,134,127,0.18); }
-      .proceso-step:nth-child(2n) { border-right:none; }
-      .proceso-step:nth-child(-n+2) { border-bottom:1px solid rgba(130,134,127,0.18); }
-    }
-    @media (max-width: 640px) {
-      #proceso .section-inner { padding:64px 20px; }
-      .proceso-steps { grid-template-columns:1fr; }
-      .proceso-step { border-right:none !important; border-bottom:1px solid rgba(130,134,127,0.18); padding:28px 8px 32px; }
-      .proceso-step:last-child { border-bottom:none; }
-      .proceso-step__num { font-size:38px; margin-bottom:16px; }
-      /* En el teléfono, número a la izquierda y texto a la derecha: la mitad de alto */
-      .proceso-step { display:grid; grid-template-columns:52px 1fr; column-gap:14px; padding:24px 4px 26px; }
-      .proceso-step__num { grid-row:span 2; font-size:34px; margin:0; }
-      .proceso-step__title { margin-bottom:8px; }
-    }
-    .proceso-step__desc a { color:var(--dark); text-decoration:none; border-bottom:1px solid var(--sage); }
-
-    /* ═══════════════════════════════════════════
-       ASOCIACIONES  — Confort (thin strip)
-    ═══════════════════════════════════════════ */
-    #asociaciones {
-      background: var(--tranquil);
-      border-top: 1px solid rgba(130,134,127,0.2);
-      border-bottom: 1px solid rgba(130,134,127,0.2);
-    }
-    .asociaciones-inner {
-      max-width: 1100px; margin: 0 auto;
-      padding: 26px 56px;
-      display: flex; align-items: center; gap: 40px;
-    }
+    .asoc { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
     .asoc-label {
       font-size: 10px; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--texto-suave); white-space: nowrap; flex-shrink: 0;
+      text-transform: uppercase; color: var(--texto-suave); white-space: nowrap;
     }
-    .asoc-list {
-      display: flex; align-items: center; gap: 0; flex-wrap: wrap; flex: 1;
-    }
-    .asoc-item {
-      display: flex; align-items: center;
-      padding: 4px 32px;
-      border-right: 1px solid rgba(130,134,127,0.2);
-    }
+    .asoc-list { display: flex; align-items: center; flex-wrap: wrap; }
+    .asoc-item { display: flex; align-items: center; padding: 4px 28px; border-right: 1px solid rgba(130,134,127,0.2); }
     .asoc-item:first-child { padding-left: 0; }
     .asoc-item:last-child { border-right: none; }
     .asoc-logo {
-      display: block; height: clamp(26px,2.8vw,38px); width: auto;
+      display: block; height: clamp(24px,2.4vw,34px); width: auto;
       filter: brightness(0); opacity: 0.4; transition: opacity 0.3s;
     }
     .asoc-item:hover .asoc-logo { opacity: 0.65; }
-    .asoc-dra { display:flex; align-items:center; gap:16px; text-decoration:none; color:var(--dark); padding-right:40px; margin-right:auto; border-right:1px solid rgba(130,134,127,0.2); }
-    .asoc-dra__foto { width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 18%; flex:none; border:1px solid rgba(130,134,127,0.25); }
-    .asoc-dra__texto { display:flex; flex-direction:column; gap:3px; font-size:13px; font-weight:300; line-height:1.4; color:var(--texto-suave); }
-    .asoc-dra__texto strong { font-size:15px; font-weight:400; color:var(--dark); }
-    .asoc-dra__ced { font-size:11.5px; letter-spacing:0.02em; }
-    .asoc-dra:hover strong { color:var(--sage); }
+    .esp-mas {
+      font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--dark); text-decoration:none; padding-bottom:5px; border-bottom:1px solid var(--sage);
+    }
+    .esp-mas:hover { color:var(--sage); }
     @media (max-width: 640px) {
-      .asociaciones-inner { padding: 20px; gap: 16px 0; flex-wrap: wrap; }
       .asoc-label { width: 100%; }
-      .asoc-dra { width:100%; padding:0 0 16px; margin:0; border-right:none; border-bottom:1px solid rgba(130,134,127,0.2); }
       .asoc-item { padding: 4px 22px; }
-    }
-
-    /* ═══════════════════════════════════════════
-       CITA EDITORIAL  — Confort
-    ═══════════════════════════════════════════ */
-    #cita {
-      background: var(--confort);
-      border-top: 1px solid rgba(130,134,127,0.2);
-      text-align: center;
-      padding: clamp(72px,10vw,120px) 56px;
-    }
-    .cita__text {
-      font-family: 'Larken', serif;
-      font-size: clamp(48px, 8vw, 108px);
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      color: var(--dark);
-      line-height: 1.02;
-      margin-bottom: 36px;
-    }
-    .cita__byline {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.26em;
-      text-transform: uppercase; color: var(--texto-suave);
-      display: inline-flex; align-items: center; gap: 18px;
-    }
-    .cita__byline::before, .cita__byline::after {
-      content: ''; display: block; width: 36px; height: 1px;
-      background: var(--sage); opacity: 0.55;
-    }
-    @media (max-width: 640px) {
-      #cita { padding: 64px 24px; }
-      .cita__byline { white-space: nowrap; letter-spacing: 0.16em; font-size: 10.5px; gap: 12px; }
-      .cita__byline::before, .cita__byline::after { width: 20px; }
-    }
-
-    /* ═══════════════════════════════════════════
-       FILOSOFÍA — Sinergia (salvia), el color protagonista del manual.
-       Sobre salvia ningún color llega a 4.5:1, así que aquí solo va texto
-       grande (títulos, la frase en Larken) y las cifras van en tarjetas crema.
-    ═══════════════════════════════════════════ */
-    #filosofia { background:var(--sage); }
-    /* #111 y no --dark: sobre salvia #262626 da 4.08:1 y el texto chico pide 4.5; #111 da 5.1 y a la vista es igual */
-    #filosofia .eyebrow { color:#111; }
-    #filosofia .eyebrow::before { background:var(--dark); opacity:0.6; }
-    #filosofia h2 { color:var(--confort); }
-    #filosofia h2 em { color:var(--dark); }
-    #filosofia .divider { background:var(--confort); opacity:0.7; }
-    #filosofia .body-text {
-      font-family:'Larken', 'Times New Roman', serif; font-weight:300;
-      font-size:clamp(24px,2.2vw,32px); line-height:1.3; color:var(--confort);
-    }
-    .filosofia__logo { max-width:240px; height:auto; opacity:0.95; }
-
-    .stats-grid {
-      display:grid; grid-template-columns:repeat(4,1fr); gap:8px;
-      margin-top:72px;
-    }
-    .stat-block {
-      padding:40px 32px; background:var(--confort);
-      transition:background 0.4s;
-    }
-    .stat-block:hover { background:var(--tranquil); }
-    .stat-block__num {
-      font-size:52px; font-weight:200;
-      letter-spacing:0.02em; color:var(--dark);
-      line-height:1; margin-bottom:12px;
-      transition:color 0.4s;
-    }
-    .stat-block:hover .stat-block__num { color:var(--sage); }
-    .stat-block__label {
-      font-size:12px; font-weight:500;
-      letter-spacing:0.14em; text-transform:uppercase;
-      color:var(--texto-suave);
     }
 
     /* ═══════════════════════════════════════════
        TESTIMONIOS  — Confort
     ═══════════════════════════════════════════ */
     #testimonios {
-      background:var(--tranquil);
+      background:var(--confort);
       border-top:1px solid rgba(130,134,127,0.2);
     }
     .testimonios-grid {
@@ -957,13 +745,16 @@
     /* ═══════════════════════════════════════════
        PREGUNTAS FRECUENTES  — Tranquil (entre Contacto en confort y el footer)
        Solo datos verificados: precios y pagos salen del perfil de Doctoralia
-       (oct-2026). Si cambia una respuesta, cámbiala también en el JSON-LD FAQPage.
+       (oct-2026). Si cambia una respuesta, cámbiala también en preguntas.html (y en su JSON-LD FAQPage).
     ═══════════════════════════════════════════ */
     #preguntas { background:var(--tranquil); border-top:1px solid rgba(130,134,127,0.2); }
     .faq-grid { display:grid; grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr); gap:clamp(32px,6vw,96px); align-items:start; }
     .faq-lado { position:sticky; top:110px; }
     .faq-lado p { font-size:15px; font-weight:300; line-height:1.7; color:var(--texto-suave); max-width:34ch; }
     .faq-lado a { color:var(--dark); text-decoration:none; border-bottom:1px solid var(--sage); }
+    .faq-todas { margin-top:20px; }
+    .faq-todas a { font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); text-decoration:none; padding-bottom:5px; border-bottom:1px solid var(--sage); }
+    .faq-todas a:hover { color:var(--sage); }
     .faq-lista { border-top:1px solid rgba(130,134,127,0.25); }
     .faq-lista details { border-bottom:1px solid rgba(130,134,127,0.25); }
     .faq-lista summary {
@@ -1275,14 +1066,6 @@
 
       /* Servicios — sin cambios adicionales, carousel ya es full-width */
 
-      /* Filosofía */
-      #filosofia [style*="grid-template-columns:1fr 1fr"] {
-        display: flex !important; flex-direction: column; gap: 36px; align-items: stretch !important;
-      }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .stat-block { padding: 28px 20px; }
-      .stat-block__num { font-size: 40px; }
-
       /* Testimonios */
       /* Opiniones: carrusel que se desliza con el dedo, una tarjeta y un pedazo de la siguiente */
       .testimonios-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-left:-20px; margin-right:-20px; padding:0 20px 8px; scroll-padding:0 20px; scrollbar-width:none; }
@@ -1371,7 +1154,6 @@
     html.redondeado .esp-grupo,
     html.redondeado .pilar-hero__foto,
     html.redondeado .tgroup__foto { border-radius: var(--r-lg); }
-    html.redondeado .mosaico figure { border-radius: var(--r-md); }
     html.redondeado .agenda__caja iframe { border-radius: var(--r-md); }
 
     /* ── Tarjetas chicas ── */
@@ -1380,7 +1162,6 @@
       border-color: rgba(130,134,127,0.12);
       box-shadow: var(--sombra-suave);
     }
-    html.redondeado .stat-block { border-radius: var(--r-md); }
     html.redondeado .credential { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
 
     /* Preguntas frecuentes: de renglones con línea a tarjetas sueltas. */
@@ -1541,70 +1322,6 @@
   ]
 }
   </script>
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "¿Cuánto cuesta la primera consulta?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Desde $2,100 MXN en la clínica y desde $1,500 MXN en línea. Son precios para pacientes sin aseguradora y pueden variar según el caso."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Puedo consultar en línea?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí. Agenda la consulta online en Doctoralia: al menos 30 minutos antes te llega por SMS y correo el enlace para entrar desde tu teléfono o tu computadora."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Qué formas de pago aceptan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Efectivo, transferencia y tarjeta de crédito o débito."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Aceptan seguro de gastos médicos?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "La clínica trabaja con GNP, AXA, MetLife, Seguros Monterrey, Seguros Banorte, Quálitas, BBVA Seguros y PIF. La cobertura depende de tu póliza y del servicio: confírmala al agendar."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Necesito una valoración antes de un tratamiento?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Sí. Todo tratamiento empieza con una valoración médica con la Dra. Melina Trujillo, en la que te explica beneficios, riesgos y contraindicaciones, y diseña contigo un plan para tu etapa."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Dónde está la clínica y cómo llego?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "En Guty Cárdenas 65, Col. Guadalupe Inn, Álvaro Obregón, CDMX 01020: a 6 minutos a pie del Metro Barranca del Muerto (Línea 7) y a una calle de Av. Revolución."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "¿Cómo agendo?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "En Doctoralia, donde ves los horarios libres y confirmas al momento, o por WhatsApp al 55 4009 9923."
-      }
-    }
-  ]
-}
-  </script>
   <!-- Bordes redondeados: estilo definitivo (clase en <html>). Solo ?estilo=actual en la URL
        quita la clase para comparar con las esquinas rectas; no hay control visible ni se recuerda. -->
   <script>
@@ -1622,7 +1339,7 @@
     <ul class="nav__links">
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#especialistas">Equipo</a></li>
-      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="#testimonios">Opiniones</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="nav__cta">Agendar consulta</a>
@@ -1635,7 +1352,7 @@
   <div class="nav__drawer" id="nav-drawer">
     <a href="#servicios" class="drawer-link">Servicios</a>
     <a href="#especialistas" class="drawer-link">Equipo</a>
-    <a href="tienda.html" class="drawer-link">Tienda</a>
+    <a href="#testimonios" class="drawer-link">Opiniones</a>
     <a href="#contacto" class="drawer-link">Contacto</a>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar consulta</a>
   </div>
@@ -1665,7 +1382,7 @@
       <p class="hero__firma">Dra. Melina Trujillo Quiroz · Ginecóloga por la UNAM<br>Guadalupe Inn, Ciudad de México</p>
       <div class="hero__actions">
         <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar consulta</a>
-        <a href="#proceso" class="hero__link">Cómo trabajamos →</a>
+        <a href="nosotros.html#proceso" class="hero__link">Cómo trabajamos →</a>
       </div>
       </div>
     </div>
@@ -1690,24 +1407,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ══ ASOCIACIONES ══ -->
-  <section id="asociaciones">
-    <div class="asociaciones-inner reveal">
-      <!-- La doctora, desde la primera pantalla: la paciente agenda con ella. Ficha completa en #especialistas. -->
-      <a class="asoc-dra" href="#especialistas">
-        <img class="asoc-dra__foto" src="images/web/equipo-dra-melina.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-        <span class="asoc-dra__texto"><strong>Dra. Melina Trujillo Quiroz</strong>
-          <span>Ginecóloga · UNAM · IVI Madrid · Dexeus Barcelona</span>
-          <span class="asoc-dra__ced">Cédulas profesionales 9177465 · 5574513</span></span>
-      </a>
-      <span class="asoc-label">Miembro de</span>
-      <div class="asoc-list">
-        <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-a4m.webp" alt="American Academy of Anti-Aging Medicine (A4M)"></span>
-        <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-solapav.webp" alt="Sociedad Latinoamericana de Patología Vulvar (SoLaPaV)"></span>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ SERVICIOS — Firma + Pilares ══ -->
   <section id="servicios">
@@ -1765,36 +1464,33 @@
         </a>
       </div>
     </div>
-  </section>
-
-  <!-- ══ TECNOLOGÍA ══ -->
-  <section id="tecnologia">
-    <div class="section-inner" style="padding-top:0; padding-bottom:0;">
+    <!-- Tecnología: cierre de Servicios (24-oct; antes era una franja aparte). -->
+    <div id="tecnologia">
       <p class="tech-label reveal">Tecnología de vanguardia</p>
-    </div>
-    <div class="tech-marquee">
-      <div class="tech-track">
-        <span class="tech-item"><img class="tech-logo" src="images/tech/hydrafacial.png" alt="HydraFacial"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/endymed.png" alt="EndyMed"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/sofwave.svg" alt="Sofwave"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/emsella.png" alt="EMSELLA"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/web/tech-healite.webp" alt="Healite II"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/xwave.png" alt="X-Wave"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/asirox.svg" alt="Asirox"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt="mesoestetic"></span>
-        <span class="tech-item"><img class="tech-logo" src="images/tech/exomind.png" alt="Exomind"></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/hydrafacial.png" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/endymed.png" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/sofwave.svg" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/emsella.png" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/web/tech-healite.webp" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/xwave.png" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/asirox.svg" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt=""></span>
-        <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/exomind.png" alt=""></span>
+      <div class="tech-marquee">
+        <div class="tech-track">
+          <span class="tech-item"><img class="tech-logo" src="images/tech/hydrafacial.png" alt="HydraFacial"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/endymed.png" alt="EndyMed"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/sofwave.svg" alt="Sofwave"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/emsella.png" alt="EMSELLA"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/web/tech-healite.webp" alt="Healite II"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/xwave.png" alt="X-Wave"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/asirox.svg" alt="Asirox"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt="mesoestetic"></span>
+          <span class="tech-item"><img class="tech-logo" src="images/tech/exomind.png" alt="Exomind"></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/hydrafacial.png" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/endymed.png" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/sofwave.svg" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/emsella.png" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/web/tech-healite.webp" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/xwave.png" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/asirox.svg" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt=""></span>
+          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/exomind.png" alt=""></span>
+        </div>
       </div>
+      <button type="button" class="tech-pausa" aria-pressed="false">Pausar</button>
     </div>
-    <button type="button" class="tech-pausa" aria-pressed="false">Pausar</button>
   </section>
 
   <!-- ══ ESPECIALISTAS ══ -->
@@ -1888,109 +1584,15 @@
             </div>
           </article>
       </div>
-    </div>
-  </section>
-
-  <!-- ══ PROCESO — Cómo trabajamos ══ -->
-  <section id="clinica" aria-labelledby="clinica-titulo">
-    <div class="section-inner">
-      <div class="clinica-head">
-        <div>
-          <p class="eyebrow reveal">La clínica</p>
-          <h2 id="clinica-titulo" class="reveal d1">Un espacio<br><em>pensado para ti.</em></h2>
+      <div class="esp-pie reveal">
+        <div class="asoc">
+          <span class="asoc-label">Miembro de</span>
+          <div class="asoc-list">
+            <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-a4m.webp" alt="American Academy of Anti-Aging Medicine (A4M)"></span>
+            <span class="asoc-item"><img class="asoc-logo" src="images/web/asoc-solapav.webp" alt="Sociedad Latinoamericana de Patología Vulvar (SoLaPaV)"></span>
+          </div>
         </div>
-        <p class="body-text reveal d2">En Guadalupe Inn, Ciudad de México. Consultorios y cabinas privadas, tecnología de última generación y una boutique de dermocosmética, en una casa rodeada de jardín.</p>
-      </div>
-      <div class="mosaico reveal">
-        <figure class="m-rec"><img src="images/web/clinica-recepcion.webp" alt="Recepción de MET Clinic con el logo iluminado" width="900" height="1350" loading="lazy"><figcaption>Recepción</figcaption></figure>
-        <figure class="m-cab"><img src="images/web/clinic.webp" alt="Cabina de tratamiento con camilla y equipos de aparatología" width="1920" height="1095" loading="lazy"><figcaption>Cabina de tratamiento</figcaption></figure>
-        <figure class="m-det"><img src="images/web/clinica-detalle.webp" alt="Detalle de un tratamiento facial con equipo de aparatología" width="900" height="1350" loading="lazy"><figcaption>Tratamiento</figcaption></figure>
-        <figure class="m-con"><img src="images/web/clinica-consultorio.webp" alt="Consultorio con equipo de ultrasonido" width="900" height="1350" loading="lazy"><figcaption>Consultorio</figcaption></figure>
-        <figure class="m-bou"><img src="images/web/clinica-boutique.webp" alt="Boutique de dermocosmética de MET Clinic" width="900" height="1350" loading="lazy"><figcaption>Boutique</figcaption></figure>
-        <figure class="m-exo"><img src="images/web/clinica-exomind.webp" alt="Sesión de Exomind en la cabina de bienestar" width="900" height="1350" loading="lazy"><figcaption>Bienestar &amp; longevidad</figcaption></figure>
-      </div>
-    </div>
-  </section>
-
-  <section id="proceso">
-    <div class="section-inner">
-      <div class="proceso-header">
-        <div>
-          <p class="eyebrow reveal">Tu experiencia</p>
-          <h2 class="reveal d1">Cómo<br><em>trabajamos.</em></h2>
-        </div>
-        <p class="body-text reveal d2">Cuatro pasos. Cero protocolos genéricos.</p>
-      </div>
-      <!-- El recorrido real de una paciente. Precios y modalidades: perfil de Doctoralia (oct-2026). -->
-      <ol class="proceso-steps">
-        <li class="proceso-step reveal">
-          <div class="proceso-step__num">01</div>
-          <div class="proceso-step__title">Agenda</div>
-          <div class="proceso-step__desc">En <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a> o por <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a>, en la clínica o en línea. Primera consulta desde $2,100 MXN.</div>
-        </li>
-        <li class="proceso-step reveal d1">
-          <div class="proceso-step__num">02</div>
-          <div class="proceso-step__title">Valoración</div>
-          <div class="proceso-step__desc">Con la Dra. Melina Trujillo: te escucha, te explora y te explica beneficios, riesgos y contraindicaciones de cada opción.</div>
-        </li>
-        <li class="proceso-step reveal d2">
-          <div class="proceso-step__num">03</div>
-          <div class="proceso-step__title">Plan y tratamiento</div>
-          <div class="proceso-step__desc">Un protocolo para tu etapa, con la tecnología que de verdad necesitas, en consultorios y cabinas privadas.</div>
-        </li>
-        <li class="proceso-step reveal d3">
-          <div class="proceso-step__num">04</div>
-          <div class="proceso-step__title">Seguimiento</div>
-          <div class="proceso-step__desc">Revisamos tu evolución en consultas de seguimiento y ajustamos el plan contigo.</div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- FASE 2 — Aquí va una sección "Resultados" con before/after slider o métricas reales
-       (ej. +X% colágeno tras 3 sesiones, NPS, satisfacción medida por Doctoralia).
-       Se renderiza después de #proceso y antes de #cita para cerrar el "qué cambia". -->
-
-  <!-- ══ CITA EDITORIAL ══ -->
-  <section id="cita">
-    <div class="reveal">
-      <div class="cita__text">Ámate.<br>Rejuvenécete.</div>
-      <div class="cita__byline">Dra. Melina Trujillo Quiroz</div>
-    </div>
-  </section>
-
-  <!-- ══ FILOSOFÍA DARK ══ -->
-  <section id="filosofia">
-    <div class="section-inner">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
-        <div>
-          <p class="eyebrow reveal">Filosofía</p>
-          <h2 class="reveal d1">La medicina<br><em>como arte.</em></h2>
-          <div class="divider reveal d1"></div>
-          <p class="body-text reveal d2">No tratamos síntomas.<br>Acompañamos procesos.</p>
-        </div>
-        <div style="display:flex; justify-content:center; align-items:center;">
-          <img src="images/web/met-crema-05.webp" alt="MET Clinic"
-               class="filosofia__logo reveal d2">
-        </div>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-block reveal">
-          <div class="stat-block__num" data-count="1366" data-suffix="+">0</div>
-          <div class="stat-block__label">Opiniones verificadas</div>
-        </div>
-        <div class="stat-block reveal d1">
-          <div class="stat-block__num" data-count="9">0</div>
-          <div class="stat-block__label">Años de experiencia</div>
-        </div>
-        <div class="stat-block reveal d2">
-          <div class="stat-block__num">3×</div>
-          <div class="stat-block__label">Premio Excelencia Doctoralia</div>
-        </div>
-        <div class="stat-block reveal d3">
-          <div class="stat-block__num" data-count="6">0</div>
-          <div class="stat-block__label">Especialidades certificadas</div>
-        </div>
+        <a class="esp-mas" href="nosotros.html">Conoce la clínica y cómo trabajamos →</a>
       </div>
     </div>
   </section>
@@ -2024,6 +1626,40 @@
       <p class="testimonios-fuente reveal">
         <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico#profile-reviews" target="_blank" rel="noopener">Ver las 1,366 opiniones en Doctoralia →</a>
       </p>
+    </div>
+  </section>
+
+  <!-- ══ PREGUNTAS FRECUENTES ══
+       Solo datos verificados (perfil de Doctoralia, oct-2026, y lo que ya dice esta página).
+       No agregar horarios, estacionamiento ni datos médicos sin confirmarlos con la clínica.
+       Desde el 24-oct aquí van las 4 más útiles; las 7, con su JSON-LD FAQPage, viven en preguntas.html.
+       Si cambia una respuesta, cámbiala en las dos páginas. -->
+  <section id="preguntas" aria-labelledby="preguntas-titulo">
+    <div class="section-inner faq-grid">
+      <div class="faq-lado">
+        <p class="eyebrow reveal">Preguntas frecuentes</p>
+        <h2 id="preguntas-titulo" class="reveal d1">Antes de<br><em>tu cita.</em></h2>
+        <p class="reveal d2">¿Tienes otra duda? Escríbenos por <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a> y te responde el equipo de la clínica.</p>
+      </div>
+      <div class="faq-lista reveal d2">
+          <details>
+            <summary>¿Cuánto cuesta la primera consulta?</summary>
+            <p>Desde $2,100 MXN en la clínica y desde $1,500 MXN en línea. Son precios para pacientes sin aseguradora y pueden variar según el caso.</p>
+          </details>
+          <details>
+            <summary>¿Puedo consultar en línea?</summary>
+            <p>Sí. Agenda la consulta online en <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>: al menos 30 minutos antes te llega por SMS y correo el enlace para entrar desde tu teléfono o tu computadora.</p>
+          </details>
+          <details>
+            <summary>¿Aceptan seguro de gastos médicos?</summary>
+            <p>La clínica trabaja con GNP, AXA, MetLife, Seguros Monterrey, Seguros Banorte, Quálitas, BBVA Seguros y PIF. La cobertura depende de tu póliza y del servicio: confírmala al agendar.</p>
+          </details>
+          <details>
+            <summary>¿Cómo agendo?</summary>
+            <p>En <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>, donde ves los horarios libres y confirmas al momento, o por <a href="https://wa.me/525540099923?text=Hola%2C%20quiero%20agendar%20una%20consulta" target="_blank" rel="noopener">WhatsApp al 55 4009 9923</a>.</p>
+          </details>
+          <p class="faq-todas"><a href="preguntas.html">Ver todas las preguntas →</a></p>
+      </div>
     </div>
   </section>
 
@@ -2102,49 +1738,6 @@
     </div>
   </section>
 
-  <!-- ══ PREGUNTAS FRECUENTES ══
-       Solo datos verificados (perfil de Doctoralia, oct-2026, y lo que ya dice esta página).
-       No agregar horarios, estacionamiento ni datos médicos sin confirmarlos con la clínica.
-       Si cambia una respuesta, cámbiala también en el JSON-LD FAQPage del <head>. -->
-  <section id="preguntas" aria-labelledby="preguntas-titulo">
-    <div class="section-inner faq-grid">
-      <div class="faq-lado">
-        <p class="eyebrow reveal">Preguntas frecuentes</p>
-        <h2 id="preguntas-titulo" class="reveal d1">Antes de<br><em>tu cita.</em></h2>
-        <p class="reveal d2">¿Tienes otra duda? Escríbenos por <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a> y te responde el equipo de la clínica.</p>
-      </div>
-      <div class="faq-lista reveal d2">
-          <details>
-            <summary>¿Cuánto cuesta la primera consulta?</summary>
-            <p>Desde $2,100 MXN en la clínica y desde $1,500 MXN en línea. Son precios para pacientes sin aseguradora y pueden variar según el caso.</p>
-          </details>
-          <details>
-            <summary>¿Puedo consultar en línea?</summary>
-            <p>Sí. Agenda la consulta online en <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>: al menos 30 minutos antes te llega por SMS y correo el enlace para entrar desde tu teléfono o tu computadora.</p>
-          </details>
-          <details>
-            <summary>¿Qué formas de pago aceptan?</summary>
-            <p>Efectivo, transferencia y tarjeta de crédito o débito.</p>
-          </details>
-          <details>
-            <summary>¿Aceptan seguro de gastos médicos?</summary>
-            <p>La clínica trabaja con GNP, AXA, MetLife, Seguros Monterrey, Seguros Banorte, Quálitas, BBVA Seguros y PIF. La cobertura depende de tu póliza y del servicio: confírmala al agendar.</p>
-          </details>
-          <details>
-            <summary>¿Necesito una valoración antes de un tratamiento?</summary>
-            <p>Sí. Todo tratamiento empieza con una valoración médica con la Dra. Melina Trujillo, en la que te explica beneficios, riesgos y contraindicaciones, y diseña contigo un plan para tu etapa.</p>
-          </details>
-          <details>
-            <summary>¿Dónde está la clínica y cómo llego?</summary>
-            <p>En Guty Cárdenas 65, Col. Guadalupe Inn, Álvaro Obregón, CDMX 01020: a 6 minutos a pie del Metro Barranca del Muerto (Línea 7) y a una calle de Av. Revolución. <a href="#mapa">Ver el mapa</a>.</p>
-          </details>
-          <details>
-            <summary>¿Cómo agendo?</summary>
-            <p>En <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia</a>, donde ves los horarios libres y confirmas al momento, o por <a href="https://wa.me/525540099923?text=Hola%2C%20quiero%20agendar%20una%20consulta" target="_blank" rel="noopener">WhatsApp al 55 4009 9923</a>.</p>
-          </details>
-      </div>
-    </div>
-  </section>
 
   <!-- ══ FOOTER ══ -->
   </main>
@@ -2160,10 +1753,11 @@
         <ul class="footer-col__links">
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#especialistas">Equipo</a></li>
-          <li><a href="#clinica">La clínica</a></li>
+          <li><a href="nosotros.html">La clínica</a></li>
           <li><a href="#testimonios">Opiniones</a></li>
           <li><a href="#contacto">Contacto</a></li>
-          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="preguntas.html">Preguntas frecuentes</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
         </ul>
       </div>
       <div>

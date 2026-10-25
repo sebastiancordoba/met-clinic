@@ -42,12 +42,17 @@ node generate-pdf.mjs
 
 ## index.html architecture
 
-Section order (anchors used by nav links and `main.js` smooth-scroll):
+Section order (anchors used by nav links and `main.js` smooth-scroll). Since 24-oct-2026 the home page has **6 blocks**
+(Sebas: «reduzcámoslo a 5 o 6»); keep it that way:
 
 ```
-#hero  →  #asociaciones  →  #servicios  →  #tecnologia  →  #especialistas  →  #clinica
-       →  #proceso  →  #cita  →  #filosofia (salvia)  →  #testimonios  →  #contacto  →  <footer>
+#hero (portada + franja)  →  #servicios (con #tecnologia al final)  →  #especialistas (doctora, equipo, asociaciones)
+       →  #testimonios  →  #preguntas (4; «Ver todas» → preguntas.html)  →  #contacto (mapa + agenda)  →  <footer>
 ```
+
+What left the home page lives in `nosotros.html` (#clinica mosaico, #proceso «Cómo trabajamos», #cita «Ámate.
+Rejuvenécete.», #filosofia sin cifras) and `preguntas.html` (las 7 preguntas + su JSON-LD FAQPage). Both use
+`pilares.css` (bloque «NOSOTROS»). Menú: Servicios · Equipo · Opiniones · Contacto; Tienda va en el pie.
 
 Things worth knowing before editing:
 
@@ -87,8 +92,8 @@ Things worth knowing before editing:
   «frena la caída», «sin tiempo de recuperación» o «se nota desde la primera sesión»; di «progresiva» o «recuperación
   mínima».
 - **Datos verificados:** precios, formas de pago, aseguradoras, consulta en línea y formación de la doctora salen de su
-  perfil de Doctoralia (revisado el 23-oct-2026). Viven en #preguntas (más su JSON-LD FAQPage), #proceso, #contacto,
-  la franja de #asociaciones y la tarjeta de la doctora: si cambia uno, cámbialo en todos. Pendiente de confirmar con
+  perfil de Doctoralia (revisado el 23-oct-2026). Viven en `preguntas.html` (más su JSON-LD FAQPage), las 4 de
+  #preguntas en la portada, `nosotros.html#proceso`, #contacto y la tarjeta de la doctora: si cambia uno, cámbialo en todos. Pendiente de confirmar con
   ella: la página dice «9 años» y 4 idiomas; Doctoralia dice 11 años y español/inglés.
 - **Hero:** el póster del video va como fondo precargado del `<div>`, no como atributo `poster` (LCP en celular
   2.9 → 2.4 s). En el teléfono, el hueco de la barra fija de contacto va en el `footer`, no en el `body`.
