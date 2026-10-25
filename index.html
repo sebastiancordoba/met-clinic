@@ -467,13 +467,16 @@
     #servicios {
       background:var(--confort);
       border-top:1px solid rgba(130,134,127,0.14);
-      padding:clamp(64px,8vw,120px) 0;
+      padding:clamp(40px,5vw,72px) 0 clamp(56px,7vw,96px);
     }
     #servicios .section-inner { padding-top:0; padding-bottom:0; }
-    .serv-head { max-width:900px; margin-bottom:clamp(40px,5vw,64px); }
+    /* Que quepa (24-oct, Sebas): título + Ginecología arriba en una fila y los 6 pilares en una
+       rejilla 3×2; todo junto entra en una laptop de 680 px. Tablet 2×3, teléfono 1 columna. */
+    .serv-top { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,40px); align-items:stretch; margin-bottom:clamp(14px,1.6vw,20px); }
+    .serv-head { max-width:900px; align-self:end; }
     .serv-head h2 {
       font-family:var(--font); font-weight:200; text-transform:none;
-      font-size:clamp(36px,5.6vw,80px); line-height:0.96; letter-spacing:-0.03em;
+      font-size:clamp(34px,4vw,58px); line-height:0.96; letter-spacing:-0.03em;
       margin-bottom:0;
     }
     .serv-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.78); max-width:580px; }
@@ -482,9 +485,9 @@
     .serv-firma {
       position:relative; overflow:hidden;
       display:flex; flex-direction:column; justify-content:flex-end;
-      min-height:clamp(340px,42vw,480px);
-      padding:clamp(28px,3.5vw,56px);
-      margin-bottom:24px; color:var(--confort);
+      min-height:clamp(200px,30vh,280px);
+      padding:clamp(22px,2.6vw,40px);
+      color:var(--confort); text-decoration:none;
     }
     .serv-firma::before {
       content:''; position:absolute; inset:0; z-index:0;
@@ -495,54 +498,55 @@
        de su propio fondo desenfocado, para no estirarla y que no se vea borrosa. */
     @media (min-width:761px){ .serv-firma::before {
       background:linear-gradient(90deg, #bdbdbd 42%, rgba(189,189,189,0) 60%),
-                 url('images/web/servicio-oshot-prp.webp') right center/58% auto no-repeat, #bdbdbd; } }
+                 url('images/web/servicio-oshot-prp.webp') right center/auto 100% no-repeat, #bdbdbd; } } /* alto completo: la foto (725×658) nunca se agranda */
     .serv-firma:hover::before { transform:scale(1.04); }
     .serv-firma::after {
       content:''; position:absolute; inset:0; z-index:0;
       background:linear-gradient(105deg, rgba(38,38,38,0.82) 0%, rgba(38,38,38,0.45) 52%, rgba(38,38,38,0.12) 100%);
     }
     .serv-firma > * { position:relative; z-index:1; }
-    .serv-firma__tag { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; opacity:0.85; margin-bottom:16px; }
-    .serv-firma__title { font-family:var(--font); font-weight:200; font-size:clamp(30px,4vw,56px); line-height:1.0; letter-spacing:-0.02em; margin-bottom:16px; max-width:18ch; }
-    .serv-firma__desc { font-size:clamp(15px,1.1vw,18px); font-weight:300; line-height:1.6; max-width:480px; color:rgba(247,237,220,0.85); margin-bottom:26px; }
+    .serv-firma__tag { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; opacity:0.85; margin-bottom:10px; }
+    .serv-firma__title { font-family:var(--font); font-weight:200; font-size:clamp(26px,2.6vw,40px); line-height:1.0; letter-spacing:-0.02em; margin-bottom:10px; max-width:18ch; }
+    .serv-firma__desc { font-size:clamp(14px,1vw,16px); font-weight:300; line-height:1.5; max-width:420px; color:rgba(247,237,220,0.85); margin-bottom:16px; }
+    /* En compu la foto ocupa el 58 % derecho: el texto se queda en la parte gris. */
+    @media (min-width:761px){ .serv-firma__title, .serv-firma__desc { max-width:min(420px, 56%); } }
     .serv-firma__link { display:inline-flex; align-items:center; gap:10px; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--confort); border-bottom:1px solid var(--confort); padding-bottom:6px; transition:gap 0.3s; }
     .serv-firma__link:hover { gap:16px; }
 
-    /* Pilares — filas (lista) */
-    .serv-grid { display:flex; flex-direction:column; border-top:1px solid var(--sage-mid); }
-    /* Desktop: los 6 llenan una pantalla, repartidos por igual */
-    @media (min-width:761px){
-      .serv-grid { height:calc(100vh - 68px); height:calc(100dvh - 68px); }
-      .pilar { flex:1; padding-top:0; padding-bottom:0; }
-    }
+    /* Pilares — rejilla de tarjetas (24-oct; antes, 6 filas de una pantalla de alto) */
+    .serv-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.4vw,18px); }
     .pilar {
-      display:grid;
-      grid-template-columns: auto minmax(0,1.5fr) minmax(0,1fr) auto;
-      align-items:center; gap:clamp(20px,3.5vw,60px);
-      padding:clamp(26px,3vw,42px) clamp(6px,1vw,18px);
-      border-bottom:1px solid var(--sage-mid);
-      position:relative; overflow:hidden;
-      transition:background 0.3s var(--ease), padding-left 0.35s var(--ease);
+      display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+      padding:clamp(18px,1.8vw,26px); min-height:clamp(140px,19vh,190px);
+      background:rgba(255,255,255,0.5); border:1px solid rgba(130,134,127,0.18);
+      text-decoration:none; position:relative;
+      transition:background 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease), border-color 0.3s;
     }
-    .pilar::before { content:''; position:absolute; top:0; left:0; bottom:0; width:0; background:var(--sage); transition:width 0.35s var(--ease); }
-    .pilar:hover { background:var(--white); padding-left:clamp(16px,1.8vw,30px); }
-    .pilar:hover::before { width:3px; }
-    .pilar__n { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--texto-suave); margin:0; white-space:nowrap; }
-    .pilar__title { font-family:var(--font); font-weight:300; font-size:clamp(22px,2.4vw,36px); line-height:1.05; letter-spacing:-0.02em; color:var(--dark); margin:0; }
-    .pilar__desc { font-size:15px; font-weight:300; line-height:1.5; color:rgba(38,38,38,0.78); margin:0; }
-    .pilar__link { display:inline-flex; align-items:center; gap:8px; margin:0; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); white-space:nowrap; transition:gap 0.3s, color 0.3s; }
-    .pilar:hover .pilar__link { gap:13px; color:var(--sage); }
-    @media (max-width:760px){
-      .pilar {
-        grid-template-columns:auto 1fr;
-        grid-template-areas:"n title" "desc desc" "link link";
-        gap:6px 16px; padding:26px 4px;
-      }
-      .pilar__n { grid-area:n; align-self:center; }
-      .pilar__title { grid-area:title; font-size:clamp(21px,5.4vw,28px); }
-      .pilar__desc { grid-area:desc; margin-top:8px; }
-      .pilar__link { grid-area:link; margin-top:16px; }
-      .pilar:hover { padding-left:4px; }
+    .pilar:hover, .pilar:focus-visible { background:var(--white); border-color:rgba(130,134,127,0.3); box-shadow:0 14px 36px -18px rgba(38,38,38,0.25); transform:translateY(-3px); }
+    .pilar__n { font-size:11px; font-weight:600; letter-spacing:0.22em; color:var(--texto-suave); }
+    .pilar__title { font-family:var(--font); font-weight:300; font-size:clamp(19px,1.6vw,24px); line-height:1.1; letter-spacing:-0.015em; color:var(--dark); }
+    .pilar__desc { font-size:14px; font-weight:300; line-height:1.5; color:rgba(38,38,38,0.78); }
+    .pilar__link { display:inline-flex; align-items:center; gap:8px; margin-top:auto; padding-top:6px; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); white-space:nowrap; transition:gap 0.3s, color 0.3s; }
+    .pilar:hover .pilar__link { gap:13px; color:var(--texto-suave); }
+    /* Laptop baja (≤ 780 px de alto): todo más apretado para que título, Ginecología y los 6 quepan juntos. */
+    @media (min-width:1101px) and (max-height:780px){
+      #servicios { padding-top:28px; }
+      .serv-firma { min-height:170px; padding:20px 26px; }
+      .serv-firma__title { font-size:24px; }
+      .serv-firma__desc { margin-bottom:10px; font-size:13.5px; }
+      .pilar { min-height:0; padding:14px 18px; gap:4px; }
+      .pilar__title { font-size:19px; }
+      .pilar__desc { font-size:13.5px; }
+    }
+    @media (max-width:1100px){
+      .serv-top { grid-template-columns:1fr; }
+      .serv-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:640px){
+      .serv-grid { grid-template-columns:1fr; gap:10px; }
+      .pilar { min-height:0; padding:16px 18px; display:grid; grid-template-columns:24px 1fr; gap:4px 14px; }
+      .pilar__n { grid-row:span 3; padding-top:6px; }
+      .pilar__link { margin-top:4px; padding-top:0; }
     }
 
     /* ═══════════════════════════════════════════
@@ -1153,6 +1157,7 @@
 
     /* ── Fotos y tarjetas grandes ── */
     html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
+    html.redondeado .pilar { border-radius: var(--r-md); }
     html.redondeado .esp-card {
       border-radius: var(--r-lg);
       border-color: rgba(130,134,127,0.14);
@@ -1419,6 +1424,7 @@
   <!-- ══ SERVICIOS — Firma + Pilares ══ -->
   <section id="servicios">
     <div class="section-inner">
+      <div class="serv-top">
       <div class="serv-head reveal">
         <p class="eyebrow">Tratamientos</p>
         <h2>Tu cuerpo,<br><em>en un solo lugar.</em></h2>
@@ -1431,6 +1437,7 @@
         <span class="serv-firma__desc">Láser íntimo CO₂, O-Shot, suelo pélvico EMSELLA y despigmentación íntima. La firma que distingue a MET Clinic.</span>
         <span class="serv-firma__link">Explorar tratamientos →</span>
       </a>
+      </div>
 
       <!-- Pilares -->
       <div class="serv-grid">

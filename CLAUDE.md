@@ -53,6 +53,9 @@ Section order (anchors used by nav links and `main.js` smooth-scroll). Since 24-
 What left the home page lives in `nosotros.html` (#clinica mosaico, #proceso «Cómo trabajamos», #cita «Ámate.
 Rejuvenécete.», #filosofia sin cifras) and `preguntas.html` (las 7 preguntas + su JSON-LD FAQPage). Both use
 `pilares.css` (bloque «NOSOTROS»). Menú: Servicios · Equipo · Opiniones · Contacto; Tienda va en el pie.
+#servicios: título y la tarjeta de Ginecología en una fila, los 6 pilares en rejilla 3×2 (tablet 2×3, teléfono una
+columna); todo junto cabe en una laptop de 680 px. Barra de desplazamiento: ver `pie.js` (4); no vuelvas a poner
+estilos `::-webkit-scrollbar`, porque en macOS vuelven fija la barra flotante.
 
 Things worth knowing before editing:
 
