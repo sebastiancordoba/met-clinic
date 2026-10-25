@@ -85,8 +85,10 @@ Things worth knowing before editing:
   ella: la página dice «9 años» y 4 idiomas; Doctoralia dice 11 años y español/inglés.
 - **Hero:** el póster del video va como fondo precargado del `<div>`, no como atributo `poster` (LCP en celular
   2.9 → 2.4 s). En el teléfono, el hueco de la barra fija de contacto va en el `footer`, no en el `body`.
-  Video y barra de datos viven en `.portada`, de alto `100svh − 68px` (y `− --barra-h` en el teléfono), para que la
-  barra se vea entera al entrar. El velo crema se mide en px desde abajo. En el teléfono el póster es
+  Video y barra de datos viven en `.portada`, de alto `100svh` (y `− --barra-h` en el teléfono), para que la
+  barra se vea entera al entrar. Desde el 24-oct el video sube bajo la barra de arriba, que va transparente
+  (`.nav--video`, ya en el HTML; `main.js` la quita a los 48 px o con el menú abierto). El texto va en crema sobre
+  una sombra oscura que sigue al bloque (`.hero__texto::before`); su contraste se mide sobre cuadros del video. El velo crema se mide en px desde abajo. En el teléfono el póster es
   `hero-poster-movil.webp` (vertical); `optimizar-video.sh` genera los dos.
 
 ### Mapa de #contacto (`#mapa` + IIFE en `main.js`)

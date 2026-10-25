@@ -12,9 +12,13 @@ function getDarkRanges() {
 let darkRanges = getDarkRanges();
 window.addEventListener('resize', () => { darkRanges = getDarkRanges(); updateNav(); });
 
+// Al entrar, la barra va transparente sobre el video (.nav--video, ya viene en el HTML
+// para que no parpadee). Al bajar 48 px, o con el menú del teléfono abierto, vuelve al crema.
+const navSobreVideo = !!document.querySelector('.hero');
 function updateNav() {
   const y = window.scrollY;
   const mid = y + nav.offsetHeight / 2;
+  nav.classList.toggle('nav--video', navSobreVideo && y < 48 && !document.querySelector('.nav__drawer.open'));
   nav.classList.toggle('scrolled', y > 60);
   nav.classList.toggle('dark-section', darkRanges.some(r => mid >= r.top && mid <= r.bottom));
 }
@@ -151,6 +155,7 @@ const drawer = document.getElementById('nav-drawer');
 hamburger.addEventListener('click', () => {
   hamburger.classList.toggle('open');
   drawer.classList.toggle('open');
+  updateNav();
 });
 document.querySelectorAll('.drawer-link').forEach(a => {
   a.addEventListener('click', () => {
