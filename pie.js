@@ -105,3 +105,31 @@
     nota.hidden = false;
   });
 })();
+
+// 3. Un solo «Agendar consulta» a la vista (24-oct, Sebas: «dos botones para lo mismo»).
+//    Mientras se ve el botón principal de la primera pantalla (portada o cabecera del
+//    servicio), <html> lleva .cta-principal-visible: el CSS esconde el botón de la barra
+//    de arriba, y aquí se esconde la barra fija del teléfono. Al salir ese botón de la
+//    pantalla aparecen los dos. La barra también se esconde sobre el bloque final
+//    (#contacto o .pilar-cta), que ya trae los mismos botones en grande.
+//    El HTML ya trae los dos estados «escondidos» para que no parpadeen al cargar.
+(function () {
+  const raiz = document.documentElement;
+  const barra = document.querySelector('.barra-movil');
+  const principal = document.querySelector('.hero .btn-primary, .pilar-hero .btn-primary');
+  const final = document.querySelector('#contacto, .pilar-cta');
+  if (!principal || !('IntersectionObserver' in window)) {
+    raiz.classList.remove('cta-principal-visible');
+    if (barra) barra.classList.remove('oculta');
+    return;
+  }
+  const visible = new Map();
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => visible.set(e.target, e.isIntersecting));
+    const arriba = !!visible.get(principal);
+    raiz.classList.toggle('cta-principal-visible', arriba);
+    if (barra) barra.classList.toggle('oculta', arriba || !!visible.get(final));
+  }, { threshold: 0.25 });
+  io.observe(principal);
+  if (final) io.observe(final);
+})();

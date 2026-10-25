@@ -24,13 +24,4 @@ const obs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 
-/* ── Barra de contacto en móvil ──────────────────────────────────────────
-   Se esconde mientras el bloque final (.pilar-cta) está en pantalla: ahí ya
-   están los mismos dos botones en grande. */
-(function () {
-  const barra = document.querySelector('.barra-movil');
-  const cta = document.querySelector('.pilar-cta');
-  if (!barra || !cta || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(([e]) => barra.classList.toggle('oculta', e.isIntersecting),
-    { threshold: 0.25 }).observe(cta);
-})();
+/* La barra de contacto del teléfono (cuándo se ve) vive en pie.js, igual en todas las páginas. */

@@ -267,16 +267,7 @@ document.querySelectorAll('.drawer-link').forEach(a => {
 })();
 
 
-/* ── Barra de contacto en móvil ──────────────────────────────────────────
-   Se esconde cuando #contacto está en pantalla: ahí ya están los mismos dos
-   botones en grande y repetirlos abajo solo estorba. */
-(function () {
-  const barra = document.querySelector('.barra-movil');
-  const contacto = document.getElementById('contacto');
-  if (!barra || !contacto || !('IntersectionObserver' in window)) return;
-  new IntersectionObserver(([e]) => barra.classList.toggle('oculta', e.isIntersecting),
-    { threshold: 0.25 }).observe(contacto);
-})();
+/* La barra de contacto del teléfono (cuándo se ve) vive en pie.js, igual en todas las páginas. */
 
 
 /* ── Mapa propio en #contacto ────────────────────────────────────────────
