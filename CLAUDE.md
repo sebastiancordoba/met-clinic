@@ -53,6 +53,12 @@ Things worth knowing before editing:
 
 - **Nav offset is 68px.** Fixed nav height is hardcoded; smooth-scroll in `main.js` subtracts 68, and several sections size themselves to `calc(100dvh - 68px)`. If you change nav height, hunt down all three.
 - **`.is-dark` sections** flip the nav to a dark theme on scroll (`main.js` toggles `nav.dark-section`). No section uses it today — the site stays on the light palette — but the mechanism is still there.
+- **Que cada bloque quepa en la pantalla (24-oct, Sebas).** Cada bloque que no se debe partir (tarjeta, foto, mapa
+  con su tarjeta, la columna de título de un grupo de tratamientos) cabe entero en el alto útil: pantalla − 68 px de
+  la barra (− 67 de la barra fija en el teléfono), en 1280×680, 1440×900, 1920×1080, iPad e iPhone. Las fotos se topan
+  con `100svh` y enfocan la cara. En las páginas de servicio la columna izquierda de cada grupo es `sticky`; por eso
+  `html`/`body` usan `overflow-x:clip` y no `hidden` (hidden rompe sticky). Las anclas ya bajan bajo la barra con
+  `scroll-padding-top`. Sin scroll-snap: con listas largas brincaba.
 - **One-screen layout pattern.** `#sobre-block` and `#servicios` are constrained to `height: calc(100dvh - 68px)` and use flex column children with `flex:1 / min-height:0` so content fills exactly one viewport. Be careful with padding/margins inside them — small additions overflow and clip.
 - **Bordes redondeados (default since 24-oct-2026, Sebas chose them).** One radius scale: `--r-sm` 8, `--r-md` 14,
   `--r-lg` 20, `--r-pill` 999 (buttons, chips). The block lives under `html.redondeado` at the end of `index.html`'s
