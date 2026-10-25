@@ -254,12 +254,14 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const zoom = (w, h) => Math.max(caja.width / w, caja.height / h);
   const vertical = window.matchMedia('(max-width: 640px)').matches || zoom(720, 1080) < zoom(1920, 1080);
   const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
-  // ?video=lento: el mismo archivo a 0.8× para comparar (24-oct, Sebas: «va muy rápido»).
-  // Son 11 tomas en 11 s; a 0.8× cada una dura ~1.25 s y el video 13.8 s.
-  const lento = /[?&]video=lento\b/.test(location.search);
+  // Velocidad para comparar (24-oct, Sebas: «va muy rápido»): ?video=lento (0.8×, 13.8 s),
+  // ?video=medio (0.9×, 12.3 s) o ?video=<número> para probar otra (0.5–1.5, p. ej. ?video=0.85).
+  // Son 11 tomas en 11 s.
+  const pedida = (location.search.match(/[?&]video=([a-z]+|\d*\.?\d+)/) || [])[1];
+  const velocidad = { lento: 0.8, medio: 0.9 }[pedida] || Math.min(1.5, Math.max(0.5, parseFloat(pedida))) || 1;
   const arrancar = () => {
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
-    if (lento) v.defaultPlaybackRate = v.playbackRate = 0.8;
+    if (velocidad !== 1) v.defaultPlaybackRate = v.playbackRate = velocidad;
     v.play().catch(() => {});
   };
   if (document.readyState === 'complete') arrancar();
