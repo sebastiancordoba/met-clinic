@@ -214,13 +214,10 @@ html.barra-propia::-webkit-scrollbar { display:none; }
 
 /* ════════════ FOOTER ════════════ */
 footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px clamp(20px,4vw,56px) 36px; }
-.footer-grid { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; }
+/* Sin columnas de enlaces desde el 26-oct: solo logo y datos (ver index.html). */
+.footer-grid { max-width:1140px; margin:0 auto; }
 .footer-logo { height:96px; width:auto; opacity:0.85; margin-bottom:20px; display:block; }
 .footer-tagline { font-size:14px; font-weight:300; letter-spacing:0.06em; color:rgba(247,237,220,0.55); line-height:1.8; }
-.footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,237,220,0.78); margin-bottom:18px; }
-.footer-col__links { list-style:none; display:flex; flex-direction:column; gap:11px; }
-.footer-col__links a { font-size:14px; font-weight:300; color:rgba(247,237,220,0.65); letter-spacing:0.04em; transition:color 0.3s; }
-.footer-col__links a:hover { color:var(--confort); }
 .footer-bottom { max-width:1140px; margin:32px auto 0; padding-top:22px; border-top:1px solid rgba(130,134,127,0.14); display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
 .footer-copy { font-size:13px; font-weight:300; color:rgba(247,237,220,0.68); }
 
@@ -231,10 +228,8 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
   .nav__marca { position:absolute; left:50%; transform:translateX(-50%); }
   .pilar-intro__grid { grid-template-columns:1fr; gap:24px; }
   .tgroup { grid-template-columns:1fr; gap:24px; }
-  .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
 }
 @media (max-width:560px) {
-  .footer-grid { grid-template-columns:1fr; }
   .footer-bottom { flex-direction:column; text-align:center; }
   .titem { flex-wrap:wrap; gap:4px 16px; }
   .titem__meta { width:100%; padding-left:21px; line-height:1.4; }

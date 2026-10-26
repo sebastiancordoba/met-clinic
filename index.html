@@ -983,19 +983,13 @@
       border-top:2px solid var(--sage);
       padding:60px 56px 40px;
     }
-    .footer-grid {
-      max-width:1100px; margin:0 auto;
-      display:grid; grid-template-columns:1.2fr 1fr 1fr;
-      gap:56px;
-    }
+    /* Desde el 26-oct el pie no lleva columnas de enlaces (Sebas: «quita todo esto»): solo logo y datos.
+       Tienda va en el menú; La clínica y Preguntas, enlazadas desde la portada. */
+    .footer-grid { max-width:1100px; margin:0 auto; }
     .footer-logo { height:120px; width:auto; opacity:0.85; margin-bottom:24px; display:block; }
     .footer-tagline { font-size:14px; font-weight:300; letter-spacing:0.06em; color:rgba(247,237,220,0.55); line-height:1.8; }
     .info-item__value a { color:inherit; text-decoration:none; border-bottom:1px solid var(--sage); }
     .footer-tagline a { color:inherit; text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.25); }
-    .footer-col__label { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,237,220,0.78); margin-bottom:20px; }
-    .footer-col__links { list-style:none; display:flex; flex-direction:column; gap:12px; }
-    .footer-col__links a { font-size:15px; font-weight:300; color:rgba(247,237,220,0.65); text-decoration:none; letter-spacing:0.04em; transition:color 0.3s; }
-    .footer-col__links a:hover { color:var(--confort); }
     .footer-bottom {
       max-width:1100px; margin:36px auto 0;
       padding-top:24px;
@@ -1059,6 +1053,13 @@
     .nav__drawer a:hover { color: var(--sage); }
     .nav__drawer .btn-primary { margin-top: 20px; text-align: center; padding: 15px; }
 
+    /* Menú de hamburguesa también en tablet: con Tienda de vuelta en el menú (26-oct), entre 641 y 960 px
+       los 5 enlaces y «Agendar consulta» ya no caben junto al logo. */
+    @media (min-width:641px) and (max-width:960px) {
+      .nav__links, .nav__cta { display:none; }
+      .nav__hamburger { display:flex; }
+    }
+
     /* ═══════════════════════════════════════════
        RESPONSIVE — TABLET (≤ 900px)
     ═══════════════════════════════════════════ */
@@ -1072,7 +1073,6 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .testimonios-grid { grid-template-columns: repeat(2, 1fr); }
       .contacto-grid { grid-template-columns: 1fr; gap: 52px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
 
     /* ═══════════════════════════════════════════
@@ -1133,7 +1133,6 @@
 
       /* Footer */
       footer { padding: 48px 20px 32px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-social { justify-content: center; flex-wrap: wrap; gap: 10px; }
       .footer-social { gap: 8px; }
@@ -1402,6 +1401,7 @@
       <li><a href="#especialistas">Equipo</a></li>
       <li><a href="#testimonios">Opiniones</a></li>
       <li><a href="#contacto">Contacto</a></li>
+      <li><a href="tienda.html">Tienda</a></li>
     </ul>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="nav__cta">Agendar consulta</a>
     <button class="nav__hamburger" id="hamburger" aria-label="Menú">
@@ -1415,6 +1415,7 @@
     <a href="#especialistas" class="drawer-link">Equipo</a>
     <a href="#testimonios" class="drawer-link">Opiniones</a>
     <a href="#contacto" class="drawer-link">Contacto</a>
+    <a href="tienda.html" class="drawer-link">Tienda</a>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar consulta</a>
   </div>
 
@@ -1833,30 +1834,6 @@
       <div>
         <img src="images/web/met-negativo-07.webp" alt="MET Clinic" class="footer-logo">
         <p class="footer-tagline">Ginecología estética,<br>regenerativa y funcional.<br>Guty Cárdenas 65, Guadalupe Inn<br>Álvaro Obregón, CDMX 01020<br><a href="tel:+525540099923">55 4009 9923</a></p>
-      </div>
-      <div>
-        <div class="footer-col__label">Navegación</div>
-        <ul class="footer-col__links">
-          <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#especialistas">Equipo</a></li>
-          <li><a href="nosotros.html">La clínica</a></li>
-          <li><a href="#testimonios">Opiniones</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-          <li><a href="preguntas.html">Preguntas frecuentes</a></li>
-          <li><a href="tienda.html">Tienda</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col__label">Servicios</div>
-        <ul class="footer-col__links">
-          <li><a href="pilar-ginecologia.html">Ginecología Estética</a></li>
-          <li><a href="pilar-facial.html">Rejuvenecimiento Facial</a></li>
-          <li><a href="pilar-corporal.html">Contorno Corporal</a></li>
-          <li><a href="pilar-piel.html">Manchas, Cicatrices &amp; Estrías</a></li>
-          <li><a href="pilar-capilar.html">Salud Capilar</a></li>
-          <li><a href="pilar-depilacion.html">Depilación Láser</a></li>
-          <li><a href="pilar-longevidad.html">Bienestar &amp; Longevidad</a></li>
-        </ul>
       </div>
     </div>
     <!-- Franja del pie (24-oct-2026): «Pregúntale a tu IA» y mapa chico. Comportamiento en pie.js.
