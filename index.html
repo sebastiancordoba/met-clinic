@@ -682,17 +682,13 @@
       .esp-formacion { gap:6px; padding-top:12px; margin-bottom:16px; }
       .esp-formacion li { font-size:12.5px; line-height:1.4; }
     }
-    /* El resto del equipo: lista compacta bajo la tarjeta de la doctora (26-oct; patrón de Rhea Fertility). */
-    .equipo-lista { margin-top:clamp(24px,3vw,40px); }
-    .equipo-lista__titulo { font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:6px; }
-    .equipo-lista ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:clamp(20px,3vw,40px); }
-    .equipo-persona { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid rgba(130,134,127,0.2); }
-    .equipo-persona img { width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 30%; flex:none; background:var(--confort); }
-    .equipo-persona > span { display:flex; flex-direction:column; gap:3px; min-width:0; }
-    .equipo-persona__nombre { font-size:16px; font-weight:400; color:var(--dark); }
-    .equipo-persona__puesto { font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--texto-suave); }
-    @media (max-width:900px) { .equipo-lista ul { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-    @media (max-width:640px) { .equipo-lista ul { grid-template-columns:1fr; } }
+    /* El resto del equipo: rejilla de cinco retratos iguales bajo la tarjeta de la doctora. */
+    .equipo-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(14px,1.6vw,24px); margin-top:clamp(28px,3.5vw,48px); }
+    .esp-card--equipo .esp-body { padding:14px 16px 18px; }
+    .esp-card--equipo .esp-name { font-size:clamp(16px,1.25vw,19px); margin-bottom:6px; }
+    .esp-card--equipo .esp-role { margin-bottom:0; }
+    @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:640px) { .equipo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     .esp-social a { color:rgba(38,38,38,0.78); transition:color 0.3s; display:flex; }
     .esp-social a:hover { color:var(--sage); }
     @media (max-width:640px){
@@ -1614,33 +1610,46 @@
           <button class="esp-arrow" id="espNext" aria-label="Siguiente">→</button>
         </div>
       </div>
-      <!-- El resto del equipo, como lista compacta (26-oct; antes tarjetas grandes). Fotos de la sesión de septiembre
-           (equipo-1…5 = DSC00108, 00121, 00153, 00161, 00229). NOMBRE Y PUESTO PENDIENTES: no vienen en el Drive.
-           Cuando lleguen, cambia «… por confirmar» y quita data-pendiente; no los inventes. -->
-      <div class="equipo-lista reveal d2">
-        <p class="equipo-lista__titulo">El equipo de la clínica</p>
-        <ul>
-          <li class="equipo-persona" data-pendiente="nombre y puesto">
-            <img src="images/web/equipo-1-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
-          </li>
-          <li class="equipo-persona" data-pendiente="nombre y puesto">
-            <img src="images/web/equipo-2-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
-          </li>
-          <li class="equipo-persona" data-pendiente="nombre y puesto">
-            <img src="images/web/equipo-3-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
-          </li>
-          <li class="equipo-persona" data-pendiente="nombre y puesto">
-            <img src="images/web/equipo-4-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
-          </li>
-          <li class="equipo-persona" data-pendiente="nombre y puesto">
-            <img src="images/web/equipo-5-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
-            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
-          </li>
-        </ul>
+      <!-- El resto del equipo, en fotos grandes (restaurado el 24-oct; 69b19f3 había escondido los espacios; el 26-oct
+           se probó una lista compacta y Sebas prefirió volver a las fotos grandes). Fotos de la sesión de
+           septiembre, recortadas como serie en optimizar-imagenes.py. NOMBRE Y PUESTO PENDIENTES: no vienen en el
+           Drive. Antes de publicar, cambia «… por confirmar» y el alt por los datos reales; no los inventes. -->
+      <div class="equipo-grid reveal d2">
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-1.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-2.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-3.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-4.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-5.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Nombre por confirmar</div>
+              <div class="esp-role">Puesto por confirmar</div>
+            </div>
+          </article>
       </div>
       <div class="esp-pie reveal">
         <div class="asoc">
