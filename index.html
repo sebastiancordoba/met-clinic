@@ -258,10 +258,11 @@
     }
 
     /* Hero entrance — elements animate in on load */
-    .hero__eyebrow, .hero__title, .hero__firma, .hero__actions {
+    .hero__premio, .hero__eyebrow, .hero__title, .hero__firma, .hero__actions {
       opacity:0; transform:translateY(16px);
       transition:opacity 0.7s var(--ease), transform 0.7s var(--ease);
     }
+    .hero--loaded .hero__premio    { opacity:1; transform:none; transition-delay:0.15s; }
     .hero--loaded .hero__eyebrow   { opacity:1; transform:none; transition-delay:0.25s; }
     .hero--loaded .hero__title     { opacity:1; transform:none; transition-delay:0.40s; }
     .hero--loaded .hero__firma     { opacity:1; transform:none; transition-delay:0.50s; }
@@ -272,6 +273,20 @@
     /* Texto crema sobre la sombra de .hero__overlay. La sombra de texto, apenas
        visible, lo sostiene en los cuadros más claros del video. */
     .hero__eyebrow, .hero__title, .hero__firma { text-shadow:0 1px 14px rgba(0,0,0,0.3); }
+    /* Pastilla del certificado de Doctoralia (26-oct): vidrio oscuro sobre el video, texto crema. */
+    .hero__premio {
+      display:inline-flex; align-items:center; gap:8px; margin-bottom:clamp(14px,2vh,22px);
+      padding:7px 14px 7px 11px; font-size:12px; font-weight:500; letter-spacing:0.03em; line-height:1.3;
+      color:var(--confort); text-decoration:none; text-shadow:none;
+      background:rgba(18,18,16,0.42); border:1px solid rgba(247,237,220,0.4);
+      -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    }
+    .hero__premio svg { width:13px; height:13px; fill:#E4D9C3; flex:none; }
+    .hero__premio:hover { background:rgba(18,18,16,0.6); border-color:var(--confort); }
+    @media (max-width:640px) {
+      .hero__premio { font-size:11.5px; padding:6px 12px 6px 10px; }
+      .hero__premio-marca { display:none; } /* el enlace ya lleva a Doctoralia */
+    }
     .hero__eyebrow {
       font-size:12px; font-weight:600;
       letter-spacing:0.24em; text-transform:uppercase;
@@ -667,13 +682,17 @@
       .esp-formacion { gap:6px; padding-top:12px; margin-bottom:16px; }
       .esp-formacion li { font-size:12.5px; line-height:1.4; }
     }
-    /* El resto del equipo: rejilla de cinco retratos iguales bajo la tarjeta de la doctora. */
-    .equipo-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(14px,1.6vw,24px); margin-top:clamp(28px,3.5vw,48px); }
-    .esp-card--equipo .esp-body { padding:14px 16px 18px; }
-    .esp-card--equipo .esp-name { font-size:clamp(16px,1.25vw,19px); margin-bottom:6px; }
-    .esp-card--equipo .esp-role { margin-bottom:0; }
-    @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
-    @media (max-width:640px) { .equipo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    /* El resto del equipo: lista compacta bajo la tarjeta de la doctora (26-oct; patrón de Rhea Fertility). */
+    .equipo-lista { margin-top:clamp(24px,3vw,40px); }
+    .equipo-lista__titulo { font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:6px; }
+    .equipo-lista ul { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:clamp(20px,3vw,40px); }
+    .equipo-persona { display:flex; align-items:center; gap:14px; padding:12px 0; border-bottom:1px solid rgba(130,134,127,0.2); }
+    .equipo-persona img { width:56px; height:56px; border-radius:50%; object-fit:cover; object-position:50% 30%; flex:none; background:var(--confort); }
+    .equipo-persona > span { display:flex; flex-direction:column; gap:3px; min-width:0; }
+    .equipo-persona__nombre { font-size:16px; font-weight:400; color:var(--dark); }
+    .equipo-persona__puesto { font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:var(--texto-suave); }
+    @media (max-width:900px) { .equipo-lista ul { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:640px) { .equipo-lista ul { grid-template-columns:1fr; } }
     .esp-social a { color:rgba(38,38,38,0.78); transition:color 0.3s; display:flex; }
     .esp-social a:hover { color:var(--sage); }
     @media (max-width:640px){
@@ -726,6 +745,19 @@
     #testimonios {
       background:var(--confort);
       border-top:1px solid rgba(130,134,127,0.2);
+    }
+    .sello-doctoralia {
+      display:inline-flex; align-items:center; gap:10px; margin:6px auto 0; padding:9px 18px;
+      background:var(--white); border:1px solid rgba(130,134,127,0.2); text-decoration:none; color:var(--dark);
+      transition:box-shadow 0.3s, border-color 0.3s;
+    }
+    .sello-doctoralia:hover { border-color:rgba(130,134,127,0.4); box-shadow:0 10px 26px -14px rgba(38,38,38,0.25); }
+    .sello-doctoralia__estrellas { font-size:13px; letter-spacing:2px; }
+    .sello-doctoralia__nota { font-size:19px; font-weight:400; }
+    .sello-doctoralia__texto { font-size:13px; font-weight:400; color:var(--texto-suave); }
+    @media (max-width:640px) {
+      .sello-doctoralia { flex-wrap:wrap; justify-content:center; row-gap:2px; padding:9px 16px; }
+      .sello-doctoralia__texto { width:100%; text-align:center; font-size:12.5px; }
     }
     .testimonios-grid {
       display:grid; grid-template-columns:repeat(3,1fr);
@@ -818,6 +850,23 @@
     .agenda__abrir:hover { color:var(--texto-suave); }
     .agenda__caja { margin-top:20px; min-height:200px; }
     .agenda__caja iframe { max-width:100%; }
+    .contacto-intro { margin-bottom:24px; }
+    /* Precio de la consulta (26-oct): dos tarjetas en la columna de agendar. */
+    .precios { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+    .precio { display:flex; flex-direction:column; gap:4px; padding:16px 18px; background:rgba(255,255,255,0.6); border:1px solid rgba(130,134,127,0.2); }
+    .precio__tipo { font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--texto-suave); }
+    .precio__monto { font-size:clamp(22px,2vw,28px); font-weight:300; letter-spacing:-0.01em; color:var(--dark); }
+    .precio__monto small { font-size:12px; font-weight:500; letter-spacing:0.08em; color:var(--texto-suave); }
+    .precio__nota { font-size:13px; font-weight:300; color:rgba(38,38,38,0.78); }
+    @media (max-width:400px) { .precio { padding:14px 14px; } .precio__monto { font-size:19px; } }
+    .precios__aviso { grid-column:1 / -1; font-size:12.5px; font-weight:300; color:var(--texto-suave); margin:0; }
+    /* Laptop baja: la columna completa (título, precios y botones) cabe en 680 px. */
+    @media (min-width:761px) and (max-height:780px) {
+      #contacto .divider { margin-bottom:16px; }
+      .contacto-intro { margin-bottom:16px; }
+      .precios { margin-bottom:16px; gap:10px; }
+      .precio { padding:12px 16px; gap:2px; }
+    }
     .info-block { padding-top:8px; }
     .info-item {
       padding:22px 0;
@@ -1158,6 +1207,9 @@
     /* ── Fotos y tarjetas grandes ── */
     html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
     html.redondeado .pilar { border-radius: var(--r-md); }
+    html.redondeado .hero__premio,
+    html.redondeado .sello-doctoralia { border-radius: var(--r-pill); }
+    html.redondeado .precio { border-radius: var(--r-md); }
     html.redondeado .esp-card {
       border-radius: var(--r-lg);
       border-color: rgba(130,134,127,0.14);
@@ -1390,6 +1442,9 @@
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <div class="hero__texto">
+      <!-- Distinción verificada en el perfil de Doctoralia (26-oct): tres insignias «Certificado de excelencia»,
+           2020, 2022 y 2023. Doctoralia no lo llama «premio»: no lo cambies. -->
+      <a class="hero__premio" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.3l-5.8 3.1 1.1-6.5L2.6 9.3l6.5-.9z"/></svg><span>Certificado de excelencia<span class="hero__premio-marca"> Doctoralia</span> · 2020 · 2022 · 2023</span></a>
       <p class="hero__eyebrow">Ginecología estética &amp; antiaging</p>
       <h1 class="hero__title">Bienestar íntimo,<br><em>en cada etapa.</em></h1>
       <p class="hero__firma">Dra. Melina Trujillo Quiroz · Ginecóloga por la UNAM<br>Guadalupe Inn, Ciudad de México</p>
@@ -1409,9 +1464,9 @@
         <div class="hero__stat__sub">Doctoralia</div>
       </div>
       <div class="hero__stat">
-        <div class="hero__stat__num">★★★★★</div>
-        <div class="hero__stat__label">Excelencia</div>
-        <div class="hero__stat__sub">2020 · 2022 · 2023</div>
+        <div class="hero__stat__num" aria-label="5 de 5 estrellas">★★★★★</div>
+        <div class="hero__stat__label">Calificación 5.0</div>
+        <div class="hero__stat__sub">Doctoralia</div>
       </div>
       <div class="hero__stat">
         <div class="hero__stat__num">9 años</div>
@@ -1559,45 +1614,33 @@
           <button class="esp-arrow" id="espNext" aria-label="Siguiente">→</button>
         </div>
       </div>
-      <!-- El resto del equipo (restaurado el 24-oct; 69b19f3 había escondido los espacios). Fotos de la sesión de
-           septiembre, recortadas como serie en optimizar-imagenes.py. NOMBRE Y PUESTO PENDIENTES: no vienen en el
-           Drive. Antes de publicar, cambia «… por confirmar» y el alt por los datos reales; no los inventes. -->
-      <div class="equipo-grid reveal d2">
-          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
-            <div class="esp-photo"><img src="images/web/equipo-1.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
-            <div class="esp-body">
-              <div class="esp-name">Nombre por confirmar</div>
-              <div class="esp-role">Puesto por confirmar</div>
-            </div>
-          </article>
-          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
-            <div class="esp-photo"><img src="images/web/equipo-2.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
-            <div class="esp-body">
-              <div class="esp-name">Nombre por confirmar</div>
-              <div class="esp-role">Puesto por confirmar</div>
-            </div>
-          </article>
-          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
-            <div class="esp-photo"><img src="images/web/equipo-3.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
-            <div class="esp-body">
-              <div class="esp-name">Nombre por confirmar</div>
-              <div class="esp-role">Puesto por confirmar</div>
-            </div>
-          </article>
-          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
-            <div class="esp-photo"><img src="images/web/equipo-4.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
-            <div class="esp-body">
-              <div class="esp-name">Nombre por confirmar</div>
-              <div class="esp-role">Puesto por confirmar</div>
-            </div>
-          </article>
-          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
-            <div class="esp-photo"><img src="images/web/equipo-5.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
-            <div class="esp-body">
-              <div class="esp-name">Nombre por confirmar</div>
-              <div class="esp-role">Puesto por confirmar</div>
-            </div>
-          </article>
+      <!-- El resto del equipo, como lista compacta (26-oct; antes tarjetas grandes). Fotos de la sesión de septiembre
+           (equipo-1…5 = DSC00108, 00121, 00153, 00161, 00229). NOMBRE Y PUESTO PENDIENTES: no vienen en el Drive.
+           Cuando lleguen, cambia «… por confirmar» y quita data-pendiente; no los inventes. -->
+      <div class="equipo-lista reveal d2">
+        <p class="equipo-lista__titulo">El equipo de la clínica</p>
+        <ul>
+          <li class="equipo-persona" data-pendiente="nombre y puesto">
+            <img src="images/web/equipo-1-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
+          </li>
+          <li class="equipo-persona" data-pendiente="nombre y puesto">
+            <img src="images/web/equipo-2-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
+          </li>
+          <li class="equipo-persona" data-pendiente="nombre y puesto">
+            <img src="images/web/equipo-3-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
+          </li>
+          <li class="equipo-persona" data-pendiente="nombre y puesto">
+            <img src="images/web/equipo-4-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
+          </li>
+          <li class="equipo-persona" data-pendiente="nombre y puesto">
+            <img src="images/web/equipo-5-mini.webp" alt="" width="56" height="56" loading="lazy" decoding="async">
+            <span><strong class="equipo-persona__nombre">Nombre por confirmar</strong><span class="equipo-persona__puesto">Puesto por confirmar</span></span>
+          </li>
+        </ul>
       </div>
       <div class="esp-pie reveal">
         <div class="asoc">
@@ -1618,6 +1661,13 @@
       <div style="text-align:center; margin-bottom:8px;">
         <p class="eyebrow centered reveal">Opiniones</p>
         <h2 class="reveal d1" style="text-align:center;">Lo que dicen<br><em>nuestras pacientes.</em></h2>
+        <!-- Verificado en Doctoralia el 26-oct: 5 de 5 (ratingValue 5) y 1,366 opiniones. Es solo texto visible:
+             sin aggregateRating en el JSON-LD, porque las opiniones viven en Doctoralia (ver CLAUDE.md, SEO). -->
+        <a class="sello-doctoralia reveal d1" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">
+          <span class="sello-doctoralia__estrellas" aria-hidden="true">★★★★★</span>
+          <span class="sello-doctoralia__nota">5.0</span>
+          <span class="sello-doctoralia__texto">1,366 opiniones verificadas en Doctoralia</span>
+        </a>
       </div>
       <!-- Opiniones reales y verificadas de Doctoralia, citadas textualmente (los "…" marcan recortes).
            Fuente: doctoralia.com.mx/melina-trujillo-quiroz — no inventar ni editar el texto. -->
@@ -1686,7 +1736,23 @@
           <p class="eyebrow reveal">Contacto</p>
           <h2 class="reveal d1">Agenda tu<br><em>consulta.</em></h2>
           <div class="divider reveal d1"></div>
-          <p class="body-text reveal d2" style="margin-bottom:36px;">En la clínica o en línea, con la Dra. Melina Trujillo. Escoge horario en Doctoralia o escríbenos y te ayudamos a encontrarlo.</p>
+          <p class="body-text contacto-intro reveal d2">En la clínica o en línea, con la Dra. Melina Trujillo. Escoge horario en Doctoralia o escríbenos y te ayudamos a encontrarlo.</p>
+          <!-- Precios verificados en el perfil de Doctoralia el 26-oct: «Consulta de primera vez · Desde $2,100» y
+               «Consulta en línea · $1,500», para pacientes sin aseguradora. Si cambian, cámbialos también en
+               preguntas.html (y su JSON-LD) y en la pregunta del precio de la portada. -->
+          <div class="precios reveal d2">
+            <div class="precio">
+              <span class="precio__tipo">En la clínica</span>
+              <span class="precio__monto">Desde $2,100 <small>MXN</small></span>
+              <span class="precio__nota">Consulta de primera vez</span>
+            </div>
+            <div class="precio">
+              <span class="precio__tipo">En línea</span>
+              <span class="precio__monto">$1,500 <small>MXN</small></span>
+              <span class="precio__nota">Desde tu teléfono o computadora</span>
+            </div>
+            <p class="precios__aviso">Precios para pacientes sin aseguradora; pueden variar según el caso.</p>
+          </div>
           <div class="reveal d3" style="display:flex; flex-direction:column; gap:14px;">
             <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary" style="text-align:center; padding:16px 32px;">Agendar consulta</a>
             <a href="https://wa.me/525540099923?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20consulta" target="_blank" rel="noopener" class="btn-ghost" style="text-align:center; padding:15px 32px;">Escribir por WhatsApp</a>
@@ -1706,10 +1772,6 @@
           <div class="info-item">
             <div class="info-item__label">Teléfono</div>
             <div class="info-item__value"><a href="tel:+525540099923">55 4009 9923</a> · <a href="https://wa.me/525540099923" target="_blank" rel="noopener">WhatsApp</a></div>
-          </div>
-          <div class="info-item">
-            <div class="info-item__label">Primera consulta</div>
-            <div class="info-item__value">Desde $2,100 MXN · Online desde $1,500 MXN</div>
           </div>
           <div class="info-item">
             <div class="info-item__label">Idiomas</div>

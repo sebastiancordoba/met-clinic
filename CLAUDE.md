@@ -83,9 +83,14 @@ Things worth knowing before editing:
 ### Equipo y agenda (oct 2026)
 
 - **Equipo:** la doctora va como tarjeta destacada (`main.js` la pinta horizontal, `.esp-solo`, porque es la única
-  `.esp-card` del carrusel). Debajo, `.equipo-grid` con las otras cinco personas (sesión de septiembre, recortadas como
-  serie en `optimizar-imagenes.py`, `RETRATOS`). **Sus nombres y puestos no vienen en el Drive:** las tarjetas dicen
-  «Nombre/Puesto por confirmar» y llevan `data-pendiente`. Cámbialos por los reales antes de publicar; no los inventes.
+  `.esp-card` del carrusel). Debajo, `.equipo-lista`: lista compacta (avatar de 56 px · nombre · puesto) con las otras
+  cinco personas (sesión de septiembre; avatares `equipo-N-mini.webp` de `RETRATOS` en `optimizar-imagenes.py`).
+  **Sus nombres y puestos no vienen en el Drive:** dicen «Nombre/Puesto por confirmar» y llevan `data-pendiente`.
+  Cámbialos por los reales antes de publicar; no los inventes.
+- **Datos de Doctoralia en la portada (verificados el 26-oct):** la pastilla `.hero__premio` dice «Certificado de
+  excelencia Doctoralia · 2020 · 2022 · 2023» (así se llaman sus insignias; no es un «premio»), la franja y el sello de
+  Opiniones dicen 5.0 y 1,366 opiniones, y las tarjetas `.precios` de #contacto dicen «Desde $2,100» (clínica) y
+  «$1,500» (en línea). Es texto visible, nunca `aggregateRating` en el JSON-LD.
 - **Agenda:** «Ver horarios disponibles aquí» en #contacto inserta el widget oficial de Doctoralia
   (`platform.docplanner.com/js/widget.js`) **solo al hacer clic**: trae GTM, Amplitude y Sentry de Doctoralia, y no
   deben cargar a quien no lo usa.
