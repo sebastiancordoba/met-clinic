@@ -574,47 +574,68 @@
     }
 
     /* ═══════════════════════════════════════════
-       TECNOLOGÍA  — strip de equipos
+       APARATOS — cierre de #servicios (26-oct; antes, una fila de logos)
+       Carrusel horizontal con scroll-snap: en compu se ven ~4 y las flechas avanzan;
+       en el teléfono una tarjeta grande y la siguiente asomando. Las fotos son PNG/WebP
+       con fondo transparente sobre el mismo fondo claro, para que se vean como serie.
     ═══════════════════════════════════════════ */
-    /* Desde el 24-oct va DENTRO de #servicios, como su cierre: ya no es una franja aparte. */
-    #tecnologia { margin-top:clamp(40px,5vw,64px); }
-    .tech-label { text-align:center; font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:clamp(24px,3vw,40px); }
-    /* Marquee — barra de tecnologías que se desplaza en continuo */
-    .tech-marquee {
-      overflow:hidden; width:100%;
-      -webkit-mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
-      mask-image:linear-gradient(to right, transparent, #000 7%, #000 93%, transparent);
+    /* Va como hijo directo de #servicios (fuera de .section-inner): se alinea al mismo ancho y margen. */
+    #tecnologia { max-width:1100px; margin:clamp(40px,5vw,64px) auto 0; padding:0 56px; }
+    .aparatos__cabeza { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:clamp(14px,1.6vw,20px); }
+    .aparatos__cabeza .eyebrow { margin-bottom:0; }
+    .aparatos__flechas { display:flex; gap:8px; }
+    .aparatos__flecha { width:42px; height:42px; border:1px solid var(--sage-mid); background:var(--white); color:var(--dark); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.3s, color 0.3s, opacity 0.3s; }
+    .aparatos__flecha:hover:not(:disabled) { background:var(--dark); color:var(--confort); }
+    .aparatos__flecha:disabled { opacity:0.35; cursor:default; }
+    .aparatos__fila {
+      list-style:none; margin:0; padding:0 0 6px; display:flex; gap:clamp(12px,1.4vw,18px);
+      overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none;
     }
-    .tech-track { display:flex; width:max-content; align-items:center; animation:techScroll 40s linear infinite; }
-    .tech-marquee:hover .tech-track, .tech-marquee:focus-within .tech-track, .tech-marquee.pausado .tech-track { animation-play-state:paused; }
-    /* WCAG 2.2.2: lo que se mueve más de 5 s necesita cómo pararlo; el hover no existe en celular ni con teclado */
-    .tech-pausa {
-      display:block; margin:clamp(16px,2vw,24px) auto 0; min-height:24px; padding:4px 10px;
-      background:none; border:none; cursor:pointer;
-      font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--texto-suave);
+    .aparatos__fila::-webkit-scrollbar { display:none; }
+    .aparatos__fila:focus-visible { outline:2px solid var(--dark); outline-offset:4px; }
+    .aparatos__fila > li { flex:0 0 calc((100% - 3 * clamp(12px,1.4vw,18px)) / 4.3); scroll-snap-align:start; display:flex; }
+    .aparato {
+      display:flex; flex-direction:column; gap:4px; width:100%; padding:14px 16px 18px;
+      background:rgba(255,255,255,0.55); border:1px solid rgba(130,134,127,0.18); color:var(--dark); text-decoration:none;
+      transition:background 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s;
     }
-    .tech-pausa:hover { color:var(--dark); }
-    @media (prefers-reduced-motion: reduce){ .tech-pausa { display:none; } }
-    .tech-item {
-      display:flex; align-items:center; flex-shrink:0;
-      padding:0 clamp(26px,3.5vw,54px);
-      font-size:clamp(18px,1.9vw,28px); font-weight:300; letter-spacing:0.01em;
-      color:rgba(38,38,38,0.78); white-space:nowrap; transition:color 0.3s;
+    .aparato:hover, .aparato:focus-visible { background:var(--white); border-color:rgba(130,134,127,0.3); box-shadow:0 14px 36px -18px rgba(38,38,38,0.25); }
+    .aparato__foto { display:flex; align-items:flex-end; justify-content:center; height:min(220px, 26svh); margin-bottom:10px; background:linear-gradient(180deg, var(--tranquil), #fff); }
+    .aparato__foto img { height:100%; width:auto; max-width:100%; object-fit:contain; display:block; }
+    .aparato__area { font-size:10.5px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--texto-suave); }
+    .aparato__nombre { font-size:clamp(18px,1.4vw,21px); font-weight:300; letter-spacing:-0.01em; }
+    .aparato__trata { font-size:13.5px; font-weight:300; line-height:1.45; color:rgba(38,38,38,0.78); }
+    .aparato__ver { margin-top:auto; padding-top:10px; font-size:11px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--texto-suave); }
+    .aparato:hover .aparato__ver { color:var(--dark); }
+    @media (max-width:900px) { .aparatos__fila > li { flex-basis:calc((100% - 2 * 14px) / 2.4); } }
+    @media (max-width:640px) {
+      .aparatos__flechas { display:none; }
+      #tecnologia { padding:0 20px; }
+      .aparatos__fila { margin:0 -20px; padding:0 20px 6px; scroll-padding:0 20px; }
+      .aparatos__fila > li { flex-basis:72%; }
     }
-    .tech-item:hover { color:var(--dark); }
-    /* Soporte para logos monocromos (recoloreados al color de la letra, sin fondo) */
-    .tech-logo {
-      display:block; height:clamp(20px,2.2vw,30px); width:auto;
-      filter:brightness(0); opacity:0.4; transition:opacity 0.3s;
-    }
-    .tech-item:hover .tech-logo { opacity:0.85; }
-    @keyframes techScroll { from { transform:translateX(-50%); } to { transform:translateX(0); } }
-    /* Sin movimiento: los logos se acomodan en renglones centrados (antes quedaban cortados en la orilla)
-       y se ocultan las copias que sólo existen para el bucle del carrusel. */
-    @media (prefers-reduced-motion: reduce){
-      .tech-track { animation:none; width:auto; flex-wrap:wrap; justify-content:center; row-gap:24px; padding:0 20px; }
-      .tech-marquee { -webkit-mask-image:none; mask-image:none; }
-      .tech-item[aria-hidden="true"] { display:none; }
+
+    /* ═══════════════════════════════════════════
+       LO MÁS ELEGIDO — franja de la boutique al final de #preguntas (26-oct)
+       4 productos met:mas-elegido de Shopify, sin precios. La escribe puentes-tienda.py.
+    ═══════════════════════════════════════════ */
+    #preguntas .faq-grid { padding-bottom:clamp(40px,5vw,64px); }
+    .elegidos { padding-top:clamp(24px,3vw,36px); border-top:1px solid rgba(130,134,127,0.2); display:grid; grid-template-columns:minmax(0,0.8fr) minmax(0,2.2fr); gap:clamp(20px,4vw,56px); align-items:center; }
+    .elegidos__titulo { font-size:clamp(26px,2.6vw,36px); margin-bottom:14px; }
+    .elegidos__ver { font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); text-decoration:none; padding-bottom:5px; border-bottom:1px solid var(--sage); }
+    .elegidos__ver:hover { color:var(--texto-suave); }
+    .elegidos__fila { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(10px,1.2vw,16px); }
+    .elegido { display:flex; flex-direction:column; gap:3px; padding:10px 10px 14px; background:var(--white); border:1px solid rgba(130,134,127,0.16); color:var(--dark); text-decoration:none; transition:box-shadow 0.3s var(--ease), transform 0.3s var(--ease); }
+    .elegido:hover, .elegido:focus-visible { box-shadow:0 12px 30px -16px rgba(38,38,38,0.25); transform:translateY(-2px); }
+    .elegido__foto { display:block; aspect-ratio:1/1; margin-bottom:6px; }
+    .elegido__foto img { width:100%; height:100%; object-fit:contain; display:block; }
+    .elegido__marca { font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--texto-suave); }
+    .elegido__nombre { font-size:13.5px; font-weight:400; line-height:1.35; }
+    @media (max-width:900px) { .elegidos { grid-template-columns:1fr; } }
+    @media (max-width:640px) {
+      .elegidos__fila { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:10px; margin:0 -20px; padding:0 20px 6px; scroll-padding:0 20px; scrollbar-width:none; }
+      .elegidos__fila::-webkit-scrollbar { display:none; }
+      .elegido { flex:0 0 42%; scroll-snap-align:start; }
     }
 
     /* ═══════════════════════════════════════════
@@ -697,7 +718,21 @@
     .esp-card--equipo .esp-name { font-size:clamp(16px,1.25vw,19px); margin-bottom:6px; }
     .esp-card--equipo .esp-role { margin-bottom:0; }
     @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
-    @media (max-width:640px) { .equipo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    /* Teléfono (26-oct, Sebas: «que vayan horizontalmente»): una sola fila que se desliza, tarjetas grandes
+       al 78 % con la siguiente asomando, y puntos discretos (main.js) en lugar de la rejilla de 2 columnas. */
+    @media (max-width:640px) {
+      .equipo-grid { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:12px; margin-left:-20px; margin-right:-20px; padding:0 20px 4px; scroll-padding:0 20px; scrollbar-width:none; }
+      .equipo-grid::-webkit-scrollbar { display:none; }
+      .equipo-grid > .esp-card--equipo { flex:0 0 78%; scroll-snap-align:start; }
+      .equipo-grid .esp-photo { max-height:calc(100svh - 68px - 67px - 150px); }
+      .esp-card--equipo .esp-name { font-size:18px; }
+    }
+    .equipo-puntos { display:none; }
+    @media (max-width:640px) {
+      .equipo-puntos { display:flex; justify-content:center; gap:8px; margin-top:14px; }
+      .equipo-puntos span { width:6px; height:6px; border-radius:50%; background:var(--sage-mid); transition:background 0.3s, transform 0.3s; }
+      .equipo-puntos span.activo { background:var(--sage); transform:scale(1.3); }
+    }
     .esp-social a { color:rgba(38,38,38,0.78); transition:color 0.3s; display:flex; }
     .esp-social a:hover { color:var(--sage); }
     @media (max-width:640px){
@@ -1216,6 +1251,9 @@
     /* ── Fotos y tarjetas grandes ── */
     html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
     html.redondeado .pilar { border-radius: var(--r-md); }
+    html.redondeado .aparato, html.redondeado .elegido { border-radius: var(--r-md); }
+    html.redondeado .aparato__foto { border-radius: var(--r-sm); }
+    html.redondeado .aparatos__flecha { border-radius: 50%; }
     html.redondeado .hero__premio,
     html.redondeado .sello-doctoralia { border-radius: var(--r-pill); }
     html.redondeado .precio { border-radius: var(--r-md); }
@@ -1548,32 +1586,69 @@
         </a>
       </div>
     </div>
-    <!-- Tecnología: cierre de Servicios (24-oct; antes era una franja aparte). -->
-    <div id="tecnologia">
-      <p class="tech-label reveal">Tecnología de vanguardia</p>
-      <div class="tech-marquee">
-        <div class="tech-track">
-          <span class="tech-item"><img class="tech-logo" src="images/tech/hydrafacial.png" alt="HydraFacial"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/endymed.png" alt="EndyMed"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/sofwave.svg" alt="Sofwave"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/emsella.png" alt="EMSELLA"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/web/tech-healite.webp" alt="Healite II"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/xwave.png" alt="X-Wave"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/asirox.svg" alt="Asirox"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt="mesoestetic"></span>
-          <span class="tech-item"><img class="tech-logo" src="images/tech/exomind.png" alt="Exomind"></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/hydrafacial.png" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/endymed.png" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/sofwave.svg" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/emsella.png" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/web/tech-healite.webp" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/xwave.png" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/asirox.svg" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/mesoestetic.svg" alt=""></span>
-          <span class="tech-item" aria-hidden="true"><img class="tech-logo" src="images/tech/exomind.png" alt=""></span>
+    <!-- Aparatos (26-oct, Sebas): cierre de Servicios, en lugar de la fila de logos. Fotos del FABRICANTE recortadas
+         (las preparó met-clinic-system; fuentes en images/equipos/FUENTES-ficha_tecnica.md). Solo el nombre comercial,
+         sin modelo: falta que la clínica confirme MonaLisa (SmartXide Touch o Tetra Pro), X-Wave (Expert o
+         Professional) e InBody (270 o 270S). Sin foto oficial, fuera por ahora: HydraFacial, EndyMed y Healite. -->
+    <div id="tecnologia" class="aparatos reveal">
+      <div class="aparatos__cabeza">
+        <p class="eyebrow">Tecnología de la clínica</p>
+        <div class="aparatos__flechas">
+          <button type="button" class="aparatos__flecha" data-dir="-1" aria-label="Aparatos anteriores">←</button>
+          <button type="button" class="aparatos__flecha" data-dir="1" aria-label="Más aparatos">→</button>
         </div>
       </div>
-      <button type="button" class="tech-pausa" aria-pressed="false">Pausar</button>
+      <ul class="aparatos__fila" tabindex="0" aria-label="Aparatos de la clínica (desliza para ver más)">
+          <li><a class="aparato" href="pilar-ginecologia.html">
+            <span class="aparato__foto"><img src="images/web/equipo-emsella.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Ginecología</span>
+            <span class="aparato__nombre">EMSELLA</span>
+            <span class="aparato__trata">Silla para fortalecer el suelo pélvico, sentada y vestida.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-ginecologia.html">
+            <span class="aparato__foto"><img src="images/web/equipo-monalisa.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Ginecología</span>
+            <span class="aparato__nombre">MonaLisa Touch</span>
+            <span class="aparato__trata">Láser de CO₂ para la salud íntima.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-facial.html">
+            <span class="aparato__foto"><img src="images/web/equipo-sofwave.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Facial</span>
+            <span class="aparato__nombre">Sofwave</span>
+            <span class="aparato__trata">Ultrasonido para la firmeza del rostro y el cuello.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-corporal.html">
+            <span class="aparato__foto"><img src="images/web/equipo-xwave.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Corporal</span>
+            <span class="aparato__nombre">X-Wave</span>
+            <span class="aparato__trata">Ondas de choque para celulitis y firmeza de la piel.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-depilacion.html">
+            <span class="aparato__foto"><img src="images/web/equipo-asirox.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Depilación</span>
+            <span class="aparato__nombre">Asirox</span>
+            <span class="aparato__trata">Láser de diodo para depilación.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-longevidad.html">
+            <span class="aparato__foto"><img src="images/web/equipo-exomind.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Longevidad</span>
+            <span class="aparato__nombre">Exomind</span>
+            <span class="aparato__trata">Estimulación magnética para el bienestar emocional.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+          <li><a class="aparato" href="pilar-ginecologia.html">
+            <span class="aparato__foto"><img src="images/web/equipo-inbody.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__area">Check up</span>
+            <span class="aparato__nombre">InBody</span>
+            <span class="aparato__trata">Análisis de tu composición corporal.</span>
+            <span class="aparato__ver">Ver tratamiento →</span>
+          </a></li>
+      </ul>
     </div>
   </section>
 
@@ -1632,7 +1707,7 @@
            se probó una lista compacta y Sebas prefirió volver a las fotos grandes). Fotos de la sesión de
            septiembre, recortadas como serie en optimizar-imagenes.py. NOMBRE Y PUESTO PENDIENTES: no vienen en el
            Drive. Antes de publicar, cambia «… por confirmar» y el alt por los datos reales; no los inventes. -->
-      <div class="equipo-grid reveal d2">
+      <div class="equipo-grid reveal d2" tabindex="0" role="region" aria-label="El equipo de la clínica (en el teléfono, desliza para ver más)">
           <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
             <div class="esp-photo"><img src="images/web/equipo-1.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
             <div class="esp-body">
@@ -1669,6 +1744,7 @@
             </div>
           </article>
       </div>
+      <div class="equipo-puntos" aria-hidden="true"></div>
       <div class="esp-pie reveal">
         <div class="asoc">
           <span class="asoc-label">Miembro de</span>
@@ -1753,6 +1829,37 @@
           <p class="faq-todas"><a href="preguntas.html">Ver todas las preguntas →</a></p>
       </div>
     </div>
+    <!-- puentes-portada:inicio — lo escribe puentes-tienda.py; no lo edites a mano -->
+    <div class="section-inner elegidos reveal">
+      <div class="elegidos__texto">
+        <p class="eyebrow">Boutique de la clínica</p>
+        <h2 class="elegidos__titulo">Lo más elegido<br><em>por nuestras pacientes.</em></h2>
+        <a class="elegidos__ver" href="https://met-clinic.myshopify.com">Ver tienda →</a>
+      </div>
+      <div class="elegidos__fila">
+            <a class="elegido" href="https://met-clinic.myshopify.com/products/cumlaude-higiene-intima-diaria-origyn-500ml">
+              <span class="elegido__foto"><img src="images/web/tienda/cumlaude-higiene-intima-diaria-origyn-500ml.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
+              <span class="elegido__marca">CUMLAUDE</span>
+              <span class="elegido__nombre">Higiene Íntima Diaria Origyn 500 ml</span>
+            </a>
+            <a class="elegido" href="https://met-clinic.myshopify.com/products/filorga-skin-prep-mousse-limpia-suaviza-ilumina-150ml">
+              <span class="elegido__foto"><img src="images/web/tienda/filorga-skin-prep-mousse-limpia-suaviza-ilumina-150ml.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
+              <span class="elegido__marca">FILORGA</span>
+              <span class="elegido__nombre">Skin-Prep Mousse Limpiadora 150 ml</span>
+            </a>
+            <a class="elegido" href="https://met-clinic.myshopify.com/products/filorga-daily-peel-anti-dark-spot">
+              <span class="elegido__foto"><img src="images/web/tienda/filorga-daily-peel-anti-dark-spot.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
+              <span class="elegido__marca">FILORGA</span>
+              <span class="elegido__nombre">Daily Peel Anti-Dark Spot</span>
+            </a>
+            <a class="elegido" href="https://met-clinic.myshopify.com/products/lazartigue-exfoliante-gel-pre-shampoo-75ml">
+              <span class="elegido__foto"><img src="images/web/tienda/lazartigue-exfoliante-gel-pre-shampoo-75ml.webp" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
+              <span class="elegido__marca">LAZARTIGUE</span>
+              <span class="elegido__nombre">Exfoliante Gel Pre-Shampoo 75 ml</span>
+            </a>
+      </div>
+    </div>
+    <!-- puentes-portada:fin -->
   </section>
 
   <!-- ══ CONTACTO ══ -->

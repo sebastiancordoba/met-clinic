@@ -56,7 +56,12 @@ Rejuvenécete.», #filosofia sin cifras) and `preguntas.html` (las 7 preguntas +
 de hamburguesa hasta 960 px). El pie ya no lleva columnas de enlaces (26-oct, Sebas): La clínica y Preguntas se
 enlazan desde la portada («Conoce la clínica →», «Cómo trabajamos →», «Ver todas las preguntas →»); no las quites.
 #servicios: título y la tarjeta de Ginecología en una fila, los 6 pilares en rejilla 3×2 (tablet 2×3, teléfono una
-columna); todo junto cabe en una laptop de 680 px. Barra de desplazamiento: ver `pie.js` (4); no vuelvas a poner
+columna); todo junto cabe en una laptop de 680 px. Cierra con el carrusel de aparatos (`#tecnologia .aparatos`, 26-oct):
+fotos del fabricante recortadas (`images/equipos/`, fuentes en `FUENTES-ficha_tecnica.md`), nombre comercial sin
+modelo hasta que la clínica confirme MonaLisa, X-Wave e InBody; flechas en `main.js`. #preguntas cierra con la
+franja «Lo más elegido por nuestras pacientes» (`met:mas-elegido`, la escribe `puentes-tienda.py`). En el teléfono
+el equipo (`.equipo-grid`) es un carrusel de una fila con puntos. **Precios: solo los de la consulta** (Sebas,
+26-oct): nada de precios de tratamientos, paquetes ni productos en ninguna página ni en el JSON-LD. Barra de desplazamiento: ver `pie.js` (4); no vuelvas a poner
 estilos `::-webkit-scrollbar`, porque en macOS vuelven fija la barra flotante.
 
 Things worth knowing before editing:

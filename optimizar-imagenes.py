@@ -57,6 +57,16 @@ TRABAJOS = [
     ("images/clinica/cabina-exomind.jpg",               "clinica-exomind.webp",     900, 80),
     # Cabecera de Longevidad (24-oct, misma sesión, DSC00270): la doctora junto al Exomind.
     ("images/servicios/longevidad-dra-exomind.jpg",     "servicio-longevidad-dra.webp", 900, 80),
+    # Carrusel de aparatos de la portada (26-oct). Fotos del FABRICANTE recortadas con fondo transparente, en lienzo
+    # vertical común; las preparó met-clinic-system (fuentes y salvedades en images/equipos/FUENTES-ficha_tecnica.md).
+    # Se pintan a ~220 px de alto: 260 de ancho da ~450 de alto, 2x. Conservan el alfa.
+    ("images/equipos/emsella.png",                      "equipo-emsella.webp",   260, 85),
+    ("images/equipos/monalisa.png",                     "equipo-monalisa.webp",  260, 85),
+    ("images/equipos/sofwave.webp",                     "equipo-sofwave.webp",   260, 85),
+    ("images/equipos/xwave.png",                        "equipo-xwave.webp",     260, 85),
+    ("images/equipos/asirox.webp",                      "equipo-asirox.webp",    260, 85),
+    ("images/equipos/exomind.webp",                     "equipo-exomind.webp",   260, 85),
+    ("images/equipos/inbody270.webp",                   "equipo-inbody.webp",    260, 85),
 ]
 
 

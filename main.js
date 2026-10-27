@@ -409,16 +409,43 @@ document.querySelectorAll('.drawer-link').forEach(a => {
 })();
 
 
-/* ── Pausa de la barra de tecnologías ───────────────────────────────────── */
+/* ── Equipo en el teléfono: puntos del carrusel ─────────────────────────
+   En el teléfono .equipo-grid es una fila que se desliza (CSS); aquí solo los
+   puntos que dicen en qué tarjeta vas. Son decorativos (aria-hidden). */
 (function () {
-  const btn = document.querySelector('.tech-pausa');
-  const barra = document.querySelector('.tech-marquee');
-  if (!btn || !barra) return;
-  btn.addEventListener('click', () => {
-    const pausado = barra.classList.toggle('pausado');
-    btn.setAttribute('aria-pressed', String(pausado));
-    btn.textContent = pausado ? 'Reanudar' : 'Pausar';
-  });
+  const fila = document.querySelector('.equipo-grid');
+  const puntos = document.querySelector('.equipo-puntos');
+  if (!fila || !puntos) return;
+  const tarjetas = [...fila.children];
+  puntos.innerHTML = tarjetas.map(() => '<span></span>').join('');
+  const marcar = () => {
+    const paso = tarjetas.length > 1 ? tarjetas[1].offsetLeft - tarjetas[0].offsetLeft : 1;
+    const i = Math.min(tarjetas.length - 1, Math.round(fila.scrollLeft / paso));
+    [...puntos.children].forEach((p, k) => p.classList.toggle('activo', k === i));
+  };
+  fila.addEventListener('scroll', marcar, { passive: true });
+  window.addEventListener('resize', marcar);
+  marcar();
+})();
+
+
+/* ── Carrusel de aparatos (#tecnologia) ────────────────────────────────
+   Las flechas avanzan casi una vista; se apagan en las orillas. En el teléfono
+   no hay flechas: se desliza con el dedo (scroll-snap). */
+(function () {
+  const fila = document.querySelector('.aparatos__fila');
+  if (!fila) return;
+  const flechas = document.querySelectorAll('.aparatos__flecha');
+  const actualizar = () => {
+    const max = fila.scrollWidth - fila.clientWidth - 2;
+    flechas.forEach((b) => { b.disabled = b.dataset.dir === '-1' ? fila.scrollLeft <= 2 : fila.scrollLeft >= max; });
+  };
+  flechas.forEach((b) => b.addEventListener('click', () => {
+    fila.scrollBy({ left: Number(b.dataset.dir) * fila.clientWidth * 0.9, behavior: 'smooth' });
+  }));
+  fila.addEventListener('scroll', actualizar, { passive: true });
+  window.addEventListener('resize', actualizar);
+  actualizar();
 })();
 
 
