@@ -11,11 +11,11 @@ Precio, nombre y foto quedan fijos hasta la siguiente corrida: córrelo de nuevo
 
     cd ~/code/met-clinic-system && poetry run python ~/code/met-clinic/puentes-tienda.py
 
-QUÉ PRODUCTOS: la lista de abajo es PROVISIONAL. Sale del mapa de respaldo del agente de la tienda (etiquetas
-`necesidad:*` de Shopify), elegidos a mano por existencias y por que vayan con el tratamiento. Cuando Sebas apruebe
-las etiquetas curadas `pilar:*`, esta lista se cambia por esas etiquetas. Nunca: LUXMETIQUE (COFEPRIS) ni
-medicamentos. Un producto sin existencias o archivado se salta solo; si a un pilar le quedan menos de 2, no se pinta
-la fila.
+QUÉ PRODUCTOS: los que llevan la etiqueta curada `pilar:<tratamiento>` en Shopify. La curó el agente de la tienda
+con OK de Sebas (26-oct, ~18:55), por venta en mostrador y existencias; se cambia desde el admin de Shopify, no aquí.
+Primero los `met:mas-elegido` y luego por existencias, hasta 4. Se saltan los que no estén activos, publicados en la
+tienda en línea, con foto y con existencias. Nunca LUXMETIQUE (COFEPRIS) ni medicamentos (no están en Shopify).
+Si a un pilar le quedan menos de 2, no se pinta la fila (hoy Longevidad).
 """
 import html
 import io
@@ -34,69 +34,47 @@ SALIDA = RAIZ / "images/web/tienda"
 # Base de la tienda. El día del lanzamiento pasa a https://tienda.metclinic.com.mx (ver el checklist de dominio).
 TIENDA = "https://met-clinic.myshopify.com"
 
-PRODUCTOS = {
-    "pilar-ginecologia.html": [
-        "cumlaude-higiene-intima-diaria-origyn-500ml",
-        "cumlaude-hidratante-interno-5ml",
-        "cumlaude-hidratante-externo-crema-30-ml",
-        "cumlaude-higiene-intima-deligyn-nf-500ml",
-    ],
-    "pilar-facial.html": [
-        "filorga-hyalu-filler-serum",
-        "cumlaude-gel-crema-firming-viderage",
-        "filorga-time-filler-eyes-5xp-15ml",
-        "svr-sun-secure-blur-protector-solar-en-mousse-fps50-50ml",
-    ],
-    "pilar-piel.html": [
-        "filorga-daily-peel-anti-dark-spot",
-        "svr-c20-biotic-crema-regeneradora-para-luminosidad-50ml",
-        "rejuvaskin-gel-rejuvasil-15ml",
-        "rejuvaskin-stretch-mark-cream-90ml",
-    ],
-    "pilar-corporal.html": [
-        "sensilis-recovery-kit",
-        "svr-crema-cicavit-100ml",
-        "svr-xerial-10lait-leche-corporalhidratante-200ml",
-    ],
-    "pilar-capilar.html": [
-        "lazartigue-thicker-suero-capilar-anticaida-50ml",
-        "lazartigue-stronger-hair-serum-500ml",
-        "lazartigue-nourish-shampoo-nutritivo-e-hidratante-250ml",
-        "lazartigue-repair-mascarilla-250ml",
-    ],
-    "pilar-depilacion.html": [
-        "svr-crema-cicavit-100ml",
-        "svr-spray-cicavit-sos-grattage-40ml",
-        "svr-sun-secure-blur-protector-solar-en-mousse-fps50-50ml",
-    ],
-    # Longevidad: solo hay 2 suplementos con existencias y no van con la página. Sin fila hasta que haya curados.
-    "pilar-longevidad.html": [],
+PILARES = {
+    "pilar-ginecologia.html": "ginecologia",
+    "pilar-facial.html": "facial",
+    "pilar-piel.html": "piel",
+    "pilar-corporal.html": "corporal",
+    "pilar-capilar.html": "capilar",
+    "pilar-depilacion.html": "depilacion",
+    "pilar-longevidad.html": "longevidad",
 }
+MAXIMO = 4
 
-CONSULTA = """query($handle: String!) {
-  productByHandle(handle: $handle) {
-    handle title vendor status totalInventory
-    featuredImage { url }
-    priceRangeV2 { minVariantPrice { amount } }
-    resourcePublicationsV2(first: 5) { nodes { isPublished publication { name } } }
+CONSULTA = """query($q: String!) {
+  products(first: 50, query: $q) {
+    nodes {
+      handle title vendor status totalInventory tags
+      featuredImage { url }
+      priceRangeV2 { minVariantPrice { amount } }
+      resourcePublicationsV2(first: 5) { nodes { isPublished publication { name } } }
+    }
   }
 }"""
 
 INICIO, FIN = "<!-- puentes-tienda:inicio", "<!-- puentes-tienda:fin -->"
 
 
-def leer(handle: str) -> dict | None:
-    p = client.execute(CONSULTA, {"handle": handle})["productByHandle"]
-    if not p or p["status"] != "ACTIVE" or (p["totalInventory"] or 0) < 1 or not p["featuredImage"]:
-        return None
+def vendible(p: dict) -> bool:
+    if p["status"] != "ACTIVE" or (p["totalInventory"] or 0) < 1 or not p["featuredImage"]:
+        return False
     if "LUXMETIQUE" in (p["vendor"] or "").upper():
-        return None
+        return False
     # Publicado en la tienda en línea. No sirve `onlineStoreUrl`: viene vacío mientras la tienda tenga
     # contraseña, aunque el producto esté publicado (lo vio el agente de la tienda el 26-oct).
     canales = p["resourcePublicationsV2"]["nodes"]
-    if not any(c["isPublished"] and c["publication"]["name"] == "Online Store" for c in canales):
-        return None
-    return p
+    return any(c["isPublished"] and c["publication"]["name"] == "Online Store" for c in canales)
+
+
+def leer(pilar: str) -> list[dict]:
+    nodos = client.execute(CONSULTA, {"q": f"status:active tag:'pilar:{pilar}'"})["products"]["nodes"]
+    nodos = [p for p in nodos if vendible(p)]
+    nodos.sort(key=lambda p: ("met:mas-elegido" not in p["tags"], -(p["totalInventory"] or 0)))
+    return nodos[:MAXIMO]
 
 
 def foto(p: dict) -> str:
@@ -169,15 +147,20 @@ def main() -> None:
     if not client.configurado():
         sys.exit("Falta configurar Shopify en met-clinic-system (.env).")
     SALIDA.mkdir(parents=True, exist_ok=True)
-    for pagina, handles in PRODUCTOS.items():
-        productos = [p for p in (leer(h) for h in handles) if p]
-        saltados = len(handles) - len(productos)
+    usadas = set()
+    for pagina, pilar in PILARES.items():
+        productos = leer(pilar)
         if len(productos) < 2:
             escribir(pagina, "")
-            print(f"  {pagina:24} sin fila ({len(productos)} producto(s) disponibles)")
+            print(f"  {pagina:24} sin fila ({len(productos)} producto(s) con pilar:{pilar})")
             continue
         escribir(pagina, bloque([tarjeta(p) for p in productos]))
-        print(f"  {pagina:24} {len(productos)} productos" + (f" ({saltados} saltados)" if saltados else ""))
+        usadas |= {f"{p['handle']}.webp" for p in productos}
+        print(f"  {pagina:24} {len(productos)}: " + ", ".join(p["handle"] for p in productos))
+    # Fotos de productos que ya no salen en ninguna fila.
+    for viejo in SALIDA.glob("*.webp"):
+        if viejo.name not in usadas:
+            viejo.unlink()
 
 
 if __name__ == "__main__":

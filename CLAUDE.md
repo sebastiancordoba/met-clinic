@@ -127,8 +127,9 @@ es para comprar, pero se sienten como una sola: mismo encabezado, tokens y redon
   `tienda.html` («Próximamente») ya no tiene enlaces; se retira el día del lanzamiento.
 - **Puente página → tienda:** «Para tu cuidado en casa», 3–4 productos reales al final de Tratamientos en cada
   pilar. Lo escribe `puentes-tienda.py` (solo lectura de Shopify, con el cliente de met-clinic-system; ver su
-  docstring para correrlo) entre las marcas `puentes-tienda:inicio/fin`; no edites ese bloque a mano. La lista de
-  productos es provisional hasta que Sebas apruebe las etiquetas curadas `pilar:*`. Nunca LUXMETIQUE ni
+  docstring para correrlo) entre las marcas `puentes-tienda:inicio/fin`; no edites ese bloque a mano. Los productos
+  salen de la etiqueta curada `pilar:<tratamiento>` en Shopify (curada por el agente de la tienda con OK de Sebas el
+  26-oct): para cambiarlos se cambia la etiqueta en el admin y se corre el script. Nunca LUXMETIQUE ni
   medicamentos. Las fotos van a `images/web/tienda/`. Corre de nuevo el script antes de publicar y al cambiar la base
   de la tienda (constante `TIENDA`).
 - **Los tokens los lee el tema de la tienda** del `:root` y del bloque `html.redondeado` de `pilares.css`: si cambias
