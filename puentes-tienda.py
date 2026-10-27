@@ -7,7 +7,7 @@ sola. Este es el puente de la página hacia la tienda; del lado de Shopify, el a
 Lee Shopify en SOLO LECTURA con el cliente de met-clinic-system (acuña y renueva su propio token; nunca lo
 imprime), baja la foto principal de cada producto a images/web/tienda/<handle>.webp y escribe la fila entre las
 marcas `puentes-tienda:inicio` y `puentes-tienda:fin` de cada pilar-*.html, al final de la sección Tratamientos.
-Precio, nombre y foto quedan fijos hasta la siguiente corrida: córrelo de nuevo si cambian o antes de publicar.
+Nombre y foto quedan fijos hasta la siguiente corrida (sin precios: en la página solo va el de la consulta): córrelo de nuevo si cambian o antes de publicar.
 
     cd ~/code/met-clinic-system && poetry run python ~/code/met-clinic/puentes-tienda.py
 
@@ -16,6 +16,11 @@ con OK de Sebas (26-oct, ~18:55), por venta en mostrador y existencias; se cambi
 Primero los `met:mas-elegido` y luego por existencias, hasta 4. Se saltan los que no estén activos, publicados en la
 tienda en línea, con foto y con existencias. Nunca LUXMETIQUE (COFEPRIS) ni medicamentos (no están en Shopify).
 Si a un pilar le quedan menos de 2, no se pinta la fila (hoy Longevidad).
+
+PORTADA (26-oct, Sebas): franja chica «Lo más elegido por nuestras pacientes» al final de #preguntas, justo antes de
+Contacto, con 4 productos de la etiqueta `met:mas-elegido` (8+ pacientes en mostrador; por eso no dice «lo que
+usamos en consulta»). Uno por tratamiento, para que no salgan cuatro del mismo tipo: de los «más elegidos» que tienen
+`pilar:*`, el de más existencias de cada pilar. Sin precios ni carrito: la portada es para agendar.
 """
 import html
 import io
@@ -50,13 +55,13 @@ CONSULTA = """query($q: String!) {
     nodes {
       handle title vendor status totalInventory tags
       featuredImage { url }
-      priceRangeV2 { minVariantPrice { amount } }
       resourcePublicationsV2(first: 5) { nodes { isPublished publication { name } } }
     }
   }
 }"""
 
 INICIO, FIN = "<!-- puentes-tienda:inicio", "<!-- puentes-tienda:fin -->"
+P_INICIO, P_FIN = "<!-- puentes-portada:inicio", "<!-- puentes-portada:fin -->"
 
 
 def vendible(p: dict) -> bool:
@@ -75,6 +80,53 @@ def leer(pilar: str) -> list[dict]:
     nodos = [p for p in nodos if vendible(p)]
     nodos.sort(key=lambda p: ("met:mas-elegido" not in p["tags"], -(p["totalInventory"] or 0)))
     return nodos[:MAXIMO]
+
+
+def mas_elegidos() -> list[dict]:
+    nodos = client.execute(CONSULTA, {"q": "status:active tag:'met:mas-elegido'"})["products"]["nodes"]
+    nodos = sorted((p for p in nodos if vendible(p)), key=lambda p: -(p["totalInventory"] or 0))
+    elegidos, pilares = [], set()
+    for p in nodos:
+        suyos = {t for t in p["tags"] if t.startswith("pilar:")}
+        if suyos and not suyos & pilares:
+            elegidos.append(p)
+            pilares |= suyos
+        if len(elegidos) == MAXIMO:
+            break
+    return elegidos
+
+
+def franja_portada(productos: list[dict]) -> str:
+    tarjetas = "".join(f"""            <a class="elegido" href="{TIENDA}/products/{p['handle']}">
+              <span class="elegido__foto"><img src="{foto(p)}" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
+              <span class="elegido__marca">{html.escape(p['vendor'])}</span>
+              <span class="elegido__nombre">{html.escape(nombre(p))}</span>
+            </a>
+""" for p in productos)
+    return f"""    {P_INICIO} — lo escribe puentes-tienda.py; no lo edites a mano -->
+    <div class="section-inner elegidos reveal">
+      <div class="elegidos__texto">
+        <p class="eyebrow">Boutique de la clínica</p>
+        <h2 class="elegidos__titulo">Lo más elegido<br><em>por nuestras pacientes.</em></h2>
+        <a class="elegidos__ver" href="{TIENDA}">Ver tienda →</a>
+      </div>
+      <div class="elegidos__fila">
+{tarjetas}      </div>
+    </div>
+    {P_FIN}
+"""
+
+
+def escribir_portada(contenido: str) -> None:
+    ruta = RAIZ / "index.html"
+    s = ruta.read_text()
+    s = re.sub(rf"    {re.escape(P_INICIO)}.*?{re.escape(P_FIN)}\n", "", s, flags=re.S)
+    if contenido:
+        # Al final de #preguntas, después de su rejilla, para no sumar una séptima sección.
+        i = s.index('<section id="preguntas"')
+        j = s.index("  </section>", i)
+        s = s[:j] + contenido + s[j:]
+    ruta.write_text(s)
 
 
 def foto(p: dict) -> str:
@@ -103,12 +155,13 @@ def nombre(p: dict) -> str:
 
 
 def tarjeta(p: dict) -> str:
-    precio = f"${float(p['priceRangeV2']['minVariantPrice']['amount']):,.0f}"
+    # Sin precio (Sebas, 26-oct 19:30: «deja solo lo de consulta»): el único precio de la página es el de la
+    # consulta; el de cada producto se ve en la tienda.
     return f"""          <a class="casa-producto" href="{TIENDA}/products/{p['handle']}">
             <span class="casa-producto__foto"><img src="{foto(p)}" alt="" width="480" height="480" loading="lazy" decoding="async"></span>
             <span class="casa-producto__marca">{html.escape(p['vendor'])}</span>
             <span class="casa-producto__nombre">{html.escape(nombre(p))}</span>
-            <span class="casa-producto__precio">{precio} <small>MXN</small></span>
+            <span class="casa-producto__ver">Ver en la tienda →</span>
           </a>
 """
 
@@ -157,6 +210,10 @@ def main() -> None:
         escribir(pagina, bloque([tarjeta(p) for p in productos]))
         usadas |= {f"{p['handle']}.webp" for p in productos}
         print(f"  {pagina:24} {len(productos)}: " + ", ".join(p["handle"] for p in productos))
+    elegidos = mas_elegidos()
+    escribir_portada(franja_portada(elegidos) if len(elegidos) >= 2 else "")
+    usadas |= {f"{p['handle']}.webp" for p in elegidos}
+    print(f"  {'index.html (portada)':24} {len(elegidos)}: " + ", ".join(p["handle"] for p in elegidos))
     # Fotos de productos que ya no salen en ninguna fila.
     for viejo in SALIDA.glob("*.webp"):
         if viejo.name not in usadas:
