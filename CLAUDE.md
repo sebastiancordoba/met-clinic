@@ -115,6 +115,27 @@ Things worth knowing before editing:
   una sombra oscura que sigue al bloque (`.hero__texto::before`); su contraste se mide sobre cuadros del video. El velo crema se mide en px desde abajo. En el teléfono el póster es
   `hero-poster-movil.webp` (vertical); `optimizar-video.sh` genera los dos.
 
+### Página ↔ tienda (estrategia de Sebas, 26-oct-2026: «que agenden muchas citas y compren mucho»)
+
+La página es para agendar y la tienda (Shopify, tema propio que arma el agente `met-clinic/claude-1` en su worktree)
+es para comprar, pero se sienten como una sola: mismo encabezado, tokens y redondeado.
+
+- **Encabezado igual en las dos:** menú Servicios · Equipo · Opiniones · Contacto · Tienda, y a la derecha
+  `.nav__acciones` = «Agendar consulta» + bolsa (`.nav__bolsa`, sin contador) + hamburguesa. Con hamburguesa, la
+  hamburguesa va a la izquierda, el logo al centro y la bolsa a la derecha. «Tienda» y la bolsa van a la tienda:
+  hoy `https://met-clinic.myshopify.com` (con contraseña); al lanzar, `https://tienda.metclinic.com.mx`.
+  `tienda.html` («Próximamente») ya no tiene enlaces; se retira el día del lanzamiento.
+- **Puente página → tienda:** «Para tu cuidado en casa», 3–4 productos reales al final de Tratamientos en cada
+  pilar. Lo escribe `puentes-tienda.py` (solo lectura de Shopify, con el cliente de met-clinic-system; ver su
+  docstring para correrlo) entre las marcas `puentes-tienda:inicio/fin`; no edites ese bloque a mano. La lista de
+  productos es provisional hasta que Sebas apruebe las etiquetas curadas `pilar:*`. Nunca LUXMETIQUE ni
+  medicamentos. Las fotos van a `images/web/tienda/`. Corre de nuevo el script antes de publicar y al cambiar la base
+  de la tienda (constante `TIENDA`).
+- **Los tokens los lee el tema de la tienda** del `:root` y del bloque `html.redondeado` de `pilares.css`: si cambias
+  un color o un radio, avísale al agente de la tienda.
+- **Medición:** propuesta (GA4 + píxel de Meta compartidos, sin datos de salud en los eventos) en
+  `~/hermes-workspace/reportes/2026-10-26-metclinic-medicion-propuesta.md`. Nada conectado sin OK de Sebas.
+
 ### Mapa de #contacto (`#mapa` + IIFE en `main.js`)
 
 Mapa propio en lugar del iframe de Google: MapLibre GL 4.7.1 desde cdnjs y teselas vectoriales de OpenStreetMap

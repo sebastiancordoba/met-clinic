@@ -166,6 +166,15 @@
       cursor:pointer; transition:background 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s;
     }
     .nav__cta:hover { background:var(--sage); color:var(--confort); }
+    /* Acciones del encabezado (26-oct): «Agendar consulta», la bolsa que lleva a la tienda y la hamburguesa.
+       Mismo encabezado que la tienda en Shopify; la bolsa no lleva contador porque la página no conoce el carrito. */
+    .nav__acciones { display:flex; align-items:center; gap:10px; }
+    .nav__bolsa { display:flex; align-items:center; justify-content:center; width:40px; height:40px; color:var(--texto-suave); transition:color 0.3s; }
+    .nav__bolsa svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+    .nav__bolsa:hover { color:var(--dark); }
+    .nav--video .nav__bolsa { color:var(--confort); filter:drop-shadow(0 1px 6px rgba(0,0,0,0.35)); }
+    .nav--video .nav__bolsa:hover { color:#fff; }
+    .nav.dark-section .nav__bolsa { color:rgba(247,237,220,0.75); }
 
     /* Mientras se ve el «Agendar consulta» de la primera pantalla, el de la barra de arriba
        se aparta (pie.js pone .cta-principal-visible): no dos botones iguales a la vez. */
@@ -1059,6 +1068,11 @@
       .nav__links, .nav__cta { display:none; }
       .nav__hamburger { display:flex; }
     }
+    /* Con menú de hamburguesa: hamburguesa a la izquierda, logo al centro y bolsa a la derecha (como en la tienda). */
+    @media (max-width:960px) {
+      .nav__acciones { display:contents; }
+      .nav__hamburger { order:-1; }
+    }
 
     /* ═══════════════════════════════════════════
        RESPONSIVE — TABLET (≤ 900px)
@@ -1401,12 +1415,15 @@
       <li><a href="#especialistas">Equipo</a></li>
       <li><a href="#testimonios">Opiniones</a></li>
       <li><a href="#contacto">Contacto</a></li>
-      <li><a href="tienda.html">Tienda</a></li>
+      <li><a href="https://met-clinic.myshopify.com">Tienda</a></li>
     </ul>
-    <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="nav__cta">Agendar consulta</a>
-    <button class="nav__hamburger" id="hamburger" aria-label="Menú">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="nav__acciones">
+      <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="nav__cta">Agendar consulta</a>
+      <a href="https://met-clinic.myshopify.com" class="nav__bolsa" aria-label="Tienda en línea"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1.1 11.2a1.5 1.5 0 0 1-1.5 1.3H8.1a1.5 1.5 0 0 1-1.5-1.3L5.5 8.5z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg></a>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <!-- Mobile drawer -->
@@ -1415,7 +1432,7 @@
     <a href="#especialistas" class="drawer-link">Equipo</a>
     <a href="#testimonios" class="drawer-link">Opiniones</a>
     <a href="#contacto" class="drawer-link">Contacto</a>
-    <a href="tienda.html" class="drawer-link">Tienda</a>
+    <a href="https://met-clinic.myshopify.com" class="drawer-link">Tienda</a>
     <a href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener" class="btn-primary">Agendar consulta</a>
   </div>
 
