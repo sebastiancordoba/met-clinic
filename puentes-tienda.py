@@ -78,6 +78,7 @@ CONSULTA = """query($handle: String!) {
     handle title vendor status totalInventory
     featuredImage { url }
     priceRangeV2 { minVariantPrice { amount } }
+    resourcePublicationsV2(first: 5) { nodes { isPublished publication { name } } }
   }
 }"""
 
@@ -89,6 +90,11 @@ def leer(handle: str) -> dict | None:
     if not p or p["status"] != "ACTIVE" or (p["totalInventory"] or 0) < 1 or not p["featuredImage"]:
         return None
     if "LUXMETIQUE" in (p["vendor"] or "").upper():
+        return None
+    # Publicado en la tienda en línea. No sirve `onlineStoreUrl`: viene vacío mientras la tienda tenga
+    # contraseña, aunque el producto esté publicado (lo vio el agente de la tienda el 26-oct).
+    canales = p["resourcePublicationsV2"]["nodes"]
+    if not any(c["isPublished"] and c["publication"]["name"] == "Online Store" for c in canales):
         return None
     return p
 
