@@ -69,9 +69,11 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      display: flex;
+      /* Menú centrado de verdad (30-oct, Sebas): los dos lados miden lo mismo, sin importar el ancho del logo
+         y de las acciones. Igual en pilares.css y, por «mismo encabezado», en la tienda. */
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
       padding: 0 56px;
       height: 68px;
       background: var(--tranquil);
@@ -119,7 +121,7 @@
        Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
        `mask` usando el propio logo, así que la luz solo cae sobre las letras.
        Ciclo de 7 s, barrido en el primer 34% (~2.4 s de luz, 4.6 de pausa). */
-    .nav__marca { position:relative; display:block; line-height:0; }
+    .nav__marca { position:relative; display:block; line-height:0; justify-self:start; }
     .nav__marca::after {
       content:''; position:absolute; inset:0; pointer-events:none;
       background:linear-gradient(102deg, rgba(242,242,237,0) 32%, rgba(255,255,255,0.98) 50%, rgba(242,242,237,0) 68%);
@@ -160,7 +162,7 @@
     .nav__cta {
       font-family: var(--font);
       font-size:12px; font-weight:600;
-      letter-spacing:0.16em; text-transform:uppercase;
+      letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;
       padding:10px 24px; background:transparent;
       color:var(--dark); border:1px solid var(--sage);
       cursor:pointer; transition:background 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s;
@@ -168,7 +170,7 @@
     .nav__cta:hover { background:var(--sage); color:var(--confort); }
     /* Acciones del encabezado (26-oct): «Agendar consulta», la bolsa que lleva a la tienda y la hamburguesa.
        Mismo encabezado que la tienda en Shopify; la bolsa no lleva contador porque la página no conoce el carrito. */
-    .nav__acciones { display:flex; align-items:center; gap:10px; }
+    .nav__acciones { display:flex; align-items:center; gap:10px; justify-self:end; }
     .nav__bolsa { display:flex; align-items:center; justify-content:center; width:40px; height:40px; color:var(--texto-suave); transition:color 0.3s; }
     .nav__bolsa svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
     .nav__bolsa:hover { color:var(--dark); }
@@ -1097,16 +1099,24 @@
     .nav__drawer a:hover { color: var(--sage); }
     .nav__drawer .btn-primary { margin-top: 20px; text-align: center; padding: 15px; }
 
-    /* Menú de hamburguesa también en tablet: con Tienda de vuelta en el menú (26-oct), entre 641 y 960 px
-       los 5 enlaces y «Agendar consulta» ya no caben junto al logo. */
-    @media (min-width:641px) and (max-width:960px) {
+    /* Menú de hamburguesa también en tablet: abajo de 1120 px, los 5 enlaces no caben al centro con
+       «Agendar consulta» a un lado (rejilla 1fr auto 1fr, 30-oct). */
+    @media (min-width:641px) and (max-width:1120px) {
       .nav__links, .nav__cta { display:none; }
       .nav__hamburger { display:flex; }
     }
     /* Con menú de hamburguesa: hamburguesa a la izquierda, logo al centro y bolsa a la derecha (como en la tienda). */
-    @media (max-width:960px) {
+    @media (max-width:1120px) {
       .nav__acciones { display:contents; }
-      .nav__hamburger { order:-1; }
+      .nav__hamburger, .nav__marca, .nav__bolsa { grid-row:1; }
+      .nav__hamburger { grid-column:1; justify-self:start; }
+      .nav__marca { grid-column:2; }
+      .nav__bolsa { grid-column:3; justify-self:end; }
+    }
+    /* Justo arriba de la hamburguesa, un poco más apretado para que no se toquen el menú y el botón. */
+    @media (min-width:1121px) and (max-width:1240px) {
+      .nav { padding:0 28px; }
+      .nav__links { gap:24px; }
     }
 
     /* ═══════════════════════════════════════════
@@ -1133,7 +1143,6 @@
       .nav__links { display: none; }
       .nav__cta { display: none; }
       .nav__hamburger { display: flex; }
-      .nav__marca { position: absolute; left: 50%; transform: translateX(-50%); }
 
       /* Hero */
       /* La barra fija de contacto ya no se descuenta: está escondida mientras se ve

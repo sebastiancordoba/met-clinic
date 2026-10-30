@@ -61,7 +61,8 @@ html.barra-propia::-webkit-scrollbar { display:none; }
 /* ════════════ NAV ════════════ */
 .nav {
   position:fixed; top:0; left:0; right:0; z-index:100;
-  display:flex; align-items:center; justify-content:space-between;
+  /* Menú centrado de verdad (30-oct, Sebas): igual que en index.html. */
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   padding:0 clamp(20px,3vw,48px); height:68px;
   background:rgba(242,242,237,0.94);
   backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
@@ -72,7 +73,7 @@ html.barra-propia::-webkit-scrollbar { display:none; }
    Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
    `mask` usando el propio logo, así que la luz solo cae sobre las letras.
    Ciclo de 7 s, barrido en el primer 34% (~2.4 s de luz, 4.6 de pausa). */
-.nav__marca { position:relative; display:block; line-height:0; }
+.nav__marca { position:relative; display:block; line-height:0; justify-self:start; }
 .nav__marca::after {
   content:''; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(102deg, rgba(242,242,237,0) 32%, rgba(255,255,255,0.98) 50%, rgba(242,242,237,0) 68%);
@@ -98,14 +99,14 @@ html.barra-propia::-webkit-scrollbar { display:none; }
 .nav__links a:hover, .nav__links a.is-active { color:var(--dark); }
 .nav__links a:hover::after, .nav__links a.is-active::after { width:100%; }
 .nav__cta {
-  font-family:var(--font); font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
+  font-family:var(--font); font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;
   padding:10px 24px; background:transparent; color:var(--dark); border:1px solid var(--sage);
   cursor:pointer; transition:background 0.3s, color 0.3s;
 }
 .nav__cta:hover { background:var(--sage); color:var(--confort); }
 /* Acciones del encabezado (26-oct): «Agendar consulta», la bolsa que lleva a la tienda y la hamburguesa.
    Mismo encabezado que la tienda en Shopify; la bolsa no lleva contador porque la página no conoce el carrito. */
-.nav__acciones { display:flex; align-items:center; gap:10px; }
+.nav__acciones { display:flex; align-items:center; gap:10px; justify-self:end; }
 .nav__bolsa { display:flex; align-items:center; justify-content:center; width:40px; height:40px; color:var(--texto-suave); transition:color 0.3s; }
 .nav__bolsa svg { width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
 .nav__bolsa:hover { color:var(--dark); }
@@ -228,13 +229,22 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .footer-copy { font-size:13px; font-weight:300; color:rgba(247,237,220,0.68); }
 
 /* ════════════ RESPONSIVE ════════════ */
-@media (max-width:860px) {
+/* Hamburguesa abajo de 1120 px, como en la portada: ahí el menú no cabe al centro con «Agendar consulta» a un lado. */
+@media (max-width:1120px) {
   .nav__links, .nav__cta { display:none; }
   .nav__hamburger { display:flex; }
-  .nav__marca { position:absolute; left:50%; transform:translateX(-50%); }
   /* Hamburguesa a la izquierda, logo al centro y bolsa a la derecha (como en la tienda). */
   .nav__acciones { display:contents; }
-  .nav__hamburger { order:-1; }
+  .nav__hamburger, .nav__marca, .nav__bolsa { grid-row:1; }
+  .nav__hamburger { grid-column:1; justify-self:start; }
+  .nav__marca { grid-column:2; }
+  .nav__bolsa { grid-column:3; justify-self:end; }
+}
+/* Justo arriba de la hamburguesa, un poco más apretado para que no se toquen el menú y el botón. */
+@media (min-width:1121px) and (max-width:1240px) {
+  .nav__links { gap:24px; }
+}
+@media (max-width:860px) {
   .pilar-intro__grid { grid-template-columns:1fr; gap:24px; }
   .tgroup { grid-template-columns:1fr; gap:24px; }
 }

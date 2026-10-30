@@ -52,8 +52,8 @@ Section order (anchors used by nav links and `main.js` smooth-scroll). Since 24-
 
 What left the home page lives in `nosotros.html` (#clinica mosaico, #proceso «Cómo trabajamos», #cita «Ámate.
 Rejuvenécete.», #filosofia sin cifras) and `preguntas.html` (las 7 preguntas + su JSON-LD FAQPage). Both use
-`pilares.css` (bloque «NOSOTROS»). Menú: Servicios · Equipo · Opiniones · Contacto · Tienda (en la portada, menú
-de hamburguesa hasta 960 px). El pie ya no lleva columnas de enlaces (26-oct, Sebas): La clínica y Preguntas se
+`pilares.css` (bloque «NOSOTROS»). Menú: Servicios · Equipo · Opiniones · Contacto · Tienda (hamburguesa hasta 1120 px en
+todas las páginas; arriba de eso, centrado de verdad con la rejilla `1fr auto 1fr` de `.nav`, 30-oct, Sebas). El pie ya no lleva columnas de enlaces (26-oct, Sebas): La clínica y Preguntas se
 enlazan desde la portada («Conoce la clínica →», «Cómo trabajamos →», «Ver todas las preguntas →»); no las quites.
 #servicios: título y la tarjeta de Ginecología en una fila, los 6 pilares en rejilla 3×2 (tablet 2×3, teléfono una
 columna); todo junto cabe en una laptop de 680 px. Cierra con el carrusel de aparatos (`#tecnologia .aparatos`, 26-oct):
