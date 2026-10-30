@@ -254,9 +254,9 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const zoom = (w, h) => Math.max(caja.width / w, caja.height / h);
   const vertical = window.matchMedia('(max-width: 640px)').matches || zoom(720, 1080) < zoom(1920, 1080);
   const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
-  // Velocidad para comparar (24-oct, Sebas: «va muy rápido»): ?video=lento (0.8×, 13.8 s),
-  // ?video=medio (0.9×, 12.3 s) o ?video=<número> para probar otra (0.5–1.5, p. ej. ?video=0.85).
-  // Son 11 tomas en 11 s.
+  // Velocidad para comparar (24-oct, Sebas: «va muy rápido»): ?video=lento (0.8×, 15 s),
+  // ?video=medio (0.9×, 13.4 s) o ?video=<número> para probar otra (0.5–1.5, p. ej. ?video=0.85).
+  // Es sobre el archivo, que desde el 30-oct ya viene más lento: 11 tomas en 12 s (optimizar-video.sh).
   const pedida = (location.search.match(/[?&]video=([a-z]+|\d*\.?\d+)/) || [])[1];
   const velocidad = { lento: 0.8, medio: 0.9 }[pedida] || Math.min(1.5, Math.max(0.5, parseFloat(pedida))) || 1;
   const arrancar = () => {

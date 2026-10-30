@@ -3,12 +3,13 @@
 #
 #   ./optimizar-video.sh ~/Downloads/video.mov
 #
-# El original (15 MB, 1920x1080 a 11 Mbps, con audio) NO va al repo. Lo que sí:
+# El original (15 MB, 1920x1080 a 11 Mbps, con audio) NO va al repo; está en el Drive de
+# la clínica, un .MOV que se llama «video». Lo que sí va:
 #
 #   video/hero-1080.av1.mp4      1920x1080, AV1,   ~4.1 MB escritorio, si el navegador decodifica AV1
-#   video/hero-1080.mp4          1920x1080, H.264, ~5.4 MB  escritorio, el resto (Safari en Macs sin AV1)
-#   video/hero-movil.av1.mp4      720x1080, AV1,   ~1.5 MB  celular vertical
-#   video/hero-movil.mp4          720x1080, H.264, ~1.9 MB  celular vertical, el resto (casi todo iPhone)
+#   video/hero-1080.mp4          1920x1080, H.264, ~5.8 MB  escritorio, el resto (Safari en Macs sin AV1)
+#   video/hero-movil.av1.mp4      720x1080, AV1,   ~1.9 MB  celular vertical
+#   video/hero-movil.mp4          720x1080, H.264, ~2.5 MB  celular vertical, el resto (casi todo iPhone)
 #   images/web/hero-poster.webp  un cuadro del propio video, ~75 KB
 #   images/web/hero-poster-movil.webp  el mismo cuadro en vertical 720x1080, ~50 KB
 #
@@ -52,13 +53,19 @@ AV1="-c:v libsvtav1 -preset 4 -crf 39 -movflags +faststart"
 FILTRO="hqdn3d=1.2:1.2:2.5:2.5,unsharp=5:5:0.7:5:5:0"
 COMPLETO="$FILTRO,scale=1920:-2:flags=lanczos"
 VERTICAL="$FILTRO,crop=720:1080:(iw-720)/2:0"
+# Un segundo más lento (Sebas, 30-oct-2026): el original son 331 cuadros en 11.03 s
+# y aquí duran 12.03 s. Son los mismos 331 cuadros, a 27.5 por segundo en vez de 30:
+# sin -r, ffmpeg los redondea a 30 por segundo y el ritmo sale disparejo. Si cambia
+# el original, recalcula los dos valores (duración nueva / duración original).
+RITMO="setpts=PTS*361/331"
+CUADROS="-r 9930/361"
 
 # shellcheck disable=SC2086
 {
-  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,format=yuv420p"     $H264 video/hero-1080.mp4
-  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,format=yuv420p10le" $AV1  video/hero-1080.av1.mp4 2>/dev/null
-  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,format=yuv420p"     $H264 video/hero-movil.mp4
-  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,format=yuv420p10le" $AV1  video/hero-movil.av1.mp4 2>/dev/null
+  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,$RITMO,format=yuv420p"     $CUADROS $H264 video/hero-1080.mp4
+  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,$RITMO,format=yuv420p10le" $CUADROS $AV1  video/hero-1080.av1.mp4 2>/dev/null
+  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,$RITMO,format=yuv420p"     $CUADROS $H264 video/hero-movil.mp4
+  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,$RITMO,format=yuv420p10le" $CUADROS $AV1  video/hero-movil.av1.mp4 2>/dev/null
 }
 
 TMP="$(mktemp -t poster).png"
