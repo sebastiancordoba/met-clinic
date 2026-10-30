@@ -1,21 +1,7 @@
-// pie.js — lo que comparten todas las páginas (24-oct-2026). El mapa chico del pie se quitó el 30-oct (Sebas).
+// pie.js — lo que comparten todas las páginas (24-oct-2026). El mapa chico y «Pregúntale a tu IA» del pie se
+// quitaron el 30-oct (Sebas).
 //
-// 1. «Pregúntale a tu IA»: los enlaces ya traen la pregunta (ChatGPT, Claude
-//    y Perplexity la aceptan en la URL). Gemini no acepta ?q= (probado el
-//    24-oct): ahí se copia la pregunta al portapapeles y se avisa.
-
-(function () {
-  const gemini = document.querySelector('.pie-ia__btn[data-copiar]');
-  const nota = document.querySelector('.pie-ia__nota');
-  if (!gemini || !nota) return;
-  gemini.addEventListener('click', () => {
-    const texto = gemini.dataset.copiar;
-    if (navigator.clipboard) navigator.clipboard.writeText(texto).catch(() => {});
-    nota.hidden = false;
-  });
-})();
-
-// 2. Un solo «Agendar consulta» a la vista (24-oct, Sebas: «dos botones para lo mismo»).
+// 1. Un solo «Agendar consulta» a la vista (24-oct, Sebas: «dos botones para lo mismo»).
 //    Mientras se ve el botón principal de la primera pantalla (portada o cabecera del
 //    servicio), <html> lleva .cta-principal-visible: el CSS esconde el botón de la barra
 //    de arriba, y aquí se esconde la barra fija del teléfono. Al salir ese botón de la
@@ -43,7 +29,7 @@
   if (final) io.observe(final);
 })();
 
-// 3. Barra de desplazamiento flotante (24-oct, Sebas: «ocupa toda una franja vertical»).
+// 2. Barra de desplazamiento flotante (24-oct, Sebas: «ocupa toda una franja vertical»).
 //    Solo donde la barra del sistema ocupa ancho (Chrome, Edge y Firefox en Windows; macOS con
 //    «mostrar barras siempre»): ahí se esconde la nativa y flota un pulgar delgado que aparece al
 //    desplazar o al acercar el ratón al borde derecho, y se va 1 s después. Donde la barra ya es
