@@ -142,26 +142,26 @@ es para comprar, pero se sienten como una sola: mismo encabezado, tokens y redon
 - **Medición:** propuesta (GA4 + píxel de Meta compartidos, sin datos de salud en los eventos) en
   `~/hermes-workspace/reportes/2026-10-26-metclinic-medicion-propuesta.md`. Nada conectado sin OK de Sebas.
 
-### Mapa de #contacto (`#mapa` + IIFE en `main.js`)
+### Mapa de #contacto (30-oct-2026, Sebas, con una referencia)
 
-Mapa propio en lugar del iframe de Google: MapLibre GL 4.7.1 desde cdnjs y teselas vectoriales de OpenStreetMap
-servidas por OpenFreeMap (estilo `positron`, sin llave ni cuenta), recoloreado en `recolorear()` con la paleta.
-Se baja solo cuando la sección está a ~600 px (unos 210 KB comprimidos más teselas); sin WebGL o sin red queda la
-tarjeta con dirección y enlaces. La atribución de OpenStreetMap es obligatoria: no la quites.
+Mapa ilustrado: un SVG dentro de `index.html`, sin librería ni servicios externos. Crema liso, calles en dos grosores,
+parques pálidos, sin nombres de calles ni controles; referencias con punto anillado y un pin de línea para la clínica.
+Lo escribe `generar-mapa.py` con datos de OpenStreetMap (ver su docstring) entre las marcas `mapa-contacto:inicio/fin`:
+no edites ese bloque a mano. Las calles, las referencias y los encuadres son constantes del script.
 
-- Coordenadas de la clínica en `data-lat/data-lng` (las que geocodifica Google para la dirección). La ruta a pie desde
-  el Metro Barranca del Muerto está fija en `main.js` (OSRM peatón, 466 m).
-- "Cómo llegar" abre Apple Maps en iPhone/iPad/Mac y Google Maps en lo demás; abajo están las tres apps.
-- `cooperativeGestures`: la rueda y un dedo siguen moviendo la página; el mapa se mueve con Ctrl/⌘ o dos dedos.
-- Variante A (sin caja, se funde con el crema) por defecto; `?mapa=b` muestra la B (enmarcada) para comparar.
-  Quitar la que no se elija antes de publicar.
+- Todo el mapa es un enlace a «Cómo llegar»: Google Maps en el HTML; `main.js` lo cambia, junto con el botón de la
+  tarjeta, a Apple Maps en iPhone, iPad y Mac.
+- Dos encuadres sobre las mismas calles (`<use href="#mapaBase">`): el ancho, con la tarjeta encima, arriba de 1000 px,
+  y el vertical, con la tarjeta debajo. Por el `<use>`, el estilo de calles y parques va en `#mapaBase …`, no en
+  `.mapa__svg …`.
+- El crédito «© OpenStreetMap» es obligatorio (licencia ODbL): no lo quites.
 
 ### Pie de página: una sola sección (30-oct-2026, Sebas)
 
 Igual en las 11 páginas, sin líneas divisorias: a un lado el logo, la dirección con el teléfono y «Cómo llegar: Google
 Maps · Waze · Apple Maps» (`.pie-lugar`); al otro, redes y copyright. En el teléfono va todo en una columna. El CSS está
 en `index.html` **y** en `pilares.css`. El mapa chico y «Pregúntale a tu IA» se quitaron: no los repongas sin que lo
-pida. MapLibre ya solo lo baja la portada, para el mapa de #contacto.
+pida.
 
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 

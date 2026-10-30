@@ -403,25 +403,16 @@ html.redondeado .pilar-faq details[open] { background: rgba(255,255,255,0.85); b
 html.redondeado .faq-lista details p,
 html.redondeado .pilar-faq details p { padding-right: 28px; }
 
-/* ── Mapa: con esquinas redondas va enmarcado (sin el desvanecido de la
-   variante A, que no tiene bordes que redondear) ── */
-html.redondeado .mapa .mapa__lienzo {
-  border-radius: var(--r-lg); overflow: hidden;
-  border: 1px solid rgba(130,134,127,0.18);
-  box-shadow: var(--sombra-suave);
-}
-html.redondeado .mapa__lienzo .maplibregl-canvas { -webkit-mask-image: none; mask-image: none; }
-html.redondeado .mapa__tarjeta,
-html.redondeado .mapa--tarjeta .mapa__tarjeta {
+/* ── Mapa y su tarjeta con esquinas redondas ── */
+html.redondeado .mapa__enlace { border-radius: var(--r-lg); box-shadow: var(--sombra-suave); }
+html.redondeado .mapa__tarjeta {
   border-radius: var(--r-lg);
   border: 1px solid rgba(130,134,127,0.18);
   box-shadow: 0 18px 40px -20px rgba(38,38,38,0.28);
 }
-@media (min-width: 761px) {
+@media (min-width: 1001px) {
   html.redondeado .mapa__tarjeta { left: 28px; }
 }
-html.redondeado .mapa .maplibregl-ctrl-group { border-radius: var(--r-sm); overflow: hidden; }
-html.redondeado .mapa-pin__nombre { border-radius: var(--r-pill); }
 
 /* Datos bajo el logo del pie. El mismo bloque vive en index.html; si cambias uno, cambia el otro.
    El mapa chico y «Pregúntale a tu IA» se quitaron el 30-oct (Sebas). */
