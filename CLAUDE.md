@@ -61,7 +61,7 @@ fotos del fabricante recortadas (`images/equipos/`, fuentes en `FUENTES-ficha_te
 modelo hasta que la clínica confirme MonaLisa, X-Wave e InBody; flechas en `main.js`. #preguntas cierra con la
 franja «Lo más elegido por nuestras pacientes» (`met:mas-elegido`, la escribe `puentes-tienda.py`). En el teléfono
 el equipo (`.equipo-grid`) es un carrusel de una fila con puntos. **Precios: solo los de la consulta** (Sebas,
-26-oct): nada de precios de tratamientos, paquetes ni productos en ninguna página ni en el JSON-LD. Barra de desplazamiento: ver `pie.js` (4); no vuelvas a poner
+26-oct): nada de precios de tratamientos, paquetes ni productos en ninguna página ni en el JSON-LD. Barra de desplazamiento: ver `pie.js` (3); no vuelvas a poner
 estilos `::-webkit-scrollbar`, porque en macOS vuelven fija la barra flotante.
 
 Things worth knowing before editing:
@@ -156,9 +156,9 @@ tarjeta con dirección y enlaces. La atribución de OpenStreetMap es obligatoria
 - Variante A (sin caja, se funde con el crema) por defecto; `?mapa=b` muestra la B (enmarcada) para comparar.
   Quitar la que no se elija antes de publicar.
 
-### Pie de página: «Pregúntale a tu IA» + mapa chico (24-oct-2026)
+### Pie de página: «Pregúntale a tu IA» + dirección (24-oct-2026)
 
-La franja `.pie-extra` va arriba de `.footer-bottom` en las 9 páginas; el comportamiento vive en `pie.js` (cargado en
+La franja `.pie-extra` va arriba de `.footer-bottom` en las 11 páginas; el comportamiento vive en `pie.js` (cargado en
 todas). El CSS está en `index.html` **y** en `pilares.css`.
 
 - Los botones abren ChatGPT (`?hints=search&q=`), Claude (`/new?q=`, conserva la pregunta tras iniciar sesión) y
@@ -166,8 +166,8 @@ todas). El CSS está en `index.html` **y** en `pilares.css`.
   pregunta y avisa.
 - La pregunta es neutral (opiniones, servicios, ubicación) por COFEPRIS. Va repetida en los 4 enlaces de cada página.
 - Los íconos son de simple-icons, en monocromo. OpenAI ya no está en las versiones recientes; el suyo sale de la 13.0.0.
-- El mapa es el mismo MapLibre + OpenFreeMap, quieto (`interactive:false`), recoloreado en grafito y diferido a
-  ~400 px. Si la portada ya bajó MapLibre para #contacto, reusa ese `<script>`.
+- El mapa chico se quitó el 30-oct (Sebas): queda la dirección y «Cómo llegar: Google Maps · Waze · Apple Maps»
+  (`.pie-lugar`). MapLibre ya solo lo baja la portada, para el mapa de #contacto.
 
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 

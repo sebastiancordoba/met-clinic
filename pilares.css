@@ -38,7 +38,7 @@ html { scroll-padding-top:76px; }
 @media (max-width:640px) { html { scroll-padding-bottom:84px; } }
 body { font-family:var(--font); color:var(--dark); background:var(--tranquil); overflow-x:hidden; overflow-x:clip; max-width:100vw; } /* clip y no hidden: hidden vuelve al body contenedor de scroll y rompe position:sticky */
 a { color:inherit; text-decoration:none; }
-/* Barra de desplazamiento (24-oct, Sebas: «ocupa toda una franja»). Comportamiento en pie.js (4).
+/* Barra de desplazamiento (24-oct, Sebas: «ocupa toda una franja»). Comportamiento en pie.js (3).
    Sin estilos ::-webkit-scrollbar a propósito: en macOS convierten la barra flotante del sistema en
    una franja fija. Donde la barra del sistema ocupa ancho, pie.js pone .barra-propia: se esconde la
    nativa y flota un pulgar delgado, sin carril. */
@@ -426,14 +426,14 @@ html.redondeado .mapa .maplibregl-ctrl-group { border-radius: var(--r-sm); overf
 html.redondeado .mapa-pin__nombre { border-radius: var(--r-pill); }
 
 /* ═══════════════════════════════════════════
-   PIE: «Pregúntale a tu IA» + mapa chico (24-oct-2026)
+   PIE: «Pregúntale a tu IA» + dirección (24-oct-2026; el mapa chico se quitó el 30-oct, Sebas)
    El mismo bloque vive en index.html y en pilares.css; si cambias uno,
    cambia el otro. Comportamiento en pie.js.
 ═══════════════════════════════════════════ */
 .pie-extra {
   max-width:1140px; margin:44px auto 0; padding-top:40px;
   border-top:1px solid rgba(130,134,127,0.14);
-  display:grid; grid-template-columns:1fr 1.05fr; gap:clamp(32px,5vw,72px); align-items:start;
+  display:grid; grid-template-columns:1fr auto; gap:clamp(32px,5vw,72px); align-items:end;
 }
 .pie-ia__eyebrow { font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; color:rgba(247,237,220,0.78); margin:0 0 14px; }
 .pie-ia__titulo { font-family:var(--font); font-weight:200; font-size:clamp(28px,3vw,40px); line-height:1.05; letter-spacing:-0.02em; color:var(--confort); margin:0 0 14px; }
@@ -450,27 +450,12 @@ html.redondeado .mapa-pin__nombre { border-radius: var(--r-pill); }
 .pie-ia__btn:focus-visible { outline:2px solid var(--confort); outline-offset:3px; }
 .pie-ia__btn svg { width:16px; height:16px; fill:currentColor; flex:none; }
 .pie-ia__nota { margin:12px 0 0; font-size:12px; color:rgba(247,237,220,0.85); }
-.pie-mapa__lienzo {
-  position:relative; height:240px; border-radius:20px; overflow:hidden;
-  border:1px solid rgba(247,237,220,0.1);
-  background:
-    linear-gradient(rgba(247,237,220,0.04) 1px, transparent 1px) 0 0/40px 40px,
-    linear-gradient(90deg, rgba(247,237,220,0.04) 1px, transparent 1px) 0 0/40px 40px, #2E2E2B;
-}
-.pie-mapa__lienzo--listo { background:#2E2E2B; }
-.pie-mapa__pie { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px 20px; margin-top:14px; font-size:13px; font-weight:300; line-height:1.6; color:rgba(247,237,220,0.78); }
-.pie-mapa__pie strong { color:var(--confort); font-weight:500; }
-.pie-mapa__ir a { color:rgba(247,237,220,0.92); text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.3); }
-.pie-mapa__ir a:hover { border-color:var(--confort); }
-.pie-pin { width:54px; height:54px; border-radius:50%; background:#262626; border:1.5px solid var(--confort); display:grid; place-items:center; box-shadow:0 6px 18px rgba(0,0,0,0.45); }
-.pie-pin img { width:38px; height:auto; filter:brightness(0) invert(1) sepia(0.35); } /* el monograma oscuro, en crema */
-.pie-mapa__lienzo .maplibregl-ctrl.maplibregl-ctrl-attrib { font-family:var(--font); font-size:10px; background:rgba(38,38,38,0.85); color:rgba(247,237,220,0.75); }
-.pie-mapa__lienzo .maplibregl-ctrl-attrib a { color:rgba(247,237,220,0.85); }
-.pie-mapa__lienzo .maplibregl-ctrl.maplibregl-ctrl-attrib.maplibregl-compact { border-radius:999px; background:rgba(38,38,38,0.85); }
-.pie-mapa__lienzo .maplibregl-ctrl-attrib-button { filter:invert(1); }
+.pie-lugar { display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:300; line-height:1.6; color:rgba(247,237,220,0.78); }
+.pie-lugar strong { color:var(--confort); font-weight:500; }
+.pie-lugar__ir a { color:rgba(247,237,220,0.92); text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.3); }
+.pie-lugar__ir a:hover { border-color:var(--confort); }
 @media (max-width:760px) {
   .pie-extra { grid-template-columns:1fr; gap:32px; margin-top:36px; padding-top:32px; }
-  .pie-mapa__lienzo { height:200px; }
 }
 
 /* ════════════ PUENTE A LA TIENDA (26-oct-2026) ════════════
