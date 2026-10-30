@@ -90,7 +90,7 @@ Things worth knowing before editing:
 ### Equipo y agenda (oct 2026)
 
 - **Equipo:** la doctora va como tarjeta destacada (`main.js` la pinta horizontal, `.esp-solo`, porque es la única
-  `.esp-card` del carrusel). Debajo, `.equipo-grid`: las otras cinco personas en fotos grandes (sesión de septiembre,
+  `.esp-card` del carrusel). Debajo, `.equipo-grid`: las otras cuatro personas en fotos grandes (sesión de septiembre,
   recortadas como serie en `optimizar-imagenes.py`, `RETRATOS`). El 26-oct se probó una lista compacta y Sebas pidió
   volver a las fotos grandes: no la repongas sin que lo pida.
   **Sus nombres y puestos no vienen en el Drive:** dicen «Nombre/Puesto por confirmar» y llevan `data-pendiente`.

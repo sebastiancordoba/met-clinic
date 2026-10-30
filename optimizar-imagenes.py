@@ -87,10 +87,10 @@ RETRATOS = [
     # frente a la escalera para que se lean como serie. Sin nombres todavía: el
     # archivo va numerado y la tarjeta dice «Nombre por confirmar». Las caras se
     # midieron con un detector (OpenCV) y se revisaron a la vista.
-    # Se pintan a ~230 px de ancho en la rejilla de cinco: 480x600 cubre 2x.
+    # Se pintan a ~230 px de ancho en la rejilla de cuatro: 480x600 cubre 2x.
+    # equipo-3 (DSC00153) salió de la página el 30-oct (Sebas); su original sigue en images/equipo/.
     ("images/equipo/equipo-1.jpg", "equipo-1.webp", 0.516, 0.383, (480, 600)),  # DSC00108
     ("images/equipo/equipo-2.jpg", "equipo-2.webp", 0.514, 0.373, (480, 600)),  # DSC00121
-    ("images/equipo/equipo-3.jpg", "equipo-3.webp", 0.554, 0.395, (480, 600)),  # DSC00153
     ("images/equipo/equipo-4.jpg", "equipo-4.webp", 0.525, 0.382, (480, 600)),  # DSC00161
     ("images/equipo/equipo-5.jpg", "equipo-5.webp", 0.521, 0.396, (480, 600)),  # DSC00229
 ]
