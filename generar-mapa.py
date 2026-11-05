@@ -8,8 +8,8 @@ de línea para la clínica. Pesa ~11 KB dentro del HTML y no llama a ningún ser
     python3 generar-mapa.py zona.json     # igual, con una descarga guardada
 
 Solo usa la biblioteca estándar. Escribe entre las marcas `mapa-pie:inicio/fin` del pie de cada página (4-nov: el mismo
-mapa con su tarjeta, más chico y con las calles más gruesas) y entre `mapa-contacto:inicio/fin` de index.html: no edites
-esos bloques a mano. Las calles (#mapaBase) van una sola vez, en el del pie; el grande de #contacto las usa con <use>. Las calles se comparten en un <g> y hay dos encuadres con sus etiquetas: el ancho de compu
+mapa con su tarjeta, más chico y con las calles más gruesas) : no edites ese bloque a mano.
+El mapa grande de #contacto de la portada se quitó el 4-nov (Sebas: «se queda solo el del pie»). Las calles se comparten en un <g> y hay dos encuadres con sus etiquetas: el ancho de compu
 y el vertical de teléfono. Se usa `meet` y las calles se pasan del encuadre: así ninguna etiqueta se corta y el mapa
 llena la caja, mida lo que mida. El crédito a OpenStreetMap es obligatorio (licencia ODbL): no lo quites.
 """
@@ -75,7 +75,6 @@ RUTA = [(19.361545, -99.189188), (19.361514, -99.189192), (19.360622, -99.189305
 # una franja ancha y baja en compu, con la tarjeta encima a la izquierda y la clínica a la derecha de ella.
 PIE_ANCHO = (-1100, -150, 1900, 560)
 
-INICIO, FIN = "<!-- mapa-contacto:inicio", "<!-- mapa-contacto:fin -->"
 PIE_INICIO, PIE_FIN = "<!-- mapa-pie:inicio", "<!-- mapa-pie:fin -->"
 APPLE = "https://maps.apple.com/?q=MET+Clinic&amp;ll=19.3580013,-99.1890269&amp;address=Guty+C%C3%A1rdenas+65,+Guadalupe+Inn,+01020+CDMX"
 WAZE = "https://waze.com/ul?ll=19.3580013,-99.1890269&amp;navigate=yes"
@@ -413,18 +412,6 @@ def capas(alto, r_fuera, r_dentro, separa, escala_pin, alto_clinica):
     return ruta() + refs + pin(escala_pin) + f'<text class="mt mt--clinica" x="{x}" y="-30" font-size="{alto_clinica}">MET CLINIC</text>'
 
 
-def bloque():
-    """El mapa grande de #contacto (solo index.html). Las calles (#mapaBase) vienen en el del pie, que está en todas las páginas."""
-    return f"""      {INICIO} — lo escribe generar-mapa.py; no lo edites a mano -->
-      <a class="mapa__enlace js-mapa-ir" id="mapaEnlace" target="_blank" rel="noopener" href="{GOOGLE}" aria-label="Cómo llegar a MET Clinic, Guty Cárdenas 65, Guadalupe Inn: abrir en la app de mapas">
-        {encuadre("mapa__svg--ancho", ANCHO, capas(16, 7, 3.2, 19, 1, 30))}
-        {encuadre("mapa__svg--movil", MOVIL, capas(21, 11, 5, 22, 1.3, 36))}
-        <span class="mapa__credito">© OpenStreetMap</span>
-      </a>
-      {FIN}
-"""
-
-
 def bloque_pie(datos):
     """El del pie: el mismo mapa y la misma tarjeta, más chicos y con las calles más gruesas (lo pone el CSS de .pie-mapa)."""
     return f"""    {PIE_INICIO} — lo escribe generar-mapa.py; no lo edites a mano -->
@@ -478,8 +465,6 @@ def main():
         if PIE_INICIO not in s:
             continue
         s = reemplaza(s, PIE_INICIO, PIE_FIN, pie, "    ")
-        if INICIO in s:
-            s = reemplaza(s, INICIO, FIN, bloque(), "      ")
         ruta_html.write_text(s, encoding="utf-8")
         print(f"  {ruta_html.name}: mapa del pie {len(pie.encode()) / 1024:.1f} KB")
 

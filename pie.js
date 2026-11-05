@@ -111,11 +111,11 @@
 })();
 
 
-// 4. «Cómo llegar» (4-nov): los mapas (el grande de #contacto y el del pie, ver generar-mapa.py) y sus botones abren la
+// 4. «Cómo llegar» (4-nov): el mapa del pie (ver generar-mapa.py) y su botón abren la
 //    app de mapas del dispositivo: Apple Maps en iPhone/iPad/Mac; en lo demás, el enlace a Google Maps del HTML.
 (function () {
   if (!/iPhone|iPad|Macintosh/.test(navigator.userAgent) || /Android/.test(navigator.userAgent)) return;
-  document.querySelectorAll('.js-mapa-ir, #mapaIr').forEach((a) => {
+  document.querySelectorAll('.js-mapa-ir').forEach((a) => {
     a.href = 'https://maps.apple.com/?daddr=19.3580013,-99.1890269&q=MET%20Clinic';
   });
 })();

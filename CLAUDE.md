@@ -47,7 +47,7 @@ Section order (anchors used by nav links and `main.js` smooth-scroll). Since 24-
 
 ```
 #hero (portada + franja)  →  #servicios (con #tecnologia al final)  →  #especialistas (doctora, equipo, asociaciones)
-       →  #testimonios  →  #preguntas (4; «Ver todas» → preguntas.html)  →  #contacto (mapa + agenda)  →  <footer>
+       →  #testimonios  →  #preguntas (4; «Ver todas» → preguntas.html)  →  #contacto (agenda)  →  <footer>
 ```
 
 What left the home page lives in `nosotros.html` (#clinica mosaico, #proceso «Cómo trabajamos», #cita «Ámate.
@@ -142,27 +142,24 @@ es para comprar, pero se sienten como una sola: mismo encabezado, tokens y redon
 - **Medición:** propuesta (GA4 + píxel de Meta compartidos, sin datos de salud en los eventos) en
   `~/hermes-workspace/reportes/2026-10-26-metclinic-medicion-propuesta.md`. Nada conectado sin OK de Sebas.
 
-### Mapa de #contacto (30-oct-2026, Sebas, con una referencia)
+### Mapa del pie (30-oct y 4-nov-2026, Sebas, con una referencia)
 
-Mapa ilustrado: un SVG dentro de `index.html`, sin librería ni servicios externos. Crema liso, calles en dos grosores,
-parques pálidos, sin nombres de calles ni controles; referencias con punto anillado y un pin de línea para la clínica.
-Lo escribe `generar-mapa.py` con datos de OpenStreetMap (ver su docstring) entre las marcas `mapa-contacto:inicio/fin`:
-no edites ese bloque a mano. Las calles, las referencias y los encuadres son constantes del script.
+Mapa ilustrado: un SVG en el pie de las 11 páginas, sin librería ni servicios externos. Crema liso, calles en dos
+grosores (más gruesas desde el 4-nov), parques pálidos, sin nombres de calles ni controles; referencias con punto
+anillado y un pin de línea para la clínica, con su tarjeta «Cómo llegar». Lo escribe `generar-mapa.py` con datos de
+OpenStreetMap (ver su docstring) entre las marcas `mapa-pie:inicio/fin`: no edites ese bloque a mano. El mapa grande de
+#contacto se quitó el 4-nov (Sebas: «se queda solo el del pie»); #contacto se quedó con precios, agenda y datos.
 
-- Todo el mapa es un enlace a «Cómo llegar»: Google Maps en el HTML; `main.js` lo cambia, junto con el botón de la
-  tarjeta, a Apple Maps en iPhone, iPad y Mac.
-- Dos encuadres sobre las mismas calles (`<use href="#mapaBase">`): el ancho, con la tarjeta encima, arriba de 1000 px,
-  y el vertical, con la tarjeta debajo. Por el `<use>`, el estilo de calles y parques va en `#mapaBase …`, no en
-  `.mapa__svg …`.
+- Todo el mapa es un enlace a «Cómo llegar»: Google Maps en el HTML; `pie.js` (4) lo cambia, junto con el botón de la
+  tarjeta (clase `.js-mapa-ir`), a Apple Maps en iPhone, iPad y Mac.
+- Dos encuadres sobre las mismas calles (`<use href="#mapaBase">`): la franja ancha con la tarjeta encima arriba de
+  1000 px, y el vertical con la tarjeta arriba. Por el `<use>`, el estilo de calles va en `#mapaBase …`; el grosor, en
+  `--calle-g`/`--calle-d` de `.pie-mapa`. El CSS está en `index.html` y en `pilares.css`.
 - El crédito «© OpenStreetMap» es obligatorio (licencia ODbL): no lo quites.
-- **Mapa del pie (4-nov, Sebas):** el mismo mapa con la misma tarjeta, más chico, en el pie de las 11 páginas
-  (`mapa-pie:inicio/fin`, también lo escribe el script) y con las calles más gruesas (`--calle-g`/`--calle-d` en
-  `.pie-mapa`). Las calles (`#mapaBase`) viven ahí una sola vez; el grande de #contacto las usa con `<use>`. Reemplazó
-  la línea de dirección del pie (`.pie-lugar`). El cambio a Apple Maps está en `pie.js` (4), por la clase `.js-mapa-ir`.
 
 ### Pie de página: una sola sección (30-oct-2026, Sebas)
 
-Igual en las 11 páginas, sin líneas divisorias: arriba el mapa del pie con su tarjeta (ver «Mapa de #contacto»); abajo, a un
+Igual en las 11 páginas, sin líneas divisorias: arriba el mapa del pie con su tarjeta (ver «Mapa del pie»); abajo, a un
 lado el logo y al otro redes y copyright. En el teléfono va todo en una columna. El CSS está
 en `index.html` **y** en `pilares.css`. El mapa chico y «Pregúntale a tu IA» se quitaron: no los repongas sin que lo
 pida.

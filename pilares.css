@@ -329,7 +329,7 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 .pilar-intro__kicker { display:flex; align-items:center; gap:12px; }
 .pilar-intro__kicker::before { content:''; width:20px; height:1px; background:var(--sage); opacity:0.6; flex:none; }
 
-/* ════════════ MAPA ILUSTRADO (base, igual que en index.html; lo usa el mapa del pie) ════════════ */
+/* ════════════ MAPA ILUSTRADO (igual que en index.html; el mapa del pie) ════════════ */
 .mapa__enlace {
   position:absolute; inset:0; display:block; overflow:hidden; background:var(--tranquil);
   border:1px solid rgba(130,134,127,0.2); transition:border-color 0.3s;
@@ -356,13 +356,6 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 @media (prefers-reduced-motion: reduce) { .mapa__enlace:hover .mapa__pin { transform:none; } }
 .mapa__credito { position:absolute; right:12px; bottom:8px; font-size:10px; font-weight:400; letter-spacing:0.02em; color:var(--texto-suave); }
 
-.mapa__tarjeta {
-  position:absolute; left:0; top:50%; transform:translateY(-50%); z-index:2;
-  width:320px; padding:30px 30px 26px;
-  background:rgba(247,237,220,0.94);
-  border:1px solid rgba(130,134,127,0.2); border-top:2px solid var(--sage);
-  box-shadow:0 18px 40px -24px rgba(38,38,38,0.3);
-}
 .mapa__logo { height:22px; width:auto; display:block; margin-bottom:18px; opacity:0.9; }
 .mapa__eyebrow { font-size:11px; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:10px; }
 .mapa__dir { font-size:17px; font-weight:300; line-height:1.6; color:var(--dark); margin-bottom:18px; }
@@ -482,18 +475,6 @@ html.redondeado .pilar-faq details p { padding-right: 28px; }
 html.redondeado .mapa__enlace { border-radius: var(--r-lg); box-shadow: var(--sombra-suave); }
 html.redondeado .pie-mapa__tarjeta { border-radius: var(--r-lg); border-top-width: 1px; }
 html.redondeado .pie-mapa .mapa__enlace { box-shadow: none; }
-html.redondeado .mapa__tarjeta {
-  border-radius: var(--r-lg);
-  border: 1px solid rgba(130,134,127,0.18);
-  box-shadow: 0 18px 40px -20px rgba(38,38,38,0.28);
-}
-@media (min-width: 1001px) {
-  html.redondeado .mapa__tarjeta { left: 28px; }
-}
-
-/* Datos bajo el logo del pie. El mismo bloque vive en index.html; si cambias uno, cambia el otro.
-   El mapa chico y «Pregúntale a tu IA» se quitaron el 30-oct (Sebas). */
-.pie-lugar { display:flex; flex-direction:column; gap:6px; font-size:13px; font-weight:300; line-height:1.6; color:rgba(247,237,220,0.78); }
 .pie-lugar strong { color:var(--confort); font-weight:500; }
 .pie-lugar a { color:rgba(247,237,220,0.92); text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.3); white-space:nowrap; }
 .pie-lugar a:hover { border-color:var(--confort); }
