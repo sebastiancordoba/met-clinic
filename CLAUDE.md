@@ -156,6 +156,12 @@ OpenStreetMap (ver su docstring) entre las marcas `mapa-pie:inicio/fin`: no edit
   1000 px, y el vertical con la tarjeta arriba. Por el `<use>`, el estilo de calles va en `#mapaBase …`; el grosor, en
   `--calle-g`/`--calle-d` de `.pie-mapa`. El CSS está en `index.html` y en `pilares.css`.
 - El crédito «© OpenStreetMap» es obligatorio (licencia ODbL): no lo quites.
+- **Interactivo (4-nov, Sebas: «que funcione como mapa de verdad»):** el SVG es el póster. `pie.js` (5) baja
+  `mapa-pie.js` cuando el pie está a ~400 px de la pantalla o al primer toque, y ese archivo baja MapLibre GL (cdnjs) y
+  las teselas de OpenFreeMap (positron, recoloreado con los mismos colores y grosores; sin nombres de calles). Pin,
+  referencias y ruta son marcadores con las mismas letras. `cooperativeGestures`: dos dedos en el teléfono, Ctrl/⌘ +
+  rueda en la compu, para no robarse el scroll. Botones +/−; el crédito de OpenFreeMap/OpenStreetMap va en la «i». Si
+  MapLibre falla, se queda el póster, que es un enlace a «Cómo llegar».
 
 ### Pie de página: una sola sección (30-oct-2026, Sebas)
 

@@ -119,3 +119,25 @@
     a.href = 'https://maps.apple.com/?daddr=19.3580013,-99.1890269&q=MET%20Clinic';
   });
 })();
+
+
+// 5. Mapa del pie interactivo (4-nov, Sebas): mapa-pie.js (MapLibre) se baja solo cuando el pie está a ~400 px de la
+//    pantalla o al primer toque/foco sobre el mapa. Mientras, el SVG del pie hace de póster (y de enlace a «Cómo llegar»).
+(function () {
+  const caja = document.querySelector('.pie-mapa');
+  if (!caja) return;
+  let pedido = false;
+  const pedir = () => {
+    if (pedido) return;
+    pedido = true;
+    const s = document.createElement('script');
+    s.src = 'mapa-pie.js';
+    s.async = true;
+    document.head.appendChild(s);
+  };
+  caja.addEventListener('pointerdown', pedir, { once: true, passive: true });
+  caja.addEventListener('focusin', pedir, { once: true });
+  if (!('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); pedir(); } }, { rootMargin: '400px 0px' });
+  io.observe(caja);
+})();

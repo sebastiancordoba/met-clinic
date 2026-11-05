@@ -397,6 +397,34 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
   .pie-mapa .mapa__svg--movil { display:block; }
 }
 
+/* Mapa vivo del pie (mapa-pie.js): el lienzo de MapLibre entra encima del póster SVG cuando ya pintó. */
+.pie-mapa__enlace .pie-mapa__lienzo.maplibregl-map, .pie-mapa__lienzo { position:absolute; inset:0; opacity:0; transition:opacity 0.4s var(--ease); }
+.pie-mapa--vivo .pie-mapa__lienzo, .pie-mapa--vivo .pie-mapa__lienzo.maplibregl-map { opacity:1; }
+.pie-mapa--vivo .mapa__credito { display:none; }
+.pie-mapa__ref { display:flex; align-items:center; gap:8px; pointer-events:none; font-family:var(--font); font-weight:300; font-size:12px; letter-spacing:0.14em; color:var(--dark); text-shadow:0 0 3px var(--tranquil), 0 0 3px var(--tranquil), 0 0 2px var(--tranquil); white-space:nowrap; }
+.pie-mapa__punto { width:14px; height:14px; border-radius:50%; border:1px solid var(--dark); background:var(--tranquil); display:grid; place-items:center; flex:none; }
+.pie-mapa__punto::after { content:''; width:6px; height:6px; border-radius:50%; background:var(--dark); }
+.pie-mapa__pin { position:relative; width:44px; height:52px; pointer-events:none; }
+.pie-mapa__pin svg { position:absolute; inset:0; width:44px; height:52px; overflow:visible; }
+.pie-mapa__pin path { fill:var(--tranquil); stroke:var(--dark); stroke-width:1.3; vector-effect:non-scaling-stroke; }
+.pie-mapa__pin img { position:absolute; left:11px; top:10px; width:22px; height:auto; }
+.pie-mapa__pin span { position:absolute; left:52px; top:6px; font-family:var(--font); font-weight:300; font-size:20px; letter-spacing:0.1em; color:var(--dark); white-space:nowrap; text-shadow:0 0 3px var(--tranquil), 0 0 3px var(--tranquil), 0 0 2px var(--tranquil); }
+.pie-mapa__pin span { top:18px; }
+@media (max-width:1000px) {
+  .pie-mapa__ref { font-size:10.5px; gap:6px; }
+  .pie-mapa__punto { width:12px; height:12px; }
+  .pie-mapa__punto::after { width:5px; height:5px; }
+  .pie-mapa__pin { width:34px; height:40px; }
+  .pie-mapa__pin svg { width:34px; height:40px; }
+  .pie-mapa__pin img { left:8px; top:8px; width:18px; }
+  .pie-mapa__pin span { left:40px; top:12px; font-size:15px; }
+}
+.pie-mapa .maplibregl-ctrl-group { background:rgba(242,242,237,0.92); border:1px solid rgba(130,134,127,0.25); box-shadow:none; border-radius:var(--r-sm, 8px); }
+.pie-mapa .maplibregl-ctrl-group button { width:30px; height:30px; }
+.pie-mapa .maplibregl-ctrl-group button + button { border-top:1px solid rgba(130,134,127,0.2); }
+.pie-mapa .maplibregl-ctrl-attrib { font-size:10px; background:rgba(242,242,237,0.8); }
+.pie-mapa .maplibregl-cooperative-gesture-screen { font-family:var(--font); font-weight:300; background:rgba(38,38,38,0.55); }
+
 /* ═══════════════════════════════════════════
    BORDES REDONDEADOS (predeterminado desde el 24-oct-2026; Sebas lo eligió)
    Una escala de radios: --r-sm 8 · --r-md 14 · --r-lg 20 · --r-pill 999.
