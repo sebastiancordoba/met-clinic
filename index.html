@@ -7,6 +7,9 @@
 
   <link rel="preload" as="image" href="images/web/hero-poster.webp" fetchpriority="high" media="(min-width:641px)">
   <link rel="preload" as="image" href="images/web/hero-poster-movil.webp" fetchpriority="high" media="(max-width:640px)">
+  <!-- Las dos fuentes de la primera pantalla (4-nov, rendimiento): sin esperar a que el CSS las pida. -->
+  <link rel="preload" as="font" type="font/woff2" href="BRANDING/webfonts/metropolis-300.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="BRANDING/webfonts/larken-300.woff2" crossorigin>
   <style>
     /* ── Fuentes ── */
     @font-face { font-family:'Metropolis'; src:url('BRANDING/webfonts/metropolis-100.woff2') format('woff2'); font-weight:100; font-display:swap; }
@@ -129,6 +132,8 @@
       animation:metLogoShine 7s cubic-bezier(0.4,0,0.2,1) 2.6s infinite;
     }
     .nav.dark-section .nav__marca::after { display:none; }
+    /* Mientras se desplaza la página, el destello se detiene (pie.js 3): repintaba la barra fija en cada cuadro. */
+    .nav.desplazando .nav__marca::after { animation-play-state:paused; }
     @keyframes metLogoShine {
       0%   { background-position:250% 0; }
       34%  { background-position:-150% 0; }

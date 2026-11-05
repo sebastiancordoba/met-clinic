@@ -82,6 +82,8 @@ html.barra-propia::-webkit-scrollbar { display:none; }
   animation:metLogoShine 7s cubic-bezier(0.4,0,0.2,1) 2.6s infinite;
 }
 .nav.dark-section .nav__marca::after { display:none; }
+/* Mientras se desplaza la página, el destello se detiene (pie.js 3): repintaba la barra fija en cada cuadro. */
+.nav.desplazando .nav__marca::after { animation-play-state:paused; }
 @keyframes metLogoShine {
   0%   { background-position:250% 0; }
   34%  { background-position:-150% 0; }

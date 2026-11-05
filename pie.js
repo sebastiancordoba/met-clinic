@@ -94,3 +94,18 @@
   });
   medir();
 })();
+
+
+// 3. Rendimiento (4-nov): mientras la página se desplaza, la barra de arriba lleva .desplazando y el CSS
+//    detiene el destello del logo, que de otro modo repinta la barra fija en cada cuadro del scroll.
+//    Vuelve a correr 200 ms después de que se detiene el scroll.
+(function () {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  let espera = 0;
+  addEventListener('scroll', () => {
+    if (!espera) nav.classList.add('desplazando');
+    clearTimeout(espera);
+    espera = setTimeout(() => { espera = 0; nav.classList.remove('desplazando'); }, 200);
+  }, { passive: true });
+})();
