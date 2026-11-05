@@ -263,6 +263,13 @@ document.querySelectorAll('.drawer-link').forEach(a => {
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
     if (velocidad !== 1) v.defaultPlaybackRate = v.playbackRate = velocidad;
     v.play().catch(() => {});
+    // Fuera de la pantalla se pausa (4-nov, rendimiento): decodificar 1080p mientras se lee el resto
+    // de la página le quitaba cuadros al scroll y batería al teléfono. Al volver, sigue donde iba.
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+      }).observe(v.parentElement);
+    }
   };
   if (document.readyState === 'complete') arrancar();
   else window.addEventListener('load', arrancar, { once: true });

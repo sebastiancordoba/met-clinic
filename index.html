@@ -82,16 +82,14 @@
       transition: background 0.5s var(--ease), border-color 0.5s var(--ease);
     }
     .nav.scrolled {
-      background: rgba(242,242,237,0.94);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      /* Sin backdrop-filter (4-nov, rendimiento): desenfocar lo que pasa debajo de una barra fija
+         cuesta en cada cuadro del scroll, sobre todo en iPhone. Casi opaco se ve igual. */
+      background: rgba(242,242,237,0.97);
     }
     .nav.dark-section {
       background: rgba(38,38,38,0.96);
       border-top-color: var(--sage);
       border-bottom-color: rgba(130,134,127,0.3);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
     }
     /* Portada: al entrar, la barra va transparente ENCIMA del video (que sube hasta el
        borde de arriba), con logo y menú en claro. main.js le quita .nav--video al bajar
@@ -1165,8 +1163,7 @@
         position:fixed; left:0; right:0; bottom:0; z-index:90;
         display:grid; grid-template-columns:1fr 1fr; gap:8px;
         padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-        background:rgba(242,242,237,0.94);
-        -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        background:rgba(242,242,237,0.97); /* sin blur: ver .nav.scrolled */
         border-top:1px solid rgba(130,134,127,0.2);
         transform:translateY(0); transition:transform 0.35s var(--ease);
       }
