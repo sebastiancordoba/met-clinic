@@ -86,8 +86,8 @@
     }
     .nav.scrolled {
       /* Sin backdrop-filter (4-nov, rendimiento): desenfocar lo que pasa debajo de una barra fija
-         cuesta en cada cuadro del scroll, sobre todo en iPhone. Casi opaco se ve igual. */
-      background: rgba(242,242,237,0.97);
+         cuesta en cada cuadro del scroll, sobre todo en iPhone. Opaco (4-nov): al 0.97 se leía el texto oscuro que pasaba debajo. */
+      background: var(--tranquil);
     }
     .nav.dark-section {
       background: rgba(38,38,38,0.96);
@@ -1156,7 +1156,7 @@
         position:fixed; left:0; right:0; bottom:0; z-index:90;
         display:grid; grid-template-columns:1fr 1fr; gap:8px;
         padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-        background:rgba(242,242,237,0.97); /* sin blur: ver .nav.scrolled */
+        background:var(--tranquil); /* sin blur: ver .nav.scrolled */
         border-top:1px solid rgba(130,134,127,0.2);
         transform:translateY(0); transition:transform 0.35s var(--ease);
       }
