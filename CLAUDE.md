@@ -155,11 +155,15 @@ no edites ese bloque a mano. Las calles, las referencias y los encuadres son con
   y el vertical, con la tarjeta debajo. Por el `<use>`, el estilo de calles y parques va en `#mapaBase …`, no en
   `.mapa__svg …`.
 - El crédito «© OpenStreetMap» es obligatorio (licencia ODbL): no lo quites.
+- **Mapa del pie (4-nov, Sebas):** el mismo mapa con la misma tarjeta, más chico, en el pie de las 11 páginas
+  (`mapa-pie:inicio/fin`, también lo escribe el script) y con las calles más gruesas (`--calle-g`/`--calle-d` en
+  `.pie-mapa`). Las calles (`#mapaBase`) viven ahí una sola vez; el grande de #contacto las usa con `<use>`. Reemplazó
+  la línea de dirección del pie (`.pie-lugar`). El cambio a Apple Maps está en `pie.js` (4), por la clase `.js-mapa-ir`.
 
 ### Pie de página: una sola sección (30-oct-2026, Sebas)
 
-Igual en las 11 páginas, sin líneas divisorias: a un lado el logo, la dirección con el teléfono y «Cómo llegar: Google
-Maps · Waze · Apple Maps» (`.pie-lugar`); al otro, redes y copyright. En el teléfono va todo en una columna. El CSS está
+Igual en las 11 páginas, sin líneas divisorias: arriba el mapa del pie con su tarjeta (ver «Mapa de #contacto»); abajo, a un
+lado el logo y al otro redes y copyright. En el teléfono va todo en una columna. El CSS está
 en `index.html` **y** en `pilares.css`. El mapa chico y «Pregúntale a tu IA» se quitaron: no los repongas sin que lo
 pida.
 

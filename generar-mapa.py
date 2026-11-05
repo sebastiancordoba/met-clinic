@@ -7,8 +7,9 @@ de línea para la clínica. Pesa ~11 KB dentro del HTML y no llama a ningún ser
     python3 generar-mapa.py               # baja la zona de Overpass y reescribe el mapa en index.html
     python3 generar-mapa.py zona.json     # igual, con una descarga guardada
 
-Solo usa la biblioteca estándar. Escribe entre las marcas `mapa-contacto:inicio` y `mapa-contacto:fin` de index.html:
-no edites ese bloque a mano. Las calles se comparten en un <g> y hay dos encuadres con sus etiquetas: el ancho de compu
+Solo usa la biblioteca estándar. Escribe entre las marcas `mapa-pie:inicio/fin` del pie de cada página (4-nov: el mismo
+mapa con su tarjeta, más chico y con las calles más gruesas) y entre `mapa-contacto:inicio/fin` de index.html: no edites
+esos bloques a mano. Las calles (#mapaBase) van una sola vez, en el del pie; el grande de #contacto las usa con <use>. Las calles se comparten en un <g> y hay dos encuadres con sus etiquetas: el ancho de compu
 y el vertical de teléfono. Se usa `meet` y las calles se pasan del encuadre: así ninguna etiqueta se corta y el mapa
 llena la caja, mida lo que mida. El crédito a OpenStreetMap es obligatorio (licencia ODbL): no lo quites.
 """
@@ -70,7 +71,15 @@ SAN_ANGEL = (19.34464, -99.19241)
 RUTA = [(19.361545, -99.189188), (19.361514, -99.189192), (19.360622, -99.189305), (19.360269, -99.189348),
         (19.360328, -99.18927), (19.360149, -99.188611), (19.358649, -99.188788), (19.357985, -99.188861), (LAT0, LON0)]
 
+# El del pie (4-nov, Sebas: «haz este mapa más pequeño y mételo así igual al footer», con las calles más gruesas):
+# una franja ancha y baja en compu, con la tarjeta encima a la izquierda y la clínica a la derecha de ella.
+PIE_ANCHO = (-1100, -150, 1900, 560)
+
 INICIO, FIN = "<!-- mapa-contacto:inicio", "<!-- mapa-contacto:fin -->"
+PIE_INICIO, PIE_FIN = "<!-- mapa-pie:inicio", "<!-- mapa-pie:fin -->"
+APPLE = "https://maps.apple.com/?q=MET+Clinic&amp;ll=19.3580013,-99.1890269&amp;address=Guty+C%C3%A1rdenas+65,+Guadalupe+Inn,+01020+CDMX"
+WAZE = "https://waze.com/ul?ll=19.3580013,-99.1890269&amp;navigate=yes"
+BUSCA = "https://www.google.com/maps/search/?api=1&amp;query=Guty+C%C3%A1rdenas+65%2C+Guadalupe+Inn%2C+01020+CDMX"
 GOOGLE = "https://www.google.com/maps/dir/?api=1&amp;destination=MET+Clinic%2C+Guty+C%C3%A1rdenas+65%2C+Guadalupe+Inn%2C+01020+CDMX"
 
 
@@ -397,30 +406,59 @@ def encuadre(clase, caja, capas):
             f'<use href="#mapaBase"/>{capas}</svg>')
 
 
-def bloque(datos):
-    capas_ancho = (
-        ruta() + punto(METRO, 7, 3.2) + etiqueta(METRO, "METRO BARRANCA DEL MUERTO", 16, separa=19)
-        + punto(PLAZA_INN, 7, 3.2) + etiqueta(PLAZA_INN, "PLAZA INN", 16, separa=19)
-        + punto(ALTAVISTA, 7, 3.2) + etiqueta(ALTAVISTA, "ALTAVISTA", 16, separa=19)
-        + punto(SAN_ANGEL, 7, 3.2) + etiqueta(SAN_ANGEL, "SAN ÁNGEL", 16, separa=19)
-        + pin(1) + f'<text class="mt mt--clinica" x="36" y="-30" font-size="30">MET CLINIC</text>'
-    )
-    capas_movil = (
-        ruta() + punto(METRO, 11, 5) + etiqueta(METRO, "METRO BARRANCA DEL MUERTO", 20, separa=22)
-        + punto(PLAZA_INN, 11, 5) + etiqueta(PLAZA_INN, "PLAZA INN", 21, separa=22)
-        + punto(ALTAVISTA, 11, 5) + etiqueta(ALTAVISTA, "ALTAVISTA", 21, separa=22)
-        + punto(SAN_ANGEL, 11, 5) + etiqueta(SAN_ANGEL, "SAN ÁNGEL", 21, separa=22)
-        + pin(1.3) + f'<text class="mt mt--clinica" x="46" y="-30" font-size="36">MET CLINIC</text>'
-    )
+def capas(alto, r_fuera, r_dentro, separa, escala_pin, alto_clinica):
+    refs = "".join(punto(q, r_fuera, r_dentro) + etiqueta(q, n, alto, separa=separa)
+                   for q, n in ((METRO, "METRO BARRANCA DEL MUERTO"), (PLAZA_INN, "PLAZA INN"), (ALTAVISTA, "ALTAVISTA"), (SAN_ANGEL, "SAN ÁNGEL")))
+    x = round(36 * escala_pin)
+    return ruta() + refs + pin(escala_pin) + f'<text class="mt mt--clinica" x="{x}" y="-30" font-size="{alto_clinica}">MET CLINIC</text>'
+
+
+def bloque():
+    """El mapa grande de #contacto (solo index.html). Las calles (#mapaBase) vienen en el del pie, que está en todas las páginas."""
     return f"""      {INICIO} — lo escribe generar-mapa.py; no lo edites a mano -->
-      <a class="mapa__enlace" id="mapaEnlace" target="_blank" rel="noopener" href="{GOOGLE}" aria-label="Cómo llegar a MET Clinic, Guty Cárdenas 65, Guadalupe Inn: abrir en la app de mapas">
-        <svg class="mapa__defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>{base(datos)}</defs></svg>
-        {encuadre("mapa__svg--ancho", ANCHO, capas_ancho)}
-        {encuadre("mapa__svg--movil", MOVIL, capas_movil)}
+      <a class="mapa__enlace js-mapa-ir" id="mapaEnlace" target="_blank" rel="noopener" href="{GOOGLE}" aria-label="Cómo llegar a MET Clinic, Guty Cárdenas 65, Guadalupe Inn: abrir en la app de mapas">
+        {encuadre("mapa__svg--ancho", ANCHO, capas(16, 7, 3.2, 19, 1, 30))}
+        {encuadre("mapa__svg--movil", MOVIL, capas(21, 11, 5, 22, 1.3, 36))}
         <span class="mapa__credito">© OpenStreetMap</span>
       </a>
       {FIN}
 """
+
+
+def bloque_pie(datos):
+    """El del pie: el mismo mapa y la misma tarjeta, más chicos y con las calles más gruesas (lo pone el CSS de .pie-mapa)."""
+    return f"""    {PIE_INICIO} — lo escribe generar-mapa.py; no lo edites a mano -->
+    <div class="pie-mapa">
+      <div class="pie-mapa__tarjeta">
+        <img class="mapa__logo" src="images/web/met-positivo-03.webp" alt="" width="64" height="26" loading="lazy">
+        <p class="mapa__eyebrow">Cómo llegar</p>
+        <p class="mapa__dir">Guty Cárdenas 65<br>Guadalupe Inn, Álvaro Obregón<br>CDMX 01020</p>
+        <ul class="mapa__refs">
+          <li><span class="mapa__m" aria-hidden="true">M</span>6 min a pie del Metro Barranca del Muerto · Línea 7</li>
+          <li><svg class="mapa__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3 5 21M16 3l3 18M12 4v3M12 10.5v3M12 17v3"/></svg>A una calle de Av. Revolución</li>
+          <li><svg class="mapa__i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><a href="tel:+525540099923">55 4009 9923</a></li>
+        </ul>
+        <a class="btn-primary mapa__ir js-mapa-ir" target="_blank" rel="noopener" href="{GOOGLE}">Cómo llegar</a>
+        <p class="mapa__apps">Abrir en
+          <a target="_blank" rel="noopener" href="{BUSCA}">Google Maps</a> ·
+          <a target="_blank" rel="noopener" href="{APPLE}">Apple Maps</a> ·
+          <a target="_blank" rel="noopener" href="{WAZE}">Waze</a>
+        </p>
+      </div>
+      <a class="mapa__enlace pie-mapa__enlace js-mapa-ir" target="_blank" rel="noopener" href="{GOOGLE}" aria-label="Mapa: cómo llegar a MET Clinic, Guty Cárdenas 65, Guadalupe Inn">
+        <svg class="mapa__defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>{base(datos)}</defs></svg>
+        {encuadre("mapa__svg--ancho", PIE_ANCHO, capas(25, 10, 4.5, 26, 1.3, 38))}
+        {encuadre("mapa__svg--movil", MOVIL, capas(21, 11, 5, 22, 1.3, 36))}
+        <span class="mapa__credito">© OpenStreetMap</span>
+      </a>
+    </div>
+    {PIE_FIN}
+"""
+
+
+def reemplaza(s, inicio, fin, nuevo, sangria):
+    a, b = s.index(sangria + inicio), s.index(fin) + len(fin) + 1
+    return s[:a] + nuevo + s[b:]
 
 
 def main():
@@ -434,12 +472,16 @@ def main():
         )
         with urllib.request.urlopen(pedido, timeout=180) as r:
             datos = json.load(r)
-    ruta_html = RAIZ / "index.html"
-    s = ruta_html.read_text(encoding="utf-8")
-    nuevo = bloque(datos)
-    a, b = s.index("      " + INICIO), s.index(FIN) + len(FIN) + 1
-    ruta_html.write_text(s[:a] + nuevo + s[b:], encoding="utf-8")
-    print(f"  mapa: {len(nuevo.encode()) / 1024:.1f} KB en index.html")
+    pie = bloque_pie(datos)
+    for ruta_html in sorted(RAIZ.glob("*.html")):
+        s = ruta_html.read_text(encoding="utf-8")
+        if PIE_INICIO not in s:
+            continue
+        s = reemplaza(s, PIE_INICIO, PIE_FIN, pie, "    ")
+        if INICIO in s:
+            s = reemplaza(s, INICIO, FIN, bloque(), "      ")
+        ruta_html.write_text(s, encoding="utf-8")
+        print(f"  {ruta_html.name}: mapa del pie {len(pie.encode()) / 1024:.1f} KB")
 
 
 if __name__ == "__main__":

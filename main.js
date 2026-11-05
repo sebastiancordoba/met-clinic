@@ -279,15 +279,7 @@ document.querySelectorAll('.drawer-link').forEach(a => {
 /* La barra de contacto del teléfono (cuándo se ve) vive en pie.js, igual en todas las páginas. */
 
 
-/* ── «Cómo llegar» de #contacto ──────────────────────────────────────────
-   El mapa (un SVG fijo, ver generar-mapa.py) y el botón abren la app de mapas del dispositivo:
-   Apple Maps en iPhone/iPad/Mac; en lo demás, el enlace a Google Maps que ya trae el HTML. */
-(function () {
-  if (!/iPhone|iPad|Macintosh/.test(navigator.userAgent) || /Android/.test(navigator.userAgent)) return;
-  document.querySelectorAll('#mapaIr, #mapaEnlace').forEach((a) => {
-    a.href = 'https://maps.apple.com/?daddr=19.3580013,-99.1890269&q=MET%20Clinic';
-  });
-})();
+/* «Cómo llegar» (Apple Maps en iPhone/iPad/Mac) vive en pie.js (4), igual en todas las páginas. */
 
 
 /* ── Equipo en el teléfono: puntos del carrusel ─────────────────────────
