@@ -499,51 +499,19 @@
       padding:clamp(40px,5vw,72px) 0 clamp(56px,7vw,96px);
     }
     #servicios .section-inner { padding-top:0; padding-bottom:0; }
-    /* Que quepa (24-oct, Sebas): título + Ginecología arriba en una fila y los 6 pilares en una
-       rejilla 3×2; todo junto entra en una laptop de 680 px. Tablet 2×3, teléfono 1 columna. */
-    .serv-top { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(20px,3vw,40px); align-items:stretch; margin-bottom:clamp(14px,1.6vw,20px); }
-    .serv-head { max-width:900px; align-self:end; }
+    /* Que quepa (24-oct, Sebas): título y los 7 tratamientos en una rejilla de 4 columnas, el título en la
+       primera celda (4-nov: sin el cuadro grande de Ginecología); todo junto entra en una laptop de 680 px.
+       Tablet 2×4, teléfono una columna. */
+    .serv-head { align-self:end; padding:0 4px 6px 0; }
     .serv-head h2 {
       font-family:var(--font); font-weight:200; text-transform:none;
-      font-size:clamp(34px,4vw,58px); line-height:0.96; letter-spacing:-0.03em;
+      font-size:clamp(30px,2.9vw,44px); line-height:0.98; letter-spacing:-0.03em;
       margin-bottom:0;
     }
     .serv-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.78); max-width:580px; }
 
-    /* Firma — feature banner */
-    .serv-firma {
-      position:relative; overflow:hidden;
-      display:flex; flex-direction:column; justify-content:flex-end;
-      min-height:clamp(200px,30vh,280px);
-      padding:clamp(22px,2.6vw,40px);
-      color:var(--confort); text-decoration:none;
-    }
-    .serv-firma::before {
-      content:''; position:absolute; inset:0; z-index:0;
-      background:url('images/web/servicio-oshot-prp.webp') center/cover;
-      transition:transform 0.5s var(--ease);
-    }
-    /* La foto (recortada, ~725 px) se pinta entera a la derecha; el resto lo cubre el gris
-       de su propio fondo desenfocado, para no estirarla y que no se vea borrosa. */
-    @media (min-width:761px){ .serv-firma::before {
-      background:linear-gradient(90deg, #bdbdbd 42%, rgba(189,189,189,0) 60%),
-                 url('images/web/servicio-oshot-prp.webp') right center/auto 100% no-repeat, #bdbdbd; } } /* alto completo: la foto (725×658) nunca se agranda */
-    .serv-firma:hover::before { transform:scale(1.04); }
-    .serv-firma::after {
-      content:''; position:absolute; inset:0; z-index:0;
-      background:linear-gradient(105deg, rgba(38,38,38,0.82) 0%, rgba(38,38,38,0.45) 52%, rgba(38,38,38,0.12) 100%);
-    }
-    .serv-firma > * { position:relative; z-index:1; }
-    .serv-firma__tag { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; opacity:0.85; margin-bottom:10px; }
-    .serv-firma__title { font-family:var(--font); font-weight:200; font-size:clamp(26px,2.6vw,40px); line-height:1.0; letter-spacing:-0.02em; margin-bottom:10px; max-width:18ch; }
-    .serv-firma__desc { font-size:clamp(14px,1vw,16px); font-weight:300; line-height:1.5; max-width:420px; color:rgba(247,237,220,0.85); margin-bottom:16px; }
-    /* En compu la foto ocupa el 58 % derecho: el texto se queda en la parte gris. */
-    @media (min-width:761px){ .serv-firma__title, .serv-firma__desc { max-width:min(420px, 56%); } }
-    .serv-firma__link { display:inline-flex; align-items:center; gap:10px; font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--confort); border-bottom:1px solid var(--confort); padding-bottom:6px; transition:gap 0.3s; }
-    .serv-firma__link:hover { gap:16px; }
-
     /* Pilares — rejilla de tarjetas (24-oct; antes, 6 filas de una pantalla de alto) */
-    .serv-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(12px,1.4vw,18px); }
+    .serv-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.4vw,18px); }
     .pilar {
       display:flex; flex-direction:column; align-items:flex-start; gap:8px;
       padding:clamp(18px,1.8vw,26px); min-height:clamp(140px,19vh,190px);
@@ -557,18 +525,14 @@
     .pilar__desc { font-size:14px; font-weight:300; line-height:1.5; color:rgba(38,38,38,0.78); }
     .pilar__link { display:inline-flex; align-items:center; gap:8px; margin-top:auto; padding-top:6px; font-size:11px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--dark); white-space:nowrap; transition:gap 0.3s, color 0.3s; }
     .pilar:hover .pilar__link { gap:13px; color:var(--texto-suave); }
-    /* Laptop baja (≤ 780 px de alto): todo más apretado para que título, Ginecología y los 6 quepan juntos. */
+    /* Laptop baja (≤ 780 px de alto): todo más apretado para que el título y los 7 quepan juntos. */
     @media (min-width:1101px) and (max-height:780px){
       #servicios { padding-top:28px; }
-      .serv-firma { min-height:170px; padding:20px 26px; }
-      .serv-firma__title { font-size:24px; }
-      .serv-firma__desc { margin-bottom:10px; font-size:13.5px; }
       .pilar { min-height:0; padding:14px 18px; gap:4px; }
       .pilar__title { font-size:19px; }
       .pilar__desc { font-size:13.5px; }
     }
     @media (max-width:1100px){
-      .serv-top { grid-template-columns:1fr; }
       .serv-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
     }
     @media (max-width:640px){
@@ -664,7 +628,7 @@
     @media (max-width:760px) {
       .esp-head { grid-template-columns:1fr; align-items:start; }
     }
-    .esp-head h2 { font-family:var(--font); font-weight:200; text-transform:none; font-size:clamp(34px,4vw,58px); line-height:0.96; letter-spacing:-0.03em; margin-bottom:0; }
+    .esp-head h2 { font-family:var(--font); font-weight:200; text-transform:none; font-size:clamp(30px,2.9vw,44px); line-height:0.98; letter-spacing:-0.03em; margin-bottom:0; }
     .esp-head p { font-size:clamp(16px,1.3vw,19px); font-weight:300; line-height:1.6; color:rgba(38,38,38,0.78); max-width:560px; }
     /* Carrusel de especialistas — responsivo (4 / 3 / 2 por vista) */
     .esp-carousel { position:relative; }
@@ -1219,7 +1183,6 @@
     html.redondeado .form-textarea { border-radius: var(--r-sm); }
 
     /* ── Fotos y tarjetas grandes ── */
-    html.redondeado .serv-firma { border-radius: var(--r-lg); isolation: isolate; }
     html.redondeado .pilar { border-radius: var(--r-md); }
     html.redondeado .aparato, html.redondeado .elegido { border-radius: var(--r-md); }
     html.redondeado .aparato__foto { border-radius: var(--r-sm); }
@@ -1451,55 +1414,51 @@
   <!-- ══ SERVICIOS — Firma + Pilares ══ -->
   <section id="servicios">
     <div class="section-inner">
-      <div class="serv-top">
+      <!-- Pilares: el título va en la primera celda y Ginecología es la 01 (4-nov, Sebas: se quitó el cuadro
+           grande «Nuestra especialidad»). Son 8 celdas: 4×2 en compu, 2×4 en tablet, una columna en el teléfono. -->
+      <div class="serv-grid">
       <div class="serv-head reveal">
         <p class="eyebrow">Tratamientos</p>
         <h2>Tu cuerpo,<br><em>en un solo lugar.</em></h2>
       </div>
-
-      <!-- Firma -->
-      <a href="pilar-ginecologia.html" class="serv-firma reveal">
-        <span class="serv-firma__tag">Nuestra especialidad</span>
-        <span class="serv-firma__title">Ginecología Estética &amp; Regenerativa</span>
-        <span class="serv-firma__desc">Láser íntimo CO₂, O-Shot, suelo pélvico EMSELLA y despigmentación íntima. La firma que distingue a MET Clinic.</span>
-        <span class="serv-firma__link">Explorar tratamientos →</span>
-      </a>
-      </div>
-
-      <!-- Pilares -->
-      <div class="serv-grid">
-        <a href="pilar-facial.html" class="pilar reveal">
+        <a href="pilar-ginecologia.html" class="pilar reveal d1">
           <span class="pilar__n">01</span>
+          <span class="pilar__title">Ginecología Estética &amp; Regenerativa</span>
+          <span class="pilar__desc">Láser íntimo, O-Shot y suelo pélvico.</span>
+          <span class="pilar__link">Ver tratamientos →</span>
+        </a>
+        <a href="pilar-facial.html" class="pilar reveal d2">
+          <span class="pilar__n">02</span>
           <span class="pilar__title">Rejuvenecimiento Facial &amp; Antiaging</span>
           <span class="pilar__desc">Piel firme y luminosa.</span>
           <span class="pilar__link">Ver tratamientos →</span>
         </a>
-        <a href="pilar-corporal.html" class="pilar reveal d1">
-          <span class="pilar__n">02</span>
+        <a href="pilar-corporal.html" class="pilar reveal d3">
+          <span class="pilar__n">03</span>
           <span class="pilar__title">Contorno Corporal &amp; Reafirmación</span>
           <span class="pilar__desc">Modela y reafirma, sin cirugía.</span>
           <span class="pilar__link">Ver tratamientos →</span>
         </a>
-        <a href="pilar-depilacion.html" class="pilar reveal d2">
-          <span class="pilar__n">03</span>
+        <a href="pilar-depilacion.html" class="pilar reveal">
+          <span class="pilar__n">04</span>
           <span class="pilar__title">Depilación Láser</span>
           <span class="pilar__desc">Reducción progresiva del vello.</span>
           <span class="pilar__link">Ver tratamientos →</span>
         </a>
-        <a href="pilar-piel.html" class="pilar reveal">
-          <span class="pilar__n">04</span>
+        <a href="pilar-piel.html" class="pilar reveal d1">
+          <span class="pilar__n">05</span>
           <span class="pilar__title">Manchas, Cicatrices &amp; Estrías</span>
           <span class="pilar__desc">Tono y textura, emparejados.</span>
           <span class="pilar__link">Ver tratamientos →</span>
         </a>
-        <a href="pilar-capilar.html" class="pilar reveal d1">
-          <span class="pilar__n">05</span>
+        <a href="pilar-capilar.html" class="pilar reveal d2">
+          <span class="pilar__n">06</span>
           <span class="pilar__title">Salud Capilar</span>
           <span class="pilar__desc">Tratamiento médico de la caída.</span>
           <span class="pilar__link">Ver tratamientos →</span>
         </a>
-        <a href="pilar-longevidad.html" class="pilar reveal d2">
-          <span class="pilar__n">06</span>
+        <a href="pilar-longevidad.html" class="pilar reveal d3">
+          <span class="pilar__n">07</span>
           <span class="pilar__title">Bienestar, Longevidad &amp; IV Therapy</span>
           <span class="pilar__desc">Energía, prevención, longevidad.</span>
           <span class="pilar__link">Ver tratamientos →</span>

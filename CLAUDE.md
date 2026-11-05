@@ -55,8 +55,8 @@ Rejuvenécete.», #filosofia sin cifras) and `preguntas.html` (las 7 preguntas +
 `pilares.css` (bloque «NOSOTROS»). Menú: Servicios · Equipo · Opiniones · Contacto · Tienda (hamburguesa hasta 1120 px en
 todas las páginas; arriba de eso, centrado de verdad con la rejilla `1fr auto 1fr` de `.nav`, 30-oct, Sebas). El pie ya no lleva columnas de enlaces (26-oct, Sebas): La clínica y Preguntas se
 enlazan desde la portada («Conoce la clínica →», «Cómo trabajamos →», «Ver todas las preguntas →»); no las quites.
-#servicios: título y la tarjeta de Ginecología en una fila, los 6 pilares en rejilla 3×2 (tablet 2×3, teléfono una
-columna); todo junto cabe en una laptop de 680 px. Cierra con el carrusel de aparatos (`#tecnologia .aparatos`, 26-oct):
+#servicios: el cuadro grande de Ginecología se quitó (4-nov, Sebas); el título va en la primera celda y los 7
+tratamientos (Ginecología es la 01) en una rejilla 4×2 (tablet 2×4, teléfono una columna); todo junto cabe en una laptop de 680 px. Cierra con el carrusel de aparatos (`#tecnologia .aparatos`, 26-oct):
 fotos del fabricante recortadas (`images/equipos/`, fuentes en `FUENTES-ficha_tecnica.md`), nombre comercial sin
 modelo hasta que la clínica confirme MonaLisa, X-Wave e InBody; flechas en `main.js`. #preguntas cierra con la
 franja «Lo más elegido por nuestras pacientes» (`met:mas-elegido`, la escribe `puentes-tienda.py`). En el teléfono
