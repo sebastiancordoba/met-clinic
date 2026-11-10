@@ -1009,10 +1009,10 @@
     /* Pie en una fila (9-nov, Sebas: «manda todo esto a la izquierda del mapa»): en compu, logo, redes y © en una
        columna a la izquierda y el mapa a la derecha; abajo de 1000 px, primero ese bloque y debajo el mapa. */
     @media (min-width:1001px) {
-      footer { display:grid; grid-template-columns:minmax(220px, 280px) minmax(0, 1fr); column-gap:48px; align-items:center;
+      footer { display:grid; grid-template-columns:minmax(240px, 300px) minmax(0, 1fr); column-gap:48px; align-items:center;
         padding-left:56px; padding-right:56px; } /* 9-nov: a los márgenes del menú, sin centrar a 1100 */
       footer .footer-grid { grid-column:1; grid-row:1; max-width:none; margin:0; flex-direction:column; align-items:flex-start; }
-    footer .footer-logo { height:200px; } /* 9-nov, Sebas: logo más grande (era 120 / 96) */
+    footer .footer-logo { height:auto; width:300px; max-width:100%; opacity:1; } /* 9-nov, Sebas: logo «met crema 04», horizontal y grande */
       footer .footer-bottom { align-items:flex-start; }
       footer .footer-social { flex-wrap:wrap; justify-content:flex-start; }
       footer .pie-mapa { grid-column:2; grid-row:1; max-width:none; margin:0; width:100%; }
@@ -1863,7 +1863,7 @@
     <!-- mapa-pie:fin -->
     <div class="footer-grid">
       <div>
-        <img src="images/web/met-negativo-07.webp" alt="MET Clinic" class="footer-logo">
+        <img src="images/web/met-crema-04.webp" alt="MET Clinic" class="footer-logo">
       </div>
       <div class="footer-bottom">
         <div class="footer-social">

@@ -30,6 +30,8 @@ TRABAJOS = [
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_04.png",    "met-positivo-04.webp", 1200, 88),
     ("BRANDING/METCLINIC/LOGOS/MET_CREMA_05.png",       "met-crema-05.webp",    800, 88),
     ("BRANDING/METCLINIC/LOGOS/MET_NEGATIVO_07.png",    "met-negativo-07.webp", 400, 88),
+    # Pie (9-nov, Sebas eligió «met crema 04»): horizontal, se pinta a ~300 px de ancho; 640 cubre 2x.
+    ("BRANDING/METCLINIC/LOGOS/MET_CREMA_04.png",       "met-crema-04.webp",    640, 88),
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_03.png",    "met-positivo-03.webp", 400, 88),
     # Lockup apilado del hero. Se pinta a ~330 px, así que 800 cubre retina.
     ("BRANDING/METCLINIC/LOGOS/MET_POSITIVO_07.png",    "met-positivo-07.webp", 800, 88),
