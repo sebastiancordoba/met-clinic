@@ -95,8 +95,9 @@ Things worth knowing before editing:
   volver a las fotos grandes: no la repongas sin que lo pida.
   **Sus nombres y puestos no vienen en el Drive:** dicen «Nombre/Puesto por confirmar» y llevan `data-pendiente`.
   Cámbialos por los reales antes de publicar; no los inventes.
-- **Datos de Doctoralia en la portada (verificados el 26-oct):** la pastilla `.hero__premio` dice «Certificado de
-  excelencia Doctoralia · 2020 · 2022 · 2023» (así se llaman sus insignias; no es un «premio»), la franja y el sello de
+- **Datos de Doctoralia en la portada (verificados el 26-oct):** «Certificado de excelencia Doctoralia · 2020 · 2022 ·
+  2023» (así se llaman sus insignias; no es un «premio») va en Opiniones bajo el sello 5.0 (`.sello-doctoralia__premio`;
+  salió de la portada el 9-nov, Sebas), la franja y el sello de
   Opiniones dicen 5.0 y 1,366 opiniones, y las tarjetas `.precios` de #contacto dicen «Desde $2,100» (clínica) y
   «$1,500» (en línea). Es texto visible, nunca `aggregateRating` en el JSON-LD.
 - **Agenda:** «Ver horarios disponibles aquí» en #contacto inserta el widget oficial de Doctoralia

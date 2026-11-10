@@ -326,8 +326,9 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
    columna a la izquierda y el mapa a la derecha; abajo de 1000 px, primero ese bloque y debajo el mapa. */
 @media (min-width:1001px) {
   footer { display:grid; grid-template-columns:minmax(220px, 280px) minmax(0, 1fr); column-gap:48px; align-items:center;
-    padding-left:max(56px, calc((100% - 1100px) / 2)); padding-right:max(56px, calc((100% - 1100px) / 2)); }
+    padding-left:56px; padding-right:56px; } /* 9-nov: a los márgenes del menú, sin centrar a 1100 */
   footer .footer-grid { grid-column:1; grid-row:1; max-width:none; margin:0; flex-direction:column; align-items:flex-start; }
+  footer .footer-logo { height:200px; } /* 9-nov, Sebas: logo más grande (era 120 / 96) */
   footer .footer-bottom { align-items:flex-start; }
   footer .footer-social { flex-wrap:wrap; justify-content:flex-start; }
   footer .pie-mapa { grid-column:2; grid-row:1; max-width:none; margin:0; width:100%; }
