@@ -72,8 +72,8 @@ RUTA = [(19.361545, -99.189188), (19.361514, -99.189192), (19.360622, -99.189305
         (19.360328, -99.18927), (19.360149, -99.188611), (19.358649, -99.188788), (19.357985, -99.188861), (LAT0, LON0)]
 
 # El del pie (4-nov, Sebas: «haz este mapa más pequeño y mételo así igual al footer», con las calles más gruesas):
-# una franja ancha y baja en compu, con la tarjeta encima a la izquierda y la clínica a la derecha de ella.
-PIE_ANCHO = (-1100, -150, 1900, 560)
+# en compu va a la derecha del logo y las redes, con la tarjeta encima a la izquierda y la clínica a la derecha de ella.
+PIE_ANCHO = (-640, -150, 1060, 555)  # 9-nov: el mapa va a la derecha del logo y las redes, más angosto
 
 PIE_INICIO, PIE_FIN = "<!-- mapa-pie:inicio", "<!-- mapa-pie:fin -->"
 APPLE = "https://maps.apple.com/?q=MET+Clinic&amp;ll=19.3580013,-99.1890269&amp;address=Guty+C%C3%A1rdenas+65,+Guadalupe+Inn,+01020+CDMX"
@@ -434,7 +434,7 @@ def bloque_pie(datos):
       </div>
       <a class="mapa__enlace pie-mapa__enlace js-mapa-ir" target="_blank" rel="noopener" href="{GOOGLE}" aria-label="Mapa: cómo llegar a MET Clinic, Guty Cárdenas 65, Guadalupe Inn">
         <svg class="mapa__defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>{base(datos)}</defs></svg>
-        {encuadre("mapa__svg--ancho", PIE_ANCHO, capas(25, 10, 4.5, 26, 1.3, 38))}
+        {encuadre("mapa__svg--ancho", PIE_ANCHO, capas(19, 8, 3.6, 21, 1.1, 30))}
         {encuadre("mapa__svg--movil", MOVIL, capas(21, 11, 5, 22, 1.3, 36))}
         <span class="mapa__credito">© OpenStreetMap</span>
       </a>

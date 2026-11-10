@@ -165,8 +165,9 @@ OpenStreetMap (ver su docstring) entre las marcas `mapa-pie:inicio/fin`: no edit
 
 ### Pie de página: una sola sección (30-oct-2026, Sebas)
 
-Igual en las 11 páginas, sin líneas divisorias: arriba el mapa del pie con su tarjeta (ver «Mapa del pie»); abajo, a un
-lado el logo y al otro redes y copyright. En el teléfono va todo en una columna. El CSS está
+Igual en las 11 páginas, sin líneas divisorias. Desde el 9-nov (Sebas: «manda todo esto a la izquierda del mapa»), en compu
+va en una fila: a la izquierda una columna con el logo, las redes y el ©, y a la derecha el mapa del pie con su tarjeta
+(ver «Mapa del pie»). Abajo de 1000 px, primero ese bloque y debajo el mapa. El CSS está
 en `index.html` **y** en `pilares.css`. El mapa chico y «Pregúntale a tu IA» se quitaron: no los repongas sin que lo
 pida.
 

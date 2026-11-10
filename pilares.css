@@ -322,6 +322,21 @@ footer { background:var(--dark); border-top:2px solid var(--sage); padding:56px 
 /* Abajo de 1000 px ya no caben los dos lados en una fila: todo en una columna, a la izquierda. */
 @media (max-width:1000px) { .footer-grid { flex-direction:column; align-items:flex-start; } .footer-bottom { align-items:flex-start; } .footer-social { justify-content:flex-start; } }
 @media (max-width:640px) { .footer-social { gap:8px; } .footer-social a { padding:9px 10px; font-size:11px; letter-spacing:0.08em; gap:6px; } }
+/* Pie en una fila (9-nov, Sebas: «manda todo esto a la izquierda del mapa»): en compu, logo, redes y © en una
+   columna a la izquierda y el mapa a la derecha; abajo de 1000 px, primero ese bloque y debajo el mapa. */
+@media (min-width:1001px) {
+  footer { display:grid; grid-template-columns:minmax(220px, 280px) minmax(0, 1fr); column-gap:48px; align-items:center;
+    padding-left:max(56px, calc((100% - 1100px) / 2)); padding-right:max(56px, calc((100% - 1100px) / 2)); }
+  footer .footer-grid { grid-column:1; grid-row:1; max-width:none; margin:0; flex-direction:column; align-items:flex-start; }
+  footer .footer-bottom { align-items:flex-start; }
+  footer .footer-social { flex-wrap:wrap; justify-content:flex-start; }
+  footer .pie-mapa { grid-column:2; grid-row:1; max-width:none; margin:0; width:100%; }
+}
+@media (max-width:1000px) {
+  footer { display:flex; flex-direction:column; }
+  footer .footer-grid { order:-1; width:100%; }
+  footer .pie-mapa { width:100%; margin:40px 0 0; }
+}
 
 /* Subtítulos con el mismo acento que la portada: segunda línea en Larken salvia,
    y la línea corta antes de cada kicker. */

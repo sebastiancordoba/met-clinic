@@ -77,7 +77,7 @@
         style: recolorear(estilo),
         bounds: [[-99.1935, 19.3440], [-99.1855, 19.3625]],
         // En compu la tarjeta tapa el tercio izquierdo: el encuadre se corre a la derecha.
-        fitBoundsOptions: { padding: angosto ? { top: 44, bottom: 22, left: 24, right: 120 } : { top: 60, bottom: 30, left: 360, right: 260 } },
+        fitBoundsOptions: { padding: angosto ? { top: 44, bottom: 22, left: 24, right: 120 } : { top: 50, bottom: 30, left: 320, right: 250 } },
         minZoom: 11, maxZoom: 18.5,
         attributionControl: false,
         cooperativeGestures: true,
