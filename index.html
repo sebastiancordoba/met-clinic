@@ -638,6 +638,9 @@
     .esp-photo { aspect-ratio:4/5; overflow:hidden; background:linear-gradient(150deg,var(--tranquil),var(--confort)); position:relative; }
     .esp-photo img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; transition:transform 0.5s var(--ease); }
     .esp-card:hover .esp-photo img { transform:scale(1.04); }
+    /* Logo personal de la doctora sobre la parte baja de su foto (9-nov): discreto, con un velo para que se lea. */
+    .esp-photo:has(.esp-photo__logo)::after { content:''; position:absolute; inset:auto 0 0 0; height:34%; background:linear-gradient(to top, rgba(18,18,16,0.55), rgba(18,18,16,0)); pointer-events:none; }
+    .esp-photo .esp-photo__logo { position:absolute; left:20px; bottom:18px; z-index:1; width:clamp(120px, 38%, 170px); height:auto; object-fit:contain; transform:none !important; opacity:0.95; }
     .esp-photo__ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:12px; font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--texto-suave); }
     .esp-body { padding:clamp(18px,1.5vw,26px); }
     .esp-name { font-family:var(--font); font-weight:300; font-size:clamp(19px,1.5vw,25px); line-height:1.1; letter-spacing:-0.01em; margin-bottom:8px; }
@@ -1578,7 +1581,7 @@
           <div class="esp-track" id="espTrack">
 
             <article class="esp-card">
-              <div class="esp-photo"><img src="images/web/equipo-dra-melina.webp" alt="Dra. Melina Trujillo Quiroz" width="720" height="900" loading="lazy"></div>
+              <div class="esp-photo"><img src="images/web/equipo-dra-melina.webp" alt="Dra. Melina Trujillo Quiroz" width="720" height="900" loading="lazy"><!-- Su logo personal (9-nov, Sebas): BRANDING/DRA. MT, horizontal en blanco; provisional hasta que elija en dra-logos.png. --><img class="esp-photo__logo" src="images/web/dra-melina-horizontal-blanco.webp" alt="" width="400" height="95" loading="lazy"></div>
               <div class="esp-body">
                 <div class="esp-name">Dra. Melina Trujillo</div>
                 <div class="esp-role">Directora · Ginecología &amp; Antiaging</div>
