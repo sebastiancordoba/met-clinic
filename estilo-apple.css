@@ -74,3 +74,39 @@ html.apple .btn-ghost:hover { color: var(--sage); transform: none; }
     -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--tranquil);
   }
 }
+
+/* ── Nivel 3: un poquito de Liquid Glass (11-nov 10:45, Sebas) ──
+   Solo barra superior y botones píldora/flotantes; nunca tarjetas ni texto largo.
+   El desenfoque va solo donde hay mouse (compu): en iPhone cuesta en cada cuadro del scroll (medido el 4-nov),
+   así que ahí queda el «vidrio» sin blur: borde de luz, brillo y sombra sobre crema sólido. */
+html.apple .nav.scrolled, html.apple .nav:not(.nav--video) {
+  border-bottom-color: rgba(255,255,255,0.45);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 8px 30px -18px rgba(38,38,38,0.25);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 60%);
+}
+html.apple .btn-primary, html.apple .nav__cta, html.apple .barra-movil a {
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 10px 24px -14px rgba(38,38,38,0.45);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 55%);
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .3s, background-color .3s;
+}
+html.apple .nav__cta, html.apple .barra-movil a:not(:last-child) {
+  background-color: rgba(255,255,255,0.45);
+  border-color: rgba(255,255,255,0.55) !important;
+}
+html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-movil a:active, html.apple .btn-ghost:active { transform: scale(0.98); }
+@media (hover: hover) and (min-width: 1001px) {
+  html.apple .nav__cta, html.apple .hero .btn-primary {
+    -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+  }
+  html.apple .hero .btn-primary { background-color: rgba(251,247,239,0.78); }
+}
+/* Reducir transparencia o sin backdrop-filter: crema sólido */
+@media (prefers-reduced-transparency: reduce) {
+  html.apple .nav, html.apple .nav.scrolled { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: var(--tranquil) !important; }
+  html.apple .nav__cta, html.apple .hero .btn-primary, html.apple .barra-movil a:not(:last-child) { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: var(--confort) !important; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html.apple .hero .btn-primary { background-color: #FBF7EF; }
+}
+@media (prefers-reduced-motion: reduce) { html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-movil a:active { transform: none; } }
