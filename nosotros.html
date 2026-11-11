@@ -51,6 +51,16 @@
   (function () {
     try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
+    // Propuesta «toque Apple» (11-nov): solo con ?estilo=apple; se recuerda en la pestaña, ?estilo=normal la apaga.
+    try {
+      var q = location.search;
+      if (/[?&]estilo=apple\b/.test(q)) sessionStorage.setItem('met-apple', '1');
+      if (/[?&]estilo=(normal|actual)\b/.test(q)) sessionStorage.removeItem('met-apple');
+      if (sessionStorage.getItem('met-apple')) {
+        document.documentElement.classList.add('apple');
+        document.write('<link rel="stylesheet" href="estilo-apple.css">');
+      }
+    } catch (err) {}
   })();
   </script>
 </head>
