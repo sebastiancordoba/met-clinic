@@ -7,7 +7,7 @@ html.apple body { -webkit-font-smoothing: antialiased; }
 /* Barra superior: translúcida con desenfoque al bajar (sin la línea salvia gruesa) */
 html.apple .nav { border-top-width: 0; border-bottom-color: rgba(130,134,127,0.18); }
 html.apple .nav.scrolled, html.apple .nav:not(.nav--video) {
-  background: rgba(247,244,238,0.72);
+  background: rgba(242,242,237,0.72);
   -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -42,4 +42,35 @@ html.apple .reveal.visible { transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html.apple .reveal { transform: none; transition: opacity .2s; }
   html.apple .pilar:hover, html.apple .btn-primary:hover, html.apple .btn-ghost:hover { transform: none; }
+}
+
+/* ── Nivel 2 (11-nov 10:44, Sebas: «un poquito más Apple») ── */
+html.apple { --r-md: 20px; --r-lg: 24px; }
+/* Aire: ~1.5× el espacio vertical */
+html.apple .section-inner { padding-top: 150px; padding-bottom: 150px; }
+html.apple #servicios { padding-top: clamp(60px,7.5vw,108px); padding-bottom: clamp(84px,10vw,144px); }
+html.apple #especialistas { padding-top: clamp(60px,7.5vw,96px); padding-bottom: clamp(96px,12vw,165px); }
+@media (max-width: 640px) { html.apple .section-inner { padding-top: 96px; padding-bottom: 96px; } }
+/* Titulares más grandes y apretados (misma tipografía; el acento sigue en Larken) */
+html.apple h2 { font-size: clamp(40px,5.8vw,84px); line-height: 0.94; letter-spacing: -0.035em; }
+html.apple h2 em { letter-spacing: -0.02em; }
+html.apple .serv-head h2 { font-size: clamp(34px,3.4vw,52px); line-height: 0.94; }
+html.apple .hero__title { font-size: clamp(40px,5vw,76px); line-height: 0.95; }
+html.apple .esp-solo .esp-name { font-size: clamp(30px,3.1vw,46px); line-height: 1; letter-spacing: -0.025em; }
+/* Fotos más grandes */
+html.apple .esp-solo .esp-photo { flex-basis: 46%; }
+html.apple .tgroup__foto, html.apple .pilar-hero__foto { border-radius: var(--r-lg); box-shadow: var(--sombra-suave); }
+html.apple .pilar { border-radius: var(--r-md); }
+/* Botones: primario relleno con más contraste; secundario como texto con «›» */
+html.apple .btn-primary { background: var(--dark); color: #FBF7EF; border-color: var(--dark); }
+html.apple .btn-primary:hover { background: #000; }
+html.apple .hero .btn-primary { background: #FBF7EF; color: var(--dark); border-color: #FBF7EF; }
+html.apple .btn-ghost { border-color: transparent !important; background: none; color: var(--dark); }
+html.apple .btn-ghost::after { content: ' ›'; font-size: 1.15em; }
+html.apple .btn-ghost:hover { color: var(--sage); transform: none; }
+/* Teléfono: sin desenfoque (es lo que hace lento el scroll en iPhone); crema casi opaca */
+@media (max-width: 1000px), (hover: none) {
+  html.apple .nav.scrolled, html.apple .nav:not(.nav--video) {
+    -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--tranquil);
+  }
 }
