@@ -1333,6 +1333,22 @@
       #contacto .divider { margin-top:14px; margin-bottom:18px; }
       #contacto .contacto-grid { gap:clamp(48px,5vw,80px); align-items:center; }
     }
+    /* Equipo en dos columnas en compu (13-nov 13:30, Sebas): a la izquierda la tarjeta de la Dra. Melina tal cual, a la
+       derecha el titular con la foto grupal; anchos parejos y alineados arriba. El resto del equipo sigue abajo.
+       Teléfono: apilado, la doctora primero. */
+    @media (min-width:1001px) {
+      #especialistas .section-inner { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:clamp(28px,3vw,48px); align-items:start; }
+      #especialistas .section-inner > * { grid-column:1 / -1; }
+      #especialistas .esp-carousel { grid-column:1; grid-row:1; }
+      #especialistas .esp-head { grid-column:2; grid-row:1; margin:0; grid-template-columns:1fr; align-items:start; gap:clamp(18px,2vw,28px); }
+      #especialistas .esp-head h2 { font-size:clamp(32px,3vw,46px); }
+      #especialistas .esp-grupo { aspect-ratio:4/3; }
+      #especialistas .equipo-grid { margin-top:clamp(32px,4vw,56px); }
+    }
+    @media (max-width:1000px) {
+      #especialistas .section-inner { display:flex; flex-direction:column; }
+      #especialistas .esp-carousel { order:-1; margin-bottom:clamp(28px,6vw,40px); }
+    }
     /* Equipo (la doctora y las empleadas) se queda en columna, como antes (13-nov, Sebas). */
     #especialistas .section-inner { max-width:1100px; padding-left:56px; padding-right:56px; }
     @media (max-width:640px) { #especialistas .section-inner { padding-left:20px; padding-right:20px; } }
