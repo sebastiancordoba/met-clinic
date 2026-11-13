@@ -141,3 +141,30 @@
   const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); pedir(); } }, { rootMargin: '400px 0px' });
   io.observe(caja);
 })();
+
+// 6. Brillo del logo (13-nov, Sebas; igual en la tienda, shopify_tema_met.py). El CSS solo barre cuando el logo
+//    lleva .brillando: aquí se pone al pasar el mouse (de inmediato) y solo cada 10–12 s. Entre dos brillos hay al
+//    menos 2 s, y cada hover reinicia la cuenta del automático. Se detiene con la pestaña oculta. En teléfono (sin
+//    hover) solo el automático. Con «reducir movimiento», nada.
+(function () {
+  const marcas = document.querySelectorAll('.nav__marca');
+  if (!marcas.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const PAUSA = 2000, MIN = 10000, MAX = 12000;
+  let ultimo = -Infinity, reloj = 0;
+  const programar = () => { clearTimeout(reloj); if (!document.hidden) reloj = setTimeout(brillar, MIN + Math.random() * (MAX - MIN)); };
+  function brillar() {
+    const ahora = performance.now();
+    if (ahora - ultimo >= PAUSA) {
+      ultimo = ahora;
+      marcas.forEach((m) => { m.classList.remove('brillando'); void m.offsetWidth; m.classList.add('brillando'); });
+    }
+    programar();
+  }
+  const conMouse = matchMedia('(hover: hover)').matches;
+  marcas.forEach((m) => {
+    m.addEventListener('animationend', () => m.classList.remove('brillando'));
+    if (conMouse) m.addEventListener('mouseenter', brillar);
+  });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(reloj); else programar(); });
+  reloj = setTimeout(brillar, 2600);
+})();

@@ -71,7 +71,7 @@ html.barra-propia::-webkit-scrollbar { display:none; }
 /* Destello del logo — el mismo de la tienda en Shopify (shopify_tema_met.py).
    Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
    `mask` usando el propio logo, así que la luz solo cae sobre las letras.
-   Ciclo de 7 s, barrido en el primer 34% (~2.4 s de luz, 4.6 de pausa). */
+   Lo dispara pie.js (6) con .brillando (13-nov, Sebas): al pasar el mouse, cada 10–12 s solo, mínimo 2 s entre brillos. */
 .nav__marca { position:relative; display:block; line-height:0; justify-self:start; }
 .nav__marca::after {
   content:''; position:absolute; inset:0; pointer-events:none;
@@ -79,15 +79,15 @@ html.barra-propia::-webkit-scrollbar { display:none; }
   background-size:300% 100%; background-repeat:no-repeat;
   -webkit-mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
           mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
-  animation:metLogoShine 7s cubic-bezier(0.4,0,0.2,1) 2.6s infinite;
+  background-position:250% 0;
 }
+.nav__marca.brillando::after { animation:metLogoShine 2.4s cubic-bezier(0.4,0,0.2,1) 1; }
 .nav.dark-section .nav__marca::after { display:none; }
 /* Mientras se desplaza la página, el destello se detiene (pie.js 3): repintaba la barra fija en cada cuadro. */
 .nav.desplazando .nav__marca::after { animation-play-state:paused; }
 @keyframes metLogoShine {
-  0%   { background-position:250% 0; }
-  34%  { background-position:-150% 0; }
-  100% { background-position:-150% 0; }
+  from { background-position:250% 0; }
+  to   { background-position:-150% 0; }
 }
 @media (prefers-reduced-motion: reduce) { .nav__marca::after { animation:none; } }
 

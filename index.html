@@ -121,7 +121,7 @@
     /* Destello del logo — el mismo de la tienda en Shopify (shopify_tema_met.py).
        Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
        `mask` usando el propio logo, así que la luz solo cae sobre las letras.
-       Ciclo de 7 s, barrido en el primer 34% (~2.4 s de luz, 4.6 de pausa). */
+       Lo dispara pie.js (6) con .brillando (13-nov, Sebas): al pasar el mouse, cada 10–12 s solo, mínimo 2 s entre brillos. */
     .nav__marca { position:relative; display:block; line-height:0; justify-self:start; }
     .nav__marca::after {
       content:''; position:absolute; inset:0; pointer-events:none;
@@ -129,15 +129,15 @@
       background-size:300% 100%; background-repeat:no-repeat;
       -webkit-mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
               mask:url('images/web/met-positivo-03.webp') center / contain no-repeat;
-      animation:metLogoShine 7s cubic-bezier(0.4,0,0.2,1) 2.6s infinite;
+      background-position:250% 0;
     }
+    .nav__marca.brillando::after { animation:metLogoShine 2.4s cubic-bezier(0.4,0,0.2,1) 1; }
     .nav.dark-section .nav__marca::after { display:none; }
     /* Mientras se desplaza la página, el destello se detiene (pie.js 3): repintaba la barra fija en cada cuadro. */
     .nav.desplazando .nav__marca::after { animation-play-state:paused; }
     @keyframes metLogoShine {
-      0%   { background-position:250% 0; }
-      34%  { background-position:-150% 0; }
-      100% { background-position:-150% 0; }
+      from { background-position:250% 0; }
+      to   { background-position:-150% 0; }
     }
     @media (prefers-reduced-motion: reduce) { .nav__marca::after { animation:none; } }
 
@@ -1313,6 +1313,13 @@
       #preguntas .faq-lista summary { padding-top:15px; padding-bottom:15px; }
       #preguntas .elegidos__titulo { font-size:clamp(28px,2.4vw,40px); }
       #preguntas .elegidos__fila { max-width:calc((100vh - 68px) * 1.25); justify-self:end; width:100%; }
+    }
+    /* «Agenda tu consulta» completa en una pantalla de compu (13-nov, Sebas): menos aire y titular más bajo. */
+    @media (min-width:1001px) {
+      #contacto .section-inner { padding-top:clamp(48px,7vh,80px); padding-bottom:clamp(48px,7vh,80px); }
+      #contacto h2 { font-size:clamp(44px,4vw,64px); margin-bottom:14px; }
+      #contacto .divider { margin-top:14px; margin-bottom:18px; }
+      #contacto .contacto-grid { gap:clamp(48px,5vw,80px); align-items:center; }
     }
     /* Equipo (la doctora y las empleadas) se queda en columna, como antes (13-nov, Sebas). */
     #especialistas .section-inner { max-width:1100px; padding-left:56px; padding-right:56px; }
