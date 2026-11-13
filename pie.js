@@ -168,3 +168,59 @@
   document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(reloj); else programar(); });
   reloj = setTimeout(brillar, 2600);
 })();
+
+// 7. Dónde está uno (13-nov, Sebas). Una sola línea (.nav__indicador) bajo el ítem activo del menú, que se desliza con
+//    transform. En la portada, IntersectionObserver mira qué sección cruza el centro de la pantalla; las secciones que
+//    no están en el menú (portada, preguntas) la apagan. Al hacer scroll rápido no recorre los ítems intermedios:
+//    espera 120 ms a que se asiente. En las páginas internas el ítem va fijo (class="is-active" en el HTML).
+(function () {
+  const lista = document.querySelector('.nav__links');
+  if (!lista) return;
+  const enlaces = [...lista.querySelectorAll('a')];
+  const linea = document.createElement('li');
+  linea.className = 'nav__indicador sin-transicion';
+  linea.setAttribute('aria-hidden', 'true');
+  lista.appendChild(linea);
+  let activo = null;
+
+  function poner(a) {
+    activo = a || null;
+    enlaces.forEach((e) => {
+      if (e === activo) e.setAttribute('aria-current', e.classList.contains('is-active') ? 'page' : 'location');
+      else e.removeAttribute('aria-current');
+    });
+    if (!activo || !activo.offsetWidth) { linea.style.opacity = '0'; return; }
+    const base = lista.getBoundingClientRect(), r = activo.getBoundingClientRect();
+    // El texto lleva letter-spacing al final: la línea mide solo las letras.
+    const sobra = parseFloat(getComputedStyle(activo).letterSpacing) || 0;
+    linea.style.transform = `translateX(${r.left - base.left}px) scaleX(${(r.width - sobra) / 100})`;
+    linea.style.opacity = '1';
+  }
+  const arrancar = () => requestAnimationFrame(() => requestAnimationFrame(() => linea.classList.remove('sin-transicion')));
+
+  const fijo = lista.querySelector('a.is-active');
+  if (fijo) {
+    poner(fijo); arrancar();
+    addEventListener('resize', () => poner(activo));
+    document.fonts && document.fonts.ready.then(() => poner(activo));
+    return;
+  }
+
+  const porId = new Map(enlaces.filter((a) => a.hash && a.getAttribute('href').startsWith('#')).map((a) => [a.hash.slice(1), a]));
+  const secciones = [...document.querySelectorAll('body section[id]')].filter((s) => s.closest('section') === s);
+  if (!porId.size || !('IntersectionObserver' in window)) return;
+  let espera = 0;
+  let enMedio = null; // la sección que cruza la franja del centro (o ninguna: la portada)
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => { if (e.isIntersecting) enMedio = e.target; else if (enMedio === e.target) enMedio = null; });
+    clearTimeout(espera);
+    espera = setTimeout(() => {
+      const a = enMedio ? porId.get(enMedio.id) : null;
+      if (a !== activo) poner(a);
+    }, 120);
+  }, { rootMargin: '-45% 0px -54% 0px' });
+  secciones.forEach((s) => io.observe(s));
+  addEventListener('resize', () => poner(activo));
+  document.fonts && document.fonts.ready.then(() => poner(activo));
+  arrancar();
+})();

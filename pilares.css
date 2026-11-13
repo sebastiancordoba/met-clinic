@@ -98,7 +98,19 @@ html.barra-propia::-webkit-scrollbar { display:none; }
 }
 .nav__links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--sage); transition:width 0.35s var(--ease); }
 .nav__links a:hover, .nav__links a.is-active { color:var(--dark); }
-.nav__links a:hover::after, .nav__links a.is-active::after { width:100%; }
+.nav__links a:hover::after { width:100%; }
+/* Dónde está uno (13-nov, Sebas): una línea fina de 2 px en salvia bajo el ítem activo que se desliza de uno a otro
+   (pie.js, 7). En la portada sigue a la sección visible; en las páginas internas marca su ítem fijo. Solo se anima
+   transform, así que no repinta la barra. Con «reducir movimiento» no se desliza: solo cambia el color. Igual en la tienda. */
+.nav__links { position:relative; }
+.nav__indicador { position:absolute; left:0; bottom:-8px; width:100px; height:2px; border-radius:2px; background:var(--sage);
+  transform-origin:0 0; opacity:0; pointer-events:none; transition:transform 0.25s var(--ease), opacity 0.25s var(--ease); }
+.nav__indicador.sin-transicion { transition:none; }
+.nav__links a.is-active, .nav__links a[aria-current] { color:var(--dark); }
+.nav__links a.is-active::after, .nav__links a[aria-current]::after { width:0; }
+.nav--video .nav__indicador { background:var(--confort); }
+.nav--video .nav__links a[aria-current] { color:#fff; }
+@media (prefers-reduced-motion: reduce) { .nav__indicador { transition:opacity 0.2s; } }
 .nav__cta {
   font-family:var(--font); font-size:12px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; white-space:nowrap;
   padding:10px 24px; background:transparent; color:var(--dark); border:1px solid var(--sage);
