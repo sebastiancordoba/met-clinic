@@ -1344,6 +1344,21 @@
       #especialistas .esp-head h2 { font-size:clamp(32px,3vw,46px); }
       #especialistas .esp-grupo { aspect-ratio:4/3; }
       #especialistas .equipo-grid { margin-top:clamp(32px,4vw,56px); }
+      /* 13:31, Sebas (opción 1): solo la fila Doctora | Manos expertas va a todo el ancho, con el margen de las demás
+         secciones; el resto del equipo y «Miembro de…» se quedan en la columna de 1100 px. Las dos mitades, del mismo alto. */
+      section#especialistas > .section-inner { max-width:none; padding-left:var(--margen); padding-right:var(--margen);
+        grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); align-items:stretch; }
+      #especialistas .section-inner > :not(.esp-carousel):not(.esp-head) { width:100%; max-width:988px; justify-self:center; }
+      #especialistas .esp-carousel, #especialistas .esp-carousel .esp-viewport, #especialistas .esp-carousel .esp-track,
+      #especialistas .esp-carousel .esp-card { height:100%; }
+      #especialistas .esp-solo .esp-photo { flex-basis:40%; aspect-ratio:auto; }
+      #especialistas .esp-solo .esp-body { padding:clamp(28px,3vw,44px) clamp(28px,3vw,48px); }
+      #especialistas .esp-solo .esp-name { font-size:clamp(30px,2.6vw,42px); }
+      #especialistas .esp-head { display:flex; flex-direction:column; align-items:stretch; }
+      #especialistas .esp-grupo { flex:1 1 auto; aspect-ratio:auto; min-height:280px; position:relative; }
+      /* Las fotos no fijan el alto de la fila (las dos son verticales y la estiraban): manda el texto de la doctora. */
+      #especialistas .esp-grupo img, #especialistas .esp-solo .esp-photo > img:not(.esp-photo__logo) { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+      #especialistas .esp-solo .esp-photo { position:relative; }
     }
     @media (max-width:1000px) {
       #especialistas .section-inner { display:flex; flex-direction:column; }
