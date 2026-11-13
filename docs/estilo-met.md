@@ -54,6 +54,11 @@ Reglas:
   - dentro de un campo de formulario o del buscador;
   - en la píldora «+» de agregar;
   - en el cajón del carrito.
+- **Choque pendiente de Sebas: portada de la tienda.**
+  - El 4-nov Sebas pidió fondo **blanco** en la portada de la tienda: el bloque «Lo que usamos en consulta» y
+    sus tarjetas de producto. Las secciones de abajo iban en crema/salvia.
+  - El 13-nov pidió «fondos crema/salvia acordados, NO blancos».
+  - Mientras no confirme, la portada de la tienda se queda como está y en todo lo demás se aplica esta guía.
 - El texto oscuro translúcido nunca baja de alfa 0.75. Úsalo para texto de párrafo: `rgba(38,38,38,.78)`.
 - Sobre `--sage` solo va texto grande. Una etiqueta chica sobre salvia usa `#111`.
 - Revisa con axe-core antes de entregar cualquier cambio de color.
