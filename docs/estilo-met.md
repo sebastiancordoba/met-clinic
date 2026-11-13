@@ -43,7 +43,7 @@ alinear», al final.
 | `--texto-suave` | `#515151` | Texto chico secundario: marca, cejas y notas (6.8:1) |
 | `--loseta` | `#ECEBE4` | **Loseta de producto, salvia claro.** Es la que se usa por defecto |
 | `--loseta-crema` | `#EFE3CF` | Loseta alterna, solo para destacar una tarjeta (la del centro en un trío) |
-| `--crema-boton` | `#FBF7EF` | Botón principal sobre video o foto |
+| `--crema-boton` | `#FBF7EF` | Texto del botón principal y fondo del botón principal sobre video o foto |
 | `--existencia` | `#6E8B5E` / `#8A4B2A` | Punto «en existencia» / «quedan pocas» |
 
 Reglas:
@@ -129,10 +129,10 @@ Reglas:
 
 | Tipo | Aspecto |
 |---|---|
-| **Principal** | Píldora `--dark` con texto `--confort`, 12px/600/0.16em en MAYÚSCULAS, relleno 15 × 32 px, alto mínimo 48 px. Brillo de vidrio arriba: `inset 0 1px 0 rgba(255,255,255,.35)` + degradado blanco 18 % → 0. Hover: `#000` y `scale(1.02)`. Al presionar: `scale(.98)` |
+| **Principal** | Píldora `--dark` con texto `--crema-boton` #FBF7EF (igual en página y tienda), 12px/600/0.16em en MAYÚSCULAS, relleno 15 × 32 px, alto mínimo 48 px. Brillo de vidrio arriba: `inset 0 1px 0 rgba(255,255,255,.35)` + degradado blanco 18 % → 0. Hover: `#000` y `scale(1.02)`. Al presionar: `scale(.98)` |
 | **Principal sobre foto o video** | Igual, pero en `--crema-boton` con texto `--dark` |
 | **Secundario** | Texto `--dark` sin borde, con « ›» al final. Hover: `--sage` |
-| **Contorno** (CTA del menú, «Agendar consulta») | Píldora con borde `--sage` y fondo `rgba(255,255,255,.45)`; desenfoque solo en compu con mouse. Hover: fondo `--sage` y texto `--confort` |
+| **Contorno de vidrio** (CTA del menú, «Agendar consulta») | Píldora con borde `rgba(255,255,255,.55)` y fondo `rgba(255,255,255,.45)`, con el brillo de vidrio del principal (Liquid Glass nivel 3); desenfoque `blur(14px) saturate(180%)` solo en compu con mouse; con `prefers-reduced-transparency`, fondo `--confort`. Hover: fondo `--sage` y texto `--confort` |
 | **Chip / filtro** | Píldora 12–13px, borde `--sage-mid`, fondo transparente. Activo: fondo `--dark`, texto `--confort`. Alto mínimo 36 px (44 px de área táctil) |
 | **Agregar rápido «+»** | Círculo de 40 px abajo a la derecha de la loseta: vidrio (`rgba(255,255,255,.45)` + borde blanco 55 %) en compu y blanco sólido en táctil |
 | **Flechas de carrusel** | Círculo de 48 px con borde `--sage` y fondo `--tranquil` |
@@ -179,29 +179,39 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
 - **Menú:** Servicios · Equipo · Opiniones · Contacto · Tienda, a 14px/500/0.12em en `--texto-suave`.
   - El activo va en `--dark`, con una **línea de 2 px en `--sage` que se desliza** bajo el ítem de la sección
     visible (*scroll-spy*). En páginas internas y en la tienda la línea queda fija en el ítem actual
-    (`aria-current="page"`).
+    (`aria-current="page"`). La página de Preguntas no marca ningún ítem (pendiente de Sebas).
   - El hover lleva un subrayado de 1 px que crece de izquierda a derecha.
 - **Acciones:** «Agendar consulta» (contorno) + bolsa de 40 px sin contador.
 - **Con hamburguesa (≤ 1120):** hamburguesa a la izquierda, logo al centro y bolsa a la derecha.
-- **Fondo:** `--tranquil` opaco con borde inferior `rgba(255,255,255,.45)` y brillo de vidrio. El desenfoque
-  (`blur(20px) saturate(180%)` sobre `rgba(242,242,237,.72)`) va **solo en compu con mouse (> 1000 px)**; en
-  teléfono y pantallas táctiles el fondo es crema sólido, porque el desenfoque hace lento el scroll en iPhone.
+- **Fondo:** en compu con mouse (> 1000 px), translúcido `rgba(242,242,237,.72)` con `blur(20px) saturate(180%)`,
+  borde inferior `rgba(255,255,255,.45)` y brillo de vidrio. En teléfono y pantallas táctiles (≤ 1000 px o
+  `hover:none`) va `--tranquil` **opaco**, sin desenfoque, porque el desenfoque hace lento el scroll en iPhone. Sin
+  soporte de `backdrop-filter` o con `prefers-reduced-transparency`: `--tranquil` opaco.
 
 ## 10. Pie
 
 - Fondo `--dark` con línea superior de 2 px `--sage`, `padding-top: --aire` y texto `--confort`.
 - **Compu: 3 columnas** (`1fr 1fr 1.35fr`):
-  1. marca y datos: logo crema de 260 px, dirección y horario;
-  2. contacto y redes: un título de 12px/500/0.16em y botones redondos;
-  3. mapa ilustrado con la tarjeta «Cómo llegar» abajo.
-
-  Debajo va la barra legal a todo el ancho.
+  1. **Marca y datos:** logo crema de 260 px, dirección, teléfono y «6 min a pie del Metro Barranca del Muerto ·
+     Línea 7». **Sin horario:** nadie lo ha confirmado y no se inventa.
+  2. **Contacto y redes:** un título de 12px/500/0.16em y botones **píldora con ícono y texto** (Instagram,
+     Doctoralia, WhatsApp).
+  3. **Mapa:** MapLibre vivo; el póster SVG es el respaldo y un enlace a «Cómo llegar». Debajo lleva una fila con
+     «Cómo llegar» a la izquierda, en píldora `--confort` con texto `--dark`, y «Abrir en Google Maps · Apple Maps
+     · Waze» a la derecha.
+- **Barra legal** a todo el ancho: «© 2026 MET Clinic…» a la izquierda y «Dra. Melina Trujillo Quiroz · Cédulas
+  profesionales…» a la derecha.
 - **Teléfono:** las 3 columnas se apilan.
 - Sin columnas de enlaces y sin líneas divisorias internas.
 - Los datos van a 14px/300 en `rgba(247,237,220,.82)` y las notas a 13 px en `.68`.
 - El crédito «© OpenStreetMap» es obligatorio.
 - El pie de la tienda es el mismo de la página. Si la tienda necesita enlaces legales (envíos, devoluciones,
   privacidad), van en la barra legal, no en columnas.
+
+### 10 b. Anchos especiales (página)
+
+- **Equipo:** la fila Doctora | Manos expertas va a todo el ancho con `--margen`, en columnas `1.2fr / 1fr` del
+  mismo alto. El resto del equipo y «Miembro de…» se quedan en una columna de 1100 px (Sebas, 13-nov 13:30).
 
 ## 11. Movimiento
 
