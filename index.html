@@ -1296,6 +1296,9 @@
     .elegidos { border-top:none; position:relative; }
     .elegidos::before { content:''; position:absolute; top:0; left:0; right:0; border-top:1px solid rgba(130,134,127,0.2); }
     .faq-lista, .faq-grid > :last-child { max-width:880px; }
+    /* Equipo (la doctora y las empleadas) se queda en columna, como antes (13-nov, Sebas). */
+    #especialistas .section-inner { max-width:1100px; padding-left:56px; padding-right:56px; }
+    @media (max-width:640px) { #especialistas .section-inner { padding-left:20px; padding-right:20px; } }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
