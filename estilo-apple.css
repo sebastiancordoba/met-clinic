@@ -127,3 +127,9 @@ html.apple #proceso .section-inner { padding-top: var(--aire); padding-bottom: v
 html.apple footer.pie3 { padding-top: var(--aire); }
 @media (max-width: 640px) { html.apple { --aire: 52px; } }
 html.apple #cita { padding-top: var(--aire); padding-bottom: var(--aire); }
+
+/* «Lo más elegido» con la tarjeta de producto de la guía (docs/estilo-met.md § 7 y 15): loseta salvia claro, sin
+   borde, la foto en multiply para que su fondo blanco tome el tono. */
+html.apple { --loseta: #ECEBE4; }
+html.apple .elegido { background: var(--loseta); border-color: transparent; }
+html.apple .elegido__foto img { mix-blend-mode: multiply; }
