@@ -111,3 +111,19 @@ html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-m
 }
 @media (prefers-reduced-motion: reduce) { html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-movil a:active { transform: none; } }
 html.apple .elegidos__titulo { font-size: clamp(30px,3vw,46px); }
+
+/* ── Ritmo parejo sin huecos muertos (13-nov 13:26, Sebas: «espacios vacíos que estorban») ──
+   Cada sección lleva el mismo aire arriba y abajo (--aire); entre dos secciones queda ~2 × --aire.
+   Sustituye los 150 px del nivel 2. Preguntas y Contacto conservan sus ajustes de «cabe en una pantalla». */
+html.apple { --aire: clamp(48px, 5vw, 76px); }
+html.apple .section-inner, html.apple .nosotros .section-inner { padding-top: var(--aire); padding-bottom: var(--aire); }
+html.apple #servicios, html.apple #especialistas { padding-top: var(--aire); padding-bottom: var(--aire); }
+html.apple #servicios .section-inner, html.apple #especialistas .section-inner,
+html.apple #clinica .section-inner { padding-top: 0; padding-bottom: 0; }
+html.apple .pilar-intro, html.apple .pilar-faq, html.apple .pilar-cta, html.apple #clinica { padding-top: var(--aire); padding-bottom: var(--aire); }
+html.apple .treatments { padding-top: calc(var(--aire) * 0.6); padding-bottom: var(--aire); }
+html.apple .pilar-hero { padding-bottom: calc(var(--aire) * 0.8); }
+html.apple #proceso .section-inner { padding-top: var(--aire); padding-bottom: var(--aire); }
+html.apple footer.pie3 { padding-top: var(--aire); }
+@media (max-width: 640px) { html.apple { --aire: 52px; } }
+html.apple #cita { padding-top: var(--aire); padding-bottom: var(--aire); }
