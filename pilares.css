@@ -67,7 +67,7 @@ html.barra-propia::-webkit-scrollbar { display:none; }
   background:var(--tranquil); /* sin backdrop-filter: ver index.html, .nav.scrolled */
   border-top:2px solid var(--sage); border-bottom:1px solid var(--sage-mid);
 }
-.nav__logo { height:42px; width:auto; display:block; }
+.nav__logo { height:54px; width:auto; display:block; }
 /* Destello del logo — el mismo de la tienda en Shopify (shopify_tema_met.py).
    Un gradiente que barre POR DENTRO de la silueta: el ::after se recorta con
    `mask` usando el propio logo, así que la luz solo cae sobre las letras.

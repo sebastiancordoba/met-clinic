@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="redondeado cta-principal-visible">
+<html lang="es" class="redondeado apple cta-principal-visible">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,18 +32,11 @@
   (function () {
     try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
-    // Propuesta «toque Apple» (11-nov): solo con ?estilo=apple; se recuerda en la pestaña, ?estilo=normal la apaga.
-    try {
-      var q = location.search;
-      if (/[?&]estilo=apple\b/.test(q)) sessionStorage.setItem('met-apple', '1');
-      if (/[?&]estilo=(normal|actual)\b/.test(q)) sessionStorage.removeItem('met-apple');
-      if (sessionStorage.getItem('met-apple')) {
-        document.documentElement.classList.add('apple');
-        document.write('<link rel="stylesheet" href="estilo-apple.css">');
-      }
-    } catch (err) {}
+    // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
+    if (/[?&]estilo=(normal|actual)/.test(location.search)) document.documentElement.classList.remove('apple');
   })();
   </script>
+  <link rel="stylesheet" href="estilo-apple.css" />
 </head>
 <body>
 

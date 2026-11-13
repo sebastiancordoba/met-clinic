@@ -1,5 +1,5 @@
-/* estilo-apple.css — PROPUESTA (11-nov-2026, Sebas: «un toque pequeño de estética de Apple»).
-   Solo carga con ?estilo=apple (se recuerda en la pestaña; ?estilo=normal lo apaga). No mueve nada ni cambia textos:
+/* estilo-apple.css — por defecto desde el 13-nov-2026 (Sebas); propuesta del 11-nov («un toque pequeño de estética de Apple»).
+   Va en todas las páginas con la clase html.apple; ?estilo=normal la quita para comparar. No mueve nada ni cambia textos:
    más aire, sombras más suaves, barra translúcida con desenfoque, píldoras más finas, aparición más suave. */
 html.apple { --sombra-suave: 0 1px 1px rgba(38,38,38,0.03), 0 18px 40px -22px rgba(38,38,38,0.18); --r-md: 18px; --r-lg: 24px; }
 html.apple body { -webkit-font-smoothing: antialiased; }
@@ -110,3 +110,4 @@ html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-m
   html.apple .hero .btn-primary { background-color: #FBF7EF; }
 }
 @media (prefers-reduced-motion: reduce) { html.apple .btn-primary:active, html.apple .nav__cta:active, html.apple .barra-movil a:active { transform: none; } }
+html.apple .elegidos__titulo { font-size: clamp(30px,3vw,46px); }

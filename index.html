@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="redondeado cta-principal-visible">
+<html lang="es" class="redondeado apple cta-principal-visible">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -115,7 +115,7 @@
     .nav--video .nav__hamburger span { background: var(--confort); box-shadow: 0 1px 6px rgba(0,0,0,0.3); }
 
     .nav__logo {
-      height: 44px; width: auto; display: block;
+      height: 54px; /* +23 % (13-nov, Sebas); la barra sigue de 68 px */ width: auto; display: block;
       transition: filter 0.4s, opacity 0.4s;
     }
     /* Destello del logo — el mismo de la tienda en Shopify (shopify_tema_met.py).
@@ -586,6 +586,14 @@
     .elegido:hover, .elegido:focus-visible { box-shadow:0 12px 30px -16px rgba(38,38,38,0.25); transform:translateY(-2px); }
     .elegido__foto { display:block; aspect-ratio:1/1; margin-bottom:6px; }
     .elegido__foto img { width:100%; height:100%; object-fit:contain; display:block; }
+    /* Productos más grandes (13-nov, Sebas): las fotos de la tienda traen ~17 % de blanco por lado (el frasco
+       ocupa ~62–66 % del cuadro). Se escalan dentro de su caja para que el producto llene ~80 % del alto. */
+    .elegido { padding:6px 6px 14px; }
+    .elegido__foto { overflow:hidden; border-radius:var(--r-sm, 0); margin-bottom:8px; }
+    .elegido__foto img { transform:scale(1.18); transition:transform 0.5s var(--ease); }
+    .elegido:hover .elegido__foto img { transform:scale(1.23); }
+    .elegido__marca, .elegido__nombre { padding:0 6px; }
+    @media (prefers-reduced-motion: reduce) { .elegido:hover .elegido__foto img { transform:scale(1.18); } }
     .elegido__marca { font-size:10px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:var(--texto-suave); }
     .elegido__nombre { font-size:13.5px; font-weight:400; line-height:1.35; }
     @media (max-width:900px) { .elegidos { grid-template-columns:1fr; } }
@@ -1296,6 +1304,16 @@
     .elegidos { border-top:none; position:relative; }
     .elegidos::before { content:''; position:absolute; top:0; left:0; right:0; border-top:1px solid rgba(130,134,127,0.2); }
     .faq-lista, .faq-grid > :last-child { max-width:880px; }
+    /* Preguntas + «Lo más elegido» juntas en una pantalla de compu (13-nov, Sebas): 1440×900 y 1920×1080.
+       Menos aire entre las dos, titulares más bajos y renglones de pregunta más compactos; los productos no se achican. */
+    @media (min-width:1001px) {
+      #preguntas .faq-grid { padding-top:clamp(40px,5vh,64px); padding-bottom:clamp(20px,2.5vh,32px); align-items:center; }
+      #preguntas .elegidos { padding-top:clamp(20px,2.5vh,32px); padding-bottom:clamp(40px,5vh,64px); }
+      #preguntas h2 { font-size:clamp(40px,3.6vw,60px); margin-bottom:12px; }
+      #preguntas .faq-lista summary { padding-top:15px; padding-bottom:15px; }
+      #preguntas .elegidos__titulo { font-size:clamp(28px,2.4vw,40px); }
+      #preguntas .elegidos__fila { max-width:calc((100vh - 68px) * 1.25); justify-self:end; width:100%; }
+    }
     /* Equipo (la doctora y las empleadas) se queda en columna, como antes (13-nov, Sebas). */
     #especialistas .section-inner { max-width:1100px; padding-left:56px; padding-right:56px; }
     @media (max-width:640px) { #especialistas .section-inner { padding-left:20px; padding-right:20px; } }
@@ -1380,18 +1398,11 @@
   (function () {
     try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
-    // Propuesta «toque Apple» (11-nov): solo con ?estilo=apple; se recuerda en la pestaña, ?estilo=normal la apaga.
-    try {
-      var q = location.search;
-      if (/[?&]estilo=apple\b/.test(q)) sessionStorage.setItem('met-apple', '1');
-      if (/[?&]estilo=(normal|actual)\b/.test(q)) sessionStorage.removeItem('met-apple');
-      if (sessionStorage.getItem('met-apple')) {
-        document.documentElement.classList.add('apple');
-        document.write('<link rel="stylesheet" href="estilo-apple.css">');
-      }
-    } catch (err) {}
+    // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
+    if (/[?&]estilo=(normal|actual)/.test(location.search)) document.documentElement.classList.remove('apple');
   })();
   </script>
+  <link rel="stylesheet" href="estilo-apple.css" />
 </head>
 <body>
 
