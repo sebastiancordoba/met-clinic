@@ -1282,6 +1282,20 @@
     .pie-lugar strong { color:var(--confort); font-weight:500; }
     .pie-lugar a { color:rgba(247,237,220,0.92); text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.3); white-space:nowrap; }
     .pie-lugar a:hover { border-color:var(--confort); }
+    /* ═══════════════════════════════════════════
+       ANCHO COMPLETO (13-nov-2026, Sebas: «que ocupe todo el ancho»). PROPUESTA en la rama ancho-completo.
+       Las secciones dejan la columna de 1100 px: el contenido va de orilla a orilla con un margen lateral
+       proporcional (--margen), el mismo del pie. El texto largo (preguntas) conserva su ancho de lectura.
+    ═══════════════════════════════════════════ */
+    :root { --margen: clamp(20px, 5vw, 96px); }
+    .section-inner { max-width:none; padding-left:var(--margen); padding-right:var(--margen); }
+    #tecnologia { max-width:none; padding-left:var(--margen); padding-right:var(--margen); }
+    footer { padding-left:var(--margen) !important; padding-right:var(--margen) !important; }
+    .pie-mapa, .footer-grid { max-width:none; }
+    /* La línea de arriba de «Lo más elegido» llega a las orillas */
+    .elegidos { border-top:none; position:relative; }
+    .elegidos::before { content:''; position:absolute; top:0; left:0; right:0; border-top:1px solid rgba(130,134,127,0.2); }
+    .faq-lista, .faq-grid > :last-child { max-width:880px; }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
