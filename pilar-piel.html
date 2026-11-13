@@ -311,7 +311,7 @@
   <!-- ══ FOOTER ══ -->
   </main>
 
-  <footer>
+  <footer class="pie3">
     <!-- mapa-pie:inicio — lo escribe generar-mapa.py; no lo edites a mano -->
     <div class="pie-mapa">
       <div class="pie-mapa__tarjeta">
@@ -338,12 +338,17 @@
       </a>
     </div>
     <!-- mapa-pie:fin -->
-    <div class="footer-grid">
-      <div>
-        <img src="images/web/met-crema-04.webp" alt="MET Clinic" class="footer-logo">
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-social">
+    <!-- Pie en 3 columnas (13-nov, Sebas): marca y datos · contacto y redes · mapa (arriba, generado), y abajo la
+         barra legal a todo el ancho. Sin horario: nadie lo ha confirmado. -->
+    <div class="pie-marca">
+      <img src="images/web/met-crema-04.webp" alt="MET Clinic" class="footer-logo">
+      <p class="pie-dato">Guty Cárdenas 65, Guadalupe Inn<br>Álvaro Obregón, CDMX 01020</p>
+      <p class="pie-dato"><a href="tel:+525540099923">55 4009 9923</a></p>
+      <p class="pie-dato pie-dato--suave">6 min a pie del Metro Barranca del Muerto · Línea 7</p>
+    </div>
+    <div class="pie-contacto">
+      <p class="pie-titulo">Contacto y redes</p>
+      <div class="footer-social">
           <a href="https://www.instagram.com/metclinic.mx" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -368,8 +373,10 @@
             WhatsApp
           </a>
         </div>
-        <span class="footer-copy">© 2026 MET Clinic. Todos los derechos reservados.</span>
-      </div>
+    </div>
+    <div class="pie-legal">
+      <span>© 2026 MET Clinic. Todos los derechos reservados.</span>
+      <span>Dra. Melina Trujillo Quiroz · Cédulas profesionales 9177465 · 5574513</span>
     </div>
   </footer>
 

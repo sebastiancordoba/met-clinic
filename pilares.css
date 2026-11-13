@@ -751,3 +751,53 @@ html.redondeado .pie-mapa .mapa__enlace { box-shadow: none; }
 .filosofia__logo { max-width:240px; height:auto; opacity:0.95; }
 
 html.redondeado .mosaico figure { border-radius: var(--r-md); }
+
+/* ═══ PIE EN 3 COLUMNAS (13-nov-2026, Sebas: «todo apilado a la izquierda y un hueco al centro») ═══
+   Compu: (1) logo + dirección y teléfono · (2) contacto y redes en fila · (3) mapa con «Cómo llegar» pegado a su
+   borde de abajo. Abajo, la barra legal a todo el ancho con su línea. Teléfono: todo apilado en ese orden.
+   La tarjeta flotante del mapa se queda solo con el botón y «Abrir en …»: la dirección ya va en la columna 1.
+   Mismo bloque en index.html y pilares.css. */
+footer.pie3 { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.35fr); column-gap:clamp(32px,4vw,72px);
+  row-gap:0; align-items:start; padding-top:clamp(48px,6vw,72px); padding-bottom:28px; }
+footer.pie3 .pie-marca { grid-column:1; grid-row:1; }
+footer.pie3 .pie-contacto { grid-column:2; grid-row:1; }
+footer.pie3 .pie-mapa { grid-column:3; grid-row:1; width:100%; max-width:none; height:auto; margin:0; display:flex; flex-direction:column; gap:14px; }
+footer.pie3 .pie-legal { grid-column:1 / -1; grid-row:2; }
+footer.pie3 .footer-logo { width:260px; max-width:100%; height:auto; opacity:1; margin:0 0 22px; display:block; }
+footer.pie3 .pie-dato { margin:0 0 10px; font-size:14px; font-weight:300; line-height:1.6; color:rgba(247,237,220,0.82); }
+footer.pie3 .pie-dato a { color:var(--confort); text-decoration:none; border-bottom:1px solid rgba(247,237,220,0.35); }
+footer.pie3 .pie-dato a:hover { border-color:var(--confort); }
+footer.pie3 .pie-dato--suave { font-size:13px; color:rgba(247,237,220,0.68); }
+footer.pie3 .pie-titulo { margin:6px 0 16px; font-size:12px; font-weight:500; letter-spacing:0.16em; text-transform:uppercase; color:rgba(247,237,220,0.68); }
+footer.pie3 .footer-social { display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-start; }
+/* Mapa: el lienzo arriba y el botón debajo, alineados a sus orillas */
+footer.pie3 .pie-mapa .mapa__enlace { position:relative; inset:auto; order:1; width:100%; aspect-ratio:1.5; height:auto; min-height:240px; }
+footer.pie3 .pie-mapa .mapa__svg--ancho { display:none; }
+footer.pie3 .pie-mapa .mapa__svg--movil { display:block; }
+footer.pie3 .pie-mapa__tarjeta { order:2; position:static; transform:none; width:auto; padding:0; background:none; border:0; box-shadow:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; }
+footer.pie3 .pie-mapa__tarjeta .mapa__logo, footer.pie3 .pie-mapa__tarjeta .mapa__eyebrow,
+footer.pie3 .pie-mapa__tarjeta .mapa__dir, footer.pie3 .pie-mapa__tarjeta .mapa__refs { display:none; }
+footer.pie3 .pie-mapa__tarjeta .mapa__ir { margin:0; padding:11px 22px; }
+footer.pie3 .pie-mapa__tarjeta .mapa__apps { margin:0; color:rgba(247,237,220,0.68); font-size:12.5px; }
+footer.pie3 .pie-mapa__tarjeta .mapa__apps a { color:rgba(247,237,220,0.88); }
+/* Barra legal */
+footer.pie3 .pie-legal { display:flex; justify-content:space-between; gap:8px 32px; flex-wrap:wrap; margin-top:clamp(36px,4vw,56px); padding-top:20px;
+  border-top:1px solid rgba(247,237,220,0.14); font-size:12.5px; font-weight:300; letter-spacing:0.04em; color:rgba(247,237,220,0.6); }
+@media (max-width:1000px) {
+  footer.pie3 { display:flex; flex-direction:column; align-items:stretch; }
+  footer.pie3 .pie-marca, footer.pie3 .pie-contacto { order:0; }
+  footer.pie3 .pie-contacto { margin-top:22px; }
+  footer.pie3 .pie-mapa { order:1; margin-top:32px; }
+  footer.pie3 .pie-legal { order:2; flex-direction:column; }
+  footer.pie3 .footer-logo { width:220px; }
+  footer.pie3 .footer-social { flex-wrap:nowrap; }
+  footer.pie3 .footer-social a { flex:1 1 0; justify-content:center; }
+}
+/* Ajustes del pie en 3 columnas: «Cómo llegar» en crema sobre el fondo oscuro; en el teléfono los 3 botones caben en una fila. */
+footer.pie3 .pie-mapa__tarjeta .mapa__ir { background:var(--confort); color:var(--dark); border-color:var(--confort); }
+footer.pie3 .pie-mapa__tarjeta .mapa__ir:hover { background:#fff; }
+@media (max-width:1000px) {
+  footer.pie3 .footer-social { gap:8px; }
+  footer.pie3 .footer-social a { min-width:0; padding:10px 6px; font-size:11px; letter-spacing:0.06em; gap:6px; }
+}

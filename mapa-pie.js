@@ -76,8 +76,8 @@
         container: lienzo,
         style: recolorear(estilo),
         bounds: [[-99.1935, 19.3440], [-99.1855, 19.3625]],
-        // En compu la tarjeta tapa el tercio izquierdo: el encuadre se corre a la derecha.
-        fitBoundsOptions: { padding: angosto ? { top: 44, bottom: 22, left: 24, right: 120 } : { top: 50, bottom: 30, left: 320, right: 250 } },
+        // Desde el 13-nov el mapa va en su propia columna sin tarjeta encima: margen parejo, más a la derecha por los nombres.
+        fitBoundsOptions: { padding: { top: 44, bottom: 22, left: angosto ? 24 : 56, right: angosto ? 120 : 200 } },
         minZoom: 11, maxZoom: 18.5,
         attributionControl: false,
         cooperativeGestures: true,
