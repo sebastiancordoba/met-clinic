@@ -801,3 +801,20 @@ footer.pie3 .pie-mapa__tarjeta .mapa__ir:hover { background:#fff; }
   footer.pie3 .footer-social { gap:8px; }
   footer.pie3 .footer-social a { min-width:0; padding:10px 6px; font-size:11px; letter-spacing:0.06em; gap:6px; }
 }
+/* Pie (17-nov 12:26, Sebas): las 3 redes en una fila, enlaces cortos «Tienda» y «Ayuda» debajo, enlaces legales junto al ©,
+   y el texto chico sobre el carbón a ≥ 4.5:1 (crema al 78 %). */
+footer.pie3 .footer-social { flex-wrap:nowrap; gap:8px; }
+footer.pie3 .footer-social a { padding:10px 14px; font-size:11.5px; letter-spacing:0.1em; gap:7px; white-space:nowrap; }
+footer.pie3 .pie-enlaces { display:flex; gap:clamp(32px,4vw,64px); margin-top:28px; }
+footer.pie3 .pie-enlaces div { display:flex; flex-direction:column; gap:8px; }
+footer.pie3 .pie-enlaces .pie-titulo { margin:0 0 4px; }
+footer.pie3 .pie-enlaces a, footer.pie3 .pie-legal a { color:rgba(247,237,220,0.88); text-decoration:none; font-size:14px; font-weight:300; }
+footer.pie3 .pie-enlaces a:hover, footer.pie3 .pie-legal a:hover { color:var(--confort); text-decoration:underline; text-underline-offset:3px; }
+footer.pie3 .pie-legal a { font-size:12.5px; text-decoration:underline; text-decoration-color:rgba(247,237,220,0.3); text-underline-offset:3px; }
+footer.pie3 .pie-legal, footer.pie3 .pie-dato--suave, footer.pie3 .pie-titulo,
+footer.pie3 .pie-mapa__tarjeta .mapa__apps { color:rgba(247,237,220,0.78); }
+footer.pie3 .pie-legal__izq { line-height:1.8; }
+@media (max-width:1000px) {
+  footer.pie3 .footer-social a { padding:10px 6px; font-size:11px; letter-spacing:0.06em; gap:6px; }
+}
+@media (min-width:1001px) { footer.pie3 { grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr) minmax(0,1.3fr); } footer.pie3 .footer-social a { padding:10px 12px; letter-spacing:0.08em; } }
