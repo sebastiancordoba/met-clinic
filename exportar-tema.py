@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""Lleva la página al tema de Shopify (17-nov-2026, Sebas: «migrar la página dentro de Shopify»).
+
+La página sigue siendo la fuente: este script lee index.html, las páginas internas, sus CSS y JS, y escribe en
+tema-shopify/ los archivos que el agente de la tienda (met-clinic/claude-1) sube al tema «MET · Cosmo (apple)»:
+
+  sections/met-pg-*.liquid       un bloque de la portada por sección; una sección por página interna; el pie
+  templates/index.json           la portada de la clínica en «/»
+  templates/page.met-*.json      Nosotros, Preguntas y los 7 servicios (/pages/<nombre>, con templateSuffix)
+  assets/met-pagina.css.liquid   el CSS de la página con alcance .met-pg (no choca con Horizon)
+  assets/met-pilares.css.liquid  el de las páginas internas, igual
+  assets/met-pagina.js           main.js / pilares.js + lo de pie.js que aplica, guardado para correr en el tema
+  assets/met-mapa-pie.js         el mapa vivo del pie (MapLibre)
+  assets/met-pg-*                las imágenes, el video y la fuente que usan
+
+No escribe en la tienda: solo genera archivos. El encabezado es el del tema (menú met-encabezado).
+Uso: python3 exportar-tema.py   (vuelve a generar todo; corre de nuevo tras cambiar la página)
+"""
+import json
+import re
+import shutil
+from pathlib import Path
+
+RAIZ = Path(__file__).resolve().parent
+SALIDA = RAIZ / 'tema-shopify'
+ENVOLTURA = 'met-pg redondeado apple'
+
+PAGINAS = {  # archivo → (template, título de la sección)
+    'nosotros.html': ('nosotros', 'La clínica'),
+    'preguntas.html': ('preguntas', 'Preguntas frecuentes'),
+    'pilar-ginecologia.html': ('pilar-ginecologia', 'Ginecología'),
+    'pilar-facial.html': ('pilar-facial', 'Facial'),
+    'pilar-corporal.html': ('pilar-corporal', 'Corporal'),
+    'pilar-depilacion.html': ('pilar-depilacion', 'Depilación'),
+    'pilar-piel.html': ('pilar-piel', 'Manchas y piel'),
+    'pilar-capilar.html': ('pilar-capilar', 'Capilar'),
+    'pilar-longevidad.html': ('pilar-longevidad', 'Longevidad'),
+}
+TIENDA = 'https://met-clinic.myshopify.com'
+assets: set[str] = set()
+
+
+# ── Rutas ────────────────────────────────────────────────────────────────────────────────────────────────────────
+def nombre_asset(ruta: str) -> str:
+    ruta = ruta.split('?')[0]
+    base = re.sub(r'^(images/|BRANDING/webfonts/|video/)', '', ruta).replace('/', '-')
+    nombre = 'met-pg-' + base
+    assets.add(ruta + '\t' + nombre)
+    return nombre
+
+
+def url_asset(ruta: str) -> str:
+    return "{{ '" + nombre_asset(ruta) + "' | asset_url }}"
+
+
+def enlace(href: str) -> str:
+    if href.startswith(TIENDA):
+        resto = href[len(TIENDA):]
+        return resto if resto not in ('', '/') else '/collections/all'
+    m = re.match(r'^(index\.html)?(#.*)?$', href)
+    if m and href and (m.group(1) or m.group(2)):
+        return '/' + (m.group(2) or '') if m.group(1) else href
+    m = re.match(r'^([a-z-]+)\.html(#.*)?$', href)
+    if m:
+        if m.group(1) == 'tienda':
+            return '/collections/all'
+        return f'/pages/{m.group(1)}' + (m.group(2) or '')
+    return href
+
+
+def html_a_liquid(html: str) -> str:
+    def attr(m):
+        nombre, valor = m.group(1), m.group(2)
+        if nombre in ('src', 'poster', 'data-src') and re.match(r'^(images|BRANDING|video)/', valor):
+            return f'{nombre}="{url_asset(valor)}"'
+        if nombre == 'srcset':
+            partes = []
+            for p in valor.split(','):
+                p = p.strip()
+                u, _, d = p.partition(' ')
+                partes.append((url_asset(u) if re.match(r'^(images|BRANDING)/', u) else u) + (' ' + d if d else ''))
+            return f'srcset="{", ".join(partes)}"'
+        if nombre == 'href':
+            if re.match(r'^(images|BRANDING)/', valor):
+                return f'href="{url_asset(valor)}"'
+            return f'href="{enlace(valor)}"'
+        return m.group(0)
+    html = re.sub(r'\b(src|poster|data-src|srcset|href)="([^"]*)"', attr, html)
+    html = re.sub(r"url\((['\"]?)((?:images|BRANDING)/[^'\")]+)\1\)", lambda m: f"url('{url_asset(m.group(2))}')", html)
+    # El video del hero: main.js arma la URL con data-base; en el tema cada archivo lleva su asset_url.
+    html = html.replace('data-base="video/hero"', ' '.join(
+        f'data-{k}="{url_asset("video/hero-" + v)}"' for k, v in
+        (('h1080', '1080.mp4'), ('h1080av1', '1080.av1.mp4'), ('movil', 'movil.mp4'), ('movilav1', 'movil.av1.mp4'))))
+    if '{{' in html.replace("{{ '", '') or '{%' in html:
+        pass
+    return html
+
+
+# ── CSS con alcance ──────────────────────────────────────────────────────────────────────────────────────────────
+def bloques(css: str):
+    """(cabecera, cuerpo) de nivel superior; cuerpo None para sentencias sueltas (@import…)."""
+    i, n = 0, len(css)
+    while i < n:
+        j = css.find('{', i)
+        k = css.find(';', i)
+        if j == -1:
+            break
+        if k != -1 and k < j and css[i:k].strip().startswith('@'):
+            yield css[i:k].strip(), None
+            i = k + 1
+            continue
+        cab = css[i:j].strip()
+        prof, p = 1, j + 1
+        while prof and p < n:
+            if css[p] == '{':
+                prof += 1
+            elif css[p] == '}':
+                prof -= 1
+            p += 1
+        yield cab, css[j + 1:p - 1]
+        i = p
+
+
+def partir_selectores(s: str):
+    out, prof, ac = [], 0, ''
+    for ch in s:
+        if ch == '(':
+            prof += 1
+        elif ch == ')':
+            prof -= 1
+        if ch == ',' and prof == 0:
+            out.append(ac.strip())
+            ac = ''
+        else:
+            ac += ch
+    out.append(ac.strip())
+    return [x for x in out if x]
+
+
+def alcance(sel: str) -> str:
+    sel = sel.strip()
+    if sel in (':root', 'html', 'body', 'html, body', '*'):
+        return '.met-pg' if sel != '*' else '.met-pg *'
+    m = re.match(r'^html((?:\.[\w-]+|:not\([^)]*\))*)(.*)$', sel)
+    if m:
+        clases, resto = m.group(1), m.group(2)
+        propias = re.findall(r'\.([\w-]+)', clases)
+        otras = [c for c in propias if c not in ('redondeado', 'apple')]
+        pre = '.met-pg' if not otras else 'html' + ''.join('.' + c for c in otras) + ' .met-pg'
+        if ':not(' in clases:  # ?estilo=actual / normal no aplican en el tema: la regla siempre vale
+            pre = '.met-pg'
+        resto = resto.strip()
+        if not resto:
+            return pre
+        if resto.startswith(('>', '+', '~')):
+            return pre + ' ' + resto
+        return pre + ' ' + resto
+    m = re.match(r'^body\b(.*)$', sel)
+    if m:
+        return '.met-pg' + m.group(1)
+    if sel.startswith(('*', '::')):
+        return '.met-pg ' + sel
+    return '.met-pg ' + sel
+
+
+# Ajustes propios del tema: el encabezado de Horizon no es fijo ni transparente, así que la página no deja hueco
+# para él (la portada mide la pantalla menos el encabezado y la cabecera de las internas no baja 68 px).
+AJUSTES_TEMA = """
+.met-pg .pilar-hero{margin-top:0}
+.met-pg .portada{height:calc(100svh - var(--met-encabezado, 68px));min-height:480px}
+"""
+
+
+def css_a_tema(css: str, fuentes_tema=('Metropolis', 'Larken')) -> str:
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+    out = []
+    for cab, cuerpo in bloques(css):
+        if cuerpo is None:
+            continue
+        if cab.startswith('@font-face'):
+            fam = re.search(r"font-family:\s*'([^']+)'", cuerpo)
+            if fam and fam.group(1) in fuentes_tema:
+                continue  # el tema ya las trae (met-marca.css)
+            out.append(cab + '{' + cuerpo.strip() + '}')
+        elif cab.startswith(('@keyframes', '@-webkit-keyframes')):
+            out.append(cab + '{' + cuerpo.strip() + '}')
+        elif cab.startswith(('@media', '@supports', '@container', '@layer')):
+            out.append(cab + '{' + css_a_tema(cuerpo, fuentes_tema) + '}')
+        elif cab.startswith('@'):
+            out.append(cab + '{' + cuerpo.strip() + '}')
+        else:
+            sels = ', '.join(alcance(s) for s in partir_selectores(cab))
+            out.append(sels + '{' + cuerpo.strip() + '}')
+    texto = '\n'.join(out)
+    return re.sub(r"url\((['\"]?)((?:images|BRANDING)/[^'\")]+)\1\)", lambda m: f"url('{url_asset(m.group(2))}')", texto)
+
+
+# ── JS ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+def js_pie() -> str:
+    pie = (RAIZ / 'pie.js').read_text()
+    partes = re.split(r'\n(?=// \d\. )', pie)
+    quedan = [p for p in partes if re.match(r'// (1|4|5)\. ', p)]
+    js = '\n'.join(quedan)
+    js = js.replace("s.src = 'mapa-pie.js';", "s.src = window.metPg && window.metPg.mapa;")
+    return js
+
+
+def js_main() -> str:
+    js = (RAIZ / 'main.js').read_text()
+    # El encabezado es el del tema: lo propio del nav de la página no aplica.
+    stub = ("// En el tema el encabezado es de Horizon: lo del nav de la página corre sobre un nav vacío y oculto.\n"
+            "if (!document.getElementById('site-nav')) { const n = document.createElement('nav'); n.id = 'site-nav'; n.hidden = true;"
+            " document.body.appendChild(n); }\n"
+            "if (!document.getElementById('hamburger')) { const h = document.createElement('button'); h.id = 'hamburger'; h.hidden = true;"
+            " document.body.appendChild(h); const d = document.createElement('div'); d.id = 'nav-drawer'; d.hidden = true; document.body.appendChild(d); }\n")
+    viejo = "    v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';"
+    assert viejo in js
+    js = js.replace(viejo, "    v.src = v.dataset[(vertical ? 'movil' : 'h1080') + (av1 ? 'av1' : '')];")
+    js = js.replace("if (!v || !v.dataset.base) return;", "if (!v || !v.dataset.h1080) return;")
+    js = js.replace("const top = t.getBoundingClientRect().top + window.scrollY - 68;",
+                    "const top = t.getBoundingClientRect().top + window.scrollY - (document.querySelector('header, .header')?.offsetHeight || 68);")
+    return stub + js
+
+
+def js_mapa() -> str:
+    js = (RAIZ / 'mapa-pie.js').read_text()
+    return js.replace('src="images/web/met-positivo-03.webp"', 'src="\' + (window.metPg && window.metPg.pin) + \'"')
+
+
+# ── Secciones ────────────────────────────────────────────────────────────────────────────────────────────────────
+def seccion(nombre: str, titulo: str, html: str, extra_head: str = '') -> str:
+    esquema = json.dumps({'name': f'MET · {titulo}'[:25], 'tag': 'div', 'settings': []}, ensure_ascii=False, indent=2)
+    return (f"{{%- comment -%}} Generado por exportar-tema.py desde la página (met-clinic, rama rendimiento). "
+            f"No lo edites aquí: cambia la página y vuelve a correr el script. {{%- endcomment -%}}\n"
+            f"{extra_head}<div class=\"{ENVOLTURA}\">\n{html.strip()}\n</div>\n\n{{% schema %}}\n{esquema}\n{{% endschema %}}\n")
+
+
+def recursos(css_asset: str, js_principal: str) -> str:
+    pin = url_asset('images/web/met-positivo-03.webp')
+    return seccion('recursos', 'Recursos página',
+                   '', f"{{{{ '{css_asset}' | asset_url | stylesheet_tag }}}}\n"
+                       f"<script>window.metPg = {{ mapa: {{{{ 'met-mapa-pie.js' | asset_url | json }}}}, pin: \"{pin}\" }};</script>\n"
+                       f"<script src=\"{{{{ '{js_principal}' | asset_url }}}}\" defer></script>\n")
+
+
+def entre(html: str, ini: str, fin: str) -> str:
+    a = html.index(ini)
+    b = html.index(fin, a) + len(fin)
+    return html[a:b]
+
+
+def ld_json(html: str) -> str:
+    cab = html[:html.index('<body')]
+    return '\n'.join(re.findall(r'<script type="application/ld\+json">.*?</script>', cab, re.S))
+
+
+def escribir(ruta: str, texto: str):
+    p = SALIDA / ruta
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(texto)
+
+
+def plantilla(orden: list[str]) -> str:
+    return json.dumps({'sections': {k: {'type': f'met-pg-{k}', 'settings': {}} for k in orden}, 'order': orden},
+                      ensure_ascii=False, indent=2)
+
+
+def main():
+    if SALIDA.exists():
+        shutil.rmtree(SALIDA)
+    idx = (RAIZ / 'index.html').read_text()
+
+    # CSS de la portada: el <style> en línea + estilo-apple.css; el de las internas: pilares.css + estilo-apple.css.
+    estilo = re.search(r'<style>(.*?)</style>', idx, re.S).group(1)
+    apple = (RAIZ / 'estilo-apple.css').read_text()
+    escribir('assets/met-pagina.css.liquid', '/* Generado por exportar-tema.py: no editar */\n' + css_a_tema(estilo + '\n' + apple) + AJUSTES_TEMA)
+    escribir('assets/met-pilares.css.liquid', '/* Generado por exportar-tema.py: no editar */\n' +
+             css_a_tema((RAIZ / 'pilares.css').read_text() + '\n' + apple) + AJUSTES_TEMA)
+
+    # JS
+    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + '\n' + js_pie())
+    escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + '\n' + js_pie())
+    escribir('assets/met-mapa-pie.js', js_mapa())
+
+    # Portada
+    cuerpo = idx[idx.index('<body'):]
+    bloques_idx = {
+        'portada': entre(cuerpo, '<div class="portada">', '\n  </div>\n\n'),
+        'servicios': entre(cuerpo, '<section id="servicios">', '</section>'),
+        'especialistas': entre(cuerpo, '<section id="especialistas">', '</section>'),
+        'testimonios': entre(cuerpo, '<section id="testimonios">', '</section>'),
+        'preguntas': entre(cuerpo, '<section id="preguntas"', '</section>'),
+        'contacto': entre(cuerpo, '<section id="contacto">', '</section>'),
+    }
+    pie = entre(cuerpo, '<footer class="pie3">', '</footer>')
+    barra = entre(cuerpo, '<nav class="barra-movil', '</nav>')
+    escribir('sections/met-pg-recursos.liquid', recursos('met-pagina.css', 'met-pagina.js'))
+    escribir('sections/met-pg-recursos-pilares.liquid', recursos('met-pilares.css', 'met-pilares.js'))
+    # Los bloques de la portada llevan «inicio-» para no chocar con las páginas internas (preguntas ≠ inicio-preguntas).
+    for k, h in bloques_idx.items():
+        extra = ld_json(idx) + '\n' if k == 'portada' else ''
+        escribir(f'sections/met-pg-inicio-{k}.liquid', seccion(k, 'Inicio ' + k, html_a_liquid(extra + h)))
+    escribir('sections/met-pg-pie.liquid', seccion('pie', 'Pie', html_a_liquid(pie + '\n' + barra)))
+    escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx] + ['pie']))
+
+    # Páginas internas: una sección con su cabecera y su contenido.
+    for archivo, (nombre, titulo) in PAGINAS.items():
+        h = (RAIZ / archivo).read_text()
+        c = h[h.index('<body'):]
+        ini = c.index('<header class="pilar-hero')
+        fin = c.index('</main>') + len('</main>')
+        escribir(f'sections/met-pg-{nombre}.liquid', seccion(nombre, titulo, html_a_liquid(ld_json(h) + '\n' + c[ini:fin])))
+        orden = ['recursos-pilares', nombre, 'pie']
+        escribir(f'templates/page.met-{nombre}.json', plantilla(orden))
+
+    # Assets binarios
+    for linea in sorted(assets):
+        origen, destino = linea.split('\t')
+        o = RAIZ / origen
+        if o.exists():
+            (SALIDA / 'assets').mkdir(parents=True, exist_ok=True)
+            shutil.copy2(o, SALIDA / 'assets' / destino)
+        else:
+            print('FALTA', origen)
+    archivos = sorted(str(p.relative_to(SALIDA)) for p in SALIDA.rglob('*') if p.is_file())
+    (SALIDA / 'ARCHIVOS.txt').write_text('\n'.join(archivos) + '\n')
+    peso = sum((SALIDA / a).stat().st_size for a in archivos)
+    print(f'{len(archivos)} archivos, {peso / 1e6:.1f} MB en {SALIDA}')
+
+
+if __name__ == '__main__':
+    main()
+
+
+def prueba_local():
+    """Arma tema-shopify/_prueba/*.html: las secciones con un encabezado falso de 68 px, para revisar el CSS con
+    alcance sin subir nada. Sirve con la vista previa (127.0.0.1:8411/tema-shopify/_prueba/index.html)."""
+    import json as _j
+    d = SALIDA / '_prueba'
+    d.mkdir(exist_ok=True)
+    falso = ('<header style="position:sticky;top:0;z-index:50;height:68px;background:#F2F2ED;border-bottom:1px solid #ccc;'
+             'display:flex;align-items:center;justify-content:center;font:500 13px/1 sans-serif;letter-spacing:.12em">'
+             'ENCABEZADO DEL TEMA (Horizon)</header>')
+    fuentes = ('<style>@font-face{font-family:Metropolis;src:url(../../BRANDING/webfonts/metropolis-200.woff2);font-weight:200}'
+               '@font-face{font-family:Metropolis;src:url(../../BRANDING/webfonts/metropolis-300.woff2);font-weight:300}'
+               '@font-face{font-family:Metropolis;src:url(../../BRANDING/webfonts/metropolis-400.woff2);font-weight:400}'
+               '@font-face{font-family:Metropolis;src:url(../../BRANDING/webfonts/metropolis-500.woff2);font-weight:500}'
+               '@font-face{font-family:Metropolis;src:url(../../BRANDING/webfonts/metropolis-600.woff2);font-weight:600}'
+               '@font-face{font-family:Larken;src:url(../../BRANDING/webfonts/larken-300.woff2);font-weight:300}'
+               'body{margin:0;background:#fff}</style>')
+    def liquid(t):
+        t = re.sub(r"\{\{ '([^']+)' \| asset_url \| stylesheet_tag \}\}", r'<link rel="stylesheet" href="../assets/\1">', t)
+        t = re.sub(r"\{\{ '([^']+)' \| asset_url \| json \}\}", r'"../assets/\1"', t)
+        t = re.sub(r"\{\{ '([^']+)' \| asset_url \}\}", r'../assets/\1', t)
+        t = re.sub(r'\{%-? comment -?%\}.*?\{%-? endcomment -?%\}', '', t, flags=re.S)
+        return re.sub(r'\{% schema %\}.*?\{% endschema %\}', '', t, flags=re.S)
+    for css in ('met-pagina', 'met-pilares'):
+        (SALIDA / 'assets' / f'{css}.css').write_text(liquid((SALIDA / 'assets' / f'{css}.css.liquid').read_text()))
+    for tpl in (SALIDA / 'templates').glob('*.json'):
+        orden = _j.loads(tpl.read_text())['order']
+        cuerpo = ''.join(liquid((SALIDA / 'sections' / f'met-pg-{k}.liquid').read_text()) for k in orden)
+        (d / (tpl.stem.replace('page.met-', '') + '.html')).write_text(
+            f'<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            f'{fuentes}</head><body>{falso}{cuerpo}</body></html>')
+
+
+if __name__ == '__main__':
+    prueba_local()
