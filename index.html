@@ -372,35 +372,12 @@
     }
     .btn-ghost:hover { border-color:var(--sage); color:var(--sage); transform:translateY(-2px); }
 
-    /* Barra de datos — justo debajo del hero, fuera del video */
-    .hero__stats {
-      position:relative; z-index:1;
-      display:flex;
-      background:rgba(247,237,220,0.97);
-      border-top:1px solid var(--sage-mid);
-      border-bottom:2px solid var(--sage);
-      flex-shrink:0; flex-grow:0;
-    }
-    /* Delgada (24-oct): en compu cada dato va en UNA línea, «1,366+ OPINIONES
-       VERIFICADAS · Doctoralia»; en el teléfono, número arriba y etiqueta abajo. */
-    .hero__stat {
-      flex:1; padding:11px 20px;
-      border-right:1px solid rgba(130,134,127,0.12);
-      display:flex; flex-direction:row; flex-wrap:wrap;
-      align-items:baseline; justify-content:center; gap:2px 10px;
-    }
-    .hero__stat:last-child { border-right:none; }
-    .hero__stat__num { font-size:18px; font-weight:300; letter-spacing:0.04em; color:var(--dark); line-height:1.1; }
-    .hero__stat__label { font-size:11px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--texto-suave); }
-    .hero__stat__sub { font-size:11px; font-weight:400; letter-spacing:0.06em; color:rgba(38,38,38,0.78); }
-    .hero__stat__sub::before { content:'·'; margin-right:10px; }
-    @media (max-width: 1100px) { .hero__stat__sub { display:none; } }
+    /* Barra de datos: ver «BARRA DE CONFIANZA» al final del <style>. */
 
     /* Pantallas de poca altura — comprime el hero para que nada se encime */
     @media (min-width: 641px) and (max-height: 780px) {
       .hero__eyebrow { margin-bottom:10px; }
       .hero__title { font-size:clamp(32px, 4.2vw, 54px); margin-bottom:12px; }
-      .hero__stat { padding:9px 20px; }
     }
 
     /* ═══════════════════════════════════════════
@@ -1159,12 +1136,6 @@
       .hero__firma { font-size:13px; margin-bottom:clamp(14px,2.2vh,22px); }
       .btn-primary, .btn-ghost { text-align:center; padding:14px 22px; }
       .hero__link { align-self:flex-start; }
-      .hero__stats { display: grid; grid-template-columns: repeat(3,1fr); }
-      .hero__stat { flex-direction:column; align-items:center; gap:1px; padding: 8px 6px; }
-      .hero__stat__num { font-size: 16px; }
-      .hero__stat__label { font-size: 11px; letter-spacing:0.04em; text-align:center; line-height:1.25; }
-      .hero__stat__extra { display:none; }
-      .hero__stat__sub { display:none; }
 
       /* Sections */
       .section-inner { padding: 64px 20px; }
@@ -1479,6 +1450,54 @@
     }
     @media (max-width:640px) { footer.pie3 { padding-top:24px; } footer.pie3 .pie-contacto > .pie-titulo { display:none; } footer.pie3 .pie-contacto { margin-top:12px; } footer.pie3 .pie-enlaces { margin-top:12px; } footer.pie3 .pie-mapa { margin-top:16px; } footer.pie3 .pie-dato { margin-bottom:4px; } }
     @media (max-width:1000px) { html.apple footer.pie3 { padding-top:24px; } }
+
+    /* ══ BARRA DE CONFIANZA (17-nov 17:39, Sebas) ══ Cifra protagonista en Larken, rótulo en versalitas debajo,
+       fuente como enlace sutil; separadores cortos y tenues. Variante A (default): franja crema con filetes.
+       Variante B (html.barra-b, ?barra=b): tarjeta flotante redondeada montada sobre el borde del video. */
+    .hero__stats { position:relative; z-index:2; flex:0 0 auto; display:grid; grid-template-columns:repeat(3,1fr);
+      background:var(--confort); border-top:1px solid rgba(130,134,127,.16); border-bottom:1px solid rgba(130,134,127,.16);
+      padding:clamp(18px,2.6vh,28px) var(--margen,clamp(20px,5vw,96px)); }
+    .hero__stat { position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; padding:0 16px; }
+    .hero__stat + .hero__stat::before { content:''; position:absolute; left:0; top:30%; height:40%; width:1px; background:rgba(130,134,127,.22); }
+    .hero__stat__num { font-family:'Larken','Times New Roman',serif; font-weight:300; font-synthesis:none; font-size:clamp(28px,2.5vw,36px);
+      line-height:1; letter-spacing:-.01em; color:var(--dark); font-variant-numeric:lining-nums tabular-nums; }
+    .hero__stat__unidad { font-family:var(--font); font-size:.42em; letter-spacing:.04em; margin-left:2px; color:var(--texto-suave); }
+    .hero__stat__label { font-size:11px; font-weight:500; letter-spacing:.18em; text-transform:uppercase; color:var(--texto-suave); }
+    .hero__stat__sub, .hero__stat__fuente { display:flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.04em; color:var(--texto-suave); }
+    .hero__stat__fuente { display:inline-block; text-decoration:none; border-bottom:1px solid rgba(81,81,81,.25); padding-bottom:1px; transition:color .3s, border-color .3s; }
+    .hero__stat__fuente:hover { color:var(--dark); border-color:currentColor; }
+    .hero__estrellas { display:inline-flex; gap:2px; }
+    .hero__estrellas svg { width:11px; height:11px; fill:#A8946A; }
+    .hero__stat__sedes { gap:0; flex-wrap:wrap; justify-content:center; row-gap:2px; font-size:11px; font-weight:600; letter-spacing:.16em; color:var(--texto-suave); }
+    .hero__stat__sedes span + span::before { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; background:var(--sage);
+      margin:0 10px 2px; vertical-align:middle; }
+    /* Variante B: tarjeta flotante */
+    html.barra-b .portada { background:var(--tranquil); }
+    html.barra-b .hero__stats { width:min(1080px, calc(100% - 2 * var(--margen,40px))); margin:calc(-1 * clamp(44px,6vh,64px)) auto 0;
+      background:rgba(251,247,239,.96); border:0; border-radius:var(--r-lg,24px);
+      box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
+    @media (min-width:641px) and (max-height:780px) {
+      .hero__stats { padding-top:14px; padding-bottom:14px; } .hero__stat { gap:4px; } .hero__stat__num { font-size:28px; } }
+    /* Teléfono: A en fila de 3 compacta; B apilada en 3 renglones compactos dentro de la tarjeta */
+    @media (max-width:640px) {
+      .hero__stats { padding:14px 4px; }
+      .hero__stat { padding:0 6px; gap:4px; }
+      .hero__stat__num { font-size:26px; }
+      .hero__stat__label { font-size:11px; letter-spacing:.1em; line-height:1.3; }
+      .hero__stat__fuente, .hero__stat__sub { font-size:11px; letter-spacing:.02em; }
+      .hero__stat__fuente { gap:4px; } .hero__fuente-largo { display:none; }
+      .hero__stat__sedes { letter-spacing:.06em; } .hero__stat__sedes span + span::before { margin:0 5px 2px; }
+      .hero__stat__sedes span:last-child { flex-basis:100%; } .hero__stat__sedes span:last-child::before { display:none; }
+      html.barra-b .hero__stat__sedes span:last-child { flex-basis:auto; } html.barra-b .hero__stat__sedes span:last-child::before { display:inline-block; }
+      html.barra-b .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:6px 18px; border-radius:20px; }
+      html.barra-b .hero__stat { display:grid; grid-template-columns:96px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
+        column-gap:14px; row-gap:2px; padding:10px 0; }
+      html.barra-b .hero__stat + .hero__stat::before { left:0; right:0; top:0; width:auto; height:1px; }
+      html.barra-b .hero__stat__num { grid-area:n; font-size:30px; }
+      html.barra-b .hero__stat__label { grid-area:l; }
+      html.barra-b .hero__fuente-largo { display:inline; }
+      html.barra-b .hero__stat__sub, html.barra-b .hero__stat__fuente { grid-area:s; justify-self:start; }
+    }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
@@ -1561,7 +1580,8 @@
     try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
     // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
-    if (/[?&]estilo=(normal|actual)/.test(location.search)) document.documentElement.classList.remove('apple');
+    if (/[?&]estilo=(normal|actual)\b/.test(location.search)) document.documentElement.classList.remove('apple');
+    if (/[?&]barra=b\b/.test(location.search)) document.documentElement.classList.add('barra-b');
   })();
   </script>
   <link rel="stylesheet" href="estilo-apple.css" />
@@ -1629,21 +1649,23 @@
   </section>
   <!-- Barra de datos: debajo del hero y no dentro, para no tapar el video.
        Comparte .portada con él para que se vea completa al entrar. -->
+    <!-- Barra de confianza (17-nov 17:39, Sebas): cifra en Larken, rótulo en versalitas debajo y la fuente como
+         enlace sutil. Dos variantes para elegir: ?barra=a franja crema (default) · ?barra=b tarjeta flotante. -->
     <div class="hero__stats" aria-label="MET Clinic en números">
       <div class="hero__stat">
-        <div class="hero__stat__num" data-count="1366" data-suffix="+">0</div>
-        <div class="hero__stat__label">Opiniones<span class="hero__stat__extra"> verificadas</span></div>
-        <div class="hero__stat__sub">Doctoralia</div>
+        <div class="hero__stat__num" data-count="1366" data-suffix="+">1,366+</div>
+        <div class="hero__stat__label">Opiniones verificadas</div>
+        <a class="hero__stat__fuente" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia<span class="hero__fuente-largo"> · Ver opiniones</span> <span aria-hidden="true">→</span></a>
       </div>
       <div class="hero__stat">
-        <div class="hero__stat__num" aria-label="5 de 5 estrellas">★★★★★</div>
-        <div class="hero__stat__label">Calificación 5.0</div>
-        <div class="hero__stat__sub">Doctoralia</div>
+        <div class="hero__stat__num">5.0</div>
+        <div class="hero__stat__label">Calificación</div>
+        <div class="hero__stat__sub"><span class="hero__estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>Doctoralia</div>
       </div>
       <div class="hero__stat">
-        <div class="hero__stat__num">9 años</div>
+        <div class="hero__stat__num">9<span class="hero__stat__unidad"> años</span></div>
         <div class="hero__stat__label">Formación</div>
-        <div class="hero__stat__sub">UNAM · IVI · DEXEUS</div>
+        <div class="hero__stat__sub hero__stat__sedes"><span>UNAM</span><span>IVI</span><span>DEXEUS</span></div>
       </div>
     </div>
   </div>

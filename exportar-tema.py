@@ -182,6 +182,27 @@ html.cta-principal-visible #header-group .met-agendar{opacity:0;visibility:hidde
 
 # El scroll-spy de la página (pie.js 7) adaptado al menú de Horizon: los enlaces son /#seccion; en las páginas
 # internas marca su ítem fijo (servicios → «Servicios», nosotros → «Equipo»).
+JS_RECARGA = r"""
+/* Recargar la portada la deja arriba (Sebas 17:40). scroll-container.js de Horizon guarda en history.state el
+   scrollTop de .page-wrapper al salir (pagehide) y lo restaura en pageshow también al RECARGAR: una recarga tras un
+   desplazamiento mínimo caía a media portada, con el encabezado ya sólido. Solo en recarga y sin ancla se borra
+   ese dato antes de pageshow; atrás/adelante sigue restaurando como antes. */
+(function () {
+  try {
+    var nav = performance.getEntriesByType('navigation')[0];
+    if (!nav || nav.type !== 'reload' || location.hash) return;
+    var st = history.state;
+    if (st && typeof st === 'object' && 'scrollTop' in st) {
+      var limpio = Object.assign({}, st); delete limpio.scrollTop;
+      history.replaceState(limpio, '');
+    }
+    var pw = document.querySelector('.page-wrapper');
+    if (pw) pw.scrollTop = 0;
+    window.scrollTo(0, 0);
+  } catch (e) {}
+})();
+"""
+
 JS_MENU_TEMA = r"""
 (function () {
   const primero = document.querySelector('#header-group .menu-list__link');
@@ -342,7 +363,7 @@ def main():
              css_a_tema((RAIZ / 'pilares.css').read_text() + '\n' + apple) + AJUSTES_TEMA)
 
     # JS
-    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + JS_MENU_TEMA)
+    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + JS_MENU_TEMA + JS_RECARGA)
     escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + JS_MENU_TEMA)
     escribir('assets/met-mapa-pie.js', js_mapa())
 

@@ -45,6 +45,11 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 // ── Counter animation ─────────────────────────────
 function runCounter(el) {
+  // El HTML ya trae la cifra final (sin JS se lee bien); con «reducir movimiento» no se anima.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = parseInt(el.dataset.count).toLocaleString('es-MX') + (el.dataset.suffix || '');
+    return;
+  }
   const target = parseInt(el.dataset.count);
   const suffix = el.dataset.suffix || '';
   const dur = 1600;

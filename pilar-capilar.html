@@ -106,7 +106,7 @@
     try { sessionStorage.removeItem('met-estilo'); } catch (err) {}
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
     // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
-    if (/[?&]estilo=(normal|actual)/.test(location.search)) document.documentElement.classList.remove('apple');
+    if (/[?&]estilo=(normal|actual)\b/.test(location.search)) document.documentElement.classList.remove('apple');
   })();
   </script>
   <link rel="stylesheet" href="estilo-apple.css" />
