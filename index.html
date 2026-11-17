@@ -697,13 +697,13 @@
       .esp-formacion li { font-size:12.5px; line-height:1.4; }
     }
     /* El resto del equipo: rejilla de cuatro retratos iguales bajo la tarjeta de la doctora (2×2 en tablet). */
-    /* 3 personas (17-nov, Sebas: Susana, Montserrat y Fernanda): mismas tarjetas que en la rejilla de 4, centradas. */
-    .equipo-grid { --eg-gap:clamp(14px,1.6vw,24px); display:grid; grid-template-columns:repeat(3,minmax(0,calc((100% - 3 * var(--eg-gap)) / 4))); justify-content:center; gap:var(--eg-gap); margin-top:clamp(28px,3.5vw,48px); }
+    /* 4 personas (17-nov 12:44, Sebas): Susana, Fernanda, Montserrat y una cuarta cuyo nombre dará después; sin puestos. */
+    .equipo-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(14px,1.6vw,24px); margin-top:clamp(28px,3.5vw,48px); }
     .esp-role:empty { display:none; }
     .esp-card--equipo .esp-body { padding:14px 16px 18px; }
     .esp-card--equipo .esp-name { font-size:clamp(16px,1.25vw,19px); margin-bottom:6px; }
     .esp-card--equipo .esp-role { margin-bottom:0; }
-    @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:900px) { .equipo-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     /* Teléfono (26-oct, Sebas: «que vayan horizontalmente»): una sola fila que se desliza, tarjetas grandes
        al 78 % con la siguiente asomando, y puntos discretos (main.js) en lugar de la rejilla de 2 columnas. */
     @media (max-width:640px) {
@@ -1788,16 +1788,23 @@
             </div>
           </article>
           <article class="esp-card esp-card--equipo" data-pendiente="puesto">
-            <div class="esp-photo"><img src="images/web/equipo-2.webp" alt="Montserrat, del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-photo"><img src="images/web/equipo-2.webp" alt="Fernanda, del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+            <div class="esp-body">
+              <div class="esp-name">Fernanda</div>
+              <div class="esp-role"></div>
+            </div>
+          </article>
+          <article class="esp-card esp-card--equipo" data-pendiente="puesto">
+            <div class="esp-photo"><img src="images/web/equipo-4.webp" alt="Montserrat, del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
             <div class="esp-body">
               <div class="esp-name">Montserrat</div>
               <div class="esp-role"></div>
             </div>
           </article>
-          <article class="esp-card esp-card--equipo" data-pendiente="puesto">
-            <div class="esp-photo"><img src="images/web/equipo-4.webp" alt="Fernanda, del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
+          <article class="esp-card esp-card--equipo" data-pendiente="nombre y puesto">
+            <div class="esp-photo"><img src="images/web/equipo-5.webp" alt="Integrante del equipo de MET Clinic" width="480" height="600" loading="lazy" decoding="async"></div>
             <div class="esp-body">
-              <div class="esp-name">Fernanda</div>
+              <div class="esp-name">Nombre por confirmar</div>
               <div class="esp-role"></div>
             </div>
           </article>
