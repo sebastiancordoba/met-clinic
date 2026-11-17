@@ -225,7 +225,10 @@ JS_MENU_TEMA = r"""
 """
 
 
-def css_a_tema(css: str, fuentes_tema=('Metropolis', 'Larken')) -> str:
+PIE_CLAVES = ('footer', 'pie', 'mapa', 'maplibregl', 'barra-movil', 'btn-primary', 'cta-principal-visible')
+
+
+def css_a_tema(css: str, fuentes_tema=('Metropolis', 'Larken'), solo_pie: bool = False) -> str:
     css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
     out = []
     for cab, cuerpo in bloques(css):
@@ -239,11 +242,18 @@ def css_a_tema(css: str, fuentes_tema=('Metropolis', 'Larken')) -> str:
         elif cab.startswith(('@keyframes', '@-webkit-keyframes')):
             out.append(cab + '{' + cuerpo.strip() + '}')
         elif cab.startswith(('@media', '@supports', '@container', '@layer')):
-            out.append(cab + '{' + css_a_tema(cuerpo, fuentes_tema) + '}')
+            dentro = css_a_tema(cuerpo, fuentes_tema, solo_pie)
+            if dentro.strip():
+                out.append(cab + '{' + dentro + '}')
         elif cab.startswith('@'):
             out.append(cab + '{' + cuerpo.strip() + '}')
         else:
-            sels = ', '.join(alcance(s) for s in partir_selectores(cab))
+            lista = partir_selectores(cab)
+            if solo_pie and not any(any(k in x for k in PIE_CLAVES) for x in lista) \
+                    and not all(x in (':root', 'html', 'body', '*', '*::before', '*::after') or x.startswith('html.redondeado') and ' ' not in x
+                                or x.startswith('html.apple') and ' ' not in x for x in lista):
+                continue
+            sels = ', '.join(alcance(s) for s in lista)
             out.append(sels + '{' + cuerpo.strip() + '}')
     texto = '\n'.join(out)
     return re.sub(r"url\((['\"]?)((?:images|BRANDING)/[^'\")]+)\1\)", lambda m: f"url('{url_asset(m.group(2))}')", texto)
@@ -332,8 +342,8 @@ def main():
              css_a_tema((RAIZ / 'pilares.css').read_text() + '\n' + apple) + AJUSTES_TEMA)
 
     # JS
-    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + '\n' + js_pie() + JS_MENU_TEMA)
-    escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + '\n' + js_pie() + JS_MENU_TEMA)
+    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + JS_MENU_TEMA)
+    escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + JS_MENU_TEMA)
     escribir('assets/met-mapa-pie.js', js_mapa())
 
     # Portada
@@ -354,8 +364,16 @@ def main():
     for k, h in bloques_idx.items():
         extra = ld_json(idx) + '\n' if k == 'portada' else ''
         escribir(f'sections/met-pg-inicio-{k}.liquid', seccion(k, 'Inicio ' + k, html_a_liquid(extra + h)))
-    escribir('sections/met-pg-pie.liquid', seccion('pie', 'Pie', html_a_liquid(pie + '\n' + barra)))
-    escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx] + ['pie']))
+    escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx]))
+    # Un solo pie en todo el sitio (Hermes 13:03): va en footer-group con su CSS y JS mínimos.
+    escribir('assets/met-pie.css.liquid', '/* Generado por exportar-tema.py: no editar. Solo el pie y la barra del teléfono. */\n'
+             + css_a_tema(estilo + '\n' + apple, solo_pie=True))
+    escribir('assets/met-pie.js', '/* Generado por exportar-tema.py: no editar */\n' + js_pie())
+    pin = url_asset('images/web/met-positivo-03.webp')
+    escribir('sections/met-pg-pie-global.liquid', seccion('pie-global', 'Pie MET', html_a_liquid(pie + '\n' + barra),
+             "{{ 'met-pie.css' | asset_url | stylesheet_tag }}\n"
+             f"<script>window.metPg = Object.assign(window.metPg || {{}}, {{ mapa: {{{{ 'met-mapa-pie.js' | asset_url | json }}}}, pin: \"{pin}\" }});</script>\n"
+             "<script src=\"{{ 'met-pie.js' | asset_url }}\" defer></script>\n"))
 
     # Páginas internas: una sección con su cabecera y su contenido.
     for archivo, (nombre, titulo) in PAGINAS.items():
@@ -364,7 +382,7 @@ def main():
         ini = c.index('<header class="pilar-hero')
         fin = c.index('</main>') + len('</main>')
         escribir(f'sections/met-pg-{nombre}.liquid', seccion(nombre, titulo, html_a_liquid(ld_json(h) + '\n' + c[ini:fin])))
-        orden = ['recursos-pilares', nombre, 'pie']
+        orden = ['recursos-pilares', nombre]
         escribir(f'templates/page.met-{nombre}.json', plantilla(orden))
 
     # Assets binarios
@@ -408,11 +426,11 @@ def prueba_local():
         t = re.sub(r"\{\{ '([^']+)' \| asset_url \}\}", r'../assets/\1', t)
         t = re.sub(r'\{%-? comment -?%\}.*?\{%-? endcomment -?%\}', '', t, flags=re.S)
         return re.sub(r'\{% schema %\}.*?\{% endschema %\}', '', t, flags=re.S)
-    for css in ('met-pagina', 'met-pilares'):
+    for css in ('met-pagina', 'met-pilares', 'met-pie'):
         (SALIDA / 'assets' / f'{css}.css').write_text(liquid((SALIDA / 'assets' / f'{css}.css.liquid').read_text()))
     for tpl in (SALIDA / 'templates').glob('*.json'):
         orden = _j.loads(tpl.read_text())['order']
-        cuerpo = ''.join(liquid((SALIDA / 'sections' / f'met-pg-{k}.liquid').read_text()) for k in orden)
+        cuerpo = ''.join(liquid((SALIDA / 'sections' / f'met-pg-{k}.liquid').read_text()) for k in orden + ['pie-global'])
         (d / (tpl.stem.replace('page.met-', '') + '.html')).write_text(
             f'<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             f'{fuentes}</head><body>{falso}{cuerpo}</body></html>')
