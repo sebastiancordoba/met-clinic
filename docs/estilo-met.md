@@ -1,6 +1,6 @@
 # Guía de estilo MET Clinic · página y tienda
 
-Versión 1.1 · 17-nov-2026 (loseta blanca). Regla de Sebas (13-nov, 13:30): **un solo estilo para la página y la tienda**. Esta
+Versión 1.2 · 17-nov-2026 (encabezado y pie únicos; loseta blanca). Regla de Sebas (13-nov, 13:30): **un solo estilo para la página y la tienda**. Esta
 guía es la referencia y todo agente diseña con ella. Si algo no cabe aquí, **no lo inventes**: propónselo a Sebas
 como excepción y, cuando lo apruebe, se agrega a esta guía.
 
@@ -176,7 +176,9 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
 
 ## 9. Encabezado
 
-- 68 px de alto en las dos, fijo, en rejilla `1fr auto 1fr`: logo a la izquierda, menú centrado de verdad y
+- **Uno solo para todo el sitio** (clínica y tienda viven en el mismo tema de Shopify desde el 17-nov). No hay barra
+  negra de avisos (Hermes/Sebas, 17-nov 13:03).
+- 68 px de alto, fijo, en rejilla `1fr auto 1fr`: logo a la izquierda, menú centrado de verdad y
   acciones a la derecha.
 - **Logo** de 54 px de alto, con **destello**: un gradiente que barre por dentro de la silueta durante 2.4 s
   (`cubic-bezier(.4,0,.2,1)`). Se dispara al pasar el mouse y cada 10–12 s solo, con mínimo 2 s entre brillos; se
@@ -184,10 +186,17 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
 - **Menú:** Servicios · Equipo · Opiniones · Contacto · Tienda, a 14px/500/0.12em en `--texto-suave`.
   - El activo va en `--dark`, con una **línea de 2 px en `--sage` que se desliza** bajo el ítem de la sección
     visible (*scroll-spy*). En páginas internas y en la tienda la línea queda fija en el ítem actual
-    (`aria-current="page"`). La página de Preguntas no marca ningún ítem (pendiente de Sebas).
+    (`aria-current="page"`). En las páginas de servicio (`/pages/pilar-*`) se marca «Servicios», y en las de la
+    tienda, «Tienda». La página de Preguntas no marca ningún ítem (pendiente de Sebas).
   - El hover lleva un subrayado de 1 px que crece de izquierda a derecha.
-- **Acciones:** «Agendar consulta» (contorno) + bolsa de 40 px sin contador.
-- **Con hamburguesa (≤ 1120):** hamburguesa a la izquierda, logo al centro y bolsa a la derecha.
+- **Acciones:** «Agendar consulta» (contorno de vidrio, §6) + bolsa de 40 px sin contador.
+  - En las páginas de **tienda** (colecciones, `/pages/tienda`, producto, carrito y búsqueda) se agrega **solo la
+    lupa**, como ícono discreto de 40 px junto a la bolsa. **Nunca el ícono de cuenta** (Hermes/Sebas, 17-nov).
+- **Con hamburguesa (≤ 1120):** hamburguesa a la izquierda, logo al centro y bolsa a la derecha. En las páginas de
+  tienda, la lupa va junto a la bolsa.
+- **Sobre el video de la portada:** transparente, con el menú, la bolsa **y el logo** en crema claro (el logo con
+  `filter: brightness(0) invert(1)`) para que se lean sobre el video. Al bajar unos 48–60 px pasa al fondo normal y
+  todo vuelve a su color. Si el mega menú se abre, el encabezado se vuelve sólido.
 - **Fondo:** en compu con mouse (> 1000 px), translúcido `rgba(242,242,237,.72)` con `blur(20px) saturate(180%)`,
   borde inferior `rgba(255,255,255,.45)` y brillo de vidrio. En teléfono y pantallas táctiles (≤ 1000 px o
   `hover:none`) va `--tranquil` **opaco**, sin desenfoque, porque el desenfoque hace lento el scroll en iPhone. Sin
@@ -195,6 +204,7 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
 
 ## 10. Pie
 
+- **Uno solo para todo el sitio**, el mismo en las páginas de la clínica y en las de la tienda (17-nov).
 - Fondo `--dark` con línea superior de 2 px `--sage`, `padding-top: --aire` y texto `--confort`.
 - **Compu: 3 columnas** (`1fr 1fr 1.35fr`):
   1. **Marca y datos:** logo crema de 260 px, dirección, teléfono y «6 min a pie del Metro Barranca del Muerto ·
@@ -204,14 +214,19 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
   3. **Mapa:** MapLibre vivo; el póster SVG es el respaldo y un enlace a «Cómo llegar». Debajo lleva una fila con
      «Cómo llegar» a la izquierda, en píldora `--confort` con texto `--dark`, y «Abrir en Google Maps · Apple Maps
      · Waze» a la derecha.
+- **Columnas de enlaces «Tienda» y «Ayuda»** (aprobadas por Sebas el 17-nov a las 12:26). Van dentro de la
+  columna 2, debajo de las redes:
+  - «Tienda»: Marcas, Más vendidos;
+  - «Ayuda»: Preguntas, Envíos, Facturación.
+
+  Llevan un título de 12px/500/0.16em y los enlaces a 14px/300.
 - **Barra legal** a todo el ancho: «© 2026 MET Clinic…» a la izquierda y «Dra. Melina Trujillo Quiroz · Cédulas
   profesionales…» a la derecha.
 - **Teléfono:** las 3 columnas se apilan.
-- Sin columnas de enlaces y sin líneas divisorias internas.
+- Sin más columnas de enlaces que «Tienda» y «Ayuda», y sin líneas divisorias internas.
 - Los datos van a 14px/300 en `rgba(247,237,220,.82)` y las notas a 13 px en `.68`.
 - El crédito «© OpenStreetMap» es obligatorio.
-- El pie de la tienda es el mismo de la página. Si la tienda necesita enlaces legales (envíos, devoluciones,
-  privacidad), van en la barra legal, no en columnas.
+- Los enlaces legales (Aviso de privacidad, Términos, Envíos y devoluciones, Facturación) van en la barra legal.
 
 ### 10 b. Anchos especiales (página)
 
