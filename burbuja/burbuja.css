@@ -1,0 +1,60 @@
+/* Burbuja «Pregúntale a la Dra. Melina» (tienda). Tokens de docs/estilo-met.md; z-index arriba de la barra del
+   teléfono (90) y abajo de cajones y menús (1000+). */
+.met-burbuja { --b: 60px; position: fixed; right: clamp(16px, 2.2vw, 32px); bottom: clamp(16px, 2.2vw, 32px); z-index: 95;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px; font-family: var(--font, 'Metropolis', sans-serif);
+  opacity: 0; transform: translateY(16px) scale(.92); transform-origin: 100% 100%; pointer-events: none;
+  transition: opacity .45s cubic-bezier(.2,.8,.2,1), transform .45s cubic-bezier(.2,.8,.2,1); }
+.met-burbuja[hidden] { display: none; }
+.met-burbuja.visible { opacity: 1; transform: none; pointer-events: auto; }
+.met-burbuja.tapada { opacity: 0; transform: translateY(16px) scale(.92); pointer-events: none; }
+body:has(dialog[open]) .met-burbuja, body:has(.menu-drawer[open]) .met-burbuja { display: none; }
+.met-burbuja__boton { order: 2; position: relative; width: var(--b); height: var(--b); padding: 0; border: 0; border-radius: 50%;
+  background: #FFFFFF; cursor: pointer; box-shadow: 0 0 0 3px #FFFFFF, 0 1px 1px rgba(38,38,38,.06), 0 18px 40px -16px rgba(38,38,38,.35);
+  transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.met-burbuja__boton:hover { transform: scale(1.05); }
+.met-burbuja__boton:active { transform: scale(.97); }
+.met-burbuja__boton:focus-visible, .met-burbuja__tarjeta :focus-visible { outline: 2px solid var(--dark, #262626); outline-offset: 3px; }
+.met-burbuja__boton img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center 15%; display: block;
+  filter: saturate(1.04) contrast(1.02); }
+.met-burbuja__punto { position: absolute; right: 1px; bottom: 2px; width: 14px; height: 14px; border-radius: 50%; background: #3FA45B;
+  box-shadow: 0 0 0 2.5px #FFFFFF; }
+.met-burbuja__punto--linea { position: static; display: inline-block; width: 8px; height: 8px; margin-right: 8px; box-shadow: none; vertical-align: 1px; }
+.met-burbuja__tarjeta { order: 1; position: relative; width: min(330px, calc(100vw - 32px)); box-sizing: border-box; padding: 22px 22px 18px;
+  background: #FFFFFF; border-radius: var(--r-md, 20px); color: var(--dark, #262626);
+  box-shadow: 0 1px 1px rgba(38,38,38,.04), 0 28px 60px -24px rgba(38,38,38,.35);
+  transform-origin: 100% 100%; animation: metBurbujaAbre .35s cubic-bezier(.2,.8,.2,1); }
+.met-burbuja__tarjeta[hidden] { display: none; }
+@keyframes metBurbujaAbre { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+.met-burbuja__cerrar { position: absolute; top: 6px; right: 6px; width: 44px; height: 44px; display: grid; place-items: center;
+  border: 0; background: none; border-radius: 50%; cursor: pointer; color: var(--texto-suave, #515151); }
+.met-burbuja__cerrar:hover { background: var(--tranquil, #F2F2ED); }
+.met-burbuja__cerrar svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.met-burbuja__quien { margin: 0 36px 10px 0; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--texto-suave, #515151); }
+.met-burbuja__titulo { margin: 0 0 18px; font-size: 21px; line-height: 1.22; font-weight: 300; letter-spacing: -.01em; }
+.met-burbuja__titulo em { font-family: var(--serif, 'Larken', serif); font-style: normal; font-weight: 300; font-synthesis: none; }
+.met-burbuja__acciones { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.met-burbuja__acciones a { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 46px; padding: 0 12px;
+  border-radius: 999px; text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  white-space: nowrap; transition: transform .3s, background .3s; }
+.met-burbuja__cita { background: var(--dark, #262626); color: #FBF7EF;
+  background-image: linear-gradient(rgba(255,255,255,.18), rgba(255,255,255,0)); box-shadow: inset 0 1px 0 rgba(255,255,255,.35); }
+.met-burbuja__cita:hover { background-color: #000; transform: scale(1.02); }
+.met-burbuja__wa { border: 1px solid var(--sage, #82867F); color: var(--dark, #262626); }
+.met-burbuja__wa:hover { background: var(--tranquil, #F2F2ED); }
+.met-burbuja__wa svg { flex: none; width: 16px !important; height: 16px !important; fill: var(--sage, #82867F); }
+.met-burbuja__cedulas { display: block; margin-top: 12px; font-size: 11px; letter-spacing: .02em; color: var(--texto-suave, #515151); }
+/* Línea en la ficha, bajo «Agregar» */
+.met-dudas { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; padding: 0; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--texto-suave, #515151); text-align: left; }
+.met-dudas img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; object-position: center 15%; }
+.met-dudas span { text-decoration: underline; text-decoration-color: rgba(81,81,81,.35); text-underline-offset: 4px; }
+.met-dudas:hover span { color: var(--dark, #262626); text-decoration-color: currentColor; }
+/* Teléfono: más chica y arriba de la barra fija (66 px + zona segura) */
+@media (max-width: 640px) {
+  .met-burbuja { --b: 50px; right: 14px; bottom: calc(78px + env(safe-area-inset-bottom)); }
+  .met-burbuja__tarjeta { padding: 20px 18px 16px; }
+  .met-burbuja__titulo { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) { .met-burbuja, .met-burbuja__tarjeta, .met-burbuja__boton { transition: none; animation: none; } }
+@media print { .met-burbuja { display: none; } }

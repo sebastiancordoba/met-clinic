@@ -26,7 +26,7 @@ TEMA = RAIZ / 'tema-shopify'
 SISTEMA = Path.home() / 'code/met-clinic-system/src'
 TEMA_ID = 'gid://shopify/OnlineStoreTheme/190001086784'
 PROPIOS = ('sections/met-pg-', 'templates/index.json', 'templates/page.met-', 'assets/met-pagina', 'assets/met-pilares',
-           'assets/met-pie', 'assets/met-mapa-pie.js', 'assets/met-pg-')
+           'assets/met-pie', 'assets/met-burbuja', 'assets/met-mapa-pie.js', 'assets/met-pg-')
 TEXTO = ('.liquid', '.json', '.js', '.css')
 
 

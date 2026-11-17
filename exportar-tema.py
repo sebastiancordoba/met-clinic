@@ -373,7 +373,11 @@ def main():
     escribir('sections/met-pg-pie-global.liquid', seccion('pie-global', 'Pie MET', html_a_liquid(pie + '\n' + barra),
              "{{ 'met-pie.css' | asset_url | stylesheet_tag }}\n"
              f"<script>window.metPg = Object.assign(window.metPg || {{}}, {{ mapa: {{{{ 'met-mapa-pie.js' | asset_url | json }}}}, pin: \"{pin}\" }});</script>\n"
-             "<script src=\"{{ 'met-pie.js' | asset_url }}\" defer></script>\n"))
+             "<script src=\"{{ 'met-pie.js' | asset_url }}\" defer></script>\n"
+             + (RAIZ / 'burbuja/burbuja.liquid').read_text()))
+    # Burbuja «Pregúntale a la Dra. Melina» (Sebas 17:23): va con el pie global, fuera de .met-pg, y solo se pinta en la tienda.
+    escribir('assets/met-burbuja.css', '/* Generado por exportar-tema.py desde burbuja/: no editar */\n' + (RAIZ / 'burbuja/burbuja.css').read_text())
+    escribir('assets/met-burbuja.js', '/* Generado por exportar-tema.py desde burbuja/: no editar */\n' + (RAIZ / 'burbuja/burbuja.js').read_text())
 
     # Páginas internas: una sección con su cabecera y su contenido.
     for archivo, (nombre, titulo) in PAGINAS.items():
