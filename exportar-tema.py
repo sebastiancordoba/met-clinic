@@ -168,6 +168,59 @@ def alcance(sel: str) -> str:
 AJUSTES_TEMA = """
 .met-pg .pilar-hero{margin-top:0}
 .met-pg .portada{height:calc(100svh - var(--met-encabezado, 68px));min-height:480px}
+/* Un solo «Agendar consulta» a la vista (pie.js 1): el del encabezado se esconde mientras se ve el de la portada. */
+#header-group .met-agendar{transition:opacity .3s,visibility .3s}
+html.cta-principal-visible #header-group .met-agendar{opacity:0;visibility:hidden;pointer-events:none}
+/* Dónde está uno (pie.js 7) en el menú de Horizon: línea salvia de 2 px que se desliza bajo el ítem activo. */
+#header-group .met-menu-lista{position:relative}
+#header-group .nav__indicador{position:absolute;left:0;bottom:2px;width:100px;height:2px;border-radius:2px;background:#82867F;
+  transform-origin:0 0;opacity:0;pointer-events:none;list-style:none;transition:transform .25s cubic-bezier(.25,.46,.45,.94),opacity .25s}
+#header-group .nav__indicador.sin-transicion{transition:none}
+#header-group .menu-list__link[aria-current]{color:#262626}
+@media (prefers-reduced-motion: reduce){#header-group .nav__indicador{transition:opacity .2s}}
+"""
+
+# El scroll-spy de la página (pie.js 7) adaptado al menú de Horizon: los enlaces son /#seccion; en las páginas
+# internas marca su ítem fijo (servicios → «Servicios», nosotros → «Equipo»).
+JS_MENU_TEMA = r"""
+(function () {
+  const primero = document.querySelector('#header-group .menu-list__link');
+  const lista = primero && primero.closest('ul');
+  if (!lista) return;
+  lista.classList.add('met-menu-lista');
+  const enlaces = [...lista.querySelectorAll('.menu-list__link')].filter((a) => a.tagName === 'A');
+  const linea = document.createElement('li');
+  linea.className = 'nav__indicador sin-transicion';
+  linea.setAttribute('aria-hidden', 'true');
+  lista.appendChild(linea);
+  let activo = null;
+  function poner(a, tipo) {
+    activo = a || null;
+    enlaces.forEach((e) => { if (e === activo) e.setAttribute('aria-current', tipo || 'location'); else e.removeAttribute('aria-current'); });
+    if (!activo || !activo.offsetWidth) { linea.style.opacity = '0'; return; }
+    const base = lista.getBoundingClientRect(), r = (activo.querySelector('.menu-list__link-title') || activo).getBoundingClientRect();
+    linea.style.transform = `translateX(${r.left - base.left}px) scaleX(${r.width / 100})`;
+    linea.style.opacity = '1';
+  }
+  const arrancar = () => requestAnimationFrame(() => requestAnimationFrame(() => linea.classList.remove('sin-transicion')));
+  const ruta = location.pathname;
+  const porHash = (h) => enlaces.find((a) => a.hash === h);
+  const fijo = /^\/pages\/pilar-/.test(ruta) ? porHash('#servicios') : /^\/pages\/nosotros/.test(ruta) ? porHash('#especialistas')
+    : enlaces.find((a) => a.classList.contains('menu-list__link--active') && !a.hash);
+  const recolocar = () => poner(activo, activo && activo.getAttribute('aria-current'));
+  addEventListener('resize', recolocar);
+  document.fonts && document.fonts.ready.then(recolocar);
+  if (ruta !== '/' || !('IntersectionObserver' in window)) { if (fijo) poner(fijo, 'page'); arrancar(); return; }
+  const porId = new Map(enlaces.filter((a) => a.hash && a.pathname === '/').map((a) => [a.hash.slice(1), a]));
+  let enMedio = null, espera = 0;
+  const io = new IntersectionObserver((es) => {
+    es.forEach((e) => { if (e.isIntersecting) enMedio = e.target; else if (enMedio === e.target) enMedio = null; });
+    clearTimeout(espera);
+    espera = setTimeout(() => { const a = enMedio ? porId.get(enMedio.id) : null; if (a !== activo) poner(a); }, 120);
+  }, { rootMargin: '-45% 0px -54% 0px' });
+  document.querySelectorAll('.met-pg section[id]').forEach((s) => io.observe(s));
+  arrancar();
+})();
 """
 
 
@@ -278,8 +331,8 @@ def main():
              css_a_tema((RAIZ / 'pilares.css').read_text() + '\n' + apple) + AJUSTES_TEMA)
 
     # JS
-    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + '\n' + js_pie())
-    escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + '\n' + js_pie())
+    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + '\n' + js_pie() + JS_MENU_TEMA)
+    escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + '\n' + js_pie() + JS_MENU_TEMA)
     escribir('assets/met-mapa-pie.js', js_mapa())
 
     # Portada
