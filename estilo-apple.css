@@ -124,7 +124,8 @@ html.apple .pilar-intro, html.apple .pilar-faq, html.apple .pilar-cta, html.appl
 html.apple .treatments { padding-top: calc(var(--aire) * 0.6); padding-bottom: var(--aire); }
 html.apple .pilar-hero { padding-bottom: calc(var(--aire) * 0.8); }
 html.apple #proceso .section-inner { padding-top: var(--aire); padding-bottom: var(--aire); }
-html.apple footer.pie3 { padding-top: var(--aire); }
+html.apple footer.pie3 { padding-top: clamp(32px,3.2vw,48px); }  /* pie más bajo (Sebas 13:08) */
+@media (max-width: 1000px) { html.apple footer.pie3 { padding-top: 24px; } }
 @media (max-width: 640px) { html.apple { --aire: 52px; } }
 html.apple #cita { padding-top: var(--aire); padding-bottom: var(--aire); }
 
