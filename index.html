@@ -1452,8 +1452,8 @@
     @media (max-width:1000px) { html.apple footer.pie3 { padding-top:24px; } }
 
     /* ══ BARRA DE CONFIANZA (17-nov 17:39, Sebas) ══ Cifra protagonista en Larken, rótulo en versalitas debajo,
-       fuente como enlace sutil; separadores cortos y tenues. Variante A (default): franja crema con filetes.
-       Variante B (html.barra-b, ?barra=b): tarjeta flotante redondeada montada sobre el borde del video. */
+       fuente como enlace sutil; separadores cortos y tenues.
+       Franja crema con filetes (Sebas eligió la A, 17:54). */
     .hero__stats { position:relative; z-index:2; flex:0 0 auto; display:grid; grid-template-columns:repeat(3,1fr);
       background:var(--confort); border-top:1px solid rgba(130,134,127,.16); border-bottom:1px solid rgba(130,134,127,.16);
       padding:clamp(18px,2.6vh,28px) var(--margen,clamp(20px,5vw,96px)); }
@@ -1471,14 +1471,9 @@
     .hero__stat__sedes { gap:0; flex-wrap:wrap; justify-content:center; row-gap:2px; font-size:11px; font-weight:600; letter-spacing:.16em; color:var(--texto-suave); }
     .hero__stat__sedes span + span::before { content:''; display:inline-block; width:3px; height:3px; border-radius:50%; background:var(--sage);
       margin:0 10px 2px; vertical-align:middle; }
-    /* Variante B: tarjeta flotante */
-    html.barra-b .portada { background:var(--tranquil); }
-    html.barra-b .hero__stats { width:min(1080px, calc(100% - 2 * var(--margen,40px))); margin:calc(-1 * clamp(44px,6vh,64px)) auto 0;
-      background:rgba(251,247,239,.96); border:0; border-radius:var(--r-lg,24px);
-      box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
     @media (min-width:641px) and (max-height:780px) {
       .hero__stats { padding-top:14px; padding-bottom:14px; } .hero__stat { gap:4px; } .hero__stat__num { font-size:28px; } }
-    /* Teléfono: A en fila de 3 compacta; B apilada en 3 renglones compactos dentro de la tarjeta */
+    /* Teléfono: fila de 3 compacta */
     @media (max-width:640px) {
       .hero__stats { padding:14px 4px; }
       .hero__stat { padding:0 6px; gap:4px; }
@@ -1488,51 +1483,35 @@
       .hero__stat__fuente { gap:4px; } .hero__fuente-largo { display:none; }
       .hero__stat__sedes { letter-spacing:.06em; } .hero__stat__sedes span + span::before { margin:0 5px 2px; }
       .hero__stat__sedes span:last-child { flex-basis:100%; } .hero__stat__sedes span:last-child::before { display:none; }
-      html.barra-b .hero__stat__sedes span:last-child { flex-basis:auto; } html.barra-b .hero__stat__sedes span:last-child::before { display:inline-block; }
-      html.barra-b .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:6px 18px; border-radius:20px; }
-      html.barra-b .hero__stat { display:grid; grid-template-columns:96px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
-        column-gap:14px; row-gap:2px; padding:10px 0; }
-      html.barra-b .hero__stat + .hero__stat::before { left:0; right:0; top:0; width:auto; height:1px; }
-      html.barra-b .hero__stat__num { grid-area:n; font-size:30px; }
-      html.barra-b .hero__stat__label { grid-area:l; }
-      html.barra-b .hero__fuente-largo { display:inline; }
-      html.barra-b .hero__stat__sub, html.barra-b .hero__stat__fuente { grid-area:s; justify-self:start; }
     }
 
-    /* ══ MAQUETA «Tecnología» sin tarjetas (17-nov 17:41, Sebas) — ?tec=a «Galería» · ?tec=b «Escaparate» ══
-       Los equipos van sueltos sobre el crema de la sección, recortados al borde (images/web/vitrina-*.webp), a la
-       misma altura sobre una línea de piso; texto sin caja debajo. Sin el parámetro, la sección queda como estaba. */
-    html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 4 * 40px) / 4.6); }
-    html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:40px; padding-top:18px; }
-    html.tec-a .aparato, html.tec-b .aparato, html.apple.tec-a .aparato, html.apple.tec-b .aparato {
+    /* ══ TECNOLOGÍA sin tarjetas, «Galería» (Sebas eligió la A, 17:55) ══ Los equipos van sueltos sobre el crema de la
+       sección, recortados al borde (images/web/vitrina-*.webp, de images/equipos/), a la misma altura sobre una línea
+       de piso con sombra de contacto; texto sin caja debajo; al pasar el mouse suben 4 px y la sombra se abre. */
+    #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 4 * 40px) / 4.6); }
+    #tecnologia .aparatos__fila{ gap:40px; padding-top:18px; }
+    #tecnologia .aparato, html.apple #tecnologia .aparato {
       background:none !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 4px; gap:5px; }
-    html.tec-a .aparato__foto, html.tec-b .aparato__foto { --h:min(250px, 30svh); position:relative; height:var(--h); margin-bottom:26px;
+    #tecnologia .aparato__foto{ --h:min(250px, 30svh); position:relative; height:var(--h); margin-bottom:26px;
       background:none; border-radius:0; overflow:visible; }
-    html.tec-a .aparato__foto img, html.tec-b .aparato__foto img { position:relative; z-index:1; height:100%; max-width:100%; object-fit:contain;
+    #tecnologia .aparato__foto img{ position:relative; z-index:1; height:100%; max-width:100%; object-fit:contain;
       object-position:50% 100%; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
     /* Sombra de contacto: una elipse borrosa en la línea de piso */
-    html.tec-a .aparato__foto::after, html.tec-b .aparato__foto::after { content:''; position:absolute; left:18%; right:18%; bottom:-7px; height:16px;
+    #tecnologia .aparato__foto::after{ content:''; position:absolute; left:18%; right:18%; bottom:-7px; height:16px;
       border-radius:50%; background:radial-gradient(closest-side, rgba(38,38,38,.26), rgba(38,38,38,0)); transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s; }
-    html.tec-a .aparato:hover .aparato__foto img, html.tec-b .aparato:hover .aparato__foto img,
-    html.tec-a .aparato:focus-visible .aparato__foto img, html.tec-b .aparato:focus-visible .aparato__foto img { transform:translateY(-4px); }
-    html.tec-a .aparato:hover .aparato__foto::after, html.tec-b .aparato:hover .aparato__foto::after { transform:scaleX(1.18) scaleY(1.3); opacity:.7; }
-    html.tec-a .aparato__trata, html.tec-b .aparato__trata { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
-    html.tec-a .aparato__ver, html.tec-b .aparato__ver { padding-top:8px; }
-    /* B «Escaparate»: plano de piso un tono más oscuro que se pierde hacia el fondo, con luz cenital en cada equipo */
-    html.tec-b .aparatos__fila { --h:min(250px, 30svh);
-      background:linear-gradient(180deg, rgba(222,207,180,0) 0, rgba(222,207,180,0) calc(18px + var(--h) * .45),
-        rgba(222,207,180,.55) calc(18px + var(--h) * .92), rgba(214,198,168,.75) calc(18px + var(--h) + 6px), rgba(222,207,180,0) calc(18px + var(--h) + 40px)) no-repeat; }
-    html.tec-b .aparato__foto::before { content:''; position:absolute; inset:-14px 0 0; pointer-events:none;
-      background:radial-gradient(closest-side at 50% 38%, rgba(255,255,255,.62), rgba(255,255,255,.25) 55%, rgba(255,255,255,0) 100%); }
-    html.tec-b .aparato__foto::after { background:radial-gradient(closest-side, rgba(70,56,32,.30), rgba(70,56,32,0)); }
-    @media (max-width:900px) { html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 2 * 28px) / 2.6); }
-      html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:28px; } }
+    #tecnologia .aparato:hover .aparato__foto img,
+    #tecnologia .aparato:focus-visible .aparato__foto img{ transform:translateY(-4px); }
+    #tecnologia .aparato:hover .aparato__foto::after{ transform:scaleX(1.18) scaleY(1.3); opacity:.7; }
+    #tecnologia .aparato__trata{ display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+    #tecnologia .aparato__ver{ padding-top:8px; }
+    @media (max-width:900px) { #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 2 * 28px) / 2.6); }
+      #tecnologia .aparatos__fila{ gap:28px; } }
     @media (max-width:640px) {
-      html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 24px) / 1.5); }
-      html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:24px; }
-      html.tec-a .aparato__foto, html.tec-b .aparato__foto, html.tec-b .aparatos__fila { --h:230px; }
+      #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 24px) / 1.5); }
+      #tecnologia .aparatos__fila{ gap:24px; }
+      #tecnologia .aparato__foto{ --h:230px; }
     }
-    @media (prefers-reduced-motion: reduce) { html.tec-a .aparato__foto img, html.tec-b .aparato__foto img, html.tec-a .aparato__foto::after, html.tec-b .aparato__foto::after { transition:none; } }
+    @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__foto img, #tecnologia .aparato__foto::after{ transition:none; } }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
@@ -1616,17 +1595,6 @@
     if (/[?&]estilo=actual\b/.test(location.search)) document.documentElement.classList.remove('redondeado');
     // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
     if (/[?&]estilo=(normal|actual)\b/.test(location.search)) document.documentElement.classList.remove('apple');
-    if (/[?&]barra=b\b/.test(location.search)) document.documentElement.classList.add('barra-b');
-    // Maqueta de «Tecnología» (17-nov 17:41): ?tec=a galería · ?tec=b escaparate; usa los recortes vitrina-*.webp.
-    var tec = /[?&]tec=([ab])\b/.exec(location.search);
-    if (tec) {
-      document.documentElement.classList.add('tec-' + tec[1]);
-      document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.aparato__foto img').forEach(function (im) {
-          im.src = im.getAttribute('src').replace('equipo-', 'vitrina-'); im.removeAttribute('width'); im.removeAttribute('height'); im.loading = 'eager';
-        });
-      });
-    }
   })();
   </script>
   <link rel="stylesheet" href="estilo-apple.css" />
@@ -1695,7 +1663,7 @@
   <!-- Barra de datos: debajo del hero y no dentro, para no tapar el video.
        Comparte .portada con él para que se vea completa al entrar. -->
     <!-- Barra de confianza (17-nov 17:39, Sebas): cifra en Larken, rótulo en versalitas debajo y la fuente como
-         enlace sutil. Dos variantes para elegir: ?barra=a franja crema (default) · ?barra=b tarjeta flotante. -->
+         enlace sutil (franja crema, Sebas 17:54). -->
     <div class="hero__stats" aria-label="MET Clinic en números">
       <div class="hero__stat">
         <div class="hero__stat__num" data-count="1366" data-suffix="+">1,366+</div>
@@ -1783,49 +1751,49 @@
       </div>
       <ul class="aparatos__fila" tabindex="0" aria-label="Aparatos de la clínica (desliza para ver más)">
           <li><a class="aparato" href="pilar-ginecologia.html">
-            <span class="aparato__foto"><img src="images/web/equipo-emsella.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-emsella.webp" alt="" width="520" height="407" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Ginecología</span>
             <span class="aparato__nombre">EMSELLA</span>
             <span class="aparato__trata">Silla para fortalecer el suelo pélvico, sentada y vestida.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-ginecologia.html">
-            <span class="aparato__foto"><img src="images/web/equipo-monalisa.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-monalisa.webp" alt="" width="158" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Ginecología</span>
             <span class="aparato__nombre">MonaLisa Touch</span>
             <span class="aparato__trata">Láser de CO₂ para la salud íntima.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-facial.html">
-            <span class="aparato__foto"><img src="images/web/equipo-sofwave.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-sofwave.webp" alt="" width="295" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Facial</span>
             <span class="aparato__nombre">Sofwave</span>
             <span class="aparato__trata">Ultrasonido para la firmeza del rostro y el cuello.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-corporal.html">
-            <span class="aparato__foto"><img src="images/web/equipo-xwave.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-xwave.webp" alt="" width="260" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Corporal</span>
             <span class="aparato__nombre">X-Wave</span>
             <span class="aparato__trata">Ondas de choque para celulitis y firmeza de la piel.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-depilacion.html">
-            <span class="aparato__foto"><img src="images/web/equipo-asirox.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-asirox.webp" alt="" width="203" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Depilación</span>
             <span class="aparato__nombre">Asirox</span>
             <span class="aparato__trata">Láser de diodo para depilación.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-longevidad.html">
-            <span class="aparato__foto"><img src="images/web/equipo-exomind.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-exomind.webp" alt="" width="283" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Longevidad</span>
             <span class="aparato__nombre">Exomind</span>
             <span class="aparato__trata">Estimulación magnética para el bienestar emocional.</span>
             <span class="aparato__ver">Ver tratamiento →</span>
           </a></li>
           <li><a class="aparato" href="pilar-ginecologia.html">
-            <span class="aparato__foto"><img src="images/web/equipo-inbody.webp" alt="" width="260" height="450" loading="lazy" decoding="async"></span>
+            <span class="aparato__foto"><img src="images/web/vitrina-inbody.webp" alt="" width="292" height="560" loading="lazy" decoding="async"></span>
             <span class="aparato__area">Check up</span>
             <span class="aparato__nombre">InBody</span>
             <span class="aparato__trata">Análisis de tu composición corporal.</span>

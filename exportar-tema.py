@@ -354,6 +354,8 @@ def main():
     if SALIDA.exists():
         shutil.rmtree(SALIDA)
     idx = (RAIZ / 'index.html').read_text()
+    # Las maquetas sin aprobar (bloques CSS «/* ══ MAQUETA …») no van al tema: hoy, «Tecnología» con ?tec=a|b.
+    idx = re.sub(r'\n    /\* ══ MAQUETA.*?(?=\n    /\* ══|\n  </style>)', '', idx, flags=re.S)
 
     # CSS de la portada: el <style> en línea + estilo-apple.css; el de las internas: pilares.css + estilo-apple.css.
     estilo = re.search(r'<style>(.*?)</style>', idx, re.S).group(1)
