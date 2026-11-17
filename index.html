@@ -1498,6 +1498,41 @@
       html.barra-b .hero__fuente-largo { display:inline; }
       html.barra-b .hero__stat__sub, html.barra-b .hero__stat__fuente { grid-area:s; justify-self:start; }
     }
+
+    /* ══ MAQUETA «Tecnología» sin tarjetas (17-nov 17:41, Sebas) — ?tec=a «Galería» · ?tec=b «Escaparate» ══
+       Los equipos van sueltos sobre el crema de la sección, recortados al borde (images/web/vitrina-*.webp), a la
+       misma altura sobre una línea de piso; texto sin caja debajo. Sin el parámetro, la sección queda como estaba. */
+    html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 4 * 40px) / 4.6); }
+    html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:40px; padding-top:18px; }
+    html.tec-a .aparato, html.tec-b .aparato, html.apple.tec-a .aparato, html.apple.tec-b .aparato {
+      background:none !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 4px; gap:5px; }
+    html.tec-a .aparato__foto, html.tec-b .aparato__foto { --h:min(250px, 30svh); position:relative; height:var(--h); margin-bottom:26px;
+      background:none; border-radius:0; overflow:visible; }
+    html.tec-a .aparato__foto img, html.tec-b .aparato__foto img { position:relative; z-index:1; height:100%; max-width:100%; object-fit:contain;
+      object-position:50% 100%; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+    /* Sombra de contacto: una elipse borrosa en la línea de piso */
+    html.tec-a .aparato__foto::after, html.tec-b .aparato__foto::after { content:''; position:absolute; left:18%; right:18%; bottom:-7px; height:16px;
+      border-radius:50%; background:radial-gradient(closest-side, rgba(38,38,38,.26), rgba(38,38,38,0)); transition:transform .5s cubic-bezier(.2,.8,.2,1), opacity .5s; }
+    html.tec-a .aparato:hover .aparato__foto img, html.tec-b .aparato:hover .aparato__foto img,
+    html.tec-a .aparato:focus-visible .aparato__foto img, html.tec-b .aparato:focus-visible .aparato__foto img { transform:translateY(-4px); }
+    html.tec-a .aparato:hover .aparato__foto::after, html.tec-b .aparato:hover .aparato__foto::after { transform:scaleX(1.18) scaleY(1.3); opacity:.7; }
+    html.tec-a .aparato__trata, html.tec-b .aparato__trata { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+    html.tec-a .aparato__ver, html.tec-b .aparato__ver { padding-top:8px; }
+    /* B «Escaparate»: plano de piso un tono más oscuro que se pierde hacia el fondo, con luz cenital en cada equipo */
+    html.tec-b .aparatos__fila { --h:min(250px, 30svh);
+      background:linear-gradient(180deg, rgba(222,207,180,0) 0, rgba(222,207,180,0) calc(18px + var(--h) * .45),
+        rgba(222,207,180,.55) calc(18px + var(--h) * .92), rgba(214,198,168,.75) calc(18px + var(--h) + 6px), rgba(222,207,180,0) calc(18px + var(--h) + 40px)) no-repeat; }
+    html.tec-b .aparato__foto::before { content:''; position:absolute; inset:-14px 0 0; pointer-events:none;
+      background:radial-gradient(closest-side at 50% 38%, rgba(255,255,255,.62), rgba(255,255,255,.25) 55%, rgba(255,255,255,0) 100%); }
+    html.tec-b .aparato__foto::after { background:radial-gradient(closest-side, rgba(70,56,32,.30), rgba(70,56,32,0)); }
+    @media (max-width:900px) { html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 2 * 28px) / 2.6); }
+      html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:28px; } }
+    @media (max-width:640px) {
+      html.tec-a .aparatos__fila > li, html.tec-b .aparatos__fila > li { flex-basis:calc((100% - 24px) / 1.5); }
+      html.tec-a .aparatos__fila, html.tec-b .aparatos__fila { gap:24px; }
+      html.tec-a .aparato__foto, html.tec-b .aparato__foto, html.tec-b .aparatos__fila { --h:230px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html.tec-a .aparato__foto img, html.tec-b .aparato__foto img, html.tec-a .aparato__foto::after, html.tec-b .aparato__foto::after { transition:none; } }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->
@@ -1582,6 +1617,16 @@
     // Estilo Apple por defecto desde el 13-nov (Sebas); ?estilo=normal lo apaga para comparar (no se recuerda).
     if (/[?&]estilo=(normal|actual)\b/.test(location.search)) document.documentElement.classList.remove('apple');
     if (/[?&]barra=b\b/.test(location.search)) document.documentElement.classList.add('barra-b');
+    // Maqueta de «Tecnología» (17-nov 17:41): ?tec=a galería · ?tec=b escaparate; usa los recortes vitrina-*.webp.
+    var tec = /[?&]tec=([ab])\b/.exec(location.search);
+    if (tec) {
+      document.documentElement.classList.add('tec-' + tec[1]);
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.aparato__foto img').forEach(function (im) {
+          im.src = im.getAttribute('src').replace('equipo-', 'vitrina-'); im.removeAttribute('width'); im.removeAttribute('height'); im.loading = 'eager';
+        });
+      });
+    }
   })();
   </script>
   <link rel="stylesheet" href="estilo-apple.css" />
