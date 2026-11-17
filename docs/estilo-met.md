@@ -85,8 +85,9 @@ Reglas:
 | Botón | 12px | 600 · MAYÚSCULAS · 0.16em |
 | Nota / leyenda | 13px | 300–400 · `--texto-suave` |
 
-- Ningún texto que se lea queda debajo de 12 px, y los campos de formulario van a **16 px** para que el iPhone
-  no haga zoom.
+- **Tamaño mínimo:** el texto corrido va a 12 px o más. Solo bajan a **11 px** las cejas, la marca en tarjeta, las
+  etiquetas y los botones, en MAYÚSCULAS con espaciado de 0.12 em o más. Nada baja de 11 px, salvo el crédito
+  «© OpenStreetMap» del mapa. Los campos de formulario van a **16 px** para que el iPhone no haga zoom.
 - **Precios:** `$1,050` (MXN, sin espacio y sin decimales si son ,00). En la tienda el formato sale del tema, no
   del admin.
 - **Nombres de marca:** se escriben como la marca: Filorga, SVR, Cumlaude, Lazartigue, Colorescience, TiZO,
