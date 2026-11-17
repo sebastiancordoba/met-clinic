@@ -77,7 +77,7 @@
         style: recolorear(estilo),
         bounds: [[-99.1935, 19.3440], [-99.1855, 19.3625]],
         // Desde el 13-nov el mapa va en su propia columna sin tarjeta encima: margen parejo, más a la derecha por los nombres.
-        fitBoundsOptions: { padding: { top: 44, bottom: 22, left: angosto ? 24 : 56, right: angosto ? 120 : 200 } },
+        fitBoundsOptions: { padding: { top: angosto ? 58 : 72, bottom: 20, left: angosto ? 40 : 80, right: angosto ? 150 : 220 } },
         minZoom: 11, maxZoom: 18.5,
         attributionControl: false,
         cooperativeGestures: true,
@@ -92,7 +92,8 @@
         },
       });
       map.touchZoomRotate.disableRotation();
-      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), angosto ? 'top-left' : 'top-right');
+      // Abajo a la izquierda: arriba quedan los nombres del metro (a la izquierda) y de la clínica (a la derecha).
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
       // El crédito (OpenFreeMap, OpenMapTiles, OpenStreetMap) lo trae el estilo; va cerrado en una «i».
       map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
 
@@ -100,8 +101,13 @@
         map.addSource('ruta', { type: 'geojson', data: { type: 'Feature', geometry: { type: 'LineString', coordinates: RUTA } } });
         map.addLayer({ id: 'ruta', type: 'line', source: 'ruta', layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: { 'line-color': '#262626', 'line-width': 2, 'line-dasharray': [0.1, 2.6] } });
+        // El metro queda casi encima de la clínica: con el mapa bajo del pie (17-nov) su nombre chocaba con «MET CLINIC»,
+        // así que va ARRIBA de su punto, centrado; los demás, a la derecha del suyo.
         for (const [nombre, lugar] of REFS) {
-          new maplibregl.Marker({ element: marca('pie-mapa__ref', `<span class="pie-mapa__punto"></span><span>${nombre}</span>`), anchor: 'left', offset: [-8, 0] })
+          const arriba = nombre.startsWith('METRO');
+          const el = marca('pie-mapa__ref', arriba ? `<span>${nombre}</span><span class="pie-mapa__punto"></span>` : `<span class="pie-mapa__punto"></span><span>${nombre}</span>`);
+          if (arriba) el.style.cssText = 'flex-direction:column;gap:3px;align-items:center';
+          new maplibregl.Marker({ element: el, anchor: arriba ? 'bottom' : 'left', offset: arriba ? [0, angosto ? 6 : -14] : [-8, 0] })
             .setLngLat(lugar).addTo(map);
         }
         new maplibregl.Marker({
