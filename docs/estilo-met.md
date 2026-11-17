@@ -1,6 +1,6 @@
 # Guía de estilo MET Clinic · página y tienda
 
-Versión 1 · 13-nov-2026. Regla de Sebas (13-nov, 13:30): **un solo estilo para la página y la tienda**. Esta
+Versión 1.1 · 17-nov-2026 (loseta blanca). Regla de Sebas (13-nov, 13:30): **un solo estilo para la página y la tienda**. Esta
 guía es la referencia y todo agente diseña con ella. Si algo no cabe aquí, **no lo inventes**: propónselo a Sebas
 como excepción y, cuando lo apruebe, se agrega a esta guía.
 
@@ -28,7 +28,8 @@ alinear», al final.
    la barra.
 4. **Un solo botón principal a la vista.** En la página es «Agendar consulta» y en la tienda «Agregar».
 5. **Fotos de producto grandes y parejas.** El producto llena ~80 % del alto de su loseta en todas las tarjetas.
-6. **Nada de blanco como fondo** de sección, de loseta de producto ni de tarjeta (ver § 2).
+6. **Nada de blanco como fondo de sección.** La única excepción es la **loseta de producto, que es blanca**
+   `#FFFFFF` sobre fondo crema (Sebas, 17-nov; ver § 2).
 
 ## 2. Color
 
@@ -41,24 +42,21 @@ alinear», al final.
 | `--sage-light` | `rgba(130,134,127,.10)` | Rellenos muy tenues (chips inactivos, hover de filas) |
 | `--dark` | `#262626` | Texto principal, botón principal y fondo del pie |
 | `--texto-suave` | `#515151` | Texto chico secundario: marca, cejas y notas (6.8:1) |
-| `--loseta` | `#ECEBE4` | **Loseta de producto, salvia claro.** Es la que se usa por defecto |
-| `--loseta-crema` | `#EFE3CF` | Loseta alterna, solo para destacar una tarjeta (la del centro en un trío) |
+| `--loseta` | `#FFFFFF` | **Loseta de producto: blanca** sobre fondo crema, en la página y en la tienda: colección, «Lo más elegido», mega menú y portada (Sebas, 17-nov). Hasta el 17-nov era `#ECEBE4` |
 | `--crema-boton` | `#FBF7EF` | Texto del botón principal y fondo del botón principal sobre video o foto |
 | `--existencia` | `#6E8B5E` / `#8A4B2A` | Punto «en existencia» / «quedan pocas» |
 
 Reglas:
 - Las secciones alternan **solo** `--tranquil` y `--confort`. No hay secciones blancas y en la tienda nunca se
   deja el blanco de Horizon (`#FFFFFF`, `rgb(255,255,255)`).
-- La loseta de producto es siempre `--loseta` y la foto va con `mix-blend-mode:multiply`, para que el fondo
-  blanco de los JPG tome el tono. Se permite `#FFFFFF` únicamente:
+- La loseta de producto es siempre `--loseta` (#FFFFFF), sin borde, con `--sombra-suave` y el producto al ~80 % del
+  alto. Va **sobre una sección crema** (`--tranquil` o `--confort`), nunca sobre otra superficie blanca. Fuera de la
+  loseta, `#FFFFFF` solo se permite:
   - dentro de un campo de formulario o del buscador;
   - en la píldora «+» de agregar;
   - en el cajón del carrito.
-- **Choque pendiente de Sebas: portada de la tienda.**
-  - El 4-nov Sebas pidió fondo **blanco** en la portada de la tienda: el bloque «Lo que usamos en consulta» y
-    sus tarjetas de producto. Las secciones de abajo iban en crema/salvia.
-  - El 13-nov pidió «fondos crema/salvia acordados, NO blancos».
-  - Mientras no confirme, la portada de la tienda se queda como está y en todo lo demás se aplica esta guía.
+- **Resuelto el 17-nov** el choque de la portada de la tienda (blanco del 4-nov contra «NO blancos» del 13-nov): las
+  secciones van en crema y las losetas de producto en blanco.
 - El texto oscuro translúcido nunca baja de alfa 0.75. Úsalo para texto de párrafo: `rgba(38,38,38,.78)`.
 - Sobre `--sage` solo va texto grande. Una etiqueta chica sobre salvia usa `#111`.
 - Revisa con axe-core antes de entregar cualquier cambio de color.
@@ -149,7 +147,7 @@ Debe haber un solo botón principal por pantalla. Los textos de botón son verbo
 ## 7. Tarjeta de producto (una sola, igual en la página y en la tienda)
 
 ```
-┌──────────────────────┐  loseta --loseta, 1:1, --r-lg, --sombra-suave, sin borde
+┌──────────────────────┐  loseta --loseta (#FFFFFF), 1:1, --r-lg, --sombra-suave, sin borde
 │ [Sello]              │  sello opcional: píldora blanca 11px arriba a la izquierda («Nuevo», «Lo más elegido»)
 │       ▢ producto     │  el producto llena ~80 % del alto (recorte por foto: snippet met-recorte), centrado, multiply
 │                 (+)  │  agregar rápido
@@ -167,7 +165,8 @@ $1,050        Quedan 3     15px · existencia 12px en #8A4B2A solo si hay ≤ 3
 
 ## 8. Fotos
 
-- **Producto:** loseta + multiply + recorte al ~80 % del alto. Nunca se dejan las fotos con su blanco de origen.
+- **Producto:** loseta blanca + recorte al ~80 % del alto (snippet `met-recorte`). El blanco del JPG se funde con la
+  loseta, y los PNG transparentes quedan igual. Las fotos con fondo gris (Rejuvaskin, Sensilis) se recortan en la fuente.
   Si una foto trae fondo gris (Rejuvaskin, Sensilis), se recorta la fuente; no se tapa con CSS.
 - **Personas y lugares:** `--r-lg` + `--sombra-suave`, `filter:saturate(1.04) contrast(1.02)`, enfocadas en la
   cara y con alto máximo de `100svh - 68px`.
@@ -275,10 +274,10 @@ porque la guía ya recoge lo aprobado:
 
 | Dónde | Hoy | Según la guía |
 |---|---|---|
-| Página, «Lo más elegido» (`.elegido`) | Tarjeta blanca con borde | Loseta `--loseta` sin borde, igual que la tienda |
+| Página e inicio, «Lo más elegido» (`.elegido`) | Loseta salvia `#ECEBE4` (13-nov) | Loseta blanca `#FFFFFF` sin borde, igual que la colección y el mega menú (Sebas, 17-nov) |
 | Tienda, contenedores | `max-width: 1328px` y `--met-gutter: 56px` | Ancho completo con `--margen` |
 | Tienda, secciones | `padding: 100px` | `--aire` |
-| Tienda, tema publicado | Fondos blancos del experimento del 4-nov | `--tranquil`/`--confort` + `--loseta` |
+| Tienda, secciones | Blanco de Horizon (`color_palette.background`) | `--tranquil`/`--confort` (claude-1 lo cambió el 17-nov) |
 | Tienda, tarjeta | El producto llena ~72–76 % | ~80 % con `met-recorte` |
 
 Cualquier otra diferencia que quieras introducir: **propónsela a Sebas** con captura antes/después y no la apliques
