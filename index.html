@@ -1435,6 +1435,50 @@
       footer.pie3 .footer-social a { padding:10px 6px; font-size:11px; letter-spacing:0.06em; gap:6px; }
     }
     @media (min-width:1001px) { footer.pie3 { grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr) minmax(0,1.3fr); } footer.pie3 .footer-social a { padding:10px 12px; letter-spacing:0.08em; } }
+    /* Pie más bajo (17-nov 13:08, Sebas: ~25–30 % menos alto): menos aire, mapa panorámico, redes compactas y barra legal
+       delgada. El texto chico sigue en ≥ 11 px y con el mismo contraste. */
+    footer.pie3 { padding-top:clamp(32px,3.2vw,48px); padding-bottom:16px; }
+    html.apple footer.pie3 { padding-top:clamp(32px,3.2vw,48px); }
+    footer.pie3 .footer-logo { width:200px; margin-bottom:14px; }
+    footer.pie3 .pie-dato { margin-bottom:6px; line-height:1.45; font-size:13.5px; }
+    footer.pie3 .pie-titulo { margin:2px 0 10px; }
+    footer.pie3 .footer-social { gap:6px; }
+    footer.pie3 .footer-social a { padding:7px 11px; }
+    footer.pie3 .pie-enlaces { margin-top:18px; }
+    footer.pie3 .pie-enlaces div { gap:4px; }
+    footer.pie3 .pie-enlaces a { font-size:13.5px; line-height:1.4; }
+    footer.pie3 .pie-mapa { gap:10px; }
+    footer.pie3 .pie-mapa .mapa__enlace { aspect-ratio:2.3; min-height:170px; }
+    footer.pie3 .pie-mapa__tarjeta .mapa__ir { padding:8px 18px; }
+    footer.pie3 .pie-legal { margin-top:clamp(20px,2.4vw,32px); padding-top:12px; line-height:1.5; }
+    footer.pie3 .pie-legal__izq { line-height:1.5; }
+    @media (max-width:1000px) {
+      footer.pie3 { padding-top:32px; }
+      footer.pie3 .footer-logo { width:170px; }
+      footer.pie3 .pie-contacto { margin-top:14px; }
+      footer.pie3 .pie-mapa { margin-top:20px; }
+      footer.pie3 .pie-mapa .mapa__enlace { aspect-ratio:1.9; min-height:0; }
+      footer.pie3 .pie-enlaces { margin-top:14px; }
+    }
+    @media (max-width:640px) {
+      footer.pie3 { padding-bottom:calc(16px + 66px + env(safe-area-inset-bottom)); }
+    }
+    @media (max-width:640px) {
+      /* Teléfono más bajo: enlaces en renglón bajo su título, «Cómo llegar» y «Abrir en…» en una fila. */
+      footer.pie3 { padding-top:28px; }
+      footer.pie3 .footer-logo { width:150px; margin-bottom:10px; }
+      footer.pie3 .pie-enlaces { gap:24px; }
+      footer.pie3 .pie-enlaces div { flex-direction:row; flex-wrap:wrap; gap:2px 14px; align-content:flex-start; }
+      footer.pie3 .pie-enlaces .pie-titulo { flex-basis:100%; }
+      footer.pie3 .pie-mapa .mapa__enlace { aspect-ratio:1.75; }
+      footer.pie3 .pie-mapa__tarjeta { flex-wrap:nowrap; gap:10px; }
+      footer.pie3 .pie-mapa__tarjeta .mapa__ir { padding:8px 14px; font-size:11px; white-space:nowrap; }
+      footer.pie3 .pie-mapa__tarjeta .mapa__apps { font-size:12px; text-align:right; }
+      footer.pie3 .pie-legal { margin-top:18px; gap:6px; font-size:11.5px; }
+      footer.pie3 .pie-legal a { font-size:11.5px; }
+    }
+    @media (max-width:640px) { footer.pie3 { padding-top:24px; } footer.pie3 .pie-contacto > .pie-titulo { display:none; } footer.pie3 .pie-contacto { margin-top:12px; } footer.pie3 .pie-enlaces { margin-top:12px; } footer.pie3 .pie-mapa { margin-top:16px; } footer.pie3 .pie-dato { margin-bottom:4px; } }
+    @media (max-width:1000px) { html.apple footer.pie3 { padding-top:24px; } }
   </style>
 
   <!-- ══ META: buscadores y redes ══ -->

@@ -428,6 +428,10 @@ def prueba_local():
         return re.sub(r'\{% schema %\}.*?\{% endschema %\}', '', t, flags=re.S)
     for css in ('met-pagina', 'met-pilares', 'met-pie'):
         (SALIDA / 'assets' / f'{css}.css').write_text(liquid((SALIDA / 'assets' / f'{css}.css.liquid').read_text()))
+    (d / 'solo-pie.html').write_text(
+        '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        f'{fuentes}</head><body><div style="height:400px;padding:40px;font:20px sans-serif">Página de tienda (solo el pie global)</div>'
+        + liquid((SALIDA / 'sections' / 'met-pg-pie-global.liquid').read_text()) + '</body></html>')
     for tpl in (SALIDA / 'templates').glob('*.json'):
         orden = _j.loads(tpl.read_text())['order']
         cuerpo = ''.join(liquid((SALIDA / 'sections' / f'met-pg-{k}.liquid').read_text()) for k in orden + ['pie-global'])
