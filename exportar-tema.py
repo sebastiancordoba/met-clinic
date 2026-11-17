@@ -185,11 +185,12 @@ html.cta-principal-visible #header-group .met-agendar{opacity:0;visibility:hidde
 JS_MENU_TEMA = r"""
 (function () {
   const primero = document.querySelector('#header-group .menu-list__link');
-  const lista = primero && primero.closest('ul');
+  // En Horizon los ítems van en <overflow-list> (que mide a sus hijos): la línea cuelga del <nav class="menu-list">.
+  const lista = primero && (primero.closest('.menu-list') || primero.closest('nav'));
   if (!lista) return;
   lista.classList.add('met-menu-lista');
   const enlaces = [...lista.querySelectorAll('.menu-list__link')].filter((a) => a.tagName === 'A');
-  const linea = document.createElement('li');
+  const linea = document.createElement('span');
   linea.className = 'nav__indicador sin-transicion';
   linea.setAttribute('aria-hidden', 'true');
   lista.appendChild(linea);
