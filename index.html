@@ -1493,7 +1493,7 @@
       box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
     @media (max-width:640px) {
       .portada .hero__stat__sedes span:last-child { flex-basis:auto; } .portada .hero__stat__sedes span:last-child::before { display:inline-block; }
-      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:3px 18px; border-radius:20px; }
+      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 40px); margin-top:-18px; padding:3px 18px; border-radius:20px; }
       .portada .hero__stat { display:grid; grid-template-columns:84px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
         column-gap:12px; row-gap:0; padding:3px 0; }
       .portada .hero__stat__label { display:inline-flex; align-items:center; gap:6px; line-height:1.2; }
@@ -1517,16 +1517,20 @@
       .portada .hero__stat__sub, .portada .hero__stat__fuente { grid-area:s; justify-self:center; font-size:11px; }
       .portada .hero__stat__fuente { padding-bottom:0; }
       .portada .hero__content { padding-bottom:calc(clamp(32px,7vh,72px) + 12px); }
+      /* Mismo ancho que el contenido del encabezado de la tienda, del logo a la bolsa (56 px por lado; Sebas 18:16) */
+      .portada .hero__stats { width:calc(100% - 112px); }
     }
     .hero__stat__label .hero__estrellas { margin-right:2px; }
     /* ══ TECNOLOGÍA sin tarjetas, «Galería» (Sebas eligió la A, 17:55) ══ Los equipos van sueltos sobre el crema de la
        sección, recortados al borde (images/web/vitrina-*.webp, de images/equipos/), a la misma altura sobre una línea
        de piso con sombra de contacto; texto sin caja debajo; al pasar el mouse suben 4 px y la sombra se abre. */
     #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 4 * 40px) / 4.6); }
-    #tecnologia .aparatos__fila{ gap:40px; padding-top:18px; }
+    #tecnologia .aparatos__fila{ gap:40px; padding-top:8px; }
+    /* Aparatos ~35 % más altos (Sebas 18:16): menos aire arriba de la sección para que no crezca de más */
+    #tecnologia { margin-top:clamp(24px,3vw,40px); }
     #tecnologia .aparato, html.apple #tecnologia .aparato {
       background:none !important; border:0 !important; box-shadow:none !important; border-radius:0 !important; padding:0 0 4px; gap:5px; }
-    #tecnologia .aparato__foto{ --h:min(250px, 30svh); position:relative; height:var(--h); margin-bottom:26px;
+    #tecnologia .aparato__foto{ --h:min(340px, 40svh); position:relative; height:var(--h); margin-bottom:26px;
       background:none; border-radius:0; overflow:visible; }
     #tecnologia .aparato__foto img{ position:relative; z-index:1; height:100%; max-width:100%; object-fit:contain;
       object-position:50% 100%; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
@@ -1543,7 +1547,7 @@
     @media (max-width:640px) {
       #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 24px) / 1.5); }
       #tecnologia .aparatos__fila{ gap:24px; }
-      #tecnologia .aparato__foto{ --h:230px; }
+      #tecnologia .aparato__foto{ --h:300px; }
     }
     @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__foto img, #tecnologia .aparato__foto::after{ transition:none; } }
   </style>
