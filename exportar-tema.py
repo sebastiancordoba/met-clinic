@@ -197,8 +197,16 @@ JS_RECARGA = r"""
       history.replaceState(limpio, '');
     }
     var pw = document.querySelector('.page-wrapper');
-    if (pw) pw.scrollTop = 0;
-    window.scrollTo(0, 0);
+    var arriba = function () { if (pw) pw.scrollTop = 0; window.scrollTo(0, 0); };
+    arriba();
+    /* Desde que el documento es el que desplaza (claude-1, 19:15), el navegador también restaura solo al recargar
+       (scrollRestoration «auto»), después de cargar: se vuelve a subir tras load, salvo que la persona ya se haya movido. */
+    var movio = false;
+    ['wheel', 'touchstart', 'keydown'].forEach(function (t) { addEventListener(t, function () { movio = true; }, { once: true, passive: true }); });
+    addEventListener('load', function () {
+      requestAnimationFrame(function () { if (!movio) arriba(); });
+      setTimeout(function () { if (!movio) arriba(); }, 150);
+    });
   } catch (e) {}
 })();
 """
