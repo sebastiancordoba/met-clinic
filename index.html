@@ -1182,7 +1182,10 @@
         border-top:1px solid rgba(130,134,127,0.2);
         transform:translateY(0); transition:transform 0.35s var(--ease);
       }
-      .barra-movil.oculta { transform:translateY(110%); }
+      /* Escondida de verdad (Sebas 18-nov 09:13, iOS 26): Safari tiñe la zona de su barra flotante con el fondo de un
+         elemento fijo pegado al borde de abajo; trasladada fuera seguía contando y pintaba crema. visibility al final. */
+      .barra-movil { transition:transform 0.35s var(--ease), visibility 0s; }
+      .barra-movil.oculta { transform:translateY(110%); visibility:hidden; transition:transform 0.35s var(--ease), visibility 0s 0.35s; }
       .barra-movil a {
         display:flex; align-items:center; justify-content:center; gap:8px;
         min-height:46px; text-decoration:none;

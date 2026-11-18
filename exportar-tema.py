@@ -171,6 +171,12 @@ AJUSTES_TEMA = """
 /* Orilla a orilla abajo en el teléfono (Sebas 18-nov 09:06): el video baja detrás de la barra flotante de Safari (100lvh);
    gana al 100svh !important de met-apple.css (claude-1). La tarjeta de datos flota en index.html. */
 @media (max-width:640px){html body:has(.met-pg .hero) .met-pg .portada{height:100lvh !important}}
+/* Zonas de la hora y de la barra flotante en Safari iOS 26 (Sebas 09:13): Safari ya no usa theme-color en páginas normales
+   y las tiñe con el fondo de html/body (o de un fijo/sticky pegado al borde). Arriba del todo en la portada, sobre el
+   video (html.met-nav-video de met-apple.js), el fondo es el tono del video (#546466, el mismo del hero mientras carga);
+   al bajar vuelve el crema de met-apple.css. .page-wrapper y main siguen crema, así que no se ve en ningún otro lado. */
+html:has(.met-pg .hero):not(.met-js), html.met-nav-video:has(.met-pg .hero),
+html:has(.met-pg .hero):not(.met-js) body, html.met-nav-video:has(.met-pg .hero) body{background-color:#546466 !important}
 /* Un solo «Agendar consulta» a la vista (pie.js 1): el del encabezado se esconde mientras se ve el de la portada. */
 #header-group .met-agendar{transition:opacity .3s,visibility .3s}
 html.cta-principal-visible #header-group .met-agendar{opacity:0;visibility:hidden;pointer-events:none}
