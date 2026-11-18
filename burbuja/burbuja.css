@@ -7,6 +7,7 @@
 .met-burbuja[hidden] { display: none; }
 .met-burbuja.visible { opacity: 1; transform: none; pointer-events: auto; }
 .met-burbuja.tapada { opacity: 0; transform: translateY(16px) scale(.92); pointer-events: none; }
+.met-burbuja.visible.escondida { opacity: 0; transform: translateY(24px) scale(.92); pointer-events: none; }
 body:has(dialog[open]) .met-burbuja, body:has(.menu-drawer[open]) .met-burbuja { display: none; }
 .met-burbuja__boton { order: 2; position: relative; width: var(--b); height: var(--b); padding: 0; border: 0; border-radius: 50%;
   background: #FFFFFF; cursor: pointer; box-shadow: 0 0 0 3px #FFFFFF, 0 1px 1px rgba(38,38,38,.06), 0 18px 40px -16px rgba(38,38,38,.35);
@@ -45,7 +46,7 @@ body:has(dialog[open]) .met-burbuja, body:has(.menu-drawer[open]) .met-burbuja {
 .met-burbuja__wa svg { flex: none; width: 16px !important; height: 16px !important; fill: var(--sage, #82867F); }
 .met-burbuja__cedulas { display: block; margin-top: 12px; font-size: 11px; letter-spacing: .02em; color: var(--texto-suave, #515151); }
 /* Línea en la ficha, bajo «Agregar» */
-.met-dudas { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; padding: 0; border: 0; background: none; cursor: pointer;
+.met-dudas { display: flex; align-items: center; gap: 10px; min-height: 44px; margin: 8px 0 0; padding: 0; border: 0; background: none; cursor: pointer;
   font: inherit; font-size: 14px; letter-spacing: 0; text-transform: none; color: var(--texto-suave, #515151); text-align: left; }
 .met-dudas img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; object-position: center 15%; }
 .met-dudas span { text-decoration: underline; text-decoration-color: rgba(81,81,81,.35); text-underline-offset: 4px; }

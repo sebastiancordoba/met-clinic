@@ -862,3 +862,31 @@ footer.pie3 .pie-legal__izq { line-height:1.5; }
 }
 @media (max-width:640px) { footer.pie3 { padding-top:24px; } footer.pie3 .pie-contacto > .pie-titulo { display:none; } footer.pie3 .pie-contacto { margin-top:12px; } footer.pie3 .pie-enlaces { margin-top:12px; } footer.pie3 .pie-mapa { margin-top:16px; } footer.pie3 .pie-dato { margin-bottom:4px; } }
 @media (max-width:1000px) { html.apple footer.pie3 { padding-top:24px; } }
+
+/* ══ PULIDO EN TELÉFONO (17-nov 18:35, Sebas) ══ Áreas táctiles de 44 px sin mover el diseño (un ::before invisible
+   de 44 px de alto en los enlaces sueltos), botones del pie y del mapa de 44 px, letra mínima de 11 px. */
+@media (max-width:640px), (pointer:coarse) {
+  .pilar-hero__back, .casa__todo, .elegidos__ver, .agenda__abrir, .hero__stat__fuente, .faq-todas a, .esp-agendar,
+  .esp-social a, .pie-enlaces a, .mapa__apps a, .pie-legal a, .pie-dato a, .pie-marca a, .testimonios a[href*="doctoralia"] { position:relative; }
+  .pilar-hero__back::before, .casa__todo::before, .elegidos__ver::before, .agenda__abrir::before, .hero__stat__fuente::before,
+  .faq-todas a::before, .esp-agendar::before, .esp-social a::before, .pie-enlaces a::before, .mapa__apps a::before, .pie-legal a::before,
+  .pie-dato a::before, .pie-marca a::before, .testimonios a[href*="doctoralia"]::before {
+    content:''; position:absolute; left:-6px; right:-6px; top:50%; height:44px; transform:translateY(-50%); }
+  footer.pie3 .footer-social a, footer.pie3 .mapa__ir, .pie-mapa .mapa__ir { min-height:44px; display:inline-flex; align-items:center; justify-content:center; box-sizing:border-box; }
+  .pie-mapa .maplibregl-ctrl-group button { width:40px; height:40px; }
+}
+@media (max-width:640px) {
+  .esp-role { font-size:11px; letter-spacing:.1em; }
+  .hero__stat__unidad { font-size:11px; }
+  /* Equipo (Sebas 18:35): 2 por fila, fotos ~35 % menores que el carrusel anterior, nombre debajo; sin puntos */
+  .equipo-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px 12px; overflow:visible; margin-left:0; margin-right:0; padding:0; }
+  .equipo-grid > .esp-card--equipo { flex:none; }
+  .equipo-grid .esp-photo { aspect-ratio:4/5; max-height:none; }
+  .esp-card--equipo .esp-body { padding:10px 12px 12px; }
+  .esp-card--equipo .esp-name { font-size:15px; margin-bottom:0; }
+  .equipo-puntos { display:none; }
+  /* Hero de los servicios: el enlace secundario alineado con el botón, sin sangría */
+  .pilar-hero .btn-ghost { padding-left:0; padding-right:0; border-color:transparent; min-height:44px; display:inline-flex; align-items:center; gap:6px; }
+  .esp-card--equipo { height:auto; } .esp-card--equipo .esp-body { flex:none; min-height:0; }
+}
+

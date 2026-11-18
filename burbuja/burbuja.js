@@ -22,8 +22,19 @@
     raiz.classList.toggle('tapada', ver && tapada && !abierta());
     if (!ver && abierta()) abrir(false);
   }
+  /* Teléfono (Hermes, 17-nov): se esconde mientras bajas y vuelve al subir o al quedarte quieto ~600 ms. */
+  var angostoBurbuja = window.matchMedia('(max-width: 640px)');
+  var yPrev = 0, quieto = 0;
+  function bajando(v) {
+    if (!angostoBurbuja.matches || abierta()) { raiz.classList.remove('escondida'); yPrev = v; return; }
+    if (v > yPrev + 4) raiz.classList.add('escondida');
+    else if (v < yPrev - 4) raiz.classList.remove('escondida');
+    yPrev = v;
+    clearTimeout(quieto);
+    quieto = setTimeout(function () { raiz.classList.remove('escondida'); }, 600);
+  }
   var pendiente = false;
-  function alDesplazar() { if (pendiente) return; pendiente = true; requestAnimationFrame(function () { pendiente = false; pintar(); }); }
+  function alDesplazar() { if (pendiente) return; pendiente = true; requestAnimationFrame(function () { pendiente = false; bajando(y()); pintar(); }); }
   if (pw) pw.addEventListener('scroll', alDesplazar, { passive: true });
   window.addEventListener('scroll', alDesplazar, { passive: true });
   window.addEventListener('resize', alDesplazar, { passive: true });

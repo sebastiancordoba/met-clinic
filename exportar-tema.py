@@ -390,7 +390,9 @@ def main():
     escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx]))
     # Un solo pie en todo el sitio (Hermes 13:03): va en footer-group con su CSS y JS mínimos.
     escribir('assets/met-pie.css.liquid', '/* Generado por exportar-tema.py: no editar. Solo el pie y la barra del teléfono. */\n'
-             + css_a_tema(estilo + '\n' + apple, solo_pie=True))
+             + css_a_tema(estilo + '\n' + apple, solo_pie=True)
+             + '\n/* Con el cajón del menú abierto no se ve la barra fija del teléfono (claude-1, 18:4x) */\n'
+             + 'body:has(details#Details-menu-drawer-container[open]) .met-pg .barra-movil{visibility:hidden}\n')
     escribir('assets/met-pie.js', '/* Generado por exportar-tema.py: no editar */\n' + js_pie())
     pin = url_asset('images/web/met-positivo-03.webp')
     escribir('sections/met-pg-pie-global.liquid', seccion('pie-global', 'Pie MET', html_a_liquid(pie + '\n' + barra),
