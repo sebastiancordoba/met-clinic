@@ -1453,7 +1453,7 @@
 
     /* ══ BARRA DE CONFIANZA (17-nov 17:39, Sebas) ══ Cifra protagonista en Larken, rótulo en versalitas debajo,
        fuente como enlace sutil; separadores cortos y tenues.
-       Franja crema con filetes (Sebas eligió la A, 17:54). */
+       Base de la franja; encima va la variante B, la elegida (Sebas 18:05). */
     .hero__stats { position:relative; z-index:2; flex:0 0 auto; display:grid; grid-template-columns:repeat(3,1fr);
       background:var(--confort); border-top:1px solid rgba(130,134,127,.16); border-bottom:1px solid rgba(130,134,127,.16);
       padding:clamp(18px,2.6vh,28px) var(--margen,clamp(20px,5vw,96px)); }
@@ -1485,6 +1485,23 @@
       .hero__stat__sedes span:last-child { flex-basis:100%; } .hero__stat__sedes span:last-child::before { display:none; }
     }
 
+    /* Variante B, la elegida (Sebas 18:05): tarjeta flotante redondeada montada sobre el borde del video; en el
+       teléfono, apilada en 3 renglones. Va sobre la base de arriba. */
+    .portada { background:var(--tranquil); }
+    .portada .hero__stats { width:min(1080px, calc(100% - 2 * var(--margen,40px))); margin:calc(-1 * clamp(44px,6vh,64px)) auto 0;
+      background:rgba(251,247,239,.96); border:0; border-radius:var(--r-lg,24px);
+      box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
+    @media (max-width:640px) {
+      .portada .hero__stat__sedes span:last-child { flex-basis:auto; } .portada .hero__stat__sedes span:last-child::before { display:inline-block; }
+      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:6px 18px; border-radius:20px; }
+      .portada .hero__stat { display:grid; grid-template-columns:96px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
+        column-gap:14px; row-gap:2px; padding:10px 0; }
+      .portada .hero__stat + .hero__stat::before { left:0; right:0; top:0; width:auto; height:1px; }
+      .portada .hero__stat__num { grid-area:n; font-size:30px; }
+      .portada .hero__stat__label { grid-area:l; }
+      .portada .hero__fuente-largo { display:inline; }
+      .portada .hero__stat__sub, .portada .hero__stat__fuente { grid-area:s; justify-self:start; }
+    }
     /* ══ TECNOLOGÍA sin tarjetas, «Galería» (Sebas eligió la A, 17:55) ══ Los equipos van sueltos sobre el crema de la
        sección, recortados al borde (images/web/vitrina-*.webp, de images/equipos/), a la misma altura sobre una línea
        de piso con sombra de contacto; texto sin caja debajo; al pasar el mouse suben 4 px y la sombra se abre. */
@@ -1663,7 +1680,7 @@
   <!-- Barra de datos: debajo del hero y no dentro, para no tapar el video.
        Comparte .portada con él para que se vea completa al entrar. -->
     <!-- Barra de confianza (17-nov 17:39, Sebas): cifra en Larken, rótulo en versalitas debajo y la fuente como
-         enlace sutil (franja crema, Sebas 17:54). -->
+         enlace sutil (tarjeta flotante, Sebas 18:05). -->
     <div class="hero__stats" aria-label="MET Clinic en números">
       <div class="hero__stat">
         <div class="hero__stat__num" data-count="1366" data-suffix="+">1,366+</div>
