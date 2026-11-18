@@ -168,6 +168,11 @@ def alcance(sel: str) -> str:
 AJUSTES_TEMA = """
 .met-pg .pilar-hero{margin-top:0}
 .met-pg .portada{height:calc(100svh - var(--met-encabezado, 68px));min-height:480px}
+/* Orilla a orilla abajo en el teléfono (Sebas 18-nov 09:06): el video baja detrás de la barra flotante de Safari (100lvh);
+   gana al 100svh !important de met-apple.css (claude-1). La tarjeta de datos flota en index.html.
+   +2 px: --met-encabezado (70) mide 2 px más que el encabezado real (68) y la portada sube 2 px de más; sin ellos asoma una
+   línea crema abajo. */
+@media (max-width:640px){html body:has(.met-pg .hero) .met-pg .portada{height:calc(100lvh + 2px) !important}}
 /* Un solo «Agendar consulta» a la vista (pie.js 1): el del encabezado se esconde mientras se ve el de la portada. */
 #header-group .met-agendar{transition:opacity .3s,visibility .3s}
 html.cta-principal-visible #header-group .met-agendar{opacity:0;visibility:hidden;pointer-events:none}

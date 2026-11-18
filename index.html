@@ -1510,6 +1510,13 @@
       .portada .hero__estrellas svg:nth-child(n+2) { display:none; }
       .portada .hero__stat__sub, .portada .hero__stat__fuente, .portada .hero__stat__sedes { display:none; }
       .portada .hero__content { padding-bottom:calc(clamp(24px,4vh,40px) + 16px); }
+      /* Orilla a orilla abajo (Sebas 18-nov 09:06, iPhone): con 100svh la portada terminaba arriba de la barra flotante
+         de Safari y detrás quedaba crema. Ahora el video baja hasta 100lvh (detrás de la barra) y la tarjeta de datos
+         flota sobre él a la misma altura de antes: 12 px arriba del borde de 100svh (lvh − svh = lo que tapa la barra;
+         0 donde no hay barra). El texto deja libre el alto de la tarjeta (--tarjeta-h). */
+      .portada { position:relative; height:100lvh; --bajo-barra:calc(100lvh - 100svh + 12px); --tarjeta-h:62px; }
+      .portada .hero__stats { position:absolute; left:20px; right:20px; width:auto; margin:0; bottom:var(--bajo-barra); }
+      .portada .hero__content { padding-bottom:calc(var(--bajo-barra) + var(--tarjeta-h) + clamp(24px,4vh,40px) - 2px); }
     }
     /* Más baja (Sebas 18:08, ~40 % menos): en compu la cifra (32 px) va en la misma línea que su rótulo y la fuente
        pegada debajo, más chica; padding vertical a la mitad; separadores al 50 %. */
