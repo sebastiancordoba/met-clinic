@@ -393,7 +393,9 @@ def main():
     escribir('sections/met-pg-recursos-pilares.liquid', recursos('met-pilares.css', 'met-pilares.js'))
     # Los bloques de la portada llevan «inicio-» para no chocar con las páginas internas (preguntas ≠ inicio-preguntas).
     for k, h in bloques_idx.items():
-        extra = ld_json(idx) + '\n' if k == 'portada' else ''
+        # El póster del hero se precarga desde la propia sección (el <head> es del tema): sin esperar a met-pagina.css.
+        precargas = '\n'.join(re.findall(r'<link rel="preload" as="image"[^>]*>', idx.split('</head>')[0]))
+        extra = precargas + '\n' + ld_json(idx) + '\n' if k == 'portada' else ''
         escribir(f'sections/met-pg-inicio-{k}.liquid', seccion(k, 'Inicio ' + k, html_a_liquid(extra + h)))
     escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx]))
     # Un solo pie en todo el sitio (Hermes 13:03): va en footer-group con su CSS y JS mínimos.

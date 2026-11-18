@@ -33,13 +33,14 @@
 #   nativa de esa franja: más nítido y más ligero.
 # - +faststart. Mueve el índice al principio para que empiece a reproducir
 #   antes de terminar de bajar.
-# - EMPIEZA EN EL CUADRO 217 (Sebas, 17-nov-2026, con captura): el árbol al
-#   centro, la hiedra a la izquierda y los ventanales a la derecha (~7.9 s del
-#   original). El video se ROTA: cuadros 217…330 y luego 0…216. El punto de loop
-#   queda entre el 216 y el 217, que son cuadros seguidos del mismo paneo: no se
-#   nota. El corte viejo (330 → 0) queda a la mitad, como un corte más del montaje.
-#   Si cambia el original, busca de nuevo el cuadro (compararlo contra la captura).
-# - El póster es ese mismo cuadro 217, para que no haya brinco al arrancar. Es lo
+# - EMPIEZA CON LA TOMA DEL ÁRBOL (Sebas, 17-nov-2026): el árbol al centro, la
+#   hiedra a la izquierda y los ventanales a la derecha. Esa toma empieza en el
+#   cuadro 200 (el corte 199 → 200 del montaje, ~7.3 s del original). El video se
+#   ROTA: cuadros 200…330 y luego 0…199, así el loop cierra en un corte natural
+#   (fin de la toma del aparato → inicio del árbol). La unión vieja 330 → 0 ya era
+#   un cambio de toma y queda como un corte más. Si cambia el original, busca el
+#   corte otra vez (diferencia entre cuadros seguidos).
+# - El póster es ese mismo cuadro 200, para que no haya brinco al arrancar. Es lo
 #   que ve quien pidió menos movimiento. La hiedra pesa mucho en WebP: va a 1280 px
 #   (600 en vertical), calidad 60 y un desenfoque de 0.6 px (~130 KB y ~95 KB).
 set -euo pipefail
@@ -65,7 +66,7 @@ VERTICAL="$FILTRO,crop=720:1080:(iw-720)/2:0"
 # el original, recalcula los dos valores (duración nueva / duración original).
 RITMO="setpts=PTS*361/331"
 CUADROS="-r 9930/361"
-INICIO=217
+INICIO=200
 ROTAR="split[a][b];[a]trim=start_frame=$INICIO,setpts=PTS-STARTPTS[x];[b]trim=end_frame=$INICIO,setpts=PTS-STARTPTS[y];[x][y]concat=n=2:v=1:a=0"
 
 # shellcheck disable=SC2086

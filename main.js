@@ -268,6 +268,12 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const pedida = (location.search.match(/[?&]video=([a-z]+|\d*\.?\d+)/) || [])[1];
   const velocidad = { lento: 0.8, medio: 0.9 }[pedida] || Math.min(1.5, Math.max(0.5, parseFloat(pedida))) || 1;
   const arrancar = () => {
+    // Sin cuadro todavía, WebKit pinta el <video> en negro encima del póster (Sebas 23:41, recarga lenta en la tienda):
+    // se queda invisible (.sin-cuadro, sin transición) hasta que tiene el primer cuadro, que es el mismo del póster.
+    v.classList.add('sin-cuadro');
+    const yaHay = () => v.classList.remove('sin-cuadro');
+    v.addEventListener('loadeddata', yaHay, { once: true });
+    v.addEventListener('playing', yaHay, { once: true });
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
     if (velocidad !== 1) v.defaultPlaybackRate = v.playbackRate = velocidad;
     // Si el archivo no se puede decodificar (p. ej. AV1 que el navegador dijo aceptar), se cae a H.264.
