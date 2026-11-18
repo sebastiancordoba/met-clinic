@@ -1547,7 +1547,8 @@
     @media (max-width:640px) {
       #tecnologia .aparatos__fila > li{ flex-basis:calc((100% - 24px) / 1.5); }
       #tecnologia .aparatos__fila{ gap:24px; }
-      #tecnologia .aparato__foto{ --h:300px; }
+      /* Más altos en teléfono (Sebas 19:24): ~375 px, topados para que aparato, título y nombre quepan en pantalla (SE) */
+      #tecnologia .aparato__foto{ --h:min(375px, calc(100svh - 290px)); margin-bottom:14px; }
     }
     @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__foto img, #tecnologia .aparato__foto::after{ transition:none; } }
 
@@ -2239,7 +2240,8 @@
     </div>
     <div class="pie-legal">
       <span class="pie-legal__izq">© 2026 MET Clinic. Todos los derechos reservados.
-        <a href="https://met-clinic.myshopify.com/pages/aviso-de-privacidad">Aviso de privacidad</a> · <a href="https://met-clinic.myshopify.com/pages/terminos-y-condiciones">Términos</a></span>
+        <a href="https://met-clinic.myshopify.com/pages/aviso-de-privacidad">Aviso de privacidad</a> · <a href="https://met-clinic.myshopify.com/pages/terminos-y-condiciones">Términos</a> ·
+        <a href="https://met-clinic.myshopify.com/pages/envios-y-devoluciones">Envíos y devoluciones</a> · <a href="https://met-clinic.myshopify.com/pages/facturacion">Facturación</a></span>
       <span>Dra. Melina Trujillo Quiroz · Cédulas profesionales 9177465 · 5574513</span>
     </div>
   </footer>

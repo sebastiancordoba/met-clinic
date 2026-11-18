@@ -258,7 +258,10 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const caja = v.parentElement.getBoundingClientRect();
   const zoom = (w, h) => Math.max(caja.width / w, caja.height / h);
   const vertical = window.matchMedia('(max-width: 640px)').matches || zoom(720, 1080) < zoom(1920, 1080);
-  const av1 = v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
+  // En iPhone/iPad siempre H.264 (Sebas 19:23: no corría en su iPhone): iOS solo decodifica AV1 por hardware en los
+  // modelos recientes y H.264 lo decodifica cualquiera, con menos batería. AV1 se queda para compu y Android.
+  const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const av1 = !ios && v.canPlayType('video/mp4; codecs="av01.0.08M.10"') === 'probably';
   // Velocidad para comparar (24-oct, Sebas: «va muy rápido»): ?video=lento (0.8×, 15 s),
   // ?video=medio (0.9×, 13.4 s) o ?video=<número> para probar otra (0.5–1.5, p. ej. ?video=0.85).
   // Es sobre el archivo, que desde el 30-oct ya viene más lento: 11 tomas en 12 s (optimizar-video.sh).
@@ -267,15 +270,35 @@ document.querySelectorAll('.drawer-link').forEach(a => {
   const arrancar = () => {
     v.src = v.dataset.base + (vertical ? '-movil' : '-1080') + (av1 ? '.av1' : '') + '.mp4';
     if (velocidad !== 1) v.defaultPlaybackRate = v.playbackRate = velocidad;
-    v.play().catch(() => {});
+    // Si el archivo no se puede decodificar (p. ej. AV1 que el navegador dijo aceptar), se cae a H.264.
+    v.addEventListener('error', () => {
+      if (v.src.indexOf('av1') === -1) return;
+      v.src = v.src.replace('.av1.mp4', '.mp4').replace('av1.mp4', '.mp4');
+      intentar();
+    }, { once: true });
+    intentar();
     // Fuera de la pantalla se pausa (4-nov, rendimiento): decodificar 1080p mientras se lee el resto
     // de la página le quitaba cuadros al scroll y batería al teléfono. Al volver, sigue donde iba.
+    let visible = true;
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(([e]) => {
-        if (e.isIntersecting) v.play().catch(() => {}); else v.pause();
+        visible = e.isIntersecting;
+        if (visible) intentar(); else v.pause();
       }).observe(v.parentElement);
     }
+    // iOS bloquea el autoplay con «Modo de bajo consumo» y a veces tras volver a la pestaña: se reintenta al primer
+    // toque o desplazamiento y al volver a ver la página. Si sigue bloqueado, queda el póster fijo (fondo del div).
+    const otraVez = () => { if (visible && v.paused) intentar(); };
+    ['touchstart', 'pointerdown', 'scroll', 'keydown'].forEach((t) => window.addEventListener(t, otraVez, { passive: true }));
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) otraVez(); });
+    window.addEventListener('pageshow', otraVez);
   };
+  // iOS exige que esté silenciado al momento de play(): atributo y propiedad, siempre antes de cada intento.
+  function intentar() {
+    v.muted = true; v.defaultMuted = true; v.setAttribute('muted', ''); v.playsInline = true; v.setAttribute('playsinline', '');
+    const pr = v.play();
+    if (pr && pr.catch) pr.catch(() => {});
+  }
   if (document.readyState === 'complete') arrancar();
   else window.addEventListener('load', arrancar, { once: true });
 })();
