@@ -288,6 +288,136 @@ def css_a_tema(css: str, fuentes_tema=('Metropolis', 'Larken'), solo_pie: bool =
     return re.sub(r"url\((['\"]?)((?:images|BRANDING)/[^'\")]+)\1\)", lambda m: f"url('{url_asset(m.group(2))}')", texto)
 
 
+# ── CSS crítico de la portada (Hermes/Sebas, 17-nov 23:58) ─────────────────────────────────────────────────────────
+# En 3G la portada salía en blanco hasta que bajaba met-pagina.css (90 KB, bloqueante en el <body>). Ahora va en línea
+# solo lo que pinta la primera pantalla y met-pagina.css baja sin bloquear (preload → stylesheet). Las reglas se eligen
+# probando cada selector contra el HTML real de la portada (y sus ancestros: .met-pg, body, html) con un comparador
+# sencillo que, ante la duda, INCLUYE la regla (pseudo-clases, :not/:has/:is, atributos y hermanos cuentan como
+# coincidencia): sobra algún byte, nunca falta una regla.
+class _Nodo:
+    def __init__(self, tag, attrs, padre):
+        self.tag, self.padre, self.hijos = tag, padre, []
+        a = dict(attrs)
+        self.id = a.get('id') or ''
+        self.clases = set((a.get('class') or '').split())
+        if padre is not None:
+            padre.hijos.append(self)
+
+
+def _arbol(html: str):
+    from html.parser import HTMLParser
+    vacios = {'br', 'img', 'input', 'meta', 'link', 'source', 'hr', 'wbr', 'path', 'circle', 'rect', 'line', 'polyline',
+              'polygon', 'ellipse', 'use', 'stop'}
+    raiz = _Nodo('html', [], None)
+    body = _Nodo('body', [], raiz)
+    pg = _Nodo('div', [('class', 'met-pg redondeado apple')], body)
+    nodos = [raiz, body, pg]
+
+    class P(HTMLParser):
+        pila = [pg]
+
+        def handle_starttag(self, tag, attrs):
+            n = _Nodo(tag, attrs, self.pila[-1])
+            nodos.append(n)
+            if tag not in vacios:
+                self.pila.append(n)
+
+        def handle_startendtag(self, tag, attrs):
+            nodos.append(_Nodo(tag, attrs, self.pila[-1]))
+
+        def handle_endtag(self, tag):
+            for i in range(len(self.pila) - 1, 0, -1):
+                if self.pila[i].tag == tag:
+                    del self.pila[i:]
+                    break
+    P(convert_charrefs=True).feed(html)
+    return nodos
+
+
+def _compuesto_ok(comp: str, n: '_Nodo') -> bool:
+    comp = re.sub(r'\[[^\]]*\]', '', comp)
+    m = re.match(r'^([a-zA-Z][\w-]*|\*)?', comp)
+    tag = m.group(1) if m else None
+    if tag and tag != '*' and tag.lower() != n.tag:
+        return False
+    for t, v in re.findall(r'([.#])([\w-]+)', comp):
+        if t == '.' and v not in n.clases:
+            return False
+        if t == '#' and v != n.id:
+            return False
+    return True
+
+
+def _selector_toca(sel: str, nodos) -> bool:
+    sel = re.sub(r'::?-?[\w-]+\((?:[^()]|\([^()]*\))*\)', '', sel)   # :not(…), :has(…), :is(…), :nth-child(…)
+    sel = re.sub(r'::?-?[\w-]+', '', sel)                             # :hover, ::before, ::-webkit-…
+    sel = re.sub(r'\[[^\]]*\]', '', sel)
+    comps, combs = [], []
+    for tok in re.sub(r'\s*([>+~])\s*', r' \1 ', sel).split():
+        if tok in ('>', '+', '~'):
+            combs.append(tok)
+        else:
+            if len(comps) > len(combs):
+                combs.append(' ')
+            comps.append(tok)
+    if not comps:
+        return True
+    if len(comps) != len(combs) + 1:
+        return True  # no lo entendí: se queda
+
+    def baja(n, i):
+        if not _compuesto_ok(comps[i] or '*', n):
+            return False
+        if i == 0:
+            return True
+        c = combs[i - 1]
+        if c == '>':
+            return n.padre is not None and baja(n.padre, i - 1)
+        if c in '+~':
+            if n.padre is None:
+                return False
+            hermanos = n.padre.hijos[:n.padre.hijos.index(n)]
+            return any(baja(h, i - 1) for h in (hermanos[-1:] if c == '+' else hermanos))
+        a = n.padre
+        while a is not None:
+            if baja(a, i - 1):
+                return True
+            a = a.padre
+        return False
+    return any(baja(n, len(comps) - 1) for n in nodos)
+
+
+def css_critico(css: str, html: str, js: str = '') -> str:
+    nodos = _arbol(html)
+    # Las clases que pone el JS (hero--loaded, visible, s-active…) no están en el HTML: se quitan de los selectores para
+    # que sus reglas entren (si no, el texto del hero se quedaba en opacity:0 hasta que llegara met-pagina.css).
+    de_js = set(re.findall(r"classList\.(?:add|toggle|replace)\(\s*'([\w-]+)'", js))
+    usadas, ks = set(), []
+
+    def filtra(texto):
+        out = []
+        for cab, cuerpo in bloques(texto):
+            if cuerpo is None:
+                continue
+            if cab.startswith(('@keyframes', '@-webkit-keyframes')):
+                ks.append((cab.split()[-1], f'{cab}{{{cuerpo.strip()}}}'))
+            elif cab.startswith('@font-face'):
+                out.append(f'{cab}{{{cuerpo.strip()}}}')
+            elif cab.startswith(('@media', '@supports', '@container', '@layer')):
+                dentro = filtra(cuerpo)
+                if dentro:
+                    out.append(f'{cab}{{' + '\n'.join(dentro) + '}')
+            elif cab.startswith('@'):
+                continue
+            elif any(_selector_toca(re.sub(r'\.(' + '|'.join(map(re.escape, de_js)) + r')(?![\w-])', '', x) if de_js else x, nodos)
+                     for x in partir_selectores(cab)):
+                usadas.update(re.findall(r'animation(?:-name)?\s*:\s*([\w-]+)', cuerpo))
+                out.append(f'{cab}{{{cuerpo.strip()}}}')
+        return out
+    reglas = filtra(re.sub(r'/\*.*?\*/', '', css, flags=re.S))
+    reglas += [k for nombre, k in ks if nombre in usadas]
+    return re.sub(r'\n\s+', '\n', '\n'.join(reglas))
+
 # ── JS ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 def js_pie() -> str:
     pie = (RAIZ / 'pie.js').read_text()
@@ -328,12 +458,26 @@ def seccion(nombre: str, titulo: str, html: str, extra_head: str = '') -> str:
             f"{extra_head}<div class=\"{ENVOLTURA}\">\n{html.strip()}\n</div>\n\n{{% schema %}}\n{esquema}\n{{% endschema %}}\n")
 
 
-def recursos(css_asset: str, js_principal: str) -> str:
+def recursos(css_asset: str, js_principal: str, critico: str = '') -> str:
     pin = url_asset('images/web/met-positivo-03.webp')
-    return seccion('recursos', 'Recursos página',
-                   '', f"{{{{ '{css_asset}' | asset_url | stylesheet_tag }}}}\n"
-                       f"<script>window.metPg = {{ mapa: {{{{ 'met-mapa-pie.js' | asset_url | json }}}}, pin: \"{pin}\" }};</script>\n"
+    datos = (f"<script>window.metPg = {{ mapa: {{{{ 'met-mapa-pie.js' | asset_url | json }}}}, pin: \"{pin}\" }};</script>\n")
+    if not critico:
+        return seccion('recursos', 'Recursos página', '', f"{{{{ '{css_asset}' | asset_url | stylesheet_tag }}}}\n" + datos +
                        f"<script src=\"{{{{ '{js_principal}' | asset_url }}}}\" defer></script>\n")
+    # Portada: el CSS de la primera pantalla en línea; el resto baja con prioridad alta sin bloquear el pintado
+    # (preload → stylesheet). El JS de la página corre cuando ya está ese CSS: mide carruseles y no debe medir
+    # contenido sin estilo. La vuelta arriba al recargar (JS_RECARGA) va en línea porque tiene que correr antes de pageshow.
+    return seccion('recursos', 'Recursos página', '',
+                   f"<style>{critico}</style>\n" + datos +
+                   "<script>window.metPgCss = function (l) { if (l) l.rel = 'stylesheet'; if (window.metPgJs) return; "
+                   "window.metPgJs = 1; var s = document.createElement('script'); "
+                   f"s.src = {{{{ '{js_principal}' | asset_url | json }}}}; document.head.appendChild(s); }};</script>\n"
+                   f"<link rel=\"preload\" as=\"style\" href=\"{{{{ '{css_asset}' | asset_url }}}}\" onload=\"metPgCss(this)\">\n"
+                   f"<noscript>{{{{ '{css_asset}' | asset_url | stylesheet_tag }}}}</noscript>\n"
+                   # Respaldo por si el navegador no dispara onload del preload (o ya estaba en caché antes de definirlo).
+                   "<script>addEventListener('load', function () { var l = document.querySelector('link[rel=preload][as=style][onload]'); "
+                   "if (l) metPgCss(l); else metPgCss(); });</script>\n"
+                   f"<script>{JS_RECARGA}</script>\n")
 
 
 def entre(html: str, ini: str, fin: str) -> str:
@@ -373,7 +517,7 @@ def main():
              css_a_tema((RAIZ / 'pilares.css').read_text() + '\n' + apple) + AJUSTES_TEMA)
 
     # JS
-    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + JS_MENU_TEMA + JS_RECARGA)
+    escribir('assets/met-pagina.js', '/* Generado por exportar-tema.py: no editar */\n' + js_main() + JS_MENU_TEMA)
     escribir('assets/met-pilares.js', '/* Generado por exportar-tema.py: no editar */\n' + (RAIZ / 'pilares.js').read_text() + JS_MENU_TEMA)
     escribir('assets/met-mapa-pie.js', js_mapa())
 
@@ -389,13 +533,20 @@ def main():
     }
     pie = entre(cuerpo, '<footer class="pie3"', '</footer>')
     barra = entre(cuerpo, '<nav class="barra-movil', '</nav>')
-    escribir('sections/met-pg-recursos.liquid', recursos('met-pagina.css', 'met-pagina.js'))
+    css_pagina = css_a_tema(estilo + '\n' + apple) + AJUSTES_TEMA
+    # + AJUSTES_TEMA entero: son pocas reglas y varias apuntan al encabezado del tema (#header-group), que no está en el árbol.
+    critico = css_critico(css_pagina, bloques_idx['portada'], js_main()) + AJUSTES_TEMA
+    escribir('sections/met-pg-recursos.liquid', recursos('met-pagina.css', 'met-pagina.js', critico))
     escribir('sections/met-pg-recursos-pilares.liquid', recursos('met-pilares.css', 'met-pilares.js'))
     # Los bloques de la portada llevan «inicio-» para no chocar con las páginas internas (preguntas ≠ inicio-preguntas).
     for k, h in bloques_idx.items():
         # El póster del hero se precarga desde la propia sección (el <head> es del tema): sin esperar a met-pagina.css.
         precargas = '\n'.join(re.findall(r'<link rel="preload" as="image"[^>]*>', idx.split('</head>')[0]))
         extra = precargas + '\n' + ld_json(idx) + '\n' if k == 'portada' else ''
+        if k == 'portada':
+            # La entrada del texto del hero (hero--loaded) no espera a met-pagina.js, que ahora llega después de su CSS.
+            h += ("\n<script>requestAnimationFrame(function () { var h = document.querySelector('.met-pg .hero');"
+                  " if (h) h.classList.add('hero--loaded'); });</script>")
         escribir(f'sections/met-pg-inicio-{k}.liquid', seccion(k, 'Inicio ' + k, html_a_liquid(extra + h)))
     escribir('templates/index.json', plantilla(['recursos'] + ['inicio-' + k for k in bloques_idx]))
     # Un solo pie en todo el sitio (Hermes 13:03): va en footer-group con su CSS y JS mínimos.
