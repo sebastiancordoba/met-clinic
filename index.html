@@ -1491,19 +1491,19 @@
     .portada .hero__stats { width:min(1080px, calc(100% - 2 * var(--margen,40px))); margin:calc(-1 * clamp(44px,6vh,64px)) auto 0;
       background:rgba(251,247,239,.96); border:0; border-radius:var(--r-lg,24px);
       box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
+    /* Teléfono: fila compacta de 3 columnas (Sebas eligió la A, 19:08): cifra arriba (22 px) y rótulo corto abajo, sin la
+       tercera línea; separadores finos; sigue montada sobre el borde del video. En compu sigue la tarjeta B. */
+    .solo-tel { display:none; }
     @media (max-width:640px) {
-      .portada .hero__stat__sedes span:last-child { flex-basis:auto; } .portada .hero__stat__sedes span:last-child::before { display:inline-block; }
-      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 40px); margin-top:-18px; padding:3px 18px; border-radius:20px; }
-      .portada .hero__stat { display:grid; grid-template-columns:84px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
-        column-gap:12px; row-gap:0; padding:3px 0; }
-      .portada .hero__stat__label { display:inline-flex; align-items:center; gap:6px; line-height:1.2; }
+      .solo-compu { display:none; } .solo-tel { display:inline; }
+      .portada .hero__stats { grid-template-columns:repeat(3,1fr); width:calc(100% - 40px); margin-top:-18px; padding:12px 6px; border-radius:20px; }
+      .portada .hero__stat { display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px; padding:0 4px; }
+      .portada .hero__stat + .hero__stat::before { left:0; right:auto; top:22%; height:56%; width:1px; }
+      .portada .hero__stat__num { font-size:22px; }
+      .portada .hero__stat__label { display:inline-flex; align-items:center; gap:4px; font-size:11px; letter-spacing:.08em; line-height:1.2; }
+      .portada .hero__estrellas svg:nth-child(n+2) { display:none; }
+      .portada .hero__stat__sub, .portada .hero__stat__fuente, .portada .hero__stat__sedes { display:none; }
       .portada .hero__content { padding-bottom:calc(clamp(24px,4vh,40px) + 16px); }
-      .portada .hero__stat + .hero__stat::before { left:0; right:0; top:0; width:auto; height:1px; }
-      .portada .hero__stat__num { grid-area:n; font-size:24px; }
-      .portada .hero__stat__sub, .portada .hero__stat__fuente, .portada .hero__stat__sedes { line-height:1.25; }
-      .portada .hero__stat__label { grid-area:l; }
-      .portada .hero__fuente-largo { display:inline; }
-      .portada .hero__stat__sub, .portada .hero__stat__fuente { grid-area:s; justify-self:start; }
     }
     /* Más baja (Sebas 18:08, ~40 % menos): en compu la cifra (32 px) va en la misma línea que su rótulo y la fuente
        pegada debajo, más chica; padding vertical a la mitad; separadores al 50 %. */
@@ -1752,12 +1752,12 @@
     <div class="hero__stats" aria-label="MET Clinic en números">
       <div class="hero__stat">
         <div class="hero__stat__num" data-count="1366" data-suffix="+">1,366+</div>
-        <div class="hero__stat__label">Opiniones verificadas</div>
+        <div class="hero__stat__label"><span class="solo-compu">Opiniones verificadas</span><span class="solo-tel">Opiniones</span></div>
         <a class="hero__stat__fuente" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Doctoralia<span class="hero__fuente-largo"> · Ver opiniones</span> <span aria-hidden="true">→</span></a>
       </div>
       <div class="hero__stat">
         <div class="hero__stat__num">5.0</div>
-        <div class="hero__stat__label"><span class="hero__estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>Calificación</div>
+        <div class="hero__stat__label"><span class="hero__estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="solo-compu">Calificación</span><span class="solo-tel">Doctoralia</span></div>
         <div class="hero__stat__sub">Doctoralia</div>
       </div>
       <div class="hero__stat">
