@@ -379,7 +379,7 @@ def main():
         'preguntas': entre(cuerpo, '<section id="preguntas"', '</section>'),
         'contacto': entre(cuerpo, '<section id="contacto">', '</section>'),
     }
-    pie = entre(cuerpo, '<footer class="pie3">', '</footer>')
+    pie = entre(cuerpo, '<footer class="pie3"', '</footer>')
     barra = entre(cuerpo, '<nav class="barra-movil', '</nav>')
     escribir('sections/met-pg-recursos.liquid', recursos('met-pagina.css', 'met-pagina.js'))
     escribir('sections/met-pg-recursos-pilares.liquid', recursos('met-pilares.css', 'met-pilares.js'))
