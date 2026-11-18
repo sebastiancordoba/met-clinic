@@ -1493,15 +1493,32 @@
       box-shadow:0 1px 1px rgba(38,38,38,.03), 0 30px 60px -30px rgba(38,38,38,.35); padding:clamp(20px,2.8vh,30px) 12px; }
     @media (max-width:640px) {
       .portada .hero__stat__sedes span:last-child { flex-basis:auto; } .portada .hero__stat__sedes span:last-child::before { display:inline-block; }
-      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:6px 18px; border-radius:20px; }
-      .portada .hero__stat { display:grid; grid-template-columns:96px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
-        column-gap:14px; row-gap:2px; padding:10px 0; }
+      .portada .hero__stats { grid-template-columns:1fr; width:calc(100% - 32px); margin-top:-18px; padding:3px 18px; border-radius:20px; }
+      .portada .hero__stat { display:grid; grid-template-columns:84px 1fr; grid-template-areas:"n l" "n s"; align-items:center; text-align:left;
+        column-gap:12px; row-gap:0; padding:3px 0; }
+      .portada .hero__stat__label { display:inline-flex; align-items:center; gap:6px; line-height:1.2; }
+      .portada .hero__content { padding-bottom:calc(clamp(24px,4vh,40px) + 16px); }
       .portada .hero__stat + .hero__stat::before { left:0; right:0; top:0; width:auto; height:1px; }
-      .portada .hero__stat__num { grid-area:n; font-size:30px; }
+      .portada .hero__stat__num { grid-area:n; font-size:24px; }
+      .portada .hero__stat__sub, .portada .hero__stat__fuente, .portada .hero__stat__sedes { line-height:1.25; }
       .portada .hero__stat__label { grid-area:l; }
       .portada .hero__fuente-largo { display:inline; }
       .portada .hero__stat__sub, .portada .hero__stat__fuente { grid-area:s; justify-self:start; }
     }
+    /* Más baja (Sebas 18:08, ~40 % menos): en compu la cifra (32 px) va en la misma línea que su rótulo y la fuente
+       pegada debajo, más chica; padding vertical a la mitad; separadores al 50 %. */
+    @media (min-width:641px) {
+      .portada .hero__stats { margin-top:calc(-1 * clamp(28px,3.6vh,36px)); padding:clamp(10px,1.4vh,14px) 12px; }
+      .portada .hero__stat { display:grid; grid-template-columns:auto auto; grid-template-areas:"n l" "s s"; justify-content:center;
+        align-items:baseline; column-gap:10px; row-gap:1px; }
+      .portada .hero__stat + .hero__stat::before { top:25%; height:50%; }
+      .portada .hero__stat__num { grid-area:n; font-size:32px; }
+      .portada .hero__stat__label { grid-area:l; display:inline-flex; align-items:center; gap:8px; }
+      .portada .hero__stat__sub, .portada .hero__stat__fuente { grid-area:s; justify-self:center; font-size:11px; }
+      .portada .hero__stat__fuente { padding-bottom:0; }
+      .portada .hero__content { padding-bottom:calc(clamp(32px,7vh,72px) + 12px); }
+    }
+    .hero__stat__label .hero__estrellas { margin-right:2px; }
     /* ══ TECNOLOGÍA sin tarjetas, «Galería» (Sebas eligió la A, 17:55) ══ Los equipos van sueltos sobre el crema de la
        sección, recortados al borde (images/web/vitrina-*.webp, de images/equipos/), a la misma altura sobre una línea
        de piso con sombra de contacto; texto sin caja debajo; al pasar el mouse suben 4 px y la sombra se abre. */
@@ -1689,8 +1706,8 @@
       </div>
       <div class="hero__stat">
         <div class="hero__stat__num">5.0</div>
-        <div class="hero__stat__label">Calificación</div>
-        <div class="hero__stat__sub"><span class="hero__estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>Doctoralia</div>
+        <div class="hero__stat__label"><span class="hero__estrellas" role="img" aria-label="5 de 5 estrellas"><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span>Calificación</div>
+        <div class="hero__stat__sub">Doctoralia</div>
       </div>
       <div class="hero__stat">
         <div class="hero__stat__num">9<span class="hero__stat__unidad"> años</span></div>
