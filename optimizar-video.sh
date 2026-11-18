@@ -33,9 +33,15 @@
 #   nativa de esa franja: más nítido y más ligero.
 # - +faststart. Mueve el índice al principio para que empiece a reproducir
 #   antes de terminar de bajar.
-# - El póster es el cuadro del segundo 4: la recepción con el logo iluminado.
-#   Es lo que se ve mientras carga y lo que ve quien pidió menos movimiento,
-#   así que tiene que poder sostenerse solo.
+# - EMPIEZA EN EL CUADRO 217 (Sebas, 17-nov-2026, con captura): el árbol al
+#   centro, la hiedra a la izquierda y los ventanales a la derecha (~7.9 s del
+#   original). El video se ROTA: cuadros 217…330 y luego 0…216. El punto de loop
+#   queda entre el 216 y el 217, que son cuadros seguidos del mismo paneo: no se
+#   nota. El corte viejo (330 → 0) queda a la mitad, como un corte más del montaje.
+#   Si cambia el original, busca de nuevo el cuadro (compararlo contra la captura).
+# - El póster es ese mismo cuadro 217, para que no haya brinco al arrancar. Es lo
+#   que ve quien pidió menos movimiento. La hiedra pesa mucho en WebP: va a 1280 px
+#   (600 en vertical), calidad 60 y un desenfoque de 0.6 px (~130 KB y ~95 KB).
 set -euo pipefail
 
 SRC="${1:?uso: ./optimizar-video.sh <video original>}"
@@ -59,24 +65,27 @@ VERTICAL="$FILTRO,crop=720:1080:(iw-720)/2:0"
 # el original, recalcula los dos valores (duración nueva / duración original).
 RITMO="setpts=PTS*361/331"
 CUADROS="-r 9930/361"
+INICIO=217
+ROTAR="split[a][b];[a]trim=start_frame=$INICIO,setpts=PTS-STARTPTS[x];[b]trim=end_frame=$INICIO,setpts=PTS-STARTPTS[y];[x][y]concat=n=2:v=1:a=0"
 
 # shellcheck disable=SC2086
 {
-  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,$RITMO,format=yuv420p"     $CUADROS $H264 video/hero-1080.mp4
-  ffmpeg -v error -y -i "$SRC" -an -vf "$COMPLETO,$RITMO,format=yuv420p10le" $CUADROS $AV1  video/hero-1080.av1.mp4 2>/dev/null
-  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,$RITMO,format=yuv420p"     $CUADROS $H264 video/hero-movil.mp4
-  ffmpeg -v error -y -i "$SRC" -an -vf "$VERTICAL,$RITMO,format=yuv420p10le" $CUADROS $AV1  video/hero-movil.av1.mp4 2>/dev/null
+  ffmpeg -v error -y -i "$SRC" -an -filter_complex "[0:v]$COMPLETO,$RITMO,$ROTAR,format=yuv420p[o]"     -map '[o]' $CUADROS $H264 video/hero-1080.mp4
+  ffmpeg -v error -y -i "$SRC" -an -filter_complex "[0:v]$COMPLETO,$RITMO,$ROTAR,format=yuv420p10le[o]" -map '[o]' $CUADROS $AV1  video/hero-1080.av1.mp4 2>/dev/null
+  ffmpeg -v error -y -i "$SRC" -an -filter_complex "[0:v]$VERTICAL,$RITMO,$ROTAR,format=yuv420p[o]"     -map '[o]' $CUADROS $H264 video/hero-movil.mp4
+  ffmpeg -v error -y -i "$SRC" -an -filter_complex "[0:v]$VERTICAL,$RITMO,$ROTAR,format=yuv420p10le[o]" -map '[o]' $CUADROS $AV1  video/hero-movil.av1.mp4 2>/dev/null
 }
 
 TMP="$(mktemp -t poster).png"
-ffmpeg -v error -y -ss 4.0 -i "$SRC" -frames:v 1 -vf "$FILTRO,scale=1600:-2" "$TMP"
+POSTER="select=eq(n\\,$INICIO),$FILTRO"
+ffmpeg -v error -y -i "$SRC" -frames:v 1 -vf "$POSTER,scale=1280:-2:flags=lanczos" "$TMP"
 python3 -c "
-from PIL import Image
-Image.open('$TMP').convert('RGB').save('images/web/hero-poster.webp', 'WEBP', quality=78, method=6)"
-ffmpeg -v error -y -ss 4.0 -i "$SRC" -frames:v 1 -vf "$VERTICAL" "$TMP"
+from PIL import Image, ImageFilter
+Image.open('$TMP').convert('RGB').filter(ImageFilter.GaussianBlur(0.6)).save('images/web/hero-poster.webp', 'WEBP', quality=60, method=6)"
+ffmpeg -v error -y -i "$SRC" -frames:v 1 -vf "$POSTER,crop=720:1080:(iw-720)/2:0,scale=600:-2:flags=lanczos" "$TMP"
 python3 -c "
-from PIL import Image
-Image.open('$TMP').convert('RGB').save('images/web/hero-poster-movil.webp', 'WEBP', quality=80, method=6)"
+from PIL import Image, ImageFilter
+Image.open('$TMP').convert('RGB').filter(ImageFilter.GaussianBlur(0.6)).save('images/web/hero-poster-movil.webp', 'WEBP', quality=60, method=6)"
 rm -f "$TMP"
 
 for f in video/hero-*.mp4 images/web/hero-poster*.webp; do
