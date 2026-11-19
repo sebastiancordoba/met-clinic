@@ -1,0 +1,64 @@
+<!doctype html>
+<!--
+  Ruta estable del QR de las cajas (Sebas, 19-nov 08:23): https://metclinic.com.mx/qr
+  El QR impreso apunta SIEMPRE aquí; nunca a met-clinic.myshopify.com. Lo único que cambia es el destino:
+    · Hoy (tienda con contraseña): esta página «Muy pronto» con WhatsApp y agenda.
+    · El día que Sebas abra la tienda: TIENDA_ABIERTA = true (y TIENDA = el dominio final de la tienda). La página
+      redirige con utm_source=caja&utm_medium=qr (las UTM van aquí, no en el QR).
+  Archivos del QR: ~/hermes-workspace/adjuntos-avisos/metclinic-qr*. Responde solo cuando metclinic.com.mx esté
+  conectado (DNS en Cloudflare, sin registros a 19-nov; se conecta solo con orden de Sebas).
+-->
+<html lang="es-MX" class="redondeado">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex" />
+  <title>Tienda MET Clinic · Muy pronto</title>
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/web/favicon-32.png" />
+  <script>
+    (function () {
+      var TIENDA_ABIERTA = false;
+      var TIENDA = 'https://tienda.metclinic.com.mx/';
+      if (!TIENDA_ABIERTA) return;
+      var u = new URL(TIENDA);
+      u.searchParams.set('utm_source', 'caja');
+      u.searchParams.set('utm_medium', 'qr');
+      location.replace(u.toString());
+    })();
+  </script>
+  <style>
+    @font-face { font-family:'Metropolis'; src:url('../BRANDING/webfonts/metropolis-400.woff2') format('woff2'); font-weight:400; font-display:swap; }
+    @font-face { font-family:'Metropolis'; src:url('../BRANDING/webfonts/metropolis-600.woff2') format('woff2'); font-weight:600; font-display:swap; }
+    @font-face { font-family:'Larken'; src:url('../BRANDING/webfonts/larken-300.woff2') format('woff2'); font-weight:300; font-display:swap; }
+    :root { --sage:#82867F; --tranquil:#F2F2ED; --confort:#F7EDDC; --dark:#262626; --texto-suave:#515151; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; background:var(--tranquil); color:var(--dark); font-family:'Metropolis', system-ui, sans-serif; }
+    main { min-height:100svh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+      padding:calc(40px + env(safe-area-inset-top)) 24px calc(40px + env(safe-area-inset-bottom)); gap:20px; }
+    img { width:96px; height:auto; }
+    .eyebrow { font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--texto-suave); margin:0; }
+    h1 { font-family:'Larken', Georgia, serif; font-weight:300; font-size:clamp(34px, 9vw, 52px); line-height:1.05; margin:0; color:var(--sage); }
+    p { max-width:34ch; line-height:1.55; color:var(--texto-suave); margin:0; }
+    .botones { display:flex; flex-direction:column; gap:12px; width:min(320px, 100%); margin-top:8px; }
+    .botones a { display:flex; align-items:center; justify-content:center; min-height:50px; border-radius:999px; text-decoration:none;
+      font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+    .wa { background:var(--dark); color:var(--confort); }
+    .cita { border:1px solid var(--sage); color:var(--dark); }
+    .inicio { font-size:13px; color:var(--texto-suave); }
+  </style>
+</head>
+<body>
+  <main>
+    <img src="../images/web/met-positivo-03.webp" alt="MET Clinic" width="96" height="96" />
+    <p class="eyebrow">Tienda en línea</p>
+    <h1>Muy pronto</h1>
+    <p>Gracias por tu compra. Estamos preparando la tienda en línea de MET Clinic; mientras tanto, escríbenos y con gusto te ayudamos a resurtir tus productos.</p>
+    <div class="botones">
+      <a class="wa" href="https://wa.me/525540099923?text=Hola%2C%20vengo%20del%20QR%20de%20mi%20caja%20MET%20Clinic" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+      <a class="cita" href="https://www.doctoralia.com.mx/melina-trujillo-quiroz/ginecologo/ciudad-de-mexico" target="_blank" rel="noopener">Agendar consulta</a>
+    </div>
+    <a class="inicio" href="../">metclinic.com.mx</a>
+  </main>
+</body>
+</html>
