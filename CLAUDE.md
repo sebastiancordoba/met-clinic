@@ -111,7 +111,7 @@ Things worth knowing before editing:
 - **Datos verificados:** precios, formas de pago, aseguradoras, consulta en línea y formación de la doctora salen de su
   perfil de Doctoralia (revisado el 23-oct-2026). Viven en `preguntas.html` (más su JSON-LD FAQPage), las 4 de
   #preguntas en la portada, `nosotros.html#proceso`, #contacto y la tarjeta de la doctora: si cambia uno, cámbialo en todos. Pendiente de confirmar con
-  ella: la página dice «9 años» y 4 idiomas; Doctoralia dice 11 años y español/inglés.
+  ella: la portada dice «10 años» de formación (Sebas, 23-nov) y 4 idiomas; Doctoralia dice 11 años y español/inglés.
 - **Hero:** el póster del video va como fondo precargado del `<div>`, no como atributo `poster` (LCP en celular
   2.9 → 2.4 s). En el teléfono, el hueco de la barra fija de contacto va en el `footer`, no en el `body`.
   Video y barra de datos viven en `.portada`, de alto `100svh`, para que la barra de datos se vea entera al
