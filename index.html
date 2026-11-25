@@ -1561,8 +1561,6 @@
        #515151 sobre #ECE8E2 da 6.4:1 y #262626 13:1 (AA). Única excepción a «solo tranquil y confort». */
     #servicios:has(> #tecnologia) { padding-bottom:0; }
     #tecnologia { background:#ECE8E2; margin-top:clamp(32px,4vw,56px); padding-top:clamp(32px,4vw,56px); padding-bottom:clamp(40px,5vw,72px); }
-    /* Aire para la sombra del hover (la fila corta en y por el overflow-x) */
-    #tecnologia .aparatos__fila{ padding-bottom:30px; margin-bottom:-24px; }
     /* Aparatos ~35 % más altos (Sebas 18:16): menos aire arriba de la sección para que no crezca de más */
     #tecnologia { margin-top:clamp(24px,3vw,40px); }
     #tecnologia .aparato, html.apple #tecnologia .aparato {
@@ -1588,43 +1586,36 @@
       #tecnologia .aparato__foto{ --h:min(375px, calc(100svh - 290px)); margin-bottom:14px; }
     }
     @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__foto img, #tecnologia .aparato__foto::after{ transition:none; } }
-    /* Hover de la galería (Sebas 25-nov 17:46): la tarjeta sube 5 px y gana un vidrio sutil (borde claro, sombra suave),
-       el equipo crece al 103.5 %, «Ver tratamiento» se subraya y la flecha avanza; las demás bajan al 85 %. 250 ms
-       ease-out; igual con :focus-visible. Solo con mouse (hover:hover): en táctil no se queda pegado. El borde y el
-       padding ya están en reposo (transparentes) para que nada brinque. */
-    #tecnologia .aparato, html.apple #tecnologia .aparato { padding:12px 12px 14px; border:1px solid transparent !important;
-      border-radius:var(--r-lg,20px) !important; transition:transform .25s ease-out, background-color .25s ease-out, border-color .25s ease-out,
-      box-shadow .25s ease-out, opacity .25s ease-out; }
-    #tecnologia .aparato__foto img { transition:transform .25s ease-out; }
-    #tecnologia .aparato__foto::after { transition:transform .25s ease-out, opacity .25s ease-out; }
+    /* Hover de la galería (Sebas 25-nov 17:55; reemplaza la tarjeta de vidrio de 17:46): SOLO el aparato crece al 107 %
+       desde abajo al centro, 300 ms ease-out, con la sombra de piso un poco más marcada; «Ver tratamiento» se subraya y
+       la flecha avanza. Sin fondo, borde ni sombra de tarjeta, la tarjeta no sube y las demás no se atenúan. Igual con
+       :focus-visible; el mouse solo con (hover:hover), para que en táctil no se quede pegado. */
+    #tecnologia .aparato__foto img { transform-origin:50% 100%; transition:transform .3s ease-out; }
+    #tecnologia .aparato__foto::after { transition:transform .3s ease-out, opacity .3s ease-out; }
     #tecnologia .aparato__ver-txt { background:linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat; padding-bottom:2px;
-      transition:background-size .25s ease-out; }
-    #tecnologia .aparato__flechita { display:inline-block; transition:transform .25s ease-out; }
-    #tecnologia .aparato:hover .aparato__foto img { transform:none; }
-    #tecnologia .aparato:focus-visible { outline:2px solid var(--dark); outline-offset:2px; }
-    #tecnologia .aparato:focus-visible,
-    html.apple #tecnologia .aparato:focus-visible {
-      transform:translateY(-5px); background:rgba(255,255,255,.5) !important; border-color:rgba(255,255,255,.75) !important;
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 18px 40px -22px rgba(38,38,38,.3) !important;
-      -webkit-backdrop-filter:blur(12px) saturate(140%); backdrop-filter:blur(12px) saturate(140%); }
-    #tecnologia .aparato:focus-visible .aparato__foto img { transform:scale(1.035); transform-origin:50% 100%; }
+      transition:background-size .3s ease-out; }
+    #tecnologia .aparato__flechita { display:inline-block; transition:transform .3s ease-out; }
+    #tecnologia .aparato:hover .aparato__foto img, #tecnologia .aparato:hover .aparato__foto::after { transform:none; opacity:1; }
+    #tecnologia .aparato:focus-visible { outline:none; }
+    #tecnologia .aparato:focus-visible .aparato__foto img { transform:scale(1.07); }
+    #tecnologia .aparato:focus-visible .aparato__foto::after { transform:scaleX(1.14) scaleY(1.25); opacity:1;
+      background:radial-gradient(closest-side, rgba(38,38,38,.36), rgba(38,38,38,0)); }
     #tecnologia .aparato:focus-visible .aparato__ver { color:var(--dark); }
     #tecnologia .aparato:focus-visible .aparato__ver-txt { background-size:100% 1px; }
     #tecnologia .aparato:focus-visible .aparato__flechita { transform:translateX(4px); }
-    #tecnologia .aparatos__fila:has(.aparato:focus-visible) .aparato:not(:focus-visible) { opacity:.85; }
     @media (hover:hover) {
-      #tecnologia .aparato:hover,
-      html.apple #tecnologia .aparato:hover {
-        transform:translateY(-5px); background:rgba(255,255,255,.5) !important; border-color:rgba(255,255,255,.75) !important;
-        box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 18px 40px -22px rgba(38,38,38,.3) !important;
-        -webkit-backdrop-filter:blur(12px) saturate(140%); backdrop-filter:blur(12px) saturate(140%); }
-      #tecnologia .aparato:hover .aparato__foto img { transform:scale(1.035); transform-origin:50% 100%; }
+      #tecnologia .aparato:hover .aparato__foto img { transform:scale(1.07); }
+      #tecnologia .aparato:hover .aparato__foto::after { transform:scaleX(1.14) scaleY(1.25); opacity:1;
+        background:radial-gradient(closest-side, rgba(38,38,38,.36), rgba(38,38,38,0)); }
       #tecnologia .aparato:hover .aparato__ver { color:var(--dark); }
       #tecnologia .aparato:hover .aparato__ver-txt { background-size:100% 1px; }
       #tecnologia .aparato:hover .aparato__flechita { transform:translateX(4px); }
-      #tecnologia .aparatos__fila:has(.aparato:hover) .aparato:not(:hover) { opacity:.85; }
     }
-    @media (prefers-reduced-motion: reduce) { #tecnologia .aparato, #tecnologia .aparato__flechita { transition:none; } }
+    /* Que no se recorte al crecer: la fila corta en x e y por su overflow-x, así que lleva margen por dentro (arriba,
+       lo que crece el aparato más alto; a los lados, la mitad de lo que crece el más ancho) compensado por fuera. */
+    #tecnologia .aparatos__fila { padding:32px 20px 30px; margin:-24px -20px -24px; scroll-padding:0 20px; }
+    @media (max-width:640px) { #tecnologia .aparatos__fila { padding-left:20px; padding-right:20px; margin-left:-20px; margin-right:-20px; } }
+    @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__flechita, #tecnologia .aparato__ver-txt { transition:none; } }
 
     /* ══ PULIDO EN TELÉFONO (17-nov 18:35, Sebas) ══ Áreas táctiles de 44 px sin mover el diseño (un ::before invisible
        de 44 px de alto en los enlaces sueltos), botones del pie y del mapa de 44 px, letra mínima de 11 px. */
