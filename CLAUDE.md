@@ -83,7 +83,7 @@ Things worth knowing before editing:
 - **Brand tokens** live in `:root` (`--sage`, `--tranquil`, `--confort`, `--dark`, `--texto-suave`, `--font`, `--ease`). Use these instead of hex values.
 - **Color rules (brandbook p. 17-18, applied Oct 2026):**
   - Small text never goes in `--sage`: on cream it's 3.2:1 and small text needs 4.5:1. Use `--texto-suave` (#515151, the official "Formalidad 80%" tint, 6.8:1). Sage is for large headings, the Larken accents, lines and icons.
-  - Section backgrounds alternate **only** `--tranquil` and `--confort` — no plain white sections. `#filosofia` is the one block on `--sage`; only large text goes there (its stats sit on cream cards). The one small label, its eyebrow, uses `#111` (5.1:1) because `--dark` only reaches 4.08:1 on sage.
+  - Section backgrounds alternate **only** `--tranquil` and `--confort` — no plain white sections. Exception: `#tecnologia` (the equipment gallery closing #servicios) is a full-width band in warm stone `#ECE8E2` (Sebas chose it on 25-nov). `#filosofia` is the one block on `--sage`; only large text goes there (its stats sit on cream cards). The one small label, its eyebrow, uses `#111` (5.1:1) because `--dark` only reaches 4.08:1 on sage.
   - Translucent dark text stays at alpha ≥ 0.75.
   - Check with axe-core before shipping color changes.
 
