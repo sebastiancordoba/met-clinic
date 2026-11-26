@@ -1586,7 +1586,7 @@
       #tecnologia .aparato__foto{ --h:min(375px, calc(100svh - 290px)); margin-bottom:14px; }
     }
     @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__foto img, #tecnologia .aparato__foto::after{ transition:none; } }
-    /* Hover de la galería (Sebas 25-nov 17:55; reemplaza la tarjeta de vidrio de 17:46): SOLO el aparato crece al 107 %
+    /* Hover de la galería (Sebas 25-nov 17:55; reemplaza la tarjeta de vidrio de 17:46): SOLO el aparato crece al 114.5 % (17:59; antes 107 %)
        desde abajo al centro, 300 ms ease-out, con la sombra de piso un poco más marcada; «Ver tratamiento» se subraya y
        la flecha avanza. Sin fondo, borde ni sombra de tarjeta, la tarjeta no sube y las demás no se atenúan. Igual con
        :focus-visible; el mouse solo con (hover:hover), para que en táctil no se quede pegado. */
@@ -1597,14 +1597,14 @@
     #tecnologia .aparato__flechita { display:inline-block; transition:transform .3s ease-out; }
     #tecnologia .aparato:hover .aparato__foto img, #tecnologia .aparato:hover .aparato__foto::after { transform:none; opacity:1; }
     #tecnologia .aparato:focus-visible { outline:none; }
-    #tecnologia .aparato:focus-visible .aparato__foto img { transform:scale(1.07); }
+    #tecnologia .aparato:focus-visible .aparato__foto img { transform:scale(1.145); }
     #tecnologia .aparato:focus-visible .aparato__foto::after { transform:scaleX(1.14) scaleY(1.25); opacity:1;
       background:radial-gradient(closest-side, rgba(38,38,38,.36), rgba(38,38,38,0)); }
     #tecnologia .aparato:focus-visible .aparato__ver { color:var(--dark); }
     #tecnologia .aparato:focus-visible .aparato__ver-txt { background-size:100% 1px; }
     #tecnologia .aparato:focus-visible .aparato__flechita { transform:translateX(4px); }
     @media (hover:hover) {
-      #tecnologia .aparato:hover .aparato__foto img { transform:scale(1.07); }
+      #tecnologia .aparato:hover .aparato__foto img { transform:scale(1.145); }
       #tecnologia .aparato:hover .aparato__foto::after { transform:scaleX(1.14) scaleY(1.25); opacity:1;
         background:radial-gradient(closest-side, rgba(38,38,38,.36), rgba(38,38,38,0)); }
       #tecnologia .aparato:hover .aparato__ver { color:var(--dark); }
@@ -1613,8 +1613,8 @@
     }
     /* Que no se recorte al crecer: la fila corta en x e y por su overflow-x, así que lleva margen por dentro (arriba,
        lo que crece el aparato más alto; a los lados, la mitad de lo que crece el más ancho) compensado por fuera. */
-    #tecnologia .aparatos__fila { padding:32px 20px 30px; margin:-24px -20px -24px; scroll-padding:0 20px; }
-    @media (max-width:640px) { #tecnologia .aparatos__fila { padding-left:20px; padding-right:20px; margin-left:-20px; margin-right:-20px; } }
+    #tecnologia .aparatos__fila { padding:60px 22px 30px; margin:-52px -22px -24px; scroll-padding:0 22px; }
+    @media (max-width:640px) { #tecnologia .aparatos__fila { padding-left:20px; padding-right:20px; margin-left:-20px; margin-right:-20px; scroll-padding:0 20px; } }
     @media (prefers-reduced-motion: reduce) { #tecnologia .aparato__flechita, #tecnologia .aparato__ver-txt { transition:none; } }
 
     /* ══ PULIDO EN TELÉFONO (17-nov 18:35, Sebas) ══ Áreas táctiles de 44 px sin mover el diseño (un ::before invisible
