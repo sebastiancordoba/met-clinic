@@ -1030,3 +1030,6 @@ html.redondeado .tec-btn-marca { border-radius:var(--r-pill); }
 @media (max-width:900px) {
   .tec-aparato { background:linear-gradient(180deg, color-mix(in srgb, var(--marca) 20%, var(--base)) 0%, color-mix(in srgb, var(--marca) 8%, var(--base)) 40%, var(--base) 70%); }
 }
+/* Aviso legal de Tecnología (Sebas 18:41): nota discreta justo antes del pie, sin sección propia */
+.tec-aviso { background:var(--tranquil); padding:22px 0; border-top:1px solid rgba(130,134,127,.14); }
+.tec-aviso p { margin:0 auto; font-size:12px; line-height:1.6; color:var(--texto-suave); text-align:center; max-width:900px; }
