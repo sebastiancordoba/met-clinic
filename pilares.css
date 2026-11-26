@@ -1055,3 +1055,15 @@ html.redondeado .tec-btn-marca { border-radius:var(--r-pill); }
   .tec-texto__cta { margin-top:clamp(14px,2.4vh,26px); }
   .tec-rel { padding:7px 13px; }
 }
+/* Hover del aparato en Tecnología (Sebas 18:48): crece solo el aparato (1.04, desde abajo al centro, 300 ms) y la
+   sombra de piso se marca un poco; el panel no cambia. Cabe en el padding del panel (28/24 px), no se recorta. Con
+   teclado, cuando el foco visible está dentro de la sección. */
+.tec-equipo__foto { transform-origin:50% 100%; transition:transform .3s ease-out; }
+.tec-equipo__escena::after { transition:transform .3s ease-out, opacity .3s ease-out; }
+@media (hover:hover) {
+  .tec-equipo:hover .tec-equipo__foto { transform:scale(1.04); }
+  .tec-equipo:hover .tec-equipo__escena::after { transform:scaleX(1.1) scaleY(1.2); background:radial-gradient(closest-side, rgba(20,20,20,.48), rgba(20,20,20,0)); }
+}
+.tec-aparato:has(:focus-visible) .tec-equipo__foto { transform:scale(1.04); }
+.tec-aparato:has(:focus-visible) .tec-equipo__escena::after { transform:scaleX(1.1) scaleY(1.2); background:radial-gradient(closest-side, rgba(20,20,20,.48), rgba(20,20,20,0)); }
+@media (prefers-reduced-motion: reduce) { .tec-equipo__foto, .tec-equipo__escena::after { transition:none; } }
