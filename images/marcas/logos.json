@@ -1,9 +1,72 @@
 {
- "emsella":        {"src":"images/marcas/emsella.png",        "alt":"EMSELLA, de BTL",          "w":334,  "h":48,  "alto":22, "marca":"#004F91", "marca2":"#009AD4"},
- "monalisa-touch": {"src":"images/marcas/monalisa-touch.png", "alt":"MonaLisa Touch, de DEKA",  "w":761,  "h":375, "alto":44, "marca":"#7D84BF", "marca2":"#1C0D44"},
- "sofwave":        {"src":"images/marcas/sofwave.svg",        "alt":"Sofwave",                  "w":234,  "h":56,  "alto":26, "marca":"#437CBF", "marca2":"#437CBF"},
- "x-wave":         {"src":"images/marcas/btl.png",            "alt":"BTL Aesthetics, fabricante de X-Wave", "w":3728, "h":1286, "alto":44, "marca":"#009AD4", "marca2":"#004F91"},
- "asirox":         {"src":"images/marcas/asirox-evolve.svg",  "alt":"EVOLVE, plataforma de depilación láser de diodo de Asirox", "w":481, "h":78, "alto":18, "marca":"#262626", "marca2":"#82867F"},
- "exomind":        {"src":"images/marcas/exomind.png",        "alt":"EXOMIND, de BTL",          "w":327,  "h":48,  "alto":22, "marca":"#004F91", "marca2":"#009AD4"},
- "inbody":         {"src":"images/marcas/inbody.png",         "alt":"InBody",                   "w":1077, "h":354, "alto":30, "marca":"#9D1C31", "marca2":"#9D1C31"}
+ "emsella": {
+  "src": "images/marcas/emsella.png",
+  "alt": "EMSELLA, de BTL",
+  "w": 334,
+  "h": 48,
+  "alto": 22,
+  "marca": "#004F91",
+  "marca2": "#009AD4",
+  "texto": "#004F91"
+ },
+ "monalisa-touch": {
+  "src": "images/marcas/monalisa-touch.png",
+  "alt": "MonaLisa Touch, de DEKA",
+  "w": 761,
+  "h": 375,
+  "alto": 44,
+  "marca": "#7D84BF",
+  "marca2": "#1C0D44",
+  "texto": "#595E88"
+ },
+ "sofwave": {
+  "src": "images/marcas/sofwave.svg",
+  "alt": "Sofwave",
+  "w": 234,
+  "h": 56,
+  "alto": 26,
+  "marca": "#437CBF",
+  "marca2": "#437CBF",
+  "texto": "#356297"
+ },
+ "x-wave": {
+  "src": "images/marcas/btl.png",
+  "alt": "BTL Aesthetics, fabricante de X-Wave",
+  "w": 3728,
+  "h": 1286,
+  "alto": 44,
+  "marca": "#009AD4",
+  "marca2": "#004F91",
+  "texto": "#00678E"
+ },
+ "asirox": {
+  "src": "images/marcas/asirox-evolve.svg",
+  "alt": "EVOLVE, plataforma de depilación láser de diodo de Asirox",
+  "w": 481,
+  "h": 78,
+  "alto": 18,
+  "marca": "#6E7175",
+  "marca2": "#82867F",
+  "texto": "#262626"
+ },
+ "exomind": {
+  "src": "images/marcas/exomind.png",
+  "alt": "EXOMIND, de BTL",
+  "w": 327,
+  "h": 48,
+  "alto": 22,
+  "marca": "#004F91",
+  "marca2": "#009AD4",
+  "texto": "#004F91"
+ },
+ "inbody": {
+  "src": "images/marcas/inbody.png",
+  "alt": "InBody",
+  "w": 1077,
+  "h": 354,
+  "alto": 30,
+  "marca": "#9D1C31",
+  "marca2": "#9D1C31",
+  "texto": "#9D1C31"
+ }
 }

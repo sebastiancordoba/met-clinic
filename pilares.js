@@ -39,6 +39,9 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     if (id === actual) return;
     actual = id;
     chips.forEach((c, k) => { c.classList.toggle('activo', k === id); if (k === id) c.setAttribute('aria-current', 'true'); else c.removeAttribute('aria-current'); });
+    // El chip activo toma el color de marca (--marca-texto, ya en AA) del aparato en pantalla.
+    const sec = document.getElementById(id);
+    if (sec) indice.style.setProperty('--chip-activo', getComputedStyle(sec).getPropertyValue('--marca-texto').trim());
     const c = chips.get(id);
     if (c && fila) fila.scrollTo({ left: c.offsetLeft - fila.clientWidth / 2 + c.offsetWidth / 2 });
   }

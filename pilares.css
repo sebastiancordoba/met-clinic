@@ -995,3 +995,38 @@ html.redondeado .tec-datos div { border-radius:var(--r-md); }
   .tec-datos { grid-template-columns:1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .tec-indice__fila { scroll-behavior:auto; } }
+
+/* Más color de cada fabricante (Sebas 25-nov 18:36). --marca es el color del logo; --marca-texto, el MISMO tono
+   oscurecido hasta AA (≥ 4.6:1 sobre piedra, crema y con blanco encima; calculado en images/marcas/logos.json).
+   Fondo de la sección: degradado amplio desde la izquierda que se desvanece hacia el texto. Panel del aparato: color
+   pleno apagado con la piedra. Área, filetes, títulos, viñetas, chips, «Ver tratamiento» y el chip activo del índice
+   van en la marca; el CTA principal se queda en el negro de MET. */
+.tec-aparato { --base:#ECE8E2; --marca-texto:var(--dark);
+  background:linear-gradient(100deg, color-mix(in srgb, var(--marca) 22%, var(--base)) 0%, color-mix(in srgb, var(--marca) 9%, var(--base)) 42%, var(--base) 78%); }
+.tec-aparato--crema { --base:var(--confort); }
+.tec-equipo__escena { border:0;
+  background:radial-gradient(78% 66% at 50% 50%, color-mix(in srgb, var(--marca) 26%, #F7F5F0) 0%, color-mix(in srgb, var(--marca) 58%, #E6E2DA) 64%, color-mix(in srgb, var(--marca-texto) 78%, #E6E2DA) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35), 0 30px 60px -36px color-mix(in srgb, var(--marca-texto) 70%, transparent); }
+.tec-equipo__escena::after { background:radial-gradient(closest-side, rgba(20,20,20,.38), rgba(20,20,20,0)); }
+.tec-texto .tec-texto__area { color:var(--marca-texto); }
+.tec-texto__area::before { background:var(--marca-texto); height:2px; }
+.tec-texto h3 { color:var(--marca-texto); border-top-color:color-mix(in srgb, var(--marca) 45%, transparent); }
+.tec-lista li::before { background:var(--marca); }
+.tec-datos div { border-color:color-mix(in srgb, var(--marca) 40%, transparent); background:color-mix(in srgb, var(--marca) 6%, rgba(255,255,255,.6)); }
+.tec-datos dt { color:var(--marca-texto); }
+.tec-rel { color:var(--marca-texto); border-color:color-mix(in srgb, var(--marca) 55%, transparent); background:color-mix(in srgb, var(--marca) 7%, rgba(255,255,255,.6)); }
+.tec-rel:hover { background:#fff; border-color:var(--marca-texto); }
+.tec-texto__cta { display:flex; flex-wrap:wrap; align-items:center; gap:14px 22px; }
+.tec-btn-marca { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 22px; font-size:12px; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; text-decoration:none; color:var(--marca-texto); border:1px solid var(--marca-texto);
+  transition:background-color .25s ease-out, color .25s ease-out; }
+.tec-btn-marca span { display:inline-block; transition:transform .25s ease-out; }
+.tec-btn-marca:hover { background:var(--marca-texto); color:#fff; }
+.tec-btn-marca:hover span { transform:translateX(3px); }
+.tec-btn-marca:focus-visible { outline:2px solid var(--marca-texto); outline-offset:3px; }
+html.redondeado .tec-btn-marca { border-radius:var(--r-pill); }
+.tec-indice__chip.activo { background:var(--chip-activo, var(--dark)); border-color:var(--chip-activo, var(--dark)); color:#fff; }
+.tec-indice__chip { transition:background-color .3s ease-out, color .3s ease-out, border-color .3s ease-out; }
+@media (max-width:900px) {
+  .tec-aparato { background:linear-gradient(180deg, color-mix(in srgb, var(--marca) 20%, var(--base)) 0%, color-mix(in srgb, var(--marca) 8%, var(--base)) 40%, var(--base) 70%); }
+}
