@@ -1033,3 +1033,25 @@ html.redondeado .tec-btn-marca { border-radius:var(--r-pill); }
 /* Aviso legal de Tecnología (Sebas 18:41): nota discreta justo antes del pie, sin sección propia */
 .tec-aviso { background:var(--tranquil); padding:22px 0; border-top:1px solid rgba(130,134,127,.14); }
 .tec-aviso p { margin:0 auto; font-size:12px; line-height:1.6; color:var(--texto-suave); text-align:center; max-width:900px; }
+
+/* Cada aparato cabe en la pantalla y se ve centrado (Sebas 25-nov 18:43). En compu (> 900 px) la sección mide al
+   menos el alto útil (pantalla − barra de arriba − índice) con el contenido centrado; la foto se ajusta a ese alto y el
+   texto va más compacto, para no cortar nada a 1440×900 ni a 1280×800. Al llegar por ancla, scroll-margin (44) + el
+   scroll-padding de html (76) = barra (68) + índice (~52): la sección empieza justo bajo el índice. */
+@media (min-width:901px) {
+  .tec-aparato { --util:calc(100svh - var(--met-encabezado, 68px) - 52px); --aire:clamp(14px,2.4vh,36px);
+    min-height:var(--util); display:flex; align-items:center; padding:var(--aire) 0; box-sizing:border-box; }
+  .tec-aparato > .wrap { width:100%; }
+  .tec-aparato__grid { grid-template-columns:minmax(0,5fr) minmax(0,7fr); align-items:center; gap:clamp(32px,4.5vw,64px); }
+  .tec-equipo { position:static; gap:12px; }
+  .tec-equipo__escena { height:calc(var(--util) - 2 * var(--aire) - 44px); min-height:300px; max-height:600px; }
+  .tec-texto { padding-top:0; }
+  .tec-texto__area { margin-bottom:8px; }
+  .tec-texto__nombre { font-size:clamp(32px,4.8vh,48px); margin-bottom:4px; }
+  .tec-texto__desc { font-size:clamp(17px,2.2vh,20px); }
+  .tec-texto h3 { margin:clamp(10px,1.6vh,18px) 0 5px; padding-top:clamp(7px,1.1vh,11px); }
+  .tec-texto p, .tec-lista li { font-size:clamp(13.5px,1.75vh,15px); line-height:1.5; }
+  .tec-lista { gap:4px; }
+  .tec-texto__cta { margin-top:clamp(14px,2.4vh,26px); }
+  .tec-rel { padding:7px 13px; }
+}
