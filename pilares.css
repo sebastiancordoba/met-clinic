@@ -1067,3 +1067,7 @@ html.redondeado .tec-btn-marca { border-radius:var(--r-pill); }
 .tec-aparato:has(:focus-visible) .tec-equipo__foto { transform:scale(1.04); }
 .tec-aparato:has(:focus-visible) .tec-equipo__escena::after { transform:scaleX(1.1) scaleY(1.2); background:radial-gradient(closest-side, rgba(20,20,20,.48), rgba(20,20,20,0)); }
 @media (prefers-reduced-motion: reduce) { .tec-equipo__foto, .tec-equipo__escena::after { transition:none; } }
+/* Sin introducción (Sebas 18:57): el header queda vacío (solo el h1 oculto); en el repo conserva el margin-top de 68 px
+   de la barra fija, en el tema ese margen ya es 0. */
+.pilar-hero.tec-hero { padding:0 !important; border:0; background:none; min-height:0; }
+.tec-oculto { position:absolute !important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
