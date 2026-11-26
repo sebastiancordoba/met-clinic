@@ -912,3 +912,86 @@ footer.pie3 .pie-legal__izq { line-height:1.5; }
 .pie-mapa__grande:hover { background:#262626; color:#F2F2ED; }
 @media (max-width:1000px) { .pie-mapa__pin span { left:40px; top:10px; font-size:12px; } .pie-mapa__metro { font-size:11px; } }
 @media (max-width:640px), (pointer:coarse) { .pie-mapa__grande { min-height:40px; padding:0 11px; letter-spacing:.06em; gap:4px; } }
+
+/* ══ TECNOLOGÍA (tecnologia.html, 25-nov-2026, Sebas 18:03) ══ Una sección por aparato, agrupadas por área. Izquierda
+   (siempre): el aparato grande con su sombra de piso, el logo oficial y un halo suave del color del fabricante
+   (--marca, abajo por aparato; fuentes en images/marcas/FUENTES-logos.md). Derecha: el tratamiento. En el teléfono, el
+   aparato arriba y el texto abajo. Fondos piedra/crema alternados. Índice de chips pegajoso bajo la barra de arriba,
+   que resalta el aparato en pantalla (pilares.js). */
+.tec-hero { padding-bottom:clamp(28px,4vw,48px); }
+.tec-indice { position:sticky; top:var(--met-encabezado, 68px); z-index:40; background:rgba(242,242,237,.86);
+  -webkit-backdrop-filter:blur(16px) saturate(160%); backdrop-filter:blur(16px) saturate(160%);
+  border-top:1px solid rgba(130,134,127,.14); border-bottom:1px solid rgba(130,134,127,.14); }
+.tec-indice__fila { margin:0 auto; padding:10px clamp(20px,4vw,56px); display:flex; align-items:center; justify-content:safe center; gap:8px;
+  overflow-x:auto; scrollbar-width:none; scroll-behavior:smooth; }
+.tec-indice__area { flex:0 0 auto; font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--texto-suave);
+  margin:0 2px 0 10px; }
+.tec-indice__area:first-child { margin-left:0; }
+.tec-indice__chip { flex:0 0 auto; font-size:13px; padding:8px 14px; border:1px solid rgba(130,134,127,.28); color:var(--dark);
+  text-decoration:none; background:rgba(255,255,255,.5); transition:background-color .25s ease-out, color .25s ease-out, border-color .25s ease-out; }
+.tec-indice__chip:hover { border-color:var(--dark); }
+.tec-indice__chip.activo { background:var(--dark); border-color:var(--dark); color:var(--confort); }
+.tec-indice__chip:focus-visible { outline:2px solid var(--dark); outline-offset:2px; }
+
+.tec-aparato { --marca:#82867F; --marca-2:var(--marca); padding:clamp(56px,7vw,104px) 0; scroll-margin-top:44px; } /* + los 76 px de scroll-padding de html = bajo el índice */
+.tec-aparato--piedra { background:#ECE8E2; }
+.tec-aparato--crema { background:var(--confort); }
+.tec-aparato__grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,6vw,88px); align-items:start; }
+.tec-equipo { position:sticky; top:calc(var(--met-encabezado, 68px) + 58px + 24px); display:flex; flex-direction:column; gap:18px; }
+.tec-equipo__escena { position:relative; height:min(560px, calc(100svh - 68px - 58px - 150px)); min-height:340px; display:flex; align-items:flex-end;
+  justify-content:center; padding:28px 24px 30px; overflow:hidden;
+  background:radial-gradient(70% 62% at 50% 58%, color-mix(in srgb, var(--marca) 22%, transparent), transparent 72%),
+             linear-gradient(180deg, color-mix(in srgb, var(--marca-2) 7%, rgba(255,255,255,.55)), rgba(255,255,255,.25));
+  border:1px solid color-mix(in srgb, var(--marca) 22%, rgba(255,255,255,.6)); }
+.tec-equipo__escena::after { content:''; position:absolute; left:22%; right:22%; bottom:22px; height:20px; border-radius:50%;
+  background:radial-gradient(closest-side, rgba(38,38,38,.3), rgba(38,38,38,0)); }
+.tec-equipo__foto { position:relative; z-index:1; height:100%; width:auto; max-width:100%; object-fit:contain; object-position:50% 100%; }
+.tec-equipo__firma { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 4px; }
+.tec-equipo__logo { height:28px; width:auto; max-width:52%; object-fit:contain; object-position:0 50%; } /* el alto va por logo (style), según su proporción */
+.tec-equipo__marca { font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dark); }
+.tec-equipo__tecnica { font-size:12px; letter-spacing:.04em; color:var(--texto-suave); text-align:right; }
+
+.tec-texto { padding-top:8px; }
+.tec-texto__area { display:flex; align-items:center; gap:12px; font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--texto-suave); margin:0 0 12px; }
+.tec-texto__area::before { content:''; width:28px; height:1px; background:var(--marca); }
+.tec-texto__nombre { font-size:clamp(36px,4vw,54px); font-weight:300; letter-spacing:-.02em; line-height:1.02; margin:0 0 12px; color:var(--dark); }
+.tec-texto__desc { font-family:'Larken','Times New Roman',serif; font-weight:300; font-size:clamp(19px,1.6vw,22px); line-height:1.4; color:var(--dark); margin:0 0 8px; }
+.tec-texto h3 { font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dark); margin:30px 0 10px;
+  padding-top:16px; border-top:1px solid color-mix(in srgb, var(--marca) 28%, rgba(130,134,127,.18)); }
+.tec-texto p { font-size:15px; line-height:1.65; color:rgba(38,38,38,.82); margin:0; }
+.tec-lista { list-style:none; margin:0; padding:0; display:grid; gap:8px; }
+.tec-lista li { position:relative; padding-left:20px; font-size:15px; line-height:1.55; color:rgba(38,38,38,.82); }
+.tec-lista li::before { content:''; position:absolute; left:2px; top:.62em; width:7px; height:7px; border-radius:50%; background:var(--marca); }
+.tec-datos { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0 0; }
+.tec-datos div { padding:12px 14px; background:rgba(255,255,255,.55); border:1px solid color-mix(in srgb, var(--marca) 24%, rgba(130,134,127,.16)); }
+.tec-datos dt { font-size:10px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:4px; }
+.tec-datos dd { margin:0; font-size:15px; color:var(--dark); }
+.tec-pendiente { font-size:13px; color:var(--texto-suave); font-style:italic; }
+.tec-rels { display:flex; flex-wrap:wrap; gap:8px; }
+.tec-rel { font-size:13px; padding:9px 14px; color:var(--dark); text-decoration:none; background:rgba(255,255,255,.55);
+  border:1px solid color-mix(in srgb, var(--marca) 40%, rgba(130,134,127,.2)); transition:background-color .25s ease-out, border-color .25s ease-out; }
+.tec-rel span { display:inline-block; transition:transform .25s ease-out; }
+.tec-rel:hover { background:#fff; border-color:var(--marca); }
+.tec-rel:hover span { transform:translateX(3px); }
+.tec-texto__cta { margin-top:30px; }
+html.redondeado .tec-indice__chip, html.redondeado .tec-rel { border-radius:var(--r-pill); }
+html.redondeado .tec-equipo__escena { border-radius:var(--r-lg); }
+html.redondeado .tec-datos div { border-radius:var(--r-md); }
+
+@media (max-width:1280px) { .tec-indice__area { display:none; } }
+@media (max-width:900px) {
+  .tec-aparato__grid { grid-template-columns:1fr; gap:28px; }
+  .tec-equipo { position:static; }
+  .tec-equipo__escena { height:min(440px, 58svh); min-height:300px; }
+}
+@media (max-width:640px) {
+  .tec-indice__fila { padding:8px 20px; gap:6px; }
+  .tec-indice__area { display:none; }
+  .tec-indice__chip { font-size:12.5px; padding:7px 12px; }
+  .tec-aparato { padding:40px 0 52px; scroll-margin-top:40px; }
+  .tec-equipo__escena { height:min(380px, 50svh); padding:20px 16px 24px; }
+  .tec-equipo__firma { flex-direction:column; align-items:flex-start; gap:6px; }
+  .tec-equipo__tecnica { text-align:left; }
+  .tec-datos { grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .tec-indice__fila { scroll-behavior:auto; } }

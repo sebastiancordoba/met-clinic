@@ -35,6 +35,7 @@ PAGINAS = {  # archivo → (template, título de la sección)
     'pilar-piel.html': ('pilar-piel', 'Manchas y piel'),
     'pilar-capilar.html': ('pilar-capilar', 'Capilar'),
     'pilar-longevidad.html': ('pilar-longevidad', 'Longevidad'),
+    'tecnologia.html': ('tecnologia', 'Tecnología'),
 }
 TIENDA = 'https://met-clinic.myshopify.com'
 assets: set[str] = set()

@@ -172,6 +172,16 @@ va en una fila: a la izquierda una columna con el logo, las redes y el ©, y a l
 en `index.html` **y** en `pilares.css`. El mapa chico y «Pregúntale a tu IA» se quitaron: no los repongas sin que lo
 pida.
 
+### Tecnología (tecnologia.html, 25-nov-2026, Sebas)
+
+Una sección por aparato (los 7 del carrusel `#tecnologia` de la portada, que enlaza a `tecnologia.html#<slug>`),
+agrupadas por área. Izquierda fija: el aparato (`images/equipos/`), el logo oficial y un halo con el color del
+fabricante (`--marca`, `--marca-2` en el `style` de cada sección); derecha, el tratamiento. Logos y colores:
+`images/marcas/` con sus fuentes en `images/marcas/FUENTES-logos.md` y `logos.json`; no se redibujan ni se inventan.
+Solo datos que ya están en las páginas de servicio o en `images/equipos/FUENTES-ficha_tecnica.md`; lo que falta dice
+«Por confirmar» (`data-pendiente`). Índice de chips pegajoso y llegada con scroll suave en `pilares.js`. En la tienda
+es la página `/pages/tecnologia` (template `page.met-tecnologia`).
+
 ### Services carousel (`#svcCarousel` + IIFE in `main.js`)
 
 The trickiest piece. There are 6 real cards; the IIFE clones 2 in front and 3 behind for seamless looping, then auto-advances every 4s with a snap-back when it reaches the clone of card 0.
